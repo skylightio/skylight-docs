@@ -1,0 +1,90 @@
+---
+title: Getting started
+---
+
+It should only take a few minutes to get started with Skylight. If at
+anytime you get stuck, send us an email at support@skylight.io or join
+our IRC channel.
+
+## Requirements
+
+<%= partial "shared/requirements" %>
+
+## Install the agent
+
+Add the following to your Gemfile:
+
+~~~ ruby
+gem "skylight"
+~~~
+
+Then run the following command in your terminal window:
+
+~~~
+bundle install
+~~~
+
+The agent is now installed into your Rails application.
+
+## Registering the application
+
+Once you have the Skylight agent installed into your application, you
+have to register your application with us. To do this, run the following
+command:
+
+~~~
+bundle exec skylight setup
+~~~
+
+If this is the first time that you have run this command, you will be
+prompted to enter your email and password.
+
+The setup command will generate a configuration file at
+`config/skylight.yml`. By default, it includes the newly created
+Skylight ID for the application as well as an API authentication token
+that will be used to report data to us.
+
+If you are currently logged into your [Skylight
+account](https://skylight.io/app), you will notice that the app will
+transition into a state waiting for data.
+
+Also, the Skylight application will transition into the application and
+indicate that it is waiting for data. The next step is to deploy your
+application.
+
+<%= thumbnail 'getting-started/waiting-for-data.png', width: 362 %>
+
+
+## Deploy
+
+Deploy your applications with the changes that you made. You will need
+to ensure that the Skylight configuration is included with the deployed
+application. There are a few ways to do this. The easiest is to just
+commit the skylight.yml file with your application.
+
+> By default, the Skylight agent only activates itself in the **production**
+> environment. [See how to configure this](/agent#configuration).
+
+Once the application restarts in production, assuming that everything is
+properly configured, it should start sending data to us. It takes about
+30 seconds for the data to get processed.
+
+If you deployed but the Skylight UI does not indicate that it is
+receiving data, then there is most likely a configuration problem. See
+[Troubleshooting](#troubleshooting) for more help there.
+
+## What's next
+
+Your application should not be successfully setup with Skylight. You can
+start poking around the [UI](https://skylight.io/app), or read some
+[quick documentation](/app) on how to use Skylight to help debug
+performance problems.
+
+If you hit any problems at all, do not hestiate to send us an email at
+[support@skylight.io](mailto:support@skylight.io). Also, we have an IRC
+channel setup on the Freenode servers. The channel is **#skylightio**.
+Come provide feedback, ask questions, or just hangout.
+
+## Troubleshooting
+
+<%= partial "shared/troubleshooting.erb" %>

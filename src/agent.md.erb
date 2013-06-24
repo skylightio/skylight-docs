@@ -1,0 +1,84 @@
+---
+title: Agent
+---
+
+The Skylight agent is a Ruby gem available from
+[rubygems.org](https://rubygems.org).  When loaded into your
+application, it instruments your code and reports data back to us.
+Currently, we only instrument the Ruby on Rails framework, but we
+will be constantly adding more instrumentation points. Also, it is
+easy to add custom instrumentation.
+
+## Requirements
+
+<%= partial "shared/requirements" %>
+
+## Configuration
+
+The agent can be configured via YAML file, ENV variables, or a mix of both.
+
+Here is an example YAML file:
+
+~~~ yaml
+---
+# The Skylight ID for this application. This should be committed to
+# source control. This variable allows the Skylight agent to function in
+# dev mode without an authentication token.
+#
+# Not required in production.
+application: <Skylight application id>
+
+# The authentication token used when reporting data back to the Skylight
+# service.
+#
+# Required in production.
+authentication: <authentication token>
+
+# Environment specific configuration. Any variable can be scoped by an
+# environment and will take precedance over a default.
+production:
+
+  authentication: <production auth token>
+
+staging:
+
+  authentication: <staging auth token>
+~~~
+
+Or you can configure the agent with ENV variables:
+
+<dl class="dl-horizontal">
+  <dt>SK_APPLICATION</dt>
+  <dd>The skylight application ID</dd>
+
+  <dt>SK_AUTHENTICATION</dt>
+  <dd>The authentication token</dd>
+</dl>
+
+### Railtie
+
+The Skylight railtie is how you can configure the agent's integration
+with your Rails application.
+
+#### Environments
+
+By default, the Skylight agent only enables itself in the production
+Rails environment. If, for example, you wish to enable Skylight in
+staging, you can do the following:
+
+~~~ ruby
+# config/application.rb
+config.skylight.environments << 'staging'
+~~~
+
+## Custom instrumentation
+
+Stuff
+
+## Troubleshooting
+
+<%= partial "shared/troubleshooting.erb" %>
+
+## FAQ
+
+Stuff
