@@ -34,6 +34,9 @@ application: <Skylight application id>
 # Required in production.
 authentication: <authentication token>
 
+# Path to the Skylight log file
+log_file: log/foo.log
+
 # Environment specific configuration. Any variable can be scoped by an
 # environment and will take precedance over a default.
 production:
@@ -53,6 +56,9 @@ Or you can configure the agent with ENV variables:
 
   <dt>SK_AUTHENTICATION</dt>
   <dd>The authentication token</dd>
+
+  <dt>SK_LOG_FILE</dt>
+  <dd>Path to the Skylight log file</dd>
 </dl>
 
 ### Railtie
@@ -69,6 +75,16 @@ staging, you can do the following:
 ~~~ ruby
 # config/application.rb
 config.skylight.environments << 'staging'
+~~~
+
+#### Logger
+
+Perhaps you might want to tell Skylight to use a specific logger. This can be
+achieved like this:
+
+~~~ ruby
+# config/application.rb
+config.skylight.logger = Logger.new(STDOUT)
 ~~~
 
 ## Custom instrumentation
