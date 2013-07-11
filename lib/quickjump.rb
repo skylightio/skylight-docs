@@ -61,7 +61,7 @@ private
   end
 
   def dasherize(txt)
-    txt.downcase.gsub(/\s+/, '-').gsub(/[^a-z0-9-]/i, '')
+    txt.downcase.gsub(/\s+/, '-').gsub(/[^a-z0-9_.-]/i, '')
   end
 
 end

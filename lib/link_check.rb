@@ -55,7 +55,7 @@ class LinkCheck < Middleman::Extension
           end
 
           if fragment != ""
-            target = dest.css("*[id=#{fragment}],a[name=#{fragment}]")
+            target = dest.css("*[id='#{fragment}'],a[name='#{fragment}']")
 
             if target.empty?
               puts "[WARN] Broken link fragment on #{key} (#{href})"
