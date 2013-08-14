@@ -118,3 +118,11 @@ pre {
   display: inline-block;
   margin: 15px 0px 0px 0px;
 }
+
+.dw-env dt {
+  width: 250px;
+}
+
+.dw-env dd {
+  margin-left: 270px;
+}
