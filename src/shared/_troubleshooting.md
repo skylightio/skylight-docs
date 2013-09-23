@@ -73,3 +73,6 @@ that your auth token is set by running:
 Ensure that the application is running with the correct Rails
 environment. By default, the agent only starts in the **production**
 environment, but this can be configured.
+
+To learn how to change what environments Skylight starts in, see
+[Railtie Environments](/agent#environments).
