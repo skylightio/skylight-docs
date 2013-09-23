@@ -21,9 +21,9 @@ us know!
 
 ### How do I use Skylight if my app is hosted on Heroku?
 
-We are working on a Heroku add-on that will make this super-easy. But,
-if you're deployed on Heroku, there's just one command you need to run
-to make your Skylight API token available:
+We are working on a Heroku add-on that will make this super-easy. But
+until then, if you're deployed on Heroku, there's just one command you
+need to run to make your Skylight API token available:
 
     heroku config:set SKYLIGHT_AUTHENTICATION="<token>"
 
