@@ -89,6 +89,22 @@ achieved like this:
 config.skylight.logger = Logger.new(STDOUT)
 ~~~
 
+#### Probes
+
+In order to instrument other libraries outside of Rails, the agent includes probes
+which are only activated if the related files are required. Since this is an experimental
+feature, it's opt-in for now.
+
+We currently have probes for **Net::HTTP** and **Excon**.
+
+To enable probes:
+
+~~~ ruby
+# config/application.rb
+config.skylight.probes = %w(net_http excon)
+~~~
+
+
 ## Custom instrumentation
 
 The easiest way to add custom instrumentation to your application is by
