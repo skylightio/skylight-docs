@@ -4,6 +4,10 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.2.1 (December 4, 2013)
+
+* Fix bin/skylight
+
 ## 0.2.0 (December 3, 2013)
 
 * Added Probes, initially Net::HTTP and Excon
