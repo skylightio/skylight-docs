@@ -4,6 +4,13 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.2.2 (December 10, 2013)
+
+* Added support for Mongoid/Moped
+* Fix probe enabling
+* Improved error reporting
+* Fix bug with multiple subscribers to same notification
+
 ## 0.2.1 (December 4, 2013)
 
 * Fix bin/skylight
