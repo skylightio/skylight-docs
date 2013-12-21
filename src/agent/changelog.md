@@ -4,6 +4,12 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.2.3 (December 20, 2013)
+
+* Fix SQL lexing for comments, arrays, double-colon casting, and multiple queries
+* Handle template paths from gems
+* Status and exception reports for agent debugging
+
 ## 0.2.2 (December 10, 2013)
 
 * Added support for Mongoid/Moped
