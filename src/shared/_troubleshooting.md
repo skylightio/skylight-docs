@@ -45,7 +45,7 @@ If your app is running and has traffic, but you're still not seeing
 anything in Skylight, verify that the `skylight` gem is installed and
 running properly.
 
-Make sure you are using the latest version of the Skylight gem (0.1.8
+Make sure you are using the latest version of the Skylight gem (0.3.1
 when this was written). In the directory for your Rails app, run this
 command:
 
@@ -53,7 +53,7 @@ command:
 
 You should see something like the following output:
 
-    * skylight (0.1.8)
+    * skylight (0.3.1)
 
 If the gem is installed and up-to-date, the next step is to verify that
 it is running correctly:
