@@ -11,6 +11,8 @@ def aws_credentials
   creds = YAML.load_file(file)
   creds[:'skylight-docs'] ||
     creds['skylight-docs'] ||
+    creds[:'tilde-parent'] ||
+    creds['tilde-parent'] ||
     creds[:default] ||
     creds['default']
 end
