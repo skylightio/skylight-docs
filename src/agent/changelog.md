@@ -4,6 +4,11 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.3.2 (March 11, 2014)
+
+* Autoload Skylight:Helpers even when native agent isn't available
+* Fix SEGV
+
 ## 0.3.1 (March 8, 2014)
 
 * Fix requires to allow CLI to function without native extension.
