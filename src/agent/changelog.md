@@ -4,6 +4,10 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.3.3 (March 12, 2014)
+
+* Load the railtie even without native agent
+
 ## 0.3.2 (March 11, 2014)
 
 * Autoload Skylight:Helpers even when native agent isn't available
