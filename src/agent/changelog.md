@@ -4,6 +4,12 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.3.4 (March 13, 2014)
+
+* Don't try to boot Skylight without native agent
+* Make exception classes always available
+* CLI should require railtie before loading application.rb
+
 ## 0.3.3 (March 12, 2014)
 
 * Load the railtie even without native agent
