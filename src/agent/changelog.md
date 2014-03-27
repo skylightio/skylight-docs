@@ -4,7 +4,12 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
-## 0.3.5 (March 26, 2014) *YANKED*
+## 0.3.6 (March 27, 2014)
+
+* Shorter token validation timeout
+* Allow validation to be skipped
+
+## 0.3.5 (March 26, 2014)
 
 * Update Rust component
 * Return true from Task#handle to avoid sutdown
