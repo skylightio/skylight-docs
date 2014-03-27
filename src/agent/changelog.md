@@ -4,7 +4,7 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
-## 0.3.5 (March 26, 2014)
+## 0.3.5 (March 26, 2014) *YANKED*
 
 * Update Rust component
 * Return true from Task#handle to avoid sutdown
