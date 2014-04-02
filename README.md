@@ -6,7 +6,7 @@ You'll need some AWS creds with push access to the `skylight-docs` bucket on the
 Put these in `~/.fog`.
 
 ```
-skylight-doc:
+skylight-docs:
   :aws_access_key_id: ID
   :aws_secret_access_key: KEY
 ```

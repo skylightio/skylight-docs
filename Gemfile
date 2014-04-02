@@ -20,3 +20,5 @@ gem 'fog'
 
 # For faster file watcher updates:
 # gem "wdm", "~> 0.1.0") # Windows
+
+gem "rake"
