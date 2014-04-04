@@ -1,0 +1,72 @@
+---
+title: Feature Walkthrough
+---
+
+This walkthrough is current as of last check on April 1st, 2014. We're shipping early and often, so things might look ever so slightly different today.
+
+## Response time
+
+There are several places that your application's response times appear in Skylight. It is important to note that we _always_ show the 95th percentile response time, not the average. While this take significantly more computation on the backend to determine, it is a much, much better number to indicate real world performance than the average.
+
+Averages are almost useless when thinking about web performance, and in the worst case, are actually misleading. For more information, see [DHH's blog post, The problem with averages](http://signalvnoise.com/posts/1836-the-problem-with-averages). Google, Twitter, and GitHub (to name a few) all use 95th percentile numbers when tracking performance.
+
+## App Dashboard
+
+<%= thumbnail 'feature-walkthrough/dash1.png' %>
+
+This is the app dashboard, and is the first thing you will see when you log in to Skylight.
+
+The purpose of this page is to give you a high-level view of how your app is performing, and give you a starting point to digging in to the details.
+
+At the top (#1) we show the response time and RPM for your app over the last three hours. The current response time and RPM (for the current minute) are displayed in the upper right corner, and update in real-time every minute. See above for more on "response time".
+
+This section is useful for keeping an eye on your application and making sure the response times don't shoot up suddenly, or for detecting spikes in traffic.
+
+Below the response time and RPM charts is the endpoint list. This list shows you all of the endpoints in your Rails app; that is, all of the controllers and their actions that have been used in the currently selected time range.
+
+In addition to each endpoints name, we display the response time (again, 95th percentile; see above) and RPM for the selected time range.
+
+By default, the information me show you is for the last six hours. So, if you see the RPM for an endpoint is 47, that means that that endpoint was requested, on average, 47 times per minute in the last six hours.
+
+You can change the selected range using the dropdown in the upper right hand corner; either 6 hours, 30 minutes, or 5 minutes.
+
+Pro Tip: You can enter custom ranges by modifying the URL. For example, to see the last 27 hours, change the `/6h/` in the URL to `/24h/`.
+
+While the order of the endpoints may seem haphazard, it is actually sorted by our patent-pending Agony-Detection Algorithm™. (Just kidding about the patent-pending bit.) We determine how much agony your endpoint is causing customers by looking at both absolute response time, and weighting it by how popular the endpoint is. Using a combination of both factors, we determine which endpoint is having the most adverse affect on your users.
+
+For example, you might have one endpoint that has a response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint.
+
+Of course, we also allow you to sort the list by endpoint name, response time, or RPM. Just click on the "Sort by" dropdown in the upper right, next to the time range selector. We recommend you sort by Agony, though, and start at the top and work your way down.
+
+Once you've figured out where you'd like to focus your performance-tuning efforts, just click on the endpoint name and you'll be taken to a wonderland of performance information.
+
+## Endpoint view
+
+<%= thumbnail 'feature-walkthrough/endpoint-view.png' %>
+
+The endpoint view is the heart and soul of Skylight. More than just looking pretty, this page is the end result of distilling thousands of data points into actionable information that you can use to speed up your app.
+
+At the top is the Time Explorer. The Time Explorer does a number of things:
+
+1. It allows you change the selected time range. By default, this will be the same as the time range on the endpoints list. You can change the selected range by dragging the handles of the selection, or by clicking and dragging in the middle. You can also choose from the presets by clicking the clock button.
+2. It shows you the response time for that endpoint over time.
+
+Pro Tip: You can go back even further in time by clicking and dragging in the area with the timestamps along the X-axis.
+
+Below the Time Explorer is the Response Time Distribution, showing you the distribution of the response times for this particular endpoint. This feature is awesome because it makes bi-modal distributions obvious. For example, imagine you are doing an additional SQL query when the logged in user is an admin. That particular query happens to be for a column that is not indexed, so it is very slow.
+
+If all you had was an average, you'd have no idea this was happening. But because you have a histogram, you can see that the fast, non-admin requests cluster around one response time, and the slower, admin-only requests cluster around another time.
+
+Below the Response Time Distribution is the Aggregate Trace. The Aggregate Trace shows you where exactly your Rails app is spending time when servicing this endpoint. Each row represents a different task, and they're color coded. For example, blue rows are time spent in controller code, and green rows represent database queries.
+
+If you see black segments, that represents garbage collection time. Because GC can happen sporadically throughout the request, we aggregate it up and show it at the end.
+
+Wondering what the light and darker segments mean? If you see a dark segment, that's "self-time"—time that was spent for that particular task. Light colored segments represent child tasks. For example, if your controller's Ruby code calls out to the database and then does something with that data, the time spent calling out to the database would be represented as a lighter shade of blue. You'll see that the lighter shaded segments always line up with a child segment that appears below.
+
+Lastly, you can get more information about a particular segment by clicking on it to get the detail card. In database segments, for example, we show the SQL that was executed, so it's easy to track down exactly what query was slow.
+
+A couple notes about the aggregate trace. First, it's important to remember that this is not a single request—it represents many (potentially thousands) of requests all merged into one. Showing single requests can send you on a wild goose chase, because it may not be representative. Because we aggregate all requests together, if something looks like it's taking a lot of time in the trace, that means it was taking enough time in your production environment to be statistically significant.
+
+Second, the aggregate trace, by default, represents _all_ of the requests in the selected time range. Often, it's helpful to focus on slower requests to see exactly _why_ they are so slow. You can focus on the slowest requests by clicking the Slower link in the Segments section, or the Faster requests by the clicking the (you guessed it) Faster link.
+
+You can also click and drag on the Response Time Distribution to only show the Aggregate Trace for requests in the selected region. To return to our example above about slow admin pages, you could click and drag to select the cluster of slower requests. This allows you to laser-focus on the requests that are causing the slow-down.
