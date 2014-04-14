@@ -70,9 +70,18 @@ that your auth token is set by running:
 
 ### I deployed my application, but no data is appearing in Skylight.
 
-Ensure that the application is running with the correct Rails
-environment. By default, the agent only starts in the **production**
+#### Is your environment correct?
+
+Verify that the application is running with the correct Rails
+environment. By default, the agent only starts in the `production`
 environment, but this can be configured.
 
 To learn how to change what environments Skylight starts in, see
 [Railtie Environments](/agent#environments).
+
+#### Is the `skylight` gem in the right group?
+
+Verify that, in your app's `Gemfile`, you've added the `skylight`
+gem to a group that will be installed in production. For example, if you
+add `skylight` to the `development` group, it will not run when you
+deploy to production.
