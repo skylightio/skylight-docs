@@ -77,6 +77,25 @@ If you deployed but the Skylight UI does not indicate that it is
 receiving data, then there is most likely a configuration problem. See
 [Troubleshooting](#troubleshooting) for more help there.
 
+## Regenerating Your App Token
+
+If your application token may have been compromised, you can regenerate it from
+[the settings page](https://www.skylight.io/app/settings/account).
+
+<%= thumbnail 'getting-started/regenerate-token.png' %>
+
+Once you have regenerated the token, you will need to update your production
+application with the new token.
+
+By default, Skylight gets the token from `config/skylight.yml`. You should edit the
+`authentication` key in that file and redeploy it to production after regenerating
+the token.
+
+If you're using Heroku (or provide the token as an environment variable for a
+different hosting provider), you will want to
+[update](#how-do-i-use-skylight-if-my-app-is-hosted-on-heroku) the
+`SKYLIGHT_AUTHENTICATION` environment variable.
+
 ## What's next
 
 Your application should now be successfully set up with Skylight. You can
