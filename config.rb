@@ -55,6 +55,7 @@ set :images_dir, 'img'
 activate :directory_indexes
 activate :syntax
 activate :quickjump
+activate :livereload
 
 set :markdown_enngine, :kramdown
 # set :markdown_engine, :redcarpet
