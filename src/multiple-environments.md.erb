@@ -1,0 +1,27 @@
+---
+title: Setting Up Multiple Environments
+---
+
+In many cases, your applications will have two or more production-like
+environments.  These are typically referred to as "production" and "staging",
+and you may also have "test", "QA", "dev", etc. environments.
+
+You can configure Skylight to separate data for each of these environments by
+creating a new application for each, and then configuring Skylight to use the
+appropriate app on a per-environment basis.
+
+To create a new environment, make a directory using the name you'd like:
+
+    mkdir /tmp/appname-staging
+    cd /tmp/appname-staging
+    skylight setup
+
+Running the `skylight setup` command will create a new application on Skylight,
+using the directory name as the default. You can always change the application's
+name via the Skylight web UI.
+
+Once `skylight setup` has finished running, a new `config/skylight.yml` file
+will be generated containing a new application ID and authentication token.
+
+You'll need to [configure](/agent#configuration) this new environment with these
+new credentials.
