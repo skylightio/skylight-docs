@@ -48,7 +48,7 @@ Make sure you are using the latest version of the Skylight gem (0.3.1
 when this was written). In the directory for your Rails app, run this
 command:
 
-    bundle list | grep skylight 
+    bundle list | grep skylight
 
 You should see something like the following output:
 
