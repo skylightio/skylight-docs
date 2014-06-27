@@ -84,3 +84,9 @@ Verify that, in your app's `Gemfile`, you've added the `skylight`
 gem to a group that will be installed in production. For example, if you
 add `skylight` to the `development` group, it will not run when you
 deploy to production.
+
+#### Is the sockfile path writable?
+
+By default, Skylight uses your Rails tmp path as the sockfile directory.
+In the event that this path isn't writable you should set
+`agent.sockfile_path` in your [config]/agent#configuration).
