@@ -104,4 +104,4 @@ problems will benefit from grouping.
 Not all repeated queries can be resolved using the "eager loading"
 technique described above, but because Skylight only reports repeated
 queries that consume a large part of the total request, your app will
-likely benefit from fixing them.
+likely benefit from fixing.

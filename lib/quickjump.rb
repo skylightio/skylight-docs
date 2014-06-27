@@ -12,26 +12,26 @@ class QuickJump < Middleman::Extension
   end
 
   def after_configuration
+    quickjump = self
+
     app.after_render do |content, path, locs, template_class|
       page = Nokogiri::HTML(content)
-      target = page.css(target_selector).first
-      dest = page.css(destination_selector).first
+      target = page.css(quickjump.target_selector).first
+      dest = page.css(quickjump.destination_selector).first
 
       if target && dest
-        content = process(page, target, dest)
+        content = quickjump.process(page, target, dest)
       end
 
       content
     end
   end
 
-private
-
   def process(page, target, dest)
-    els = target.css('h2, h3').sort
+    els = target.css('h2, h3, h4').sort
 
     els.each do |el|
-      next unless %w(h2 h3).include?(el.name)
+      next unless %w(h2 h3 h4).include?(el.name)
 
       id = dasherize(el.text)
 
@@ -40,7 +40,7 @@ private
 
       if el.name == 'h2'
         dest.add_child li(el.text, "##{id}")
-      else
+      elsif el.name == 'h3'
         last = dest.css('li')[-1]
         sub  = last.children[-1]
 
