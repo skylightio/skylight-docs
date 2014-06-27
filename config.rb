@@ -57,9 +57,9 @@ activate :syntax
 activate :quickjump
 activate :livereload
 
-set :markdown_enngine, :kramdown
-# set :markdown_engine, :redcarpet
-# set :markdown, :fenced_code_blocks => true, :smartypants => true
+#set :markdown_engine, :kramdown
+set :markdown_engine, :redcarpet
+set :markdown, :fenced_code_blocks => true, :smartypants => true
 
 helpers Helpers
 

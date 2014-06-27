@@ -9,8 +9,8 @@ gem "middleman-syntax"
 gem "middleman-livereload", "~> 3.1.0"
 
 # Markdown
-# gem "redcarpet"
-gem "kramdown"
+gem "redcarpet"
+#gem "kramdown"
 
 # HTML processing
 gem "nokogiri"
