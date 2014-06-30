@@ -1,6 +1,8 @@
 ---
-title: "Performance Problems: Repeated Queries"
+title: "Performance Problems"
 ---
+
+## Repeated Queries
 
 In general, you will get better performance out of your database if you
 group together similar queries.
@@ -26,7 +28,7 @@ queries into the following query, allowing us to detect the repetition:
 SELECT * FROM "users" WHERE "id" = ?;
 ```
 
-## Possible Cause: N+1 Query
+### Possible Cause: N+1 Query
 
 A very common cause of repeated queries in Rails applications is known
 as "N+1 Queries". This happens because you make a request for a single
@@ -91,7 +93,7 @@ SELECT * from "clients" LIMIT 10;
 SELECT * from "addresses" WHERE "client_id" IN (7, 8, 10, 12, 13, 15, 16, 17, 21);
 ```
 
-## Other Problems
+### Other Problems
 
 Skylight will report any kind of repeated query that includes more than
 4 repetitions, happens on a regular basis, and consumes a large part of
