@@ -80,7 +80,7 @@ specifying ahead of time which associations you will need.
 
 ```rb
 def show
-  client = Client.include(:address).limit(10)
+  client = Client.includes(:address).limit(10)
   @postcodes = client.map { |c| c.address.postcode }
 end
 ```
@@ -106,4 +106,4 @@ problems will benefit from grouping.
 Not all repeated queries can be resolved using the "eager loading"
 technique described above, but because Skylight only reports repeated
 queries that consume a large part of the total request, your app will
-likely benefit from fixing.
+likely benefit from fixing it.
