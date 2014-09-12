@@ -50,7 +50,12 @@ staging:
   authentication: <staging auth token>
 ~~~
 
-Or you can configure the agent with ENV variables:
+By default, the config file is located at `config/skylight.yml`.
+If you'd like to change this, you can set `config.skylight.config_path`
+in your Rails environment file.
+
+
+Alternatively, you can configure the agent with ENV variables:
 
 <dl class="dl-horizontal dw-env">
   <dt>SKYLIGHT_APPLICATION</dt>
