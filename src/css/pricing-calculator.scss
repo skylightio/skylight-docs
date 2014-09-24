@@ -1,0 +1,276 @@
+$bg-purple: #92407e;
+$light-purple: #c29eb8;
+
+$plan-color-free: #8dbb7e;
+$plan-tint-free: #e0ebd5;
+$plan-color-small: #e68647;
+$plan-tint-small: #f9dbbe;
+$plan-color-medium: #2bb6bf;
+$plan-tint-medium: #bfe2e2;
+$plan-color-large: #8dbb7e;
+$plan-tint-large: #e0ebd5;
+$plan-color-extra-large: #e68647;
+$plan-tint-extra-large: #f9dbbe;
+$plan-color-extra-extra-large: #e0605a;
+$plan-tint-extra-extra-large: #f4c4b5;
+
+.calculator {
+  width: 678px;
+  margin: 0 auto;
+
+  /*font-family: "FuturaBT-Bold";*/
+  text-transform: uppercase;
+}
+
+.results {
+  .total-requests, .price {
+    display: inline-block;
+  }
+
+  .price {
+    float: right;
+  }
+
+  .value-label {
+    font-size: 14px;
+  }
+
+  .price .value-label {
+    text-align: right;
+  }
+
+  .value {
+    margin: 14px 0;
+    font-size: 38px;
+  }
+
+  .superscript {
+    font-size: 70%;
+    vertical-align: top;
+  }
+}
+
+.tiers {
+  font-size: 140%;
+  margin-top: 10px;
+
+  .name {
+    display: inline-block;
+    /*font-family: AvenirNextPro, "Arial", sans-serif;*/
+    text-align: center;
+    background-color: rgba(#333, 0.2);
+    color: $bg-purple;
+    margin-right: 12px;
+
+    $small-circle-size: 30px;
+
+    width: $small-circle-size;
+    height: $small-circle-size;
+    border-radius: $small-circle-size / 2;
+    line-height: 30px;
+    font-size: 15px;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  thead th {
+    vertical-align: bottom;
+    font-size: 70%;
+  }
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -4px;
+  }
+
+  td {
+    text-align: center;
+    color: rgba(black, 0.3);
+    vertical-align: middle;
+
+    font-size: 90%;
+  }
+
+  .tier, .additional {
+    width: 1px;
+  }
+
+  th, td {
+    white-space: nowrap;
+    padding: 5px 5px 4px;
+  }
+
+  path {
+    fill: rgba(white, 0.2);
+  }
+
+  .tier {
+    text-align: left;
+  }
+
+  .additional {
+    text-align: right;
+  }
+
+  tr.is-current {
+    background-color: rgba(#777, 0.2);
+
+    .name {
+      background-color: white;
+      color: $bg-purple;
+    }
+
+    td {
+      color: white;
+    }
+  }
+}
+
+.slider {
+  $slider-width: 678px;
+
+  position: relative;
+  height: 28px;
+  width: $slider-width;
+  margin: 14px 0;
+
+  > div {
+    position: absolute;
+  }
+
+  .track, .track-fill {
+    top: 10px;
+    height: 8px;
+    border-radius: 4px;
+  }
+
+  .track {
+    // Width is slightly less than the total
+    // slider to leave room for the knob when
+    // its all the way to the right.
+    width: $slider-width - 4px;
+    background-color: #aaa;
+  }
+
+  .track-fill {
+    width: 40px;
+    background-color: $bg-purple;
+  }
+
+  $knob-size: 28px;
+
+  .knob {
+    width: $knob-size;
+    height: $knob-size;
+
+    left: 30px;
+    margin-left: -14px;
+
+    background-color: white;
+    background-clip: padding-box;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: $knob-size / 2;
+
+    .grip {
+      float: left;
+      margin-right: 2px;
+      margin-top: 7px;
+
+      width: 2px;
+      height: 8px;
+
+      background-color: #c99fbe;
+      border-radius: 2px;
+    }
+
+    .grip:first-child {
+      margin-left: 6px;
+    }
+  }
+
+  @media only screen and (max-device-width : 568px) {
+    height: 28px * 2;
+
+    .knob {
+      width: $knob-size * 2;
+      height: $knob-size * 2;
+      border-radius: $knob-size;
+      margin-left: -14px * 2;
+
+      .grip {
+        margin-top: 17px;
+        margin-right: 2px * 2;
+
+        width: 2px * 2;
+        height: 8px * 2;
+        border-radius: 2px * 2;
+      }
+
+      .grip:first-child {
+        margin-left: 15px;
+      }
+    }
+
+    .track, .track-fill {
+      top: 20px;
+      height: 16px;
+    }
+  }
+}
+
+.tiers {
+  .name {
+    color: white;
+  }
+
+  th {
+    color: #787976;
+  }
+
+  tr.is-current {
+
+    @mixin colored-row($color, $tint) {
+      td {
+        color: $color;
+        border-color: darken($tint, 5%);
+      }
+
+      path {
+        fill: $color;
+      }
+
+      .name {
+        background-color: $color;
+        color: $tint;
+      }
+    }
+
+    &.free {
+      @include colored-row($plan-color-free, $plan-tint-free);
+    }
+
+    &.small {
+      @include colored-row($plan-color-small, $plan-tint-small);
+    }
+
+    &.medium {
+      @include colored-row($plan-color-medium, $plan-tint-medium);
+    }
+
+    &.large {
+      @include colored-row($plan-color-large, $plan-tint-large);
+    }
+
+    &.xl {
+      @include colored-row($plan-color-extra-large, $plan-tint-extra-large);
+    }
+
+    &.xxl {
+      @include colored-row($plan-color-extra-extra-large, $plan-tint-extra-extra-large);
+    }
+  }
+}
+
