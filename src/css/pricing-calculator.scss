@@ -76,6 +76,7 @@ $plan-tint-extra-extra-large: #f4c4b5;
   }
 
   thead th {
+    text-align: center;
     vertical-align: bottom;
     font-size: 70%;
   }
@@ -182,7 +183,7 @@ $plan-tint-extra-extra-large: #f4c4b5;
       width: 2px;
       height: 8px;
 
-      background-color: #c99fbe;
+      background-color: #777;
       border-radius: 2px;
     }
 
