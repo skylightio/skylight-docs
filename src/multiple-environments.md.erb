@@ -14,11 +14,12 @@ To create a new environment, make a directory using the name you'd like:
 
     mkdir /tmp/appname-staging
     cd /tmp/appname-staging
-    skylight setup
 
-Running the `skylight setup` command will create a new application on Skylight,
-using the directory name as the default. You can always change the application's
-name via the Skylight web UI.
+Then follow the instructions available at https://www.skylight.io/app/setup,
+running them in this temporary directory intead of in your main Rails app.
+
+This will create a new application on Skylight, using the directory name as
+the default. You can always change the application's name via the Skylight web UI.
 
 Once `skylight setup` has finished running, a new `config/skylight.yml` file
 will be generated containing a new application ID and authentication token.
