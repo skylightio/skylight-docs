@@ -24,10 +24,8 @@ Here is an example YAML file:
 ~~~ yaml
 ---
 # The Skylight ID for this application. This should be committed to
-# source control. This variable allows the Skylight agent to function in
-# dev mode without an authentication token.
-#
-# Not required in production.
+# source control. It is not currently in use, but may be utilized in
+# future agent releases.
 application: <Skylight application id>
 
 # The authentication token used when reporting data back to the Skylight
@@ -59,13 +57,13 @@ Alternatively, you can configure the agent with ENV variables:
 
 <dl class="dl-horizontal dw-env">
   <dt>SKYLIGHT_APPLICATION</dt>
-  <dd>The skylight application ID</dd>
+  <dd>The skylight application ID. (Optional. Currently does nothing, but may be used in the future.)</dd>
 
   <dt>SKYLIGHT_AUTHENTICATION</dt>
   <dd>The authentication token</dd>
 
   <dt>SKYLIGHT_LOG_FILE</dt>
-  <dd>Path to the Skylight log file</dd>
+  <dd>Path to the Skylight log file. (Defaults to log/skylight.log if not specified.)</dd>
 </dl>
 
 ### Railtie
