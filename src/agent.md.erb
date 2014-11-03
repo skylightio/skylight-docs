@@ -108,6 +108,16 @@ To enable probes:
 config.skylight.probes = %w(net_http excon redis)
 ~~~
 
+### Ignoring your Heartbeat endpoint
+
+Sometimes, an endpoint exists solely for your load-balancer to determine whether your Rails
+process is up.
+
+If you would like to ignore this endpoint, you may add the `SKYLIGHT_IGNORED_ENDPOINT`
+environment variable. Once configured, Skylight will not collect instrumentation and
+requests to this endpoint will not be counted in the application's usage.
+
+An example of the environment variable would be: `SKYLIGHT_IGNORED_ENDPOINT=HeartbeatController#status`
 
 ## Custom instrumentation
 
