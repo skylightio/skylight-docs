@@ -115,7 +115,8 @@ process is up.
 
 If you would like to ignore this endpoint, you may add the `SKYLIGHT_IGNORED_ENDPOINT`
 environment variable. Once configured, Skylight will not collect instrumentation and
-requests to this endpoint will not be counted in the application's usage.
+requests to this endpoint will not be counted in the application's usage or be represented
+as part of the application's aggregated response time and RPM graphs.
 
 An example of the environment variable would be: `SKYLIGHT_IGNORED_ENDPOINT=HeartbeatController#status`
 
