@@ -4,6 +4,11 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.4.0 (November 3, 2014)
+
+* Featherweight Agent: lowered CPU and memory overhead
+* [IMPROVEMENT] Add support for ignoring an endpoint by name
+
 ## 0.3.21 (October 8, 2014)
 
 * [BUGFIX] Skylight crashing on start won't crash entire app
