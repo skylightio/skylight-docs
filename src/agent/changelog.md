@@ -4,6 +4,10 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.4.3 (November 17, 2014)
+
+* [BUGFIX] Fix Moped integration when queries include times
+
 ## 0.4.2 (November 12, 2014)
 
 * [BUGFIX] Fix exit status on MRI 1.9.2
