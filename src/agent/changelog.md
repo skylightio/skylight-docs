@@ -4,6 +4,11 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.5.0 (December 4, 2014)
+* [IMPROVEMENT] Automatically load configuration from ENV
+* [FEATURE] Track object allocations per span
+* [IMPROVEMENT] Fix C warnings
+
 ## 0.4.3 (November 17, 2014)
 
 * [BUGFIX] Fix Moped integration when queries include times
