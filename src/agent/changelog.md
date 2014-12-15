@@ -4,6 +4,11 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.5.2 (December 15, 2014)
+
+* [IMPROVEMENT] Support ignoring multiple heartbeat endpoints
+* [BUGFIX] Fix compilation errors on old GCC
+
 ## 0.5.1 (December 5, 2014)
 
 * [BUGFIX] Fix issues with working directory dissappearing
