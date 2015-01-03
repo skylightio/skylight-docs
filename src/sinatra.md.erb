@@ -1,0 +1,43 @@
+---
+title: Sinatra Apps
+---
+
+> Support for Sinatra is currently in beta. It may change throughout the beta,
+> and once it leaves beta.
+
+Skylight supports Sinatra applications out of the box. What this means is that you
+can use the same Skylight gem for Sinatra apps and Rails apps.
+
+Sinatra apps usually do not require all gems in the `Gemfile`, so you will want
+to add a line like this to your main file:
+
+```rb
+require "skylight/sinatra"
+```
+
+You will also need to boot up the Skylight agent explicitly:
+
+```rb
+Skylight.start!
+```
+
+You generally do not want to run Skylight in development mode, and the most common
+way to do that in Sinatra apps is to use the `:production` environment.
+
+```rb
+configure :production do
+  require "skylight/sinatra"
+  Skylight.start!
+end
+```
+
+You don't need to install any middleware manually, or do anything with unicorn
+forking settings.
+
+When working with Sinatra, you'll want to use environment variables to
+configure Skylight (most notably the authentication token). Skylight doesn't
+support YAML-file configuration in Sinatra apps.
+
+The authentication token will be emitted into `config/skylight.yml` when you
+run `bundle exec skylight setup`, and you should provide it to your production
+app as `SKYLIGHT_AUTHENTICATION`.
