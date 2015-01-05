@@ -1,13 +1,11 @@
 Currently, Skylight supports the following:
 
-* **Ruby** versions 1.9.3, 2.0.x, 2.1.x
+* **Ruby** versions 1.9.3, 2.0.x, 2.1.x (memory allocation measurement
+  requires 2.1+)
 * **Rails** versions 3.x and 4.x
 * **Linux** kernel version 2.6.18+
 
 We recommend running the latest version of the Skylight rubygem.
-
-After June 15th 2014, support for versions older that 0.3.x will
-be dropped.
 
 Although we currently only officially support the Ruby on Rails
 framework, it is possible to get Skylight working with any Rack
