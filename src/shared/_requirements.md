@@ -1,6 +1,6 @@
 Currently, Skylight supports the following:
 
-* **Ruby** versions 1.9.3, 2.0.x, 2.1.x (memory allocation measurement
+* **Ruby** versions 1.9.3, 2.0.x, 2.1.x, 2.2.x (memory allocation measurement
   requires 2.1+)
 * **Rails** versions 3.x and 4.x
 * **Linux** kernel version 2.6.18+
