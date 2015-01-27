@@ -4,6 +4,14 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.6.0 (January 27, 2015)
+
+* [IMPROVEMENT] Eliminates runtime dependency on the Rails
+  constant across the entire codebase
+* [FEATURE] Support for Sinatra applications. See http://docs.skylight.io/sinatra/
+* [FEATURE] Support for the Sequel ORM (off by default for Rails apps)
+* [FEATURE] Support for Tilt templates (off by default for Rails apps)
+
 ## 0.5.2 (December 15, 2014)
 
 * [IMPROVEMENT] Support ignoring multiple heartbeat endpoints
