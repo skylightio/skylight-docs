@@ -89,4 +89,4 @@ deploy to production.
 
 By default, Skylight uses your Rails tmp path as the sockfile directory.
 In the event that this path isn't writable you should set
-`agent.sockfile_path` in your [config]/agent#configuration).
+`daemon.sockdir_path` in your [config](/agent#configuration).
