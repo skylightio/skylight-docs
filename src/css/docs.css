@@ -117,6 +117,7 @@ pre {
 .dw-thumbnail > div {
   display: inline-block;
   margin: 15px 0px 0px 0px;
+  max-width: 100%;
 }
 
 .dw-env dt {
