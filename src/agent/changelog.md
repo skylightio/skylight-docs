@@ -4,6 +4,18 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.6.2-beta.2 (July 1, 2015)
+
+* No changes. Replaces bad 0.6.2-beta.1 build.
+
+## 0.6.2-beta.1 (June 30, 2015) [YANKED]
+
+* [FEATURE] Add probe on ActionView for layout renders
+
+## 0.6.1 (June 30, 2015)
+
+* [BUGFIX] Don't use $DEBUG to enable verbose internal logging
+
 ## 0.6.0 (January 27, 2015)
 
 * [IMPROVEMENT] Eliminates runtime dependency on the Rails
