@@ -108,7 +108,7 @@ To enable probes:
 
 ~~~ ruby
 # config/application.rb
-config.skylight.probes = %w(net_http excon redis)
+config.skylight.probes += %w(excon redis)
 ~~~
 
 ### Ignoring your Heartbeat endpoints
