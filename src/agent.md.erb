@@ -127,7 +127,7 @@ You may also set the ignored heartbeat endpoint using the YAML configuration fil
 
 ~~~ yaml
 ignored_endpoints:
-  - Foo#heartbeat
+  - FooController#heartbeat
 ~~~
 
 
@@ -135,8 +135,8 @@ Sometimes, you may have more than one heartbeat endpoint that you will want to i
 
 ~~~ yaml
 ignored_endpoints:
-  - Foo#heartbeat
-  - Bar#heartbeat
+  - FooController#heartbeat
+  - BarController#heartbeat
 ~~~
 
 ## Custom instrumentation
