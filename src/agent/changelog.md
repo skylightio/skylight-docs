@@ -4,21 +4,20 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
-## 0.7.0-beta.2 (July 23, 2015)
+## 0.8.0-beta.1 (August 4, 2015)
 
-* [IMPROVEMENT] Silence a noisy log message
+* [FEATURE] Add Grape instumentation
 
-## 0.7.0-beta.1 (July 15, 2015)
+## 0.7.1 (August 4, 2015)
 
+* [BUGFIX] Fix bug in FFI error handling
+
+## 0.7.0 (August 3, 2015)
+
+* [BUFIX] Condvar bug in Rust. Updated to latest nightly.
 * [BUGFIX] Don't crash on ruby stack overflow
+* [IMPROVEMENT] Silence a noisy log message
 * [IMPROVEMENT] Update to latest openssl & curl
-
-## 0.6.2-beta.2 (July 1, 2015)
-
-* No changes. Replaces bad 0.6.2-beta.1 build.
-
-## 0.6.2-beta.1 (June 30, 2015) [YANKED]
-
 * [FEATURE] Add probe on ActionView for layout renders
 
 ## 0.6.1 (June 30, 2015)
@@ -99,7 +98,7 @@ title: Ruby Agent Changelog
 
 * Fixed ActiveSupport::Cache monkeypatch
 
-## 0.3.15 (June 30, 2014)
+## 0.3.15 (June 30, 2014) [YANKED]
 
 * Basic instrumentation for ActiveSupport::Cache
 * Fix incompatibility with old version of rack-mini-profiler
