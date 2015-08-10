@@ -4,6 +4,12 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.8.0-beta.2 (August 10, 2015)
+
+* [FEATURE] Process ERB in config/skylight.yml
+* [IMPROVEMENT] Switch Grape instrumentation to use ActiveSupport::Notifications hooks provided by future Grape versions.
+* [IMPROVEMENT] Internal cleanup
+
 ## 0.8.0-beta.1 (August 4, 2015)
 
 * [FEATURE] Add Grape instumentation
