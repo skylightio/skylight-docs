@@ -85,6 +85,11 @@ gem to a group that will be installed in production. For example, if you
 add `skylight` to the `development` group, it will not run when you
 deploy to production.
 
+#### If you're using Sinatra or Grape without Rails, did you follow the installation instructions?
+
+* [Sinatra Instructions](/sinatra)
+* [Grape Instructions](/grape)
+
 #### Is the sockfile path writable?
 
 By default, Skylight uses your Rails tmp path as the sockfile directory.
