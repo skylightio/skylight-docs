@@ -1,0 +1,59 @@
+---
+title: Grape Apps
+---
+
+> NOTE: Grape support requires the 0.8 beta gem.
+
+Skylight supports Grape applications out of the box. What this means is that you
+can use the same Skylight gem for Grape apps and Rails apps.
+
+## Grape on Rails
+
+If your Grape app is mounted in Rails and is version 0.13+, it works out of the
+box with no further configuration! Congrats!
+
+If you're running 0.10 - 0.12 all you have to do is require the following probe:
+
+```rb
+# config/application.rb
+config.skylight.probes += ['grape']
+```
+
+See the [Rails configuration instructions](/agent#railtie) for more information.
+
+## Grape on Sinatra
+
+If your Grape app is mounted in a Sinatra app, first follow the [Sinatra
+instructions](/sinatra).
+
+If you're running Grape 0.13+, that's all you need to do. For versions 0.10 -
+0.12, you'll also want to add this to your main file:
+
+```rb
+require 'skylight/probes/grape'
+```
+
+## Standalone Grape
+
+Grape apps usually do not require all gems in the `Gemfile`, so you'll want to
+begin by adding a line like this to your main file:
+
+```rb
+require "skylight"
+```
+
+(If you're running grape 0.10 - 0.12 or earlier, you'll also need to explicitly
+require the probe: `require 'skylight/probes/grape'`.)
+
+You will also need to boot up the Skylight agent explicitly.
+
+```rb
+Skylight.start!
+```
+
+Finally, you'll want to install the Skylight middleware in your base Grape or
+Rack app with:
+
+```rb
+use Skylight::Middleware
+```
