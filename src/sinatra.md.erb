@@ -36,19 +36,21 @@ You will also need to boot up the Skylight agent explicitly:
 Skylight.start!
 ```
 
-Since you probably don't want to instrument your app locally, you should set up a
-conditional to ensure this this is only run in production environments.
+(If you want to load your configuration from a file instead of from ENV, you
+can use `Skylight.start!(file: PATH_TO_CONFIG)`.)
+
+You generally do not want to run Skylight in development mode, and the most common
+way to do that in Sinatra apps is to use the `:production` environment.
+
+```rb
+configure :production do
+  require "skylight/sinatra"
+  Skylight.start!
+end
+```
 
 You don't need to install any middleware manually, or do anything with unicorn
 forking settings.
-
-When working with Sinatra, you'll want to use environment variables to
-configure Skylight (most notably the authentication token). Skylight doesn't
-support YAML-file configuration in Sinatra apps.
-
-The authentication token will be emitted into `config/skylight.yml` when you
-run `bundle exec skylight setup`, and you should provide it to your production
-app as `SKYLIGHT_AUTHENTICATION`.
 
 <br><br><br>
 
