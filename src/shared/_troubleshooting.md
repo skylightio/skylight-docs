@@ -40,11 +40,14 @@ First, make sure that there is traffic to your application. If your
 Rails app is handling requests, you should start to see data in Skylight
 in just a few minutes.
 
+We have received reports of problems running on the `cedar-10` stack.
+You should upgrade to the `cedar-14` stack.
+
 If your app is running and has traffic, but you're still not seeing
 anything in Skylight, verify that the `skylight` gem is installed and
 running properly.
 
-Make sure you are using the latest version of the Skylight gem (0.3.1
+Make sure you are using the latest version of the Skylight gem (0.8.0
 when this was written). In the directory for your Rails app, run this
 command:
 
@@ -52,7 +55,7 @@ command:
 
 You should see something like the following output:
 
-    * skylight (0.3.1)
+    * skylight (0.8.0)
 
 If the gem is installed and up-to-date, the next step is to verify that
 it is running correctly:
