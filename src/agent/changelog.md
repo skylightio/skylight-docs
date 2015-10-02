@@ -4,6 +4,13 @@ title: Ruby Agent Changelog
 
 [On rubygems.org](https://rubygems.org/gems/skylight)
 
+## 0.8.1 (October 1, 2015)
+
+* [BUGFIX] Fix agent on OS X El Capitan.
+* [PERFORMANCE] Explicitly subscribe to normalized events
+* [IMPROVEMENT] Use native unique description tracking
+* [IMPROVEMENT] Native SQL: Support multistatement queries
+
 ## 0.8.0 (August 13, 2015)
 
 * [FEATURE] Add Grape instumentation. See http://docs.skylight.io/grape
