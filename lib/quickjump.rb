@@ -31,30 +31,56 @@ class QuickJump < Middleman::Extension
   def process(page, target, dest)
     els = target.css('h2, h3, h4').sort
 
-    els.each do |el|
-      next unless %w(h2 h3 h4).include?(el.name)
+    nested = []
+    last_chain = []
 
-      id = dasherize(el.text)
+    # Chain ids to avoid duplicates
+    els.each do |el|
+      hash = {
+        el: el,
+        id: dasherize(el.text),
+        children: []
+      }
+
+      parent = last_chain.last
+      while parent && el.name <= parent[:el].name
+        last_chain.pop
+        parent = last_chain.last
+      end
+
+      if parent
+        hash[:id] = "#{parent[:id]}-#{hash[:id]}"
+        parent[:children] << hash
+      else
+        nested << hash
+      end
+
+      last_chain << hash
+    end
+
+    last_chain = []
+
+    build_tree(dest, nested)
+
+    page.to_html
+  end
+
+  def build_tree(dest, elements)
+    elements.each do |hash|
+      el = hash[:el]
+      id = hash[:id]
+      children = hash[:children]
 
       el.remove_attribute 'id'
       el.add_child Nokogiri::HTML.fragment(%[<div id="#{id}" class="dw-nav-token"></div>])
 
-      if el.name == 'h2'
-        dest.add_child li(el.text, "##{id}")
-      elsif el.name == 'h3'
-        last = dest.css('li')[-1]
-        sub  = last.children[-1]
+      list_item = dest.add_child(li(el.text, "##{id}")).first
 
-        unless sub.name == 'ul'
-          last.add_child Nokogiri::HTML.fragment(%[<ul class="nav"></ul>])
-          sub = last.children[-1]
-        end
-
-        sub.add_child li(el.text, "##{id}")
+      unless children.empty?
+        child_list = list_item.add_child(Nokogiri::HTML.fragment(%[<ul class="nav"></ul>])).first
+        build_tree(child_list, children)
       end
     end
-
-    page.to_html
   end
 
   def li(text, url)
