@@ -3,3 +3,6 @@
     <p>&copy; 2012&ndash;<%= Time.now.year %> Tilde Inc.</p>
   </div>
 </footer>
+
+<%= javascript_include_tag "jquery", "bootstrap" %>
+<%= javascript_include_tag "pricing-calculator" if current_page.data.pricing_calculator %>
