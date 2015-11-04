@@ -2,11 +2,13 @@
 # the following line to use "https"
 source 'http://rubygems.org'
 
-gem "middleman", "~>3.3.3"
+gem "middleman", "~> 3.4.0"
+
+# Syntax highlighting
 gem "middleman-syntax"
 
 # Live-reloading plugin
-gem "middleman-livereload", "~> 3.1.0"
+gem "middleman-livereload", "~> 3.4.3"
 
 # Markdown
 gem "redcarpet"

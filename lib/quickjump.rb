@@ -14,7 +14,8 @@ class QuickJump < Middleman::Extension
   def after_configuration
     quickjump = self
 
-    app.after_render do |content, path, locs, template_class|
+    app.after_render do |path, locs, template_class|
+      content = self
       page = Nokogiri::HTML(content)
       target = page.css(quickjump.target_selector).first
       dest = page.css(quickjump.destination_selector).first
