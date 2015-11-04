@@ -1,5 +1,6 @@
 ---
-title: "Performance Problems"
+title: "Performance Tips"
+last_updated: 2015-11-06
 ---
 
 ## Repeated Queries
@@ -71,7 +72,7 @@ SELECT * from "clients" LIMIT ?;
 SELECT * from "addresses" WHERE "id" = ?; // x 10
 ```
 
-### The Solution
+#### The Solution
 
 The solution to this problem is ["eager loading"][2], which means
 specifying ahead of time which associations you will need.
@@ -93,7 +94,7 @@ SELECT * from "clients" LIMIT 10;
 SELECT * from "addresses" WHERE "client_id" IN (7, 8, 10, 12, 13, 15, 16, 17, 21);
 ```
 
-### Other Problems
+### Other Possiblities
 
 Skylight will report any kind of repeated query that includes more than
 4 repetitions, happens on a regular basis, and consumes a large part of

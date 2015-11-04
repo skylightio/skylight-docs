@@ -28,8 +28,8 @@ class QuickJump < Middleman::Extension
     end
   end
 
-  def process(page, target, dest)
-    els = target.css('h2, h3, h4').sort
+  def process(page, target=nil, dest=nil)
+    els = (target || page).css('h2, h3, h4').sort
 
     nested = []
     last_chain = []
@@ -60,12 +60,13 @@ class QuickJump < Middleman::Extension
 
     last_chain = []
 
-    build_tree(dest, nested)
+    build_tree(nested, dest)
 
     page.to_html
   end
 
-  def build_tree(dest, elements)
+  # dest may be nil when we call from middleman-search
+  def build_tree(elements, dest=nil)
     elements.each do |hash|
       el = hash[:el]
       id = hash[:id]
@@ -74,11 +75,11 @@ class QuickJump < Middleman::Extension
       el.remove_attribute 'id'
       el.add_child Nokogiri::HTML.fragment(%[<div id="#{id}" class="dw-nav-token"></div>])
 
-      list_item = dest.add_child(li(el.text, "##{id}")).first
+      list_item = dest ? dest.add_child(li(el.text, "##{id}")).first : nil
 
       unless children.empty?
-        child_list = list_item.add_child(Nokogiri::HTML.fragment(%[<ul class="nav"></ul>])).first
-        build_tree(child_list, children)
+        child_list = list_item ? list_item.add_child(Nokogiri::HTML.fragment(%[<ul class="nav"></ul>])).first : nil
+        build_tree(children, child_list)
       end
     end
   end
@@ -88,7 +89,7 @@ class QuickJump < Middleman::Extension
   end
 
   def dasherize(txt)
-    txt.downcase.gsub(/\s+/, '-').gsub(/[^a-z0-9_.-]/i, '')
+    txt.downcase.gsub(/\s+/, '-').gsub(/[^a-z0-9_-]/i, '')
   end
 
 end

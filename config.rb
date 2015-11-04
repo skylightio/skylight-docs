@@ -54,6 +54,59 @@ activate :syntax
 activate :quickjump
 activate :livereload
 
+activate :search do |config|
+  config.resources = data.outline.map{|s| s.url[1..-1] }
+
+  config.fields = {
+    id:             { index: false, store: true },
+    title:          { boost: 100, store: true, required: true },
+    description:    { boost: 90, store: true },
+    headers:        { boost: 80, store: false },
+    header_details: { index: false, store: true },
+    content:        { boost: 50 },
+    url:            { index: false, store: true }
+  }
+
+  quickjump = self.extensions[:quickjump]
+
+  config.before_index = Proc.new do |to_index, to_store, resource|
+    if title = resource.data.title
+      if section = data.outline.find{|s| s.title == title }
+        [:id, :description].each do |key|
+          to_index[key] = to_store[key] = section[key]
+        end
+      end
+    end
+
+    # Would be nice to avoid all this duplicate processing
+    page = Nokogiri::HTML(resource.render(layout: false))
+    quickjump.process(page)
+
+    to_index[:headers] = page.css('h2, h3, h4').map(&:text).join(' ')
+    to_store[:header_details] = page.css('h2').map do |header|
+      id = header.css('.dw-nav-token')[0][:id]
+      { title: header.text, id: id }
+    end
+  end
+end
+
+activate :s3_redirect do |config|
+  aws_creds = Docs::AWS.credentials
+
+  config.bucket = Docs::AWS.bucket
+  config.aws_access_key_id = aws_creds[:aws_access_key_id]
+  config.aws_secret_access_key = aws_creds[:aws_secret_access_key]
+  config.after_build = false # Don't run automatically
+end
+
+redirect "/grape", "/getting-set-up"
+redirect "/sinatra", "/getting-set-up"
+redirect "/billing", "/get-to-know-skylight"
+redirect "/feature-walkthrough", "/get-to-know-skylight"
+redirect "/filing-bugs", "/contributing"
+redirect "/problems/repeated-queries", "/performance-tips"
+redirect "/multipe-environments", "/getting-set-up"
+
 #set :markdown_engine, :kramdown
 set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true, smartypants: true
@@ -72,7 +125,10 @@ configure :build do
   activate :minify_javascript
 
   # Enable cache buster
-  activate :asset_hash
+  activate :asset_hash do |asset_hash|
+    # For search
+    asset_hash.exts << '.json'
+  end
 
   # Use relative URLs
   # activate :relative_assets
