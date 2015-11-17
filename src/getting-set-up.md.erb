@@ -84,26 +84,19 @@ Alternatively, configuration can be set via ENV vars. In general, the ENV vars a
 Sometimes, an endpoint exists solely for your load-balancer to determine whether your Rails
 process is up.
 
-If you would like to ignore this endpoint, you may add the `SKYLIGHT_IGNORED_ENDPOINT`
+If you would like to ignore this endpoint, you may add the `SKYLIGHT_IGNORED_ENDPOINTS`
 environment variable. Once configured, Skylight will not collect instrumentation and
 requests to this endpoint will not be counted in the application's usage or be represented
 as part of the application's aggregated response time and RPM graphs.
 
-An example of the environment variable would be: `SKYLIGHT_IGNORED_ENDPOINT=HeartbeatController#status`
+An example of the environment variable would be: `SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,OtherController#heartbeat`
 
 You may also set the ignored heartbeat endpoint using the YAML configuration file as follows:
 
 ```yaml
 ignored_endpoints:
-  - FooController#heartbeat
-```
-
-Sometimes, you may have more than one heartbeat endpoint that you will want to ignore. As of now, the only way to specify more than one heartbeat endpoint to ignore is by using the YAML config as follows:
-
-```yaml
-ignored_endpoints:
-  - FooController#heartbeat
-  - BarController#heartbeat
+  - HeartbeatController#status
+  - OtherController#heartbeat
 ```
 
 
