@@ -1,21 +1,46 @@
 <!-- Docs master nav -->
-<div class="navbar navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-    <a href="/" class="navbar-brand">Skylight</a>
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <div class="nav-collapse collapse navbar-responsive-collapse">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-responsive-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">Skylight</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-responsive-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'Getting Started', '/getting-started' %></li>
-        <li><%= link_to 'The Agent', '/agent' %></li>
-        <li><%# link_to 'The App', '/app' %></li>
+        <% for section in data.outline.select(&:focus) %>
+          <li><%= link_to section.title, section.url %></li>
+        <% end %>
+
+        <% non_focused = data.outline.reject(&:focus) %>
+        <% unless non_focused.empty? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% for section in non_focused %>
+                <li><%= link_to section.title, section.url %></li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
       </ul>
-      <ul class="nav navbar-nav pull-right hidden-sm">
-        <li><%= link_to "Back to Skylight", 'https://www.skylight.io/app' %></li>
+
+      <form class="dw-search navbar-form navbar-left" role="search" style="display:none">
+        <div class="input-group">
+          <input name="query" type="text" class="form-control" placeholder="Search for..." autocomplete="off">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Search</button>
+          </span>
+        </div>
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Back to Skylight", 'https://skylight.io/' %></li>
       </ul>
     </div>
   </div>
-</div>
+</nav>

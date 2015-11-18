@@ -7,8 +7,8 @@
 <!-- Use title if it's in the page YAML frontmatter -->
 <title><%= current_page.data.title || "Skylight Documentation" %></title>
 
-<%= stylesheet_link_tag "bootstrap", "docs", "syntax", "pricing-calculator" %>
-<%= javascript_include_tag "jquery", "bootstrap", "pricing-calculator" %>
+<%= stylesheet_link_tag "bootstrap", "docs", "syntax" %>
+<%= stylesheet_link_tag "pricing-calculator" if current_page.data.pricing_calculator %>
 
 <script>
   // Google Analytics

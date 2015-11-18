@@ -1,21 +1,6 @@
 require 'zlib'
 require 'digest/md5'
-
-def aws_credentials
-  file = File.expand_path('~/.fog')
-  unless File.exist?(file)
-    puts "~/.fog missing"
-    abort
-  end
-
-  creds = YAML.load_file(file)
-  creds[:'skylight-docs'] ||
-    creds['skylight-docs'] ||
-    creds[:'tilde-parent'] ||
-    creds['tilde-parent'] ||
-    creds[:default] ||
-    creds['default']
-end
+require_relative 'lib/aws'
 
 def run(*args)
   old = ENV['RUBYOPT']
@@ -66,10 +51,11 @@ desc "Deploy the docs"
 task :deploy => :build do
   require 'fog'
 
-  creds = aws_credentials
+  creds = Docs::AWS.credentials
+  bucket = Docs::AWS.bucket
 
   conn = Fog::Storage.new(creds.merge(provider: 'AWS'))
-  dir  = conn.directories.get('skylight-docs')
+  dir  = conn.directories.get(bucket)
 
   base = File.expand_path('../build', __FILE__)
 
@@ -113,6 +99,8 @@ task :deploy => :build do
     # Upload that shiiiit
     dir.files.create(opts)
   end
+
+  run 'middleman s3_redirect'
 end
 
 desc "Build the docs"

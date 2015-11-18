@@ -1,0 +1,182 @@
+---
+title: Get to Know Skylight
+last_updated: 2015-11-09
+pricing_calculator: true
+---
+
+## Feature Walkthrough
+
+This walkthrough is current as of last check on April 1st, 2014. We're shipping early and often, so things might look ever so slightly different today.
+
+This page also doesn't cover everything in Skylight, but rather a selection we add to as we get the same frequently asked UI questions. Do reach out if there's something else specific you'd like to see explained here.
+
+### Response time
+
+There are several places that your application's response times appear in Skylight. In most cases we talk about the numbers in one of two ways. The "Problem" response time is the 95th percentile, whereas the "Typical" response time is the median (50th percentile).
+
+See [below](#the-theory-95th-percentiles-vs-averages) for a more detailed analysis.
+
+### Memory Allocation Tracking
+
+Though it's not the most common cause, high memory allocations and the resulting GC churn can be a cause of app slowdowns. To help identify and resolve these situations, Skylight tracks allocation counts in addition to reponse times.
+
+In the list view, we call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill in to the individual endpoint and see exactly where the allocations occurr.
+
+### Inspections
+
+
+### App Dashboard
+
+<%= thumbnail 'get-to-know-skylight/endpoints-list.png', retina: true %>
+
+This is the app dashboard, and is the first thing you will see when you log in to Skylight.
+
+The purpose of this page is to give you a high-level view of how your app is performing, and give you a starting point to digging in to the details.
+
+At the top we show a graph with the Typical and Problem response times and RPM for your app over the current time range. Hover over the graph to see the specific numbers at a given time. See above for more on "response time".
+
+This section is useful for keeping an eye on your application and making sure the response times don't shoot up suddenly, or for detecting spikes in traffic.
+
+Below the graph is the endpoint list. This list shows you all of the endpoints in your application; that is, all of the controllers and their actions that have been used in the currently selected time range. In addition to each endpoints name, we display the Typical and Problem response times, popularity, and agony.
+
+You may have noticed that by default, we order endpoints by our patent-pending Agony-Detection Algorithm™. (Just kidding about the patent-pending bit.) We determine how much agony your endpoint is causing customers by looking at response times and endpoint popularity. Using a combination of these factors, we determine which endpoint is having the most adverse affect on your users.
+
+For example, you might have one endpoint that has a problem response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a problem response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint.
+
+Of course, we also allow you to sort the list by any of the other columns. Just click on the column name to re-sort. If you ever forget what a column signifies, hover over the column header. We recommend you sort by Agony, though, and start at the top and work your way down.
+
+Once you've figured out where you'd like to focus your performance-tuning efforts, just click on the endpoint name and you'll be taken to a wonderland of performance information.
+
+### Time Explorer
+
+Before diving into the endpoint view, we should first mention the Time Explorer.
+
+<%= thumbnail 'get-to-know-skylight/time-explorer.png', retina: true %>
+
+The time explorer lives at the bottom of your app views. For both the dashboard and the endpoint view the data shown is for the range selected in the explorer. Displayed in the graph is the Problem (95th percentile) response time for either the entire application or for the specific endpoint being viewed.
+
+You can drag the selected range, use the arrows buttons, or chose a predefined range of time. When you update this range, you'll immediately see the current data in the rest of the page update accordingly.
+
+Pro Tip: The URL updates in response to new time selections. You can share the current URL with other collaborators or even modify the range by modifying the URL!
+
+### Endpoint view
+
+<%= thumbnail 'get-to-know-skylight/endpoint.png', retina: true %>
+
+The endpoint view is the heart and soul of Skylight. More than just looking pretty, this page is the end result of distilling thousands of data points into actionable information that you can use to speed up your app.
+
+At the top is the Response Time Distribution, showing you the distribution of the response times for this particular endpoint. This feature is awesome because it makes bi-modal distributions obvious. For example, imagine you are doing an additional SQL query when the logged in user is an admin. That particular query happens to be for a column that is not indexed, so it is very slow.
+
+If all you had was an average, you'd have no idea this was happening. But because you have a histogram, you can see that the fast, non-admin requests cluster around one response time, and the slower, admin-only requests cluster around another time.
+
+Below the Response Time Distribution is the Average Tmieline. The timeline shows you where exactly your Rails app is spending time when servicing this endpoint. Each row represents a different task, and they're color coded. For example, blue rows are time spent in application code, and green rows represent database queries.
+
+If you see black segments, that represents garbage collection time. Because GC can happen sporadically throughout the request, we aggregate it up and show it at the end.
+
+Wondering what the light and darker segments mean? If you see a dark segment, that's "self-time"—time that was spent for that particular task. Light colored segments represent child tasks. For example, if your controller's Ruby code calls out to the database and then does something with that data, the time spent calling out to the database would be represented as a lighter shade of blue. You'll see that the lighter shaded segments always line up with a child segment that appears below.
+
+Lastly, you can get more information about a particular segment by clicking on it to get the detail card. In database segments, for example, we show the SQL that was executed, so it's easy to track down exactly what query was slow.
+
+A couple notes about the aggregate trace. First, it's important to remember that this is not a single request—it represents many (potentially thousands) of requests all merged into one. Showing single requests can send you on a wild goose chase, because it may not be representative. Because we aggregate all requests together, if something looks like it's taking a lot of time in the trace, that means it was taking enough time in your production environment to be statistically significant.
+
+Second, the aggregate trace, by default, represents _all_ of the requests in the selected time range. Often, it's helpful to focus on slower requests to see exactly _why_ they are so slow. You can focus on the slowest requests by clicking the Slower link in the Segments section, or the Faster requests by the clicking the (you guessed it) Faster link.
+
+You can also click and drag on the Response Time Distribution to only show the Aggregate Trace for requests in the selected region. To return to our example above about slow admin pages, you could click and drag to select the cluster of slower requests. This allows you to laser-focus on the requests that are causing the slow-down.
+
+## Billing
+
+### Pricing
+
+We charge for Skylight based on the total number of requests per month across
+all your apps.
+
+You can use the calculator below to determine what your monthly price would
+be for a given request volume.
+
+<div class="calculator">
+  <div class="slider">
+    <div class="track"></div>
+    <div class="track-fill"></div>
+    <div class="knob">
+      <div class="grip"></div>
+      <div class="grip"></div>
+      <div class="grip"></div>
+    </div>
+  </div>
+
+  <div class="results">
+    <div class="total-requests">
+      <div class="value-label">Total Requests</div>
+      <div class="value"></div>
+    </div>
+    <div class="price">
+      <div class="value-label">You&rsquo;d pay</div>
+      <div class="value">
+        $<span class="dollar-value">60</span>.<span class="superscript">00</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tiers">
+    <table>
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>Included Requests</th>
+          <th>Additional</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tier">
+            <span class="name"></span><span class="price"></span>
+          </td>
+          <td class="requests"></td>
+          <td class="additional">
+            <span class="additional-price"></span>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+               width="10px" height="25px" viewBox="0 0 22 50" enable-background="new 0 0 22 50" xml:space="preserve">
+              <path stroke-width="20" fill-rule="evenodd" clip-rule="evenodd" d="M20.142,0L22,0.789L1.859,50L0,49.211L20.142,0z"/>
+            </svg>
+            M
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br>
+
+Skylight is free up to the first 100,000 requests. After that, pricing starts at $20 per million requests handled, and continues according to the schedule above. As you can also see, the more you need, the lower your cost per million; built-in bulk discounting.
+
+To be clear: no plans, nothing to choose. Skylight will automatically discount additional requests for you. We're fond of simplicity.
+
+### Billing Details
+
+The billing page gives an overview of your current billing status.
+
+<%= thumbnail 'get-to-know-skylight/billing-graph.png', retina: true %>
+
+At the top, we present the current billing period, including your total requests and price so far, along with a graph of your daily usage. Hovering over a specific bar in the usage chart will give you the specific number of requests each day.
+
+Below that we show your current billing tier. See above for more information on tiers.
+
+If you have multiple apps, we then show you how your usage breaks down accross all of your apps.
+
+<%= thumbnail 'get-to-know-skylight/billing-apps.png', retina: true %>
+
+The UI does not currently support viewing historical usage. If you need details about past billing cycles, please contact us via the in-app messenger with your request.
+
+## The Theory
+
+### 95th Percentiles vs. Averages
+
+Most tools only show averages, which are easy to calculate but provide limited usefulness on their own. In Skylight, we _always_ show the 95th percentile response time as well. While this taked significantly more computation on the backend to determine, it is a much, much better number to indicate real world performance than the average.
+
+Averages are almost useless when thinking about web performance, and in the worst case, are actually misleading. For more information, see [DHH's blog post, The problem with averages](http://signalvnoise.com/posts/1836-the-problem-with-averages). Google, Twitter, and GitHub (to name a few) all use 95th percentile numbers when tracking performance.
+
+### Aggregation vs. Sampling
+
+Most other profiling tools rely on sampling to give you detailed information about endpoints. While this provides some value, it doesn't provide you information about every request. Depending on how frequently the sample happens, it's quite likely that it will miss spikes and unusual behavior.
+
+In Skylight, we track information about _every_ request. We then aggregate the data together to provide you a representative picture of your application. This means that no request is ignored so we can give you a full and accurate picture of your applicaiton.
