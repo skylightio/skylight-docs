@@ -35,7 +35,7 @@ class LinkCheck < Middleman::Extension
           path ||= ""
           fragment ||= ""
 
-          if href.include?('#') && fragment == ''
+          if href.include?('#') && fragment == '' && href != '#'
             puts "[WARN] Empty fragment in link on #{key} (#{href})"
             success = false
           end
