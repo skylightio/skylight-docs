@@ -1,11 +1,13 @@
 ---
 title: Instrumentation
-last_updated: 2015-11-18
+last_updated: 2015-12-03
 ---
 
 ## Available Instrumentation Options
 
 ### Rails
+
+_See the [Rails setup instructions](/getting-set-up/#agent-configuration-rails)._
 
 In Rails applications, we use ActiveSupport::Notifications to track the following.
 
@@ -20,27 +22,59 @@ In Rails applications, we use ActiveSupport::Notifications to track the followin
 
 ### Grape
 
+_See the [Grape setup instructions](/getting-set-up/#agent-configuration-grape)._
+
 * Endpoint Execution
 * Endpoint Filters
 * Endpoint Rendering
 
 ### Sinatra
 
+_See the [Sinatra setup instructions](/getting-set-up/#agent-configuration-sinatra)._
+
 * Endpoint Execution
 
-### Net::HTTP
+---
 
-* HTTP Requests
+### ActiveModel::Serializers
+
+_Add_ `active_model_serializers` _to [probes list](/getting-set-up/#agent-configuration-rails-probes)._
+
+* Serialization
 
 ### Excon
 
+_Add_ `excon` _to [probes list](/getting-set-up/#agent-configuration-rails-probes)._
+
 * HTTP Requests
 
-### Tilt
+### Mongo (Official Driver)
 
-* Template Rendering
+_Add_ `mongo` _to probes list._
+
+* Database Queries
+
+### Moped
+
+_Add_ `moped` _to probes list._
+
+* Database Queries
+
+### Mongoid
+
+_Add_ `mongoid` _to probes list._
+
+Depending on the version, Mongoid either uses Moped or the official Mongo driver under the hood. This probe will just enable the correct probe for one of these two libraries.
+
+### Net::HTTP
+
+_Enabled by default_
+
+* HTTP Requests
 
 ### Redis
+
+_Add_ `redis` _to [probes list](/getting-set-up/#agent-configuration-rails-probes)._
 
 * All Commands
 
@@ -48,11 +82,16 @@ In Rails applications, we use ActiveSupport::Notifications to track the followin
 
 ### Sequel
 
+_Enabled automatically with Sinatra or Add_ `tilt` _to [probes list](/getting-set-up/#agent-configuration-rails-probes)._
+
 * SQL Queries
 
-### Moped/Mongoid
+### Tilt
 
-* MongoDB Queries (Currently only 4.x, 5.x coming soon)
+_Enabled automatically with Sinatra or Add_ `tilt` _to [probes list](/getting-set-up/#agent-configuration-rails-probes)._
+
+* Template Rendering
+
 
 
 ## How it Works
