@@ -96,8 +96,12 @@ ul.dw-sections {
     margin-top: 20px;
   }
 
-  p, pre, ul, blockquote {
+  p, ul, blockquote {
     @include body-width;
+  }
+
+  pre {
+    word-break: normal;
   }
 }
 
