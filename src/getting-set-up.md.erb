@@ -142,6 +142,10 @@ config.skylight.probes += %w(excon redis)
 
  See the [Instrumentation section](/instrumentation/#available-instrumentation-options) to learn more about the probes.
 
+#### ActionController::Metal
+
+By default, Metal controllers don't include the ActiveSupport::Notifications that Skylight relies on to set endpoint names. This can be remedied by adding `include ActionController::Instrumentation` to your controller.
+
 ### Sinatra
 
 #### In Rails
