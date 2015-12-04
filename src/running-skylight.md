@@ -27,7 +27,7 @@ Skylight utilizes Rails' Railties to autoload. It then watches the built ActiveS
 
 **Minimum: 1.2+**
 
-Not running Rails? We also support Sinatra apps, though the default instrumentation will be less detailed. By default, we'll recognize your Sinatra routes and also instrument any [supported gems](instrumentation/#available-instrumentation-options). You can also add [custom instrumentation](/instrumentation/#custom-app-instrumentation).
+Not running Rails? We also support Sinatra apps, though the default instrumentation will be less detailed. By default, we'll recognize your Sinatra routes and also instrument any [supported gems](/instrumentation/#available-instrumentation-options). You can also add [custom instrumentation](/instrumentation/#custom-app-instrumentation).
 
 #### Grape
 
