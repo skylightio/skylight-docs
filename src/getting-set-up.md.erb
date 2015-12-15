@@ -89,6 +89,8 @@ environment variable. Once configured, Skylight will not collect instrumentation
 requests to this endpoint will not be counted in the application's usage or be represented
 as part of the application's aggregated response time and RPM graphs.
 
+The name of the endpoint can be found in the endpoints list on your Skylight application dashboard. For Rails actions, it will be `Controller#action`, for Sinatra it will be `VERB path`, and for Grape it will be `Module [VERB] path`. Always use the name in list UI if you're unsure.
+
 An example of the environment variable would be: `SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,OtherController#heartbeat`
 
 You may also set the ignored heartbeat endpoint using the YAML configuration file as follows:
