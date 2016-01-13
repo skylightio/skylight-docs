@@ -133,9 +133,11 @@ In order to instrument other libraries outside of Rails, the agent includes prob
 which are only activated if the related files are required. Since this is an experimental
 feature, it's opt-in for now.
 
-We currently have probes for **Net::HTTP**, **ActionView**, **Grape**, **Excon**, **Redis**, **ActiveModel::Serializers**, **Moped**, **Mongo**, **Sinatra**, **Tilt**, and **Sequel**. **Net::HTTP**, **ActionView**, and **Grape** are enabled by default.
+We currently have probes for **Net::HTTP**, **ActionView**, **Grape**, **Excon**, **Redis**, **ActiveModel::Serializers**, **Moped**, **Mongo**, **Sinatra**, **Tilt**, and **Sequel**.
 
-To enable probes:
+The **Net::HTTP**, **ActionView**, and **Grape** probes are enabled by default.
+
+To enable other probes:
 
 ~~~ ruby
 # config/application.rb
