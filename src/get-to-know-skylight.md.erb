@@ -69,7 +69,7 @@ At the top is the Response Time Distribution, showing you the distribution of th
 
 If all you had was an average, you'd have no idea this was happening. But because you have a histogram, you can see that the fast, non-admin requests cluster around one response time, and the slower, admin-only requests cluster around another time.
 
-Below the Response Time Distribution is the Average Tmieline. The timeline shows you where exactly your Rails app is spending time when servicing this endpoint. Each row represents a different task, and they're color coded. For example, blue rows are time spent in application code, and green rows represent database queries.
+Below the Response Time Distribution is the Average Timeline. The timeline shows you where exactly your Rails app is spending time when servicing this endpoint. Each row represents a different task, and they're color coded. For example, blue rows are time spent in application code, and green rows represent database queries.
 
 If you see black segments, that represents garbage collection time. Because GC can happen sporadically throughout the request, we aggregate it up and show it at the end.
 
