@@ -44,7 +44,8 @@ CONTENT_TYPES = {
   '.woff' => "application/font-woff",
   '.otf'  => "application/octet-stream",
   '.ttf'  => "application/octet-stream",
-  '.svg'  => "image/svg+xml"
+  '.svg'  => "image/svg+xml",
+  '.json' => "application/json"
 }
 
 desc "Deploy the docs"
