@@ -82,7 +82,7 @@ _Add_ `redis` _to [probes list](/getting-set-up/#agent-configuration-rails-probe
 
 ### Sequel
 
-_Enabled automatically with Sinatra or Add_ `tilt` _to [probes list](/getting-set-up/#agent-configuration-rails-probes)._
+_Enabled automatically with Sinatra or Add_ `sequel` _to [probes list](/getting-set-up/#agent-configuration-rails-probes)._
 
 * SQL Queries
 
