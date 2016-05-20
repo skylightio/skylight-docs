@@ -26,7 +26,7 @@ To get the setup token, head over to <http://skylight.io/app/setup>.
 
 ## Deployment
 
-Once you've run `skylight setup` you'll need to get the configuration to your server. For this you have two options, either check in the generated `config/skylight.yml` or set the appropriate ENV vars, at the minimum `SKYLIGHT_AUTHENTICATION`. See [below](#agent-configuration-general-options) for more information.
+Once you've run `skylight setup` you'll need to get the configuration to your server. For this you have two options, either check in the `config/skylight.yml` file (which is automatically generated and includes the necessary auth token) or set the appropriate ENV vars, at the minimum `SKYLIGHT_AUTHENTICATION`. See [below](#agent-configuration-general-options) for more information.
 
 After this, all you need to do is run your standard deployment process.
 
@@ -41,7 +41,7 @@ Though, all that's necessary to set is the authentication token, there are a num
 
 ### Setting Configuration Variables
 
-The configuration file looks like this:
+The automatically generated configuration file `config/skylight.yml` looks like this:
 
 ``` yaml
 ---
@@ -121,6 +121,8 @@ staging, you can do the following:
 # config/application.rb
 config.skylight.environments += ['staging']
 ~~~
+
+Also be sure and check out the rest of our [documentation on setting up multiple environments](/getting-set-up#setting-up-multiple-environments).
 
 #### Logger
 
@@ -284,6 +286,8 @@ cd /tmp/appname-staging
 
 Then follow the instructions available on the [app setup screen](https://www.skylight.io/app/setup),
 running them in this temporary directory intead of in your main Rails app.
+
+If you have not already done so, also be sure to [add the new environment](/getting-set-up#agent-configuration-rails-environments) to your `application.rb` file if you are using Rails.
 
 This will create a new application on Skylight, using the directory name as
 the default. You can always change the application's name via the Skylight web UI.
