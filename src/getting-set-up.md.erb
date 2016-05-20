@@ -21,7 +21,7 @@ bundle install
 bundle exec skylight setup {SETUP_TOKEN}
 ```
 
-To get the token, head over to <http://skylight.io/app/setup>.
+To get the setup token, head over to <http://skylight.io/app/setup>.
 
 
 ## Deployment
@@ -107,6 +107,9 @@ ignored_endpoints:
 There are also additional configuration options that can be set in the Rails environment. Unless otherwise noted,
 these settings should be added to `config/application.rb`. Do not attempt to set them via initializers as
 Skylight starts before initializers are run.
+
+Skylight performs setup when the gem is required, at which time Rails will be detected and tapped into. However,
+you may find you need to manually require `skylight/railtie` if you need to load the Skylight gem before Rails.
 
 #### Environments
 
