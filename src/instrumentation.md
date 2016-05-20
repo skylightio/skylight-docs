@@ -110,7 +110,7 @@ While we think most libraries should include `ActiveSupport::Notifications` (any
 
 To make sure we do this in a sane fashion, we developed `Probes`. Probes are small classes that keep an eye out for specific modules and then hook into them when they're loaded. All probes can be disabled in the event of any conflicts and we only autoload probes that we have a high degree of confidence in.
 
-And, since we don't really like having to moneky-patch things either, when at all possible, we [submit pull requests](https://github.com/ruby-grape/grape/pull/1086) to relevant projects to add in ActiveSupport::Notifications.
+And, since we don't really like having to monkey-patch things either, when at all possible, we [submit pull requests](https://github.com/ruby-grape/grape/pull/1086) to relevant projects to add in ActiveSupport::Notifications.
 
 
 ## Instrumenting a Library
