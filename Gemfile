@@ -14,7 +14,7 @@ gem "middleman-livereload", "~> 3.4.3"
 gem "middleman-s3_redirect"
 
 # JS based search
-gem 'middleman-search'
+gem 'middleman-search', "~> 0.4.0"
 
 # Markdown
 gem "redcarpet"
