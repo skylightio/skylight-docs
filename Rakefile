@@ -112,3 +112,10 @@ desc "Build the docs"
 task :build do
   run 'middleman build'
 end
+
+desc "Preview the docs"
+task :preview do
+  run 'middleman'
+end
+
+task default: :preview

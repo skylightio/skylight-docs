@@ -4,7 +4,7 @@ https://docs.skylight.io
 
 ## Development
 
-Run `bundle`, then `bundle exec middleman`.
+Run `bundle`, then `bundle exec rake`.
 Change the files in `src/` and visit http://0.0.0.0:4567/
 
 ## Deployment
