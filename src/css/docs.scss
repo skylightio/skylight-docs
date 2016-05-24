@@ -173,11 +173,22 @@ ul.dw-sections {
   line-height: 50px;
 
   .container {
-    text-align: center;
-
     p:last-child {
       margin-bottom: 0;
     }
+  }
+
+  .copyright {
+    float: left;
+  }
+
+  .license {
+    float: right;
+    text-align: right;
+    width: 25%;
+    font-size: 80%;
+    line-height: 1.4;
+    padding: 10px 0;
   }
 }
 
