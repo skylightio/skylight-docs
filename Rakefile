@@ -52,8 +52,12 @@ desc "Deploy the docs"
 task :deploy => :build do
   require 'fog'
 
-  creds = Docs::AWS.credentials
-  bucket = Docs::AWS.bucket
+  begin
+    creds = Docs::AWS.credentials
+    bucket = Docs::AWS.bucket
+  rescue Docs::AWS::Error => e
+    abort "Unable to get AWS configuration: #{e.message}"
+  end
 
   conn = Fog::Storage.new(creds.merge(provider: 'AWS'))
   dir  = conn.directories.get(bucket)

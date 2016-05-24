@@ -91,12 +91,16 @@ activate :search do |config|
 end
 
 activate :s3_redirect do |config|
-  aws_creds = Docs::AWS.credentials
+  begin
+    aws_creds = Docs::AWS.credentials
 
-  config.bucket = Docs::AWS.bucket
-  config.aws_access_key_id = aws_creds[:aws_access_key_id]
-  config.aws_secret_access_key = aws_creds[:aws_secret_access_key]
-  config.after_build = false # Don't run automatically
+    config.bucket = Docs::AWS.bucket
+    config.aws_access_key_id = aws_creds[:aws_access_key_id]
+    config.aws_secret_access_key = aws_creds[:aws_secret_access_key]
+    config.after_build = false # Don't run automatically
+  rescue Docs::AWS::Error => e
+    puts "Unable to activate s3_redirect: #{e.message}"
+  end
 end
 
 redirect "/grape", "/getting-set-up"

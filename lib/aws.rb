@@ -1,10 +1,11 @@
 module Docs
   module AWS
+    class Error < StandardError; end
+
     def self.credentials
       file = File.expand_path('~/.fog')
       unless File.exist?(file)
-        puts "~/.fog missing"
-        abort
+        raise Error, "~/.fog missing"
       end
 
       creds = YAML.load_file(file)
