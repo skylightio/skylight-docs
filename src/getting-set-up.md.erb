@@ -112,7 +112,7 @@ these settings should be added to `config/application.rb`. Do not attempt to set
 Skylight starts before initializers are run.
 
 Skylight performs setup when the gem is required, at which time Rails will be detected and tapped into. However,
-you may find you need to manually require `skylight/railtie` if you need to load the Skylight gem before Rails.
+you may find you have to manually require `skylight/railtie` if you need to load the Skylight gem before Rails.
 
 #### Environments
 
@@ -290,7 +290,7 @@ cd /tmp/appname-staging
 Then follow the instructions available on the [app setup screen](https://www.skylight.io/app/setup),
 running them in this temporary directory intead of in your main Rails app.
 
-If you have not already done so, also be sure to [add the new environment](/getting-set-up#agent-configuration-rails-environments) to your `application.rb` file if you are using Rails.
+If you are using Rails and have not already done so, also be sure to [add the new environment](/getting-set-up#agent-configuration-rails-environments) to your `application.rb` file if you are using Rails.
 
 This will create a new application on Skylight, using the directory name as
 the default. You can always change the application's name via the Skylight web UI.
