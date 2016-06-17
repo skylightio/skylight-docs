@@ -21,12 +21,15 @@ bundle install
 bundle exec skylight setup {SETUP_TOKEN}
 ```
 
-To get the token, head over to <http://skylight.io/app/setup>.
+To get the setup token, head over to <http://skylight.io/app/setup>.
 
 
 ## Deployment
 
-Once you've run `skylight setup` you'll need to get the configuration to your server. For this you have two options, either check in the generated `config/skylight.yml` or set the appropriate ENV vars, at the minimum `SKYLIGHT_AUTHENTICATION`. See [below](#agent-configuration-general-options) for more information.
+Once you've run `skylight setup` you'll need to get the configuration to your server. For this you have two options:
+
+* check in the `config/skylight.yml` file (which is automatically generated and includes the necessary auth token) OR
+* set the appropriate ENV vars, at the minimum `SKYLIGHT_AUTHENTICATION`. See [below](#agent-configuration-general-options) for more information.
 
 After this, all you need to do is run your standard deployment process.
 
@@ -41,7 +44,7 @@ Though, all that's necessary to set is the authentication token, there are a num
 
 ### Setting Configuration Variables
 
-The configuration file looks like this:
+The automatically generated configuration file `config/skylight.yml` looks like this:
 
 ``` yaml
 ---
@@ -75,7 +78,7 @@ Alternatively, configuration can be set via ENV vars. In general, the ENV vars a
 
 ### General options
 
-* **`authentication` _(required)_** — The authentication token for the app. Available on the application settings page at skylight.io.
+* **`authentication` _(required)_** — The authentication token for the app. Available on the [application settings page](http://www.skylight.io/app/settings) under the 'Apps' section.
 * **`log_file`** — Change the location of the Skylight log. By default this is `log/skylight.log` with Rails or STDOUT otherwise.
 * **`daemon.sockdir_path`** – The path where the socket file for the daemon is created. In general you will not need to change this. However, if you're using an NFS mount (say with Vagrant) you'll need to point this to a non-NFS location.
 
@@ -108,6 +111,9 @@ There are also additional configuration options that can be set in the Rails env
 these settings should be added to `config/application.rb`. Do not attempt to set them via initializers as
 Skylight starts before initializers are run.
 
+Skylight performs setup when the gem is required, at which time Rails will be detected and tapped into. However,
+you may find you have to manually require `skylight/railtie` if you need to load the Skylight gem before Rails.
+
 #### Environments
 
 By default, the Skylight agent only enables itself in the production
@@ -118,6 +124,8 @@ staging, you can do the following:
 # config/application.rb
 config.skylight.environments += ['staging']
 ~~~
+
+Also be sure and check out the rest of our [documentation on setting up multiple environments](/getting-set-up#setting-up-multiple-environments).
 
 #### Logger
 
@@ -281,6 +289,8 @@ cd /tmp/appname-staging
 
 Then follow the instructions available on the [app setup screen](https://www.skylight.io/app/setup),
 running them in this temporary directory intead of in your main Rails app.
+
+If you are using Rails and have not already done so, also be sure to [add the new environment](/getting-set-up#agent-configuration-rails-environments) to your `application.rb` file if you are using Rails.
 
 This will create a new application on Skylight, using the directory name as
 the default. You can always change the application's name via the Skylight web UI.
