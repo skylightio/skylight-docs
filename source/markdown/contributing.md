@@ -1,30 +1,31 @@
 ---
 title: Contributing
-last_updated: 2015-11-09
+description: Improving the gem and reporting bugs.
+order: 7
+updated: January 1, 2017
 ---
 
 ## Reporting Bugs and Submitting Feedback
 
-Filing bugs and submitting feedback from within Skylight is easy! Find the floating question mark in the
-bottom right of the screen... and, well, that's pretty much it :p
+Filing bugs and submitting feedback from within Skylight is easy! Find the floating question mark in the bottom right of the screen... and, well, that's pretty much it :P
 
-<%= thumbnail 'contributing/intercom-button.png', retina: true %>
+<img src='../assets/intercom-buttonpng.png' alt='intercom button' style="width: 30%; max-width: 1249px">
 
 This will bring up a pop-up with the history of your communication with us and a button for starting a new conversation.
 
-<%= thumbnail 'contributing/intercom-messenger.png', retina: true %>
+<img src='../assets/intercom-messenger.png' alt='intercom messenger' style="width: 50%; max-width: 1249px">
 
-#### Include Attachments
+
+### Include Attachments
 
 The conversation window also gives you the ability to submit attachments with your communication, if relevant. Just click the paperclip icon to the right of the conversation text field.
 
 
-#### Continuing the Conversation
+### Continuing the Conversation
 
 In addition to being able to access your communications via the history, you'll be notified in two other ways:
 
-* If a response has been sent, and you're in Skylight, the box will pop up again showing you your response
-* Alternatively, that box will pop up again next time you log in
+* If a response has been sent, and you're in Skylight, the box will pop up again showing you your response (Alternatively, that box will pop up again next time you log in)
 * You'll also receive a copy of any responses via email
 
 Lastly, you can always email us at [support@skylight.io](mailto:support@skylight.io).
@@ -35,6 +36,7 @@ Lastly, you can always email us at [support@skylight.io](mailto:support@skylight
 If you want to try your hand at fixing bugs or adding features, our agent code is [publicly available on Github](https://github.com/skylightio/skylight-ruby). However, we do recommend that you contact us at <support@skylight.io> before getting started. We'd hate to have you spend time working on something that we might not be able to merge!
 
 Also take a look at our [`CONTRIBUTING.md`](https://github.com/skylightio/skylight-ruby/blob/master/CONTRIBUTING.md) and make sure to sign the CLA before you submit the PR.
+
 
 ### Adding Instrumentation
 
