@@ -1,0 +1,18 @@
+<div class="support-menu-container">
+  <%= link_to 'Support Topics', main_app.support_path, class: 'support-menu-toggle support-menu-link' %>
+
+  <nav class="support-menu js-sticky">
+    <ul class="support-menu-chapter-list">
+      <% @chapters.each do |chapter| %>
+        <li>
+          <%= link_to chapter["Title"], chapter["Path"], class: "support-menu-link support-menu-chapter" + (@current_path == chapter["Path"] ? " active": "") %>
+          <% if @current_path == chapter["Path"] %>
+          <ul id="support-menu-detail" class="support-menu-detail-list" style="display: none;">
+            <%# JavaScript will insert the details from the DOM here! %>
+          </ul>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+</div>

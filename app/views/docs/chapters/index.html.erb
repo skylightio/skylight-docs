@@ -1,0 +1,30 @@
+<%= content_for(:main_class, "support support-index") %>
+
+<header class="page-header">
+  <div class="page-header-container">
+    <h1>Support</h1>
+
+    <%= image_tag "docs/support-monsters.svg", class: "support-monsters" %>
+  </div>
+</header>
+
+<div class="page-section">
+  <div class="page-section-container">
+    <div class="support-index-tiles">
+
+      <% @chapters.each do |chapter| %>
+        <a href="<%= chapter['Path'] %>" class="support-index-tile">
+          <h3><%= chapter["Title"] %></h3>
+          <p>
+            <%= chapter["Description"] %>
+          </p>
+        </a>
+      <% end %>
+    </div>
+
+    <h3>Still have questions?</h3>
+    <p>
+      <a href="/contact">Contact us.</a>
+    </p>
+  </div>
+</div>
