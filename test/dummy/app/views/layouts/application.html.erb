@@ -9,6 +9,8 @@
   </head>
 
   <body>
-    <%= yield %>
+    <main class="<%= content_for?(:main_class) ? yield(:main_class) : '' %>">
+      <%= yield %>
+    </main>
   </body>
 </html>
