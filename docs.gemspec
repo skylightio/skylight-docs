@@ -16,7 +16,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,source,lib}/**/*", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", "~> 5.0.0", ">= 5.0.0.1"
+  s.add_dependency "rails", "~> 5.0.1"
   s.add_dependency "jquery-rails"
   s.add_dependency "kramdown"
+  s.add_dependency "nokogiri"
 end
