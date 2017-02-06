@@ -73,30 +73,11 @@ module Skylight
             content_hash[parts.shift] = parts.join(':')
           end
 
-          content_hash["Path"] = "/support/#{FormatHelpers.dashify(filename)}"
+          content_hash["Path"] = "/support/#{filename}"
         end
 
         content_hash
       end
-    end
-  end
-
-  class FormatHelpers
-    def self.anchorify(text)
-      # TODO: Check Kramdown for method that does this
-      "##{text.downcase.tr(' ', '-').gsub(/[?!.;:]/, '')}"
-    end
-
-    def self.filename_as_route(filename)
-      '/support/' + dashify(filename)
-    end
-
-    def self.dashify(filename)
-      filename.tr('_', '-')
-    end
-
-    def self.undashify(filename)
-      filename.tr('-', '_')
     end
   end
 end

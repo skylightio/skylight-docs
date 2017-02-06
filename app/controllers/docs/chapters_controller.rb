@@ -8,7 +8,7 @@ module Docs
     end
 
     def show
-      @chapter = Skylight::Docs.parse(Skylight::FormatHelpers.undashify(params[:chapter]))
+      @chapter = Skylight::Docs.parse(params[:chapter])
       @section_headers = Skylight::Docs.get_markdown_filenames
       @current_path = request.path
     end
