@@ -58,17 +58,6 @@ module Skylight
       data_array.sort_by { |hash| hash["Order"] }
     end
 
-    # TODO: Refactor this method and use for search
-    # generates a TOC for a given file
-    def self.get_table_of_contents(filename)
-      # TODO: We are parsing every .md file here. Could just parse the one that is current
-      doc = Nokogiri::HTML(parse(filename))
-      # use Nokogiri to get the children of the body element
-      body = doc.at('body').children
-      # concatenate a string of the Table of Contents headers formatted as we like
-      create_toc_string(body, filename)
-    end
-
     class << self
       private
 
@@ -88,39 +77,6 @@ module Skylight
         end
 
         content_hash
-      end
-
-      # TODO: Refactor this method and use for search
-      # loop through Nokogiri node array to put together linked chapter headers for ToC.
-      # Returns a string of html.
-      def create_toc_string(body, filename)
-        chapter_titles = ''
-        body.each do |element|
-          anchor = FormatHelpers.anchorify(element.text)
-
-          # using Rails link_to doesn't work here so we have to use HTML
-          link = "<a href='#{FormatHelpers.filename_as_route(filename)}#{anchor}'>" +
-                    "#{element.text}" +
-                  "</a>"
-
-          # TODO: Make the titles <h1>s, clean up css classes to include *'s etc
-          # the only h2 is the title, which we already have
-          unless element.name == "h2"
-            # h3s are the first subheaders and don't get dashes
-            if element.name == "h3"
-              # we have classes in our Rails app for each h tag that simply indent
-              # them a certain amount
-              chapter_titles += "<li class='#{element.name}-indent'>" + link + "</li>"
-            elsif element.name == "h5"
-              chapter_titles += "<li class='#{element.name}-indent'>* " + link + "</li>"
-            # everything that's not an h3 gets a dash, as per the design
-            elsif element.name.match(/h\d/)
-              chapter_titles += "<li class='#{element.name}-indent'>- " + link + "</li>"
-            end
-          end
-        end
-        # wrap the resulting ToC in a div with a class so we can style them
-        "<div class='chapter-wrapper'>" + chapter_titles + "</div>"
       end
     end
   end
