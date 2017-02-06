@@ -3,7 +3,7 @@ require "docs/engine"
 module Skylight
   class Docs
     # absolute path to the /markdown folder
-    FOLDER = File.expand_path('../../source/markdown', __FILE__)
+    FOLDER = File.expand_path('../../source', __FILE__)
 
     # use Kramdown to parse a GitHub-flavored markdown (GFM) file to HTML
     def self.parse(filename)

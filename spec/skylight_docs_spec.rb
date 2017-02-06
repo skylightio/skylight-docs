@@ -16,7 +16,7 @@ describe 'Skylight::Docs' do
   end
 
   describe '#get_content' do
-    let(:good_path) { File.expand_path('../../source/markdown/markdown_styleguide.md', __FILE__) }
+    let(:good_path) { File.expand_path('../../source/markdown_styleguide.md', __FILE__) }
 
     it 'returns the contents of a file as markdown' do
       expect(Skylight::Docs.get_content(good_path))
