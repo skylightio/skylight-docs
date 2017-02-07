@@ -3,7 +3,7 @@ require "skylight/docs/engine"
 module Skylight
   module Docs
     class Chapter
-      attr_accessor :description, :order, :title, :uri
+      attr_accessor :description, :order, :title, :updated, :uri
 
       # absolute path to the /markdown folder
       FOLDER = File.expand_path('../../../source', __FILE__)
@@ -15,12 +15,22 @@ module Skylight
 
         @uri = "/support/#{filename}"
 
-        frontmatter = YAML.load(@file)
-        @title = frontmatter["Title"]
-        @description = frontmatter["Description"]
-        @order = frontmatter["Order"]
-
         @content = nil
+        
+        set_frontmatter
+      end
+
+      # sets frontmatter and validates that all required
+      # frontmatter has been added
+      def set_frontmatter
+        valid_keys = ["title", "description", "order", "updated"]
+        frontmatter = YAML.load(@file)
+
+        valid_keys.each do |key|
+          value = frontmatter[key]
+          raise "Set frontmatter for `#{key}`" unless value
+          instance_variable_set("@" + key, value)
+        end
       end
 
       class << self
@@ -36,20 +46,20 @@ module Skylight
         # creates an array of hashes containing the info from the frontmatter of each file.
         # used to populate the tiles on the index page.
         # example:
-        # [{ 'Title' => 'title',
-        #    'Description' => 'description',
-        #    'Order' => '#',
-        #    'Path' => '/support/dashified-file-name' }]
+        # [{ 'title' => 'title',
+        #    'description' => 'description',
+        #    'order' => '#',
+        #    'path' => '/support/dashified-file-name' }]
         def get_metadata_array
           data_array = []
 
           get_markdown_filenames.each do |filename|
             metadata = get_metadata(filename)
             # don't include files with an Order of 0 or less
-            data_array << metadata if metadata['Order'] > 0
+            data_array << metadata if metadata["order"] > 0
           end
-          # sort the array by Order, so they aren't just alphabetical
-          data_array.sort_by { |hash| hash["Order"] }
+          # sort the array by Order, so they aren't just alphabetic
+          data_array.sort_by { |hash| hash["order"] }
         end
 
         private
