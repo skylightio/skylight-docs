@@ -13,10 +13,10 @@
     <div class="support-index-tiles">
 
       <% @chapters.each do |chapter| %>
-        <a href="<%= chapter['Path'] %>" class="support-index-tile">
-          <h3><%= chapter["Title"] %></h3>
+        <a href="<%= chapter.uri %>" class="support-index-tile">
+          <h3><%= chapter.title %></h3>
           <p>
-            <%= chapter["Description"] %>
+            <%= chapter.description %>
           </p>
         </a>
       <% end %>

@@ -23,9 +23,10 @@ Be sure to include the following metadata in your markdown file:
 
 ```
 ---
-Title: This is the Title That Shows Up on the Support Index Page
-Description: This is what shows up on the index page as the description.
-Order: <put a number here>
+title: This is the Title That Shows Up on the Support Index Page
+description: This is what shows up on the index page as the description.
+order: <put a number here>
+updated: October 11, 2017
 ---
 ```
 

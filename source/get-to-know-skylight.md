@@ -1,15 +1,9 @@
 ---
-Title: Get to Know Skylight
-Description: Learn how to use Skylight to make your app faster. Get insight into the theory behind Skylight.
-Order: 3
+title: Get to Know Skylight
+description: Learn how to use Skylight to make your app faster. Get insight into the theory behind Skylight.
+order: 3
+updated: January 1, 2017
 ---
-
-# Get To Know Skylight
-
-Last updated January 1, 2017
-
-Learn how to use Skylight to make your app faster. Get insight into the theory behind Skylight.
-
 
 ## Feature Walkthrough
 

@@ -1,9 +1,12 @@
-<%= content_for(:main_class, "support support-chapter card-background") %>
+<%= content_for(:main_class, "support support-chapter card-background #{@chapter.filename}") %>
 
 <section class="support-chapter-container">
   <%= render partial: 'table_of_contents' %>
 
   <div class='support-content card'>
-    <%= @chapter.html_safe %>
+    <h1><%= @chapter.title %></h1>
+    <p>Last updated <%= @chapter.updated %></p>
+    <p><%= @chapter.description %></p>
+    <%= @chapter.content.html_safe %>
   </div>
 </section>

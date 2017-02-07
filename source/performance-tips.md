@@ -1,15 +1,9 @@
 ---
-Title: Performance Tips
-Description: Tips for fixing common problems you might encounter in your application.
-Order: 6
+title: Performance Tips
+description: Tips for fixing common problems you might encounter in your application.
+order: 6
+updated: January 1, 2017
 ---
-
-# Performance Tips
-
-Last updated January 1, 2017
-
-Tips for fixing common problems you might encounter in your application.
-
 
 ## Repeated Queries
 

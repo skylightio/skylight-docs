@@ -9,15 +9,14 @@ module Skylight
       end
 
       def show
-        @chapter = Skylight::Docs::Chapter.new(params[:chapter]).content
-        @section_headers = Skylight::Docs::Chapter.get_markdown_filenames
+        @chapter = Skylight::Docs::Chapter.find(params[:chapter])
         @current_path = request.path
       end
 
       private
 
       def get_chapters
-        @chapters = Skylight::Docs::Chapter.get_metadata_array
+        @chapters = Skylight::Docs::Chapter.all
       end
     end
   end

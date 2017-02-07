@@ -1,13 +1,9 @@
 ---
-Title: Running Skylight
-Description: Find out if you can run Skylight in your environment.
-Order: 1
+title: Running Skylight
+description: Find out if you can run Skylight in your environment.
+order: 1
+updated: January 1, 2017
 ---
-
-# Running Skylight
-
-Last updated January 1, 2017
-
 
 ## Requirements
 

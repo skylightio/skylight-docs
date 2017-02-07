@@ -1,13 +1,9 @@
 ---
-Title: Getting Set Up
-Description: Install, configure, and deploy the agent.
-Order: 2
+title: Getting Set Up
+description: Install, configure, and deploy the agent.
+order: 2
+updated: January 1, 2017
 ---
-
-# Getting Set Up
-
-Last updated January 1, 2017
-
 
 ## Installing the Agent
 

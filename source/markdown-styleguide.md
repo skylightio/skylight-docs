@@ -1,7 +1,8 @@
 ---
-Title: Markdown Styleguide
-Description: This one line description shows up on the Support index page. Do not make it two lines!
-Order: 0
+title: Markdown Styleguide
+description: This one line description shows up on the Support index page. Do not make it two lines!
+order: 0
+updated: January 1, 2017
 ---
 
 this_should_not_be_italic
@@ -58,7 +59,7 @@ test    | woo     | yeah
  - unordered again
  - yep
 
- 
+
 
  _is this italic_
  *is this italic*
@@ -70,7 +71,7 @@ test    | woo     | yeah
  * a bullet
  * list?
 
- 
+
 
  1. is this
  2. a numbered
