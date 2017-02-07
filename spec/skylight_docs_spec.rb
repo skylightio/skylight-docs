@@ -3,29 +3,34 @@ require 'pry'
 include TestHelper
 
 describe 'Skylight::Docs::Chapter' do
-  describe '#parse' do
-    it 'parses markdown to HTML elements' do
-      TestHelper.expected_elements.each do |element|
-        expect(Skylight::Docs::Chapter.parse('markdown-styleguide')).to include(element)
-      end
+  describe "initialize" do
+    let(:chapter) { Skylight::Docs::Chapter.new('markdown-styleguide') }
+
+    it 'raises an error if the file does not exist' do
+      expect { Skylight::Docs::Chapter.new('nothing') }.to raise_error(StandardError, "File Not Found: nothing")
     end
 
-    it 'returns an html message if the file does not exist' do
-      expect(Skylight::Docs::Chapter.parse('nothing')).to eq('<p>The file you are trying to parse does not exist.</p>')
+    it 'gets the frontmatter and turns it into attributes' do
+      expect(chapter.title).to eq('Markdown Styleguide')
+      expect(chapter.description).to include('description')
+      expect(chapter.order).to eq(0)
+    end
+
+    it 'stores the URI for the chapter' do
+      expect(chapter.uri).to eq('/support/markdown-styleguide')
     end
   end
 
-  describe '#get_content' do
-    let(:good_path) { File.expand_path('../../source/markdown-styleguide.md', __FILE__) }
-
-    it 'returns the contents of a file as markdown' do
-      expect(Skylight::Docs::Chapter.get_content(good_path))
-        .to include(TestHelper.some_expected_markdown_content)
+  describe '.content' do
+    let(:chapter) { Skylight::Docs::Chapter.new('markdown-styleguide') }
+    it 'parses markdown to HTML elements' do
+      TestHelper.expected_elements.each do |element|
+        expect(chapter.content).to include(element)
+      end
     end
 
-    it 'returns the contents of a file without front matter' do
-      expect(Skylight::Docs::Chapter.get_content(good_path))
-        .not_to include(Skylight::Docs::Chapter.get_frontmatter(good_path).to_s)
+    it 'does not include the frontmatter' do
+      expect(chapter.content).not_to include(chapter.description)
     end
   end
 

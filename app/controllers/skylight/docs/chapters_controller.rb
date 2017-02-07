@@ -9,7 +9,7 @@ module Skylight
       end
 
       def show
-        @chapter = Skylight::Docs::Chapter.parse(params[:chapter])
+        @chapter = Skylight::Docs::Chapter.new(params[:chapter]).content
         @section_headers = Skylight::Docs::Chapter.get_markdown_filenames
         @current_path = request.path
       end

@@ -9,14 +9,6 @@ RSpec.configure do |config|
 end
 
 module TestHelper
-  def some_expected_markdown_content
-    "~~this should be strikethrough~~\n"
-  end
-
-  def markdown_front_matter
-    "---\n" + "Title: Markdown Styleguide\n"
-  end
-
   def expected_elements
     ['<table>', '</table>', '<td>', '<tr>', '<tbody>', '<thead>', '<h2 id="checklist-fun">',
       '</h3>', '<em>', '</em>', '<p>', '</p>', '<div class="language-yaml highlighter-coderay">', "<div class=\"language-ruby highlighter-coderay\">",
