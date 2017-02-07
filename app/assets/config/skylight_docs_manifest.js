@@ -1,2 +1,2 @@
-//= link_directory ../javascripts/docs .js
-//= link_directory ../stylesheets/docs .css
+//= link_directory ../javascripts/skylight/docs .js
+//= link_directory ../stylesheets/skylight/docs .css

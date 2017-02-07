@@ -1,1 +1,1 @@
-Rails.application.config.assets.precompile += %w( docs/* )
+Rails.application.config.assets.precompile += %w( skylight/docs/* )

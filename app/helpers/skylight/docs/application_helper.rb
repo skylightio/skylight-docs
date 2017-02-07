@@ -1,4 +1,6 @@
-module Docs
-  module ApplicationHelper
+module Skylight
+  module Docs
+    module ApplicationHelper
+    end
   end
 end

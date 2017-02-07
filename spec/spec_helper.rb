@@ -1,6 +1,6 @@
 require 'rails/all'
 require 'pry'
-require 'docs'
+require 'skylight/docs'
 require 'kramdown'
 
 RSpec.configure do |config|

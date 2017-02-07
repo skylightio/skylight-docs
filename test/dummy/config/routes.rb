@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount Docs::Engine => "/support"
+  mount Skylight::Docs::Engine => "/support"
 
-  get '/', to: 'chapters#index', as: 'support'
+  get '/', to: 'skylight/docs/chapters#index', as: 'support'
 end

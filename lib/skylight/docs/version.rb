@@ -1,3 +1,5 @@
-module Docs
-  VERSION = '0.1.0'
+module Skylight
+  module Docs
+    VERSION = '0.1.0'
+  end
 end

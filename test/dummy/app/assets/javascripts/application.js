@@ -11,4 +11,4 @@
 // about supported directives.
 //
 //= require_tree .
-//= require docs/application
+//= require skylight/docs/application
