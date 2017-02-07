@@ -52,7 +52,7 @@ module Skylight
       get_markdown_filenames.each do |filename|
         metadata = get_metadata(filename)
         # don't include files with an Order of 0 or less
-        data_array << metadata if metadata['Order'].to_f > 0
+        data_array << metadata if metadata['Order'] > 0
       end
       # sort the array by Order, so they aren't just alphabetical
       data_array.sort_by { |hash| hash["Order"] }
@@ -64,17 +64,9 @@ module Skylight
       # creates a hash of metadata from the frontmatter
       def get_metadata(filename)
         path = File.join(FOLDER, "#{filename}.md")
-        frontmatter = get_frontmatter(path)
-        content_hash = {}
+        content_hash = YAML.load(File.open(path))
 
-        if frontmatter
-          frontmatter.to_s.lines.each do |line|
-            parts = line.split(':')
-            content_hash[parts.shift] = parts.join(':')
-          end
-
-          content_hash["Path"] = "/support/#{filename}"
-        end
+        content_hash["Path"] = "/support/#{filename}" if content_hash
 
         content_hash
       end
