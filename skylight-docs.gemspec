@@ -1,12 +1,12 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "docs/version"
+require "skylight/docs/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "docs"
-  s.version     = Docs::VERSION
+  s.name        = "skylight-docs"
+  s.version     = Skylight::Docs::VERSION
   s.authors     = ["Tilde"]
   s.email       = ["engineering@tilde.io"]
   s.homepage    = "http://skylight.io/support"
