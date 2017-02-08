@@ -34,16 +34,16 @@ describe 'Skylight::Docs::Chapter' do
     end
   end
 
-  describe '#get_markdown_files' do
-    it 'returns an array of all available markdown files' do
+  describe '#all' do
+    it 'returns an array of all chapters' do
       # figure out a better way to mock this statically
       # so we don't have to update this list every time a new file is added
-      expected_filenames = ["contributing", "faqs", "get-to-know-skylight", "getting-set-up", "instrumentation", "markdown-styleguide", "performance-tips", "running-skylight", "troubleshooting"]
-      expect(Skylight::Docs::Chapter.get_markdown_filenames.sort).to eq(expected_filenames.sort)
+      expected_titles = ["Markdown Styleguide"]
+      expect(Skylight::Docs::Chapter.all.map(&:title)).to eq(expected_titles)
     end
 
     it 'does not include non-markdown files' do
-      expect(Skylight::Docs::Chapter.get_markdown_filenames).not_to include('test-ruby-file')
+      expect(Skylight::Docs::Chapter.all.map(&:title)).not_to include('test-ruby-file')
     end
   end
 end
