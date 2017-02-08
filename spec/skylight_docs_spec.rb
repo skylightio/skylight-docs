@@ -10,6 +10,12 @@ describe 'Skylight::Docs::Chapter' do
       expect { Skylight::Docs::Chapter.new('nothing') }.to raise_error(StandardError, "File Not Found: nothing")
     end
 
+    it 'raises an error if the file is not contained within /source' do
+      sneaky_filename = '../test_source_wrong_location/file-exists'
+      expect { Skylight::Docs::Chapter.new(sneaky_filename) }
+        .to raise_error(StandardError, "File Not Found in #{Skylight::Docs::Chapter::FOLDER}: #{sneaky_filename}")
+    end
+
     it 'gets the frontmatter and turns it into attributes' do
       expect(chapter.title).to eq('Markdown Styleguide')
       expect(chapter.description).to include('description')

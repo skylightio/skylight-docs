@@ -25,7 +25,10 @@ module Skylight
       # `content` is set lazily the first time it's used
       def initialize(filename)
         path = File.join(FOLDER, "#{filename}.md")
+
         raise "File Not Found: #{filename}" unless File.exist?(path)
+        raise "File Not Found in #{FOLDER}: #{filename}" unless File.dirname(path) == FOLDER
+
         @filename = filename
         @file = File.read(path)
 
