@@ -43,7 +43,8 @@ module Skylight
       # Chapter objects derived from the markdown folders in /source.
       # These chapters are sorted by their `order` attribute.
       def self.all
-        pattern = File.join(FOLDER, "**", "*.md")
+        # Match .md files in /source but not in /source/deprecated
+        pattern = File.join(FOLDER, "*.md")
 
         @@chapters = Dir[pattern].map do |path|
           Skylight::Docs::Chapter.new(File.basename(path, '.md'))
