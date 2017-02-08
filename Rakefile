@@ -14,7 +14,7 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-DUMMY_APP_LOCATION = "test/dummy"
+DUMMY_APP_LOCATION = "dummy_app"
 APP_RAKEFILE = File.expand_path("../#{DUMMY_APP_LOCATION}/Rakefile", __FILE__)
 load 'rails/tasks/engine.rake'
 
