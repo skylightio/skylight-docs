@@ -14,7 +14,8 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-APP_RAKEFILE = File.expand_path("../test/dummy/Rakefile", __FILE__)
+DUMMY_APP_LOCATION = "test/dummy"
+APP_RAKEFILE = File.expand_path("../#{DUMMY_APP_LOCATION}/Rakefile", __FILE__)
 load 'rails/tasks/engine.rake'
 
 
@@ -24,14 +25,30 @@ load 'rails/tasks/statistics.rake'
 
 require 'bundler/gem_tasks'
 
-require 'rake/testtask'
+def puts_in_pink(text)
+  puts "\e[35m#{text}\e[0m"
+end
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = false
+desc "Sets up dependencies for engine and dummy app"
+task :setup do
+  puts_in_pink "Bundling in #{Dir.pwd}"
+  sh "bundle install"
+  Dir.chdir(DUMMY_APP_LOCATION) do
+    puts_in_pink "Switching directory to #{Dir.pwd}"
+    puts_in_pink "Bundling in #{Dir.pwd}"
+    sh "bundle install"
+  end
+  puts_in_pink "Switching directory to #{Dir.pwd}"
+  puts_in_pink "Done bundling. Yay!"
+end
+
+desc "Sets up dependencies and runs the Rails server in the dummy app"
+task :server => [:setup] do
+  Dir.chdir(DUMMY_APP_LOCATION) do
+    puts_in_pink "Switching directory to #{Dir.pwd}"
+    sh "rails server -p 3001"
+  end
 end
 
 
-task default: :test
+task default: :server
