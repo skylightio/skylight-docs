@@ -14,6 +14,28 @@ Just mount the engine and you're good to go! In the Skylight Rails app, we have 
 mount Skylight::Docs::Engine, at: "/support", as: :support
 ```
 
+### Styles and layouts
+
+In order to get the docs engine to use your application layout, override the Skylight::Docs::ApplicationController with the layout name.
+
+```ruby
+module Skylight
+  module Docs
+    class ApplicationController < ::ApplicationController
+      layout "application"
+    end
+  end
+end
+```
+
+### Javascript
+
+In order to use the docs engine javascript (for TOC generation), add the following to your application.js:
+
+```
+//= require skylight/docs/application
+```
+
 ## DEVELOPMENT
 
 ### Adding New Markdown Files

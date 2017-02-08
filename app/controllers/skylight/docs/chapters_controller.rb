@@ -2,7 +2,7 @@ require_dependency "skylight/docs/application_controller"
 
 module Skylight
   module Docs
-    class ChaptersController < ::SmarketingController
+    class ChaptersController < ApplicationController
       before_action :get_chapters
 
       def index

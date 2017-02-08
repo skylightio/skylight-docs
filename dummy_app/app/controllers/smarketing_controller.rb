@@ -1,2 +1,0 @@
-class SmarketingController < ApplicationController
-end
