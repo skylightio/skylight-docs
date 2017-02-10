@@ -9,7 +9,7 @@ See the [Running Skylight](/running-skylight#requirements) section.
 
 ## Configuration
 
-See the [Getting Set Up](/getting-set-up#agent-configuration) section.
+See the [Getting Set Up](/support/getting-set-up#agent-configuration) section.
 
 ## Custom Instrumentation
 

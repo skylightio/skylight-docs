@@ -41,12 +41,12 @@ To remove yourself from an app, visit the settings page and find the app listed 
 
 ### Can I get alerts when my performance changes?
 
-While we don't yet give you up to the minute alerts, you can get insight into your app's weekly changes by signing up for the daily emails in your [account settings](https://www.skylight.io/app/settings/account). Down the road, we may add more immediate alerting when significant slowdowns occur in your app.
+While we don't yet give you up to the minute alerts, you can get insight into your app's weekly changes by signing up for the daily emails in your [account settings](https://www.skylight.io/app/settings/account){:target="_blank"}. Down the road, we may add more immediate alerting when significant slowdowns occur in your app.
 
 
 ### Can I track deploys?
 
-Soon! We've got work underway to make this happen. Sign up for our daily emails in your [account setting](https://www.skylight.io/app/settings/account) to get the latest scoop on development.
+Soon! We've got work underway to make this happen. Sign up for our daily emails in your [account settings](https://www.skylight.io/app/settings/account){:target="_blank"} to get the latest scoop on development.
 
 
 ### Can I instrument background jobs like Sidekiq?
@@ -73,4 +73,4 @@ New Relic has lots of features we don't have but, in our opinion, they're not al
 
 ## I've got a different question.
 
-We would love to hear your questions. Just shoot us an email at <support@skylight.io> or use the in-app messenger ("?" in the bottom right of the web UI). See our section on [Submitting Feedback](/contributing#reporting-bugs-and-submitting-feedback) for more details.
+We would love to hear your questions. Just shoot us an email at <support@skylight.io> or use the in-app messenger ("?" in the bottom right of the web UI). See our section on [Submitting Feedback](/support/contributing#reporting-bugs-and-submitting-feedback) for more details.

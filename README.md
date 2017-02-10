@@ -58,6 +58,15 @@ The order is important because that's the order each section appears on the inde
 
 Make sure the Table of Contents for whichever page you're working on still makes sense when you're done! It's generated based on header tags, so keep that in mind when writing.
 
+### Markdown Rules
+#### Links
+If linking to a page within /support, use: `[check out this other support page](/support/other-page)`
+
+If linking to an anchor on the same page, us: `[check out this section](#another-section){:class="js-scroll-link"}`
+
+If linking to a page outside of the /support namespace, use: `[check out this blog](http://www.someones-blog.com){:target="_blank"}` or `[check out this page elsewhere on skylight.io](/pricing){:target="_blank"}`
+
+
 ### Testing
 
 Run Rspec tests in the typical fashion - just enter `rspec` in the terminal from the `/docs` directory.

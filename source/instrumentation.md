@@ -9,7 +9,7 @@ updated: January 1, 2017
 
 ### Rails
 
-_See the [Rails setup instructions](/getting_set_up#rails)._
+_See the [Rails setup instructions](/support/getting-set-up#rails)._
 
 In Rails applications, we use ActiveSupport::Notifications to track the following.
 
@@ -25,7 +25,7 @@ In Rails applications, we use ActiveSupport::Notifications to track the followin
 
 ### Grape
 
-_See the [Grape setup instructions](/getting_set_up#grape)._
+_See the [Grape setup instructions](/support/getting-set-up#grape)._
 
 * Endpoint Execution
 * Endpoint Filters
@@ -34,42 +34,42 @@ _See the [Grape setup instructions](/getting_set_up#grape)._
 
 ### Sinatra
 
-_See the [Sinatra setup instructions](/getting_set_up#sinatra)._
+_See the [Sinatra setup instructions](/support/getting-set-up#sinatra)._
 
 * Endpoint Execution
 
 
 ### ActiveModel::Serializers
 
-_Add_ `active_model_serializers` _to [probes list](/getting_set_up#probes)._
+_Add_ `active_model_serializers` _to [probes list](/support/getting-set-up#probes)._
 
 * Serialization
 
 
 ### Excon
 
-_Add_ `excon` _to [probes list](/getting_set_up#probes)._
+_Add_ `excon` _to [probes list](/support/getting-set-up#probes)._
 
 * HTTP Requests
 
 
 ### Mongo (Official Driver)
 
-_Add_ `mongo` _to probes list._
+_Add_ `mongo` _to [probes list](/support/getting-set-up#probes)._
 
 * Database Queries
 
 
 ### Moped
 
-_Add_ `moped` _to probes list._
+_Add_ `moped` _to [probes list](/support/getting-set-up#probes)._
 
 * Database Queries
 
 
 ### Mongoid
 
-_Add_ `mongoid` _to probes list._
+_Add_ `mongoid` _to [probes list](/support/getting-set-up#probes)._
 
 Depending on the version, Mongoid either uses Moped or the official Mongo driver under the hood. This probe will just enable the correct probe for one of these two libraries.
 
@@ -83,7 +83,7 @@ _Enabled by default_
 
 ### Redis
 
-_Add_ `redis` _to [probes list](/getting_set_up#probes)._
+_Add_ `redis` _to [probes list](/support/getting-set-up#probes)._
 
 * All Commands
 
@@ -92,14 +92,14 @@ _Add_ `redis` _to [probes list](/getting_set_up#probes)._
 
 ### Sequel
 
-_Enabled automatically with Sinatra or Add_ `sequel` _to [probes list](/getting_set_up#probes)._
+_Enabled automatically with Sinatra or Add_ `sequel` _to [probes list](/support/getting-set-up#probes)._
 
 * SQL Queries
 
 
 ### Tilt
 
-_Enabled automatically with Sinatra or Add_ `tilt` _to [probes list](/getting_set_up#probes)._
+_Enabled automatically with Sinatra or Add_ `tilt` _to [probes list](/support/getting-set-up#probes)._
 
 * Template Rendering
 
@@ -111,18 +111,18 @@ If you're curious about how our instrumentation works, you're in the right place
 
 ### Normalizers
 
-Our preferred method of instrumentation is [`ActiveSupport::Notifications`](http://api.rubyonrails.org/classes/ActiveSupport/Notifications.html) events. When a library has added instrumentation, all we need to do is subscribe to the event and do a little bit of normalization of the data.
+Our preferred method of instrumentation is [`ActiveSupport::Notifications`](http://api.rubyonrails.org/classes/ActiveSupport/Notifications.html){:target="_blank"} events. When a library has added instrumentation, all we need to do is subscribe to the event and do a little bit of normalization of the data.
 
-To standardize this process, we introduced `Normalizers`. Each type of instrumenation has its own normalizer which handles the, well, normalization. You can take a look at some of them [in the source](https://github.com/skylightio/skylight-ruby/tree/master/lib/skylight/normalizers).
+To standardize this process, we introduced `Normalizers`. Each type of instrumenation has its own normalizer which handles the, well, normalization. You can take a look at some of them [in the source](https://github.com/skylightio/skylight-ruby/tree/master/lib/skylight/normalizers){:target="_blank"}.
 
 
 ### Probes
 
 While we think most libraries should include `ActiveSupport::Notifications` (anyone can subscribe to these notifications, not just Skylight), unfortunately, many still don't. In these circumstances, we have to carefully monkey-patch the libraries at their key points.
 
-To make sure we do this in a sane fashion, we developed `Probes`. Probes are small classes that keep an eye out for specific modules and then hook into them when they're loaded. All probes can be disabled in the event of any conflicts and we only autoload probes that we have a high degree of confidence in.
+To make sure we do this in a sane fashion, we developed `Probes`. Probes are small classes that keep an eye out for specific modules and then hook into them when they're loaded. All probes can be disabled in the event of any conflicts and we only autoload probes that we have a high degree of confidence in. You can take a look at some probes [in the source](https://github.com/skylightio/skylight-ruby/tree/master/lib/skylight/probes){:target="_blank"}.
 
-And, since we don't really like having to monkey-patch things either, when at all possible, we [submit pull requests](https://github.com/ruby-grape/grape/pull/1086) to relevant projects to add in ActiveSupport::Notifications.
+And, since we don't really like having to monkey-patch things either, when at all possible, we [submit pull requests](https://github.com/ruby-grape/grape/pull/1086){:target="_blank"} to relevant projects to add in ActiveSupport::Notifications.
 
 
 ## Custom App Instrumentation

@@ -33,11 +33,11 @@ Lastly, you can always email us at [support@skylight.io](mailto:support@skylight
 
 ## Code Contributions
 
-If you want to try your hand at fixing bugs or adding features, our agent code is [publicly available on Github](https://github.com/skylightio/skylight-ruby). However, we do recommend that you contact us at <support@skylight.io> before getting started. We'd hate to have you spend time working on something that we might not be able to merge!
+If you want to try your hand at fixing bugs or adding features, our agent code is [publicly available on Github](https://github.com/skylightio/skylight-ruby){:target="_blank"}. However, we do recommend that you contact us at <support@skylight.io> before getting started. We'd hate to have you spend time working on something that we might not be able to merge!
 
-Also take a look at our [`CONTRIBUTING.md`](https://github.com/skylightio/skylight-ruby/blob/master/CONTRIBUTING.md) and make sure to sign the CLA before you submit the PR.
+Also take a look at our [`CONTRIBUTING.md`](https://github.com/skylightio/skylight-ruby/blob/master/CONTRIBUTING.md){:target="_blank"} and make sure to sign the CLA before you submit the PR.
 
 
 ### Adding Instrumentation
 
-If you're interested in adding instrumentation, make sure to check out our [overview of how it works](/instrumentation#how-it-works). If the library in question doesn't have ActiveSupport::Notifications support, consider submitting a PR to them first to get it added. Once they have AS::N support, then we'd love to have you contribute a new Normalizer. If it's not feasible to get AS::N added to the library then go ahead and add a Probe for it. As always, don't hesitate to [contact us](mailto:support@skylight.io) if you have any questions.
+If you're interested in adding instrumentation, make sure to check out our [overview of how it works](/support/instrumentation#how-it-works). If the library in question doesn't have `ActiveSupport::Notifications` support, consider submitting a PR to them first to get it added. Once they have AS::N support, then we'd love to have you contribute a new Normalizer. If it's not feasible to get AS::N added to the library then go ahead and add a Probe for it. As always, don't hesitate to [contact us](mailto:support@skylight.io) if you have any questions.

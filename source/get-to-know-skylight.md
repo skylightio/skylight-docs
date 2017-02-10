@@ -16,7 +16,7 @@ This page also doesn’t cover everything in Skylight, but rather a selection we
 
 There are several places that your application’s response times appear in Skylight. In most cases we talk about the numbers in one of two ways. The “Problem” response time is the 95th percentile, whereas the “Typical” response time is the median (50th percentile).
 
-See [below](#the-theory-95th-percentiles-vs-averages) for a more detailed analysis.
+See [below](#95th-percentiles-vs-averages){:class="js-scroll-link"} for a more detailed analysis.
 
 
 ### Memory Allocation Tracking
@@ -121,7 +121,7 @@ The UI does not currently support viewing historical usage. If you need details 
 
 Most tools only show averages, which are easy to calculate but provide limited usefulness on their own. In Skylight, we always show the 95th percentile response time as well. While this takes significantly more computation on the backend to determine, it is a much, much better number to indicate real world performance than the average.
 
-Averages are almost useless when thinking about web performance, and in the worst case, are actually misleading. For more information, see [DHH’s blog post, The problem with averages](http://signalvnoise.com/posts/1836-the-problem-with-averages). Google, Twitter, and GitHub (to name a few) all use 95th percentile numbers when tracking performance.
+Averages are almost useless when thinking about web performance, and in the worst case, are actually misleading. For more information, see [DHH’s blog post, The problem with averages](http://signalvnoise.com/posts/1836-the-problem-with-averages){:target="_blank"}. Google, Twitter, and GitHub (to name a few) all use 95th percentile numbers when tracking performance.
 
 
 ### Aggregation vs. Sampling

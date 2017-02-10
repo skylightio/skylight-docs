@@ -21,7 +21,7 @@ bundle install
 bundle exec skylight setup {SETUP_TOKEN}
 ```
 
-To get the setup token, head over to [http://skylight.io/app/setup]().
+To get the setup token, log in and head over to [http://skylight.io/app/setup](http://skylight.io/app/setup){:target="_blank"}.
 
 
 ## Deployment
@@ -121,7 +121,7 @@ By default, the Skylight agent only enables itself in the production Rails envir
 config.skylight.environments += ['staging']
 ```
 
-Also be sure and check out the rest of our [documentation on setting up multiple environments](#setting-up-multiple-environments).
+Also be sure and check out the rest of our [documentation on setting up multiple environments](#setting-up-multiple-environments){:class="js-scroll-link"}.
 
 
 ####  Logger
@@ -148,7 +148,7 @@ To enable other probes:
 config.skylight.probes += %w(excon redis active_model_serializers)
 ```
 
-See the [Instrumentation section](/instrumentation#probes) to learn more about the probes.
+See the [Instrumentation section](/support/instrumentation#probes) to learn more about the probes.
 
 
 ### Sinatra
@@ -162,7 +162,7 @@ If your Sinatra app is mounted in Rails, all you have to do is require the corre
 config.skylight.probes += %w(sinatra tilt sequel)
 ```
 
-See the [Rails configuration instructions](#rails) for more information.
+See the [Rails configuration instructions](#rails){:class="js-scroll-link"} for more information.
 
 
 #### Standalone
@@ -210,12 +210,12 @@ If you’re running 0.10 - 0.12 all you have to do is require the following prob
 config.skylight.probes += ['grape']
 ```
 
-See the [Rails configuration instructions](#rails) for more information.
+See the [Rails configuration instructions](#rails){:class="js-scroll-link"} for more information.
 
 
 ####  On Sinatra
 
-If your Grape app is mounted in a Sinatra app, first follow the [Sinatra instructions](#sinatra).
+If your Grape app is mounted in a Sinatra app, first follow the [Sinatra instructions](#sinatra){:class="js-scroll-link"}.
 
 If you’re running Grape 0.13+, that’s all you need to do. For versions 0.10 - 0.12, you’ll also want to add this to your main file:
 
@@ -272,13 +272,13 @@ This will create a new application on Skylight, using the directory name as the 
 
 Once `skylight setup` has finished running, a new `config/skylight.yml` file will be generated containing a new application ID and authentication token.
 
-You’ll need to [configure](#setting-configuration-variables) this new environment with these new credentials.
+You’ll need to [configure](#setting-configuration-variables){:class="js-scroll-link"} this new environment with these new credentials.
 
 
 ## Regenerating the App Token
 
-If your application token may have been compromised, you can regenerate it from the [settings page](https://www.skylight.io/app/settings/account).
+If your application token may have been compromised, you can regenerate it from the [settings page](https://www.skylight.io/app/settings/account){:target="_blank"}.
 
 <img retina="true" style="width: 100%; max-width: 1249px" src="../assets/regenerate-token.png" alt="Screenshot of settings page">
 
-Once you have regenerated the token, you will need to [update your production application](#setting-configuration-variables) with the new token.
+Once you have regenerated the token, you will need to [update your production application](#setting-configuration-variables){:class="js-scroll-link"} with the new token.

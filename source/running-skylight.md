@@ -44,7 +44,7 @@ We support Grape standalone as well as embedded in Rails and Sinatra. We recogni
 
 ## Server Requirements
 
-We aim to support all *nix servers. Just add the gem to your Gemfile, add the configuration, then deploy as you normally would. You can also run the agent locally on OS X for testing, if desired. See the [Getting Set Up](/getting_set_up) section for more information.
+We aim to support all \*nix servers. Just add the gem to your Gemfile, add the configuration, then deploy as you normally would. You can also run the agent locally on OS X for testing, if desired. See the [Getting Set Up](/support/getting-set-up) section for more information.
 
 
 ### Heroku
@@ -59,4 +59,4 @@ Skylight plays nice with other profilers and monitoring solutions, including New
 
 ## Resource Overhead
 
-The Skylight agent is written primarily in [Rust](https://www.rust-lang.org/), a systems programming language on par with C. This means we have a very low overhead so it’s safe to run Skylight in production, even in memory limited environments like Heroku.
+The Skylight agent is written primarily in [Rust](https://www.rust-lang.org/){:target="_blank"}, a systems programming language on par with C. This means we have a very low overhead so it’s safe to run Skylight in production, even in memory limited environments like Heroku.

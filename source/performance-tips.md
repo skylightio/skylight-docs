@@ -33,7 +33,7 @@ SELECT * FROM "users" WHERE "id" = ?;
 
 A very common cause of repeated queries in Rails applications is known as “N+1 Queries”. This happens because you make a request for a single row in one table, and then make an additional request per element in a `has_many` relationship.
 
-Here’s an example offender ([from the Rails guides](http://guides.rubyonrails.org/active_record_querying.html#eager-loading-associations)):
+Here’s an example offender ([from the Rails guides](http://guides.rubyonrails.org/active_record_querying.html#eager-loading-associations){:target="_blank"}):
 
 ```ruby
 def show
