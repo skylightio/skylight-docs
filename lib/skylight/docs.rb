@@ -63,8 +63,14 @@ module Skylight
       # set, it sets the content to the parsed markdown of that Chapter's file
       # minus its frontmatter.
       def content
-        # use Kramdown to parse a GitHub-flavored markdown (GFM) file to HTML
-        @content ||= Kramdown::Document.new(clean_markdown, :input => 'GFM').to_html
+        options = {
+          input: 'GFM',              # Use Github-flavored markdown
+          coderay_css: :class,       # Output css classes to style
+          syntax_highlighter_opts: {
+            line_number_anchors: false  # Don't add anchors to line numbers
+          }
+        }
+        @content ||= Kramdown::Document.new(clean_markdown, options).to_html
       end
 
       private

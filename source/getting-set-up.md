@@ -66,11 +66,9 @@ daemon.sockdir_path: /var/run/myapp
 # environment and will take precedence over a default.
 # NOTE: Currently this is only correctly utilized in Rails apps.
 production:
-
   authentication: <production auth token>
 
 staging:
-
   authentication: <staging auth token>
 ```
 
