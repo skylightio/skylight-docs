@@ -4,7 +4,6 @@ module Skylight
   module Docs
     class Chapter
       attr_accessor :description, :filename, :order, :title, :updated, :uri
-      @@chapters = []
 
       # absolute path to the /markdown folder
       FOLDER = File.expand_path('../../../source', __FILE__)
@@ -46,11 +45,9 @@ module Skylight
         # Match .md files in /source but not in /source/deprecated
         pattern = File.join(FOLDER, "*.md")
 
-        @@chapters = Dir[pattern].map do |path|
+        @@chapters ||= Dir[pattern].map { |path|
           Skylight::Docs::Chapter.new(File.basename(path, '.md'))
-        end
-
-        @@chapters.sort_by { |chapter| chapter.order }
+        }.sort_by { |chapter| chapter.order }
       end
 
       # Given a filename, such as 'running-skylight', returns a particular
