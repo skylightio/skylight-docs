@@ -5,6 +5,7 @@ module Skylight
 
       require 'kramdown'
       require 'jquery-rails'
+      require 'sprockets/es6'
     end
   end
 end

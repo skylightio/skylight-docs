@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
   s.add_dependency "jquery-rails"
   s.add_dependency "kramdown"
   s.add_dependency "nokogiri"
+  s.add_dependency "sprockets-es6"
 end
