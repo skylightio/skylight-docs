@@ -23,6 +23,9 @@ module Skylight
       #
       # @return [Array<Chapter>] all of the Chapter objects
       def self.all
+        # Force reloading the chapters in development so that we don't
+        # have to keep restarting the server when we make changes
+        @chapters = nil if Rails.env.development?
         @chapters ||= begin
           # Match .md files in /source but not in /source/deprecated
           pattern = File.join(FOLDER, "*#{FILE_EXTENSION}")
