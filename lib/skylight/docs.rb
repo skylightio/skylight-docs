@@ -56,18 +56,24 @@ module Skylight
         @@chapters.find { |chapter| chapter.filename == filename_to_find }
       end
 
-      # Returns the `content` of a Chapter object. If `content` has not been
-      # set, it sets the content to the parsed markdown of that Chapter's file
-      # minus its frontmatter.
+      # Gets or sets the `content` of a Chapter object.
+      # First, it gets the full contents of the file, minus the frontmatter.
+      # Then, it converts the ERB from the file to markdown.
+      # Then, it parses markdown into html.
+      #
+      # @return [String] a string of html
       def content
-        options = {
-          input: 'GFM',              # Use Github-flavored markdown
-          coderay_css: :class,       # Output css classes to style
-          syntax_highlighter_opts: {
-            line_number_anchors: false  # Don't add anchors to line numbers
+        @content ||= begin
+          options = {
+            input: 'GFM',              # Use Github-flavored markdown
+            coderay_css: :class,       # Output css classes to style
+            syntax_highlighter_opts: {
+              line_number_anchors: false  # Don't add anchors to line numbers
+            }
           }
-        }
-        @content ||= Kramdown::Document.new(clean_markdown, options).to_html
+          raw_content = ERB.new(file_without_frontmatter).result(binding)
+          Kramdown::Document.new(raw_content, options).to_html
+        end
       end
 
       private
@@ -98,6 +104,13 @@ module Skylight
           # https://github.com/jekyll/jekyll/blob/27ed81547b12d28a60c51961b82a5723981feb7d/lib/jekyll/document.rb#L10
           frontmatter_regex = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
           @file.match(frontmatter_regex)
+
+        # Wraps the image_tag helper so we can use it to parse .erb to .md
+        #
+        # @return [String] a string of html
+        def image_tag(source, options={})
+          ActionController::Base.helpers.image_tag(source, options)
+        end
         end
     end
   end
