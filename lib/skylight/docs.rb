@@ -46,6 +46,13 @@ module Skylight
         chapter
       end
 
+      # The unique key to determine when to update the cache
+      #
+      # @return [Array<String>]
+      def cache_key
+        [filename, Skylight::Docs::REVISION]
+      end
+
       # Gets or sets the `content` of a Chapter object.
       # First, it gets the full contents of the file, minus the frontmatter.
       # Then, it converts the ERB from the file to markdown.
