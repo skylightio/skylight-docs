@@ -12,7 +12,7 @@
   <div class="page-section-container">
     <div class="support-index-tiles">
 
-      <% @chapters.each do |chapter| %>
+      <% @chapters.sort.each do |chapter| %>
         <% cache chapter do %>
           <a href="<%= chapter.uri %>" class="support-index-tile">
             <h3><%= chapter.title %></h3>

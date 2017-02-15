@@ -3,7 +3,7 @@
 
   <nav class="support-menu js-sticky">
     <ul class="support-menu-chapter-list">
-      <% @chapters.each do |chapter| %>
+      <% @chapters.sort.each do |chapter| %>
         <li>
           <%= link_to chapter.title, chapter.uri, class: "support-menu-link support-menu-chapter" + (@current_path == chapter.uri ? " active": "") %>
           <% if @current_path == chapter.uri %>

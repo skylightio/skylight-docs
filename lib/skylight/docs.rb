@@ -50,6 +50,13 @@ module Skylight
         chapter
       end
 
+      # When sorting chapters, use their order for comparison
+      #
+      # @return [Boolean] whether or not the order is greater than, equal to, or less than the compared order
+      def <=>(other)
+        order <=> other.order
+      end
+
       # The unique key to determine when to update the cache
       #
       # @return [Array<String>]
