@@ -143,9 +143,20 @@ module Skylight
         end
 
         # Wraps the image_tag helper so we can use it to parse .erb to .md
+        # Adds .support-image and a generated unique class name to each image
+        # for CSS selection
         #
         # @return [String] a string of html
         def image_tag(source, options={})
+          dashified_filename = File.basename(source, ".*").gsub(/[\s_]/, '-')
+          auto_class = "support-image support-image-#{dashified_filename}"
+
+          if options[:class]
+            options[:class] += " #{auto_class}"
+          else
+            options[:class] = auto_class
+          end
+
           ActionController::Base.helpers.image_tag(source, options)
         end
 
