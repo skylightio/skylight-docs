@@ -9,8 +9,7 @@ module Skylight
       end
 
       def show
-        @chapter = Skylight::Docs::Chapter.find(params[:chapter])
-        @current_path = request.path
+        @chapter = Skylight::Docs::Chapter.find(params[:id])
       end
 
       private

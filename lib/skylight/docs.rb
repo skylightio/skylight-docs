@@ -3,7 +3,7 @@ require "skylight/docs/engine"
 module Skylight
   module Docs
     class Chapter
-      attr_accessor :filename, :order, :dasherized_name, :uri
+      attr_accessor :id, :filename, :order
 
       # file extension of the source markdown files
       FILE_EXTENSION = '.md.erb'
@@ -16,9 +16,8 @@ module Skylight
       def initialize(filename)
         @filename = filename # '00-dashified-file-name'
 
-        number, @dasherized_name = filename.split('-', 2)
+        number, @id = filename.split('-', 2)
         @order = number.to_i
-        @uri = "/support/#{dasherized_name}"
       end
 
       # Gets or sets a class variable @chapters, which is an array of
@@ -44,9 +43,9 @@ module Skylight
       # Chapter object from the @chapters array.
       #
       # @return [Chapter] the chapter
-      def self.find(dasherized_name_to_find)
-        chapter = all.find { |c| c.dasherized_name == dasherized_name_to_find }
-        raise "`#{dasherized_name_to_find}` not found in #{FOLDER}" unless chapter
+      def self.find(id_to_find)
+        chapter = all.find { |c| c.id == id_to_find }
+        raise "`#{id_to_find}` not found in #{FOLDER}" unless chapter
         chapter
       end
 

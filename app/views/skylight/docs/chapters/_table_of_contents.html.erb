@@ -5,8 +5,8 @@
     <ul class="support-menu-chapter-list">
       <% @chapters.sort.each do |chapter| %>
         <li>
-          <%= link_to chapter.title, chapter.uri, class: "support-menu-link support-menu-chapter" + (@current_path == chapter.uri ? " active": "") %>
-          <% if @current_path == chapter.uri %>
+          <%= link_to chapter.title, chapter_path(chapter.id), class: "support-menu-link support-menu-chapter" + (is_current_chapter?(chapter.id) ? " active": "") %>
+          <% if is_current_chapter?(chapter.id) %>
           <ul id="support-menu-detail" class="support-menu-detail-list" style="display: none;">
             <%# JavaScript will insert the details from the DOM here! %>
           </ul>
