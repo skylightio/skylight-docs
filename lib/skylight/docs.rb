@@ -132,7 +132,11 @@ module Skylight
         #
         # @return [Hash] see above
         def frontmatter
-          @frontmatter ||= YAML.load(file_content)
+          @frontmatter ||= begin
+            yaml = YAML.load(file_content)
+            raise "No frontmatter found for #{filename}#{FILE_EXTENSION}" unless yaml
+            yaml
+          end
         end
 
         # Gets a value from the frontmatter hash. Throws an error if the
