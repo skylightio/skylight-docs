@@ -3,7 +3,7 @@ require "skylight/docs/engine"
 module Skylight
   module Docs
     class Chapter
-      attr_accessor :filename
+      attr_accessor :filename, :order, :dasherized_name, :uri
 
       # file extension of the source markdown files
       FILE_EXTENSION = '.md.erb'
@@ -14,7 +14,11 @@ module Skylight
       # Creates an object containing content and metadata about a docs chapter.
       # Takes a filename (such as 'running-skylight') on initialization.
       def initialize(filename)
-        @filename = filename # 'dashified-file-name'
+        @filename = filename # '00-dashified-file-name'
+
+        number, @dasherized_name = filename.split('-', 2)
+        @order = number.to_i
+        @uri = "/support/#{dasherized_name}"
       end
 
       # Gets or sets a class variable @chapters, which is an array of
@@ -32,17 +36,17 @@ module Skylight
 
           Dir[pattern].map { |path|
             Skylight::Docs::Chapter.new(File.basename(path, FILE_EXTENSION))
-          }.sort_by { |chapter| chapter.order }
+          }
         end
       end
 
-      # Given a filename, such as 'running-skylight', returns a particular
+      # Given a path, such as 'running-skylight', returns a particular
       # Chapter object from the @chapters array.
       #
       # @return [Chapter] the chapter
-      def self.find(filename_to_find)
-        chapter = all.find { |c| c.filename == filename_to_find }
-        raise "`#{filename_to_find}#{FILE_EXTENSION}` not found in #{FOLDER}" unless chapter
+      def self.find(dasherized_name_to_find)
+        chapter = all.find { |c| c.dasherized_name == dasherized_name_to_find }
+        raise "`#{dasherized_name_to_find}` not found in #{FOLDER}" unless chapter
         chapter
       end
 
@@ -80,13 +84,6 @@ module Skylight
         frontmatter_attr("description")
       end
 
-      # Gets the `order` from the Chapter's frontmatter.
-      #
-      # @return [Float] the order
-      def order
-        frontmatter_attr("order")
-      end
-
       # Gets the `title` from the Chapter's frontmatter.
       #
       # @return [String] the title
@@ -99,13 +96,6 @@ module Skylight
       # @return [String] the date last updated
       def updated
         frontmatter_attr("updated")
-      end
-
-      # Gets or sets the uri for the chapter, such as '/support/dashified-file-name'
-      #
-      # @return [String] the uri
-      def uri
-        @uri ||= "/support/#{@filename}"
       end
 
       private
