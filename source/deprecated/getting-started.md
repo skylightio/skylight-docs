@@ -9,7 +9,7 @@ See [Running Skylight](/running-skylight#requirements).
 
 ## Installation
 
-See [Getting Set Up](/support/getting-set-up#installing-the-agent).
+See [Getting Set Up](./getting-set-up#installing-the-agent).
 
 ## Troubleshooting
 

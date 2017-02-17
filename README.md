@@ -52,7 +52,7 @@ Make sure the Table of Contents for whichever page you're working on still makes
 
 ### Markdown Rules
 #### Links
-If linking to a page within /support, use: `[check out this other support page](/support/other-page)`
+If linking to a page within /support, use: `[check out this other support page](./other-page)`
 
 If linking to an anchor on the same page, us: `[check out this section](#another-section){:class="js-scroll-link"}`
 
