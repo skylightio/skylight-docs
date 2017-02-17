@@ -18,6 +18,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 5.0.1"
   s.add_dependency "kramdown"
-  s.add_dependency "nokogiri"
   s.add_dependency "sprockets-es6"
 end
