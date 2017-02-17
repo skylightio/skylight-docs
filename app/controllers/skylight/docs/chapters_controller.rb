@@ -1,4 +1,5 @@
 require_dependency "skylight/docs/application_controller"
+require_dependency "skylight/docs/version"
 
 module Skylight
   module Docs

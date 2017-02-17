@@ -1,9 +1,6 @@
 module Skylight
   module Docs
     VERSION = '0.1.0'
-
-    Dir.chdir(__dir__) do
-      REVISION = `git rev-parse HEAD`
-    end
+    REVISION = File.basename(File.expand_path(__dir__))
   end
 end
