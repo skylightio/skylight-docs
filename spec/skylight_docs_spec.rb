@@ -53,12 +53,19 @@ describe 'Skylight::Docs::Chapter' do
   describe '.content' do
     it 'parses .md.erb to HTML elements' do
       TestHelper.expected_elements.each do |element|
-        expect(chapter.content).to include(element)
+        expect(chapter.content.main).to include(element)
       end
     end
 
+    it 'generates HTML for a table of contents' do
+      expect(chapter.content.toc).not_to include('#header-1')
+      expect(chapter.content.toc).to include('#header-2')
+      expect(chapter.content.toc).to include('#header-3')
+      expect(chapter.content.toc).not_to include('#header-4')
+    end
+
     it 'does not include the frontmatter' do
-      expect(chapter.content).not_to include(chapter.description)
+      expect(chapter.content.main).not_to include(chapter.description)
     end
   end
 

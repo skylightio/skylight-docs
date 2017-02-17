@@ -1,15 +1,12 @@
 <div class="support-menu-container">
-  <%= link_to 'Support Topics', main_app.support_path, class: 'support-menu-toggle support-menu-link' %>
-
-  <nav class="support-menu js-sticky">
-    <ul class="support-menu-chapter-list">
+  <nav class="support-menu" id="support-menu">
+    <%= link_to "Support Topics", main_app.support_path, class: "support-menu-toggle", id: "support-menu-toggle" %>
+    <ul class="support-menu-chapter-list" id="support-menu-list">
       <% @chapters.sort.each do |chapter| %>
-        <li>
-          <%= link_to chapter.title, chapter_path(chapter.id), class: "support-menu-link support-menu-chapter" + (is_current_chapter?(chapter.id) ? " active": "") %>
+        <li class="support-menu-chapter">
+          <%= link_to chapter.title, chapter_path(chapter.id), class: "support-menu-chapter-link" + (is_current_chapter?(chapter.id) ? " active": "") %>
           <% if is_current_chapter?(chapter.id) %>
-          <ul id="support-menu-detail" class="support-menu-detail-list" style="display: none;">
-            <%# JavaScript will insert the details from the DOM here! %>
-          </ul>
+            <%= chapter.content.toc.html_safe %>
           <% end %>
         </li>
       <% end %>

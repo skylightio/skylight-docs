@@ -11,6 +11,16 @@ module Skylight
       # absolute path to the /markdown folder
       FOLDER = File.expand_path('../../../source', __FILE__)
 
+      # options to pass into the Kramdown document constructor
+      KRAMDOWN_OPTIONS = {
+        input: 'GFM',              # Use Github-flavored markdown
+        coderay_css: :class,       # Output css classes to style
+        toc_levels: (2..3),        # Generate TOC from <h2>s and <h3>s only
+        syntax_highlighter_opts: {
+          line_number_anchors: false  # Don't add anchors to line numbers
+        }
+      }
+
       # Creates an object containing content and metadata about a docs chapter.
       # Takes a filename (such as 'running-skylight') on initialization.
       def initialize(filename)
@@ -66,20 +76,24 @@ module Skylight
       # Gets or sets the `content` of a Chapter object.
       # First, it gets the full contents of the file, minus the frontmatter.
       # Then, it converts the ERB from the file to markdown.
-      # Then, it parses markdown into html.
+      # Then, it parses markdown into html, splitting the table of contents off
+      # from the main content.
       #
-      # @return [String] a string of html
+      # @return [Struct::Content] an object containing .toc and .main attributes
       def content
         @content ||= begin
-          options = {
-            input: 'GFM',              # Use Github-flavored markdown
-            coderay_css: :class,       # Output css classes to style
-            syntax_highlighter_opts: {
-              line_number_anchors: false  # Don't add anchors to line numbers
-            }
-          }
+          split_token = "split_toc"
+
           raw_content = ERB.new(file_without_frontmatter).result(binding)
-          Kramdown::Document.new(raw_content, options).to_html
+          # Add Kramdown Inline Attribute List to generate a table of contents,
+          # followed by the split_token in a new paragraph
+          raw_content = "* TOC \n {:toc .support-menu-detail-list #support-menu-detail} \n \n #{split_token} \n \n" + raw_content
+
+          full_html = Kramdown::Document.new(raw_content, KRAMDOWN_OPTIONS).to_html
+          toc, main = full_html.split("<p>#{split_token}</p>", 2)
+
+          Struct.new("Content", :toc, :main)
+          Struct::Content.new(toc, main)
         end
       end
 

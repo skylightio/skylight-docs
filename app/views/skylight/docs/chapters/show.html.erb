@@ -8,7 +8,7 @@
       <h1><%= @chapter.title %></h1>
       <p>Last updated <%= @chapter.updated %></p>
       <p><%= @chapter.description %></p>
-      <%= @chapter.content.html_safe %>
+      <%= @chapter.content.main.html_safe %>
     </div>
   </section>
 <% end %>

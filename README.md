@@ -28,14 +28,6 @@ module Skylight
 end
 ```
 
-### Javascript
-
-In order to use the docs engine javascript (for TOC generation), add the following to your application.js:
-
-```
-//= require skylight/docs/application
-```
-
 ## DEVELOPMENT
 
 ### Adding New Markdown Files
