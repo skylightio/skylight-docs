@@ -34,21 +34,22 @@ task :setup do
   puts_in_pink "Bundling in #{Dir.pwd}"
   sh "bundle install"
   Dir.chdir(DUMMY_APP_LOCATION) do
-    puts_in_pink "Switching directory to #{Dir.pwd}"
     puts_in_pink "Bundling in #{Dir.pwd}"
     sh "bundle install"
   end
-  puts_in_pink "Switching directory to #{Dir.pwd}"
   puts_in_pink "Done bundling. Yay!"
 end
 
 desc "Sets up dependencies and runs the Rails server in the dummy app"
 task :server => [:setup] do
   Dir.chdir(DUMMY_APP_LOCATION) do
-    puts_in_pink "Switching directory to #{Dir.pwd}"
     sh "rails server -p 3001"
   end
 end
 
+desc "Runs the tests"
+task :test do
+  sh "rspec"
+end
 
-task default: :server
+task default: :test
