@@ -1,4 +1,6 @@
+<!-- TODO: Figure out how to cache this when pairing with Godhuda -->
 <%= content_for(:main_class, "support support-chapter card-background #{@chapter.id}") %>
+<%= content_for :title, @chapter.title %>
 
 <% cache @chapter do %>
   <section class="support-chapter-container">
