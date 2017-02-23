@@ -22,16 +22,16 @@ See [below](#95th-percentiles-vs-averages){:class="js-scroll-link"} for a more d
 
 Though it’s not the most common cause, high memory allocations and the resulting GC churn can be a cause of app slowdowns. To help identify and resolve these situations, Skylight tracks allocation counts in addition to response times.
 
-In the list view, we call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill in to the individual endpoint and see exactly where the allocations occur.
+In the list view, we call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill into the individual endpoint and see exactly where the allocations occur.
 
 
 ### App Dashboard
 
 <%= image_tag 'skylight/docs/getting_to_know_skylight/endpoints-list.png', alt: 'Screenshot of endpoints list' %>
 
-This is the app dashboard, and is the first thing you will see when you log in to Skylight.
+This is the app dashboard, and is the first thing you will see when you login to Skylight.
 
-The purpose of this page is to give you a high-level view of how your app is performing, and give you a starting point to digging in to the details.
+The purpose of this page is to give you a high-level view of how your app is performing, and give you a starting point to digging into the details.
 
 At the top we show a graph with the Typical and Problem response times and RPM for your app over the current time range. Hover over the graph to see the specific numbers at a given time. See above for more on “response time”.
 
@@ -56,7 +56,7 @@ Before diving into the endpoint view, we should first mention the Time Explorer.
 
 The time explorer lives at the bottom of your app views. For both the dashboard and the endpoint view the data shown is for the range selected in the explorer. Displayed in the graph is the Problem (95th percentile) response time for either the entire application or for the specific endpoint being viewed.
 
-You can drag the selected range, use the arrows buttons, or chose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
+You can drag the selected range, use the arrows buttons, or choose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
 
 Pro Tip: The URL updates in response to new time selections. You can share the current URL with other collaborators or even modify the range by modifying the URL!
 
