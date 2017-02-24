@@ -24,6 +24,10 @@ module Skylight
         }
       }
 
+      # found this Regex in the Jekyll repo, used to parse frontmatter
+      # https://github.com/jekyll/jekyll/blob/27ed81547b12d28a60c51961b82a5723981feb7d/lib/jekyll/document.rb#L10
+      FRONTMATTER_REGEX = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
+
       # Creates an object containing content and metadata about a docs chapter.
       # Takes a filename (such as 'running-skylight') on initialization.
       def initialize(filename)
@@ -46,9 +50,9 @@ module Skylight
           # Match .md files in /source but not in /source/deprecated
           pattern = File.join(FOLDER, "*#{FILE_EXTENSION}")
 
-          Dir[pattern].map { |path|
+          Dir[pattern].map do |path|
             Skylight::Docs::Chapter.new(File.basename(path, FILE_EXTENSION))
-          }
+          end
         end
       end
 
@@ -57,9 +61,7 @@ module Skylight
       #
       # @return [Chapter] the chapter
       def self.find(id_to_find)
-        chapter = all.find { |c| c.id == id_to_find }
-        raise "`#{id_to_find}` not found in #{FOLDER}" unless chapter
-        chapter
+        all.find { |c| c.id == id_to_find } || raise(ActionController::RoutingError, "`#{id_to_find}` not found in #{FOLDER}")
       end
 
       # When sorting chapters, use their order for comparison
@@ -132,10 +134,7 @@ module Skylight
         #
         # @return [String] the file content after the frontmatter
         def file_without_frontmatter
-          # found this Regex in the Jekyll repo, used to parse frontmatter
-          # https://github.com/jekyll/jekyll/blob/27ed81547b12d28a60c51961b82a5723981feb7d/lib/jekyll/document.rb#L10
-          frontmatter_regex = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
-          frontmatter_match = file_content.match(frontmatter_regex)
+          frontmatter_match = file_content.match(FRONTMATTER_REGEX)
           # if there is frontmatter, return everything but the frontmatter
           frontmatter_match ? frontmatter_match.post_match : file_content
         end
@@ -149,9 +148,7 @@ module Skylight
         # @return [Hash] see above
         def frontmatter
           @frontmatter ||= begin
-            yaml = YAML.load(file_content)
-            raise "No frontmatter found for #{filename}#{FILE_EXTENSION}" unless yaml
-            yaml
+            YAML.load(file_content) || raise("No frontmatter found for #{filename}#{FILE_EXTENSION}")
           end
         end
 
@@ -160,9 +157,7 @@ module Skylight
         #
         # @return [String, Numeric] return value will vary
         def frontmatter_attr(key)
-          value = frontmatter[key]
-          raise "Set frontmatter for `#{key}` in #{filename}#{FILE_EXTENSION}" unless value
-          value
+          frontmatter[key] || raise("Set frontmatter for `#{key}` in #{filename}#{FILE_EXTENSION}")
         end
 
         # Wraps the image_tag helper so we can use it to parse .erb to .md
