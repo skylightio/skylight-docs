@@ -3,6 +3,9 @@ require "skylight/docs/engine"
 module Skylight
   module Docs
     class Chapter
+      class Content < Struct.new(:toc, :main)
+      end
+
       attr_accessor :id, :filename, :order
 
       # file extension of the source markdown files
@@ -92,8 +95,7 @@ module Skylight
           full_html = Kramdown::Document.new(raw_content, KRAMDOWN_OPTIONS).to_html
           toc, main = full_html.split("<p>#{split_token}</p>", 2)
 
-          Struct.new("Content", :toc, :main)
-          Struct::Content.new(toc, main)
+          Content.new(toc, main)
         end
       end
 
