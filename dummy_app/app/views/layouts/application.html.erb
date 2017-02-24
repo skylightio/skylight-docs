@@ -9,10 +9,8 @@
   </head>
 
   <body>
-    <header class="main-nav">
-      <div class="main-nav-titlebar">
-        <%= link_to 'Index', main_app.support_path %>
-      </div>
+    <header class="main-nav-titlebar" style="width: 100%">
+      <%= link_to 'Index', main_app.support_path %>
     </header>
 
     <main class="<%= content_for?(:main_class) ? yield(:main_class) : '' %>">
