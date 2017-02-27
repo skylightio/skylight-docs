@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dummy</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class="main-nav-titlebar" style="width: 100%">
+      <%= link_to 'Index', main_app.support_path %>
+    </header>
+
+    <main class="<%= content_for?(:main_class) ? yield(:main_class) : '' %>">
+      <%= yield %>
+    </main>
+  </body>
+</html>

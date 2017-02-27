@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Docs</title>
+  <%= stylesheet_link_tag    "skylight/docs/application", media: "all" %>
+  <%= javascript_include_tag "skylight/docs/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<main class="<%= content_for?(:main_class) ? yield(:main_class) : '' %>">
+  <%= yield %>
+</main>
+
+</body>
+</html>
