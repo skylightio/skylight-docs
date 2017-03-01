@@ -29,14 +29,18 @@ def puts_in_pink(text)
   puts "\e[35m#{text}\e[0m"
 end
 
-desc "Sets up dependencies for engine and dummy app"
-task :setup do
-  puts_in_pink "Bundling in #{Dir.pwd}"
-  sh "bundle install"
+desc "Sets up dependencies fordummy app"
+task :setup_dummy do
   Dir.chdir(DUMMY_APP_LOCATION) do
     puts_in_pink "Bundling in #{Dir.pwd}"
     sh "bundle install"
   end
+end
+
+desc "Sets up dependencies for engine and dummy app"
+task :setup => [:setup_dummy] do
+  puts_in_pink "Bundling in #{Dir.pwd}"
+  sh "bundle install"
   puts_in_pink "Done bundling. Yay!"
 end
 
