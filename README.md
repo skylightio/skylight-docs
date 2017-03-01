@@ -56,6 +56,10 @@ If linking to an anchor on the same page, use: `[check out this section](#anothe
 
 If linking to a page outside of the /support namespace, use: `[check out this blog](http://www.someones-blog.com){:target="_blank"}` or `[check out this page elsewhere on skylight.io](/pricing){:target="_blank"}`
 
+#### Partials
+You can create partials to include in multiple chapters. Just create an `.md.erb` file in the `partials` folder with a filename beginning with an underscore (e.g. `_partial_name.md.erb`). You can then include this partial in chapters with:
+`<%= render partial: "partial_name" %>`
+
 ### Renaming or Removing Chapters
 If you rename or remove a chapter, make sure to update the redirect hash in `config/routes.rb`.
 

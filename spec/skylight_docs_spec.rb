@@ -57,6 +57,14 @@ describe 'Skylight::Docs::Chapter' do
       end
     end
 
+    it 'parses .md.erb files containing partials' do
+      expect(chapter.content.main).to include('Test partial content')
+    end
+
+    it 'parses .md.erb files containing partials with erb helpers' do
+      expect(chapter.content.main).to include('Test nested partial content')
+    end
+
     it 'generates HTML for a table of contents' do
       expect(chapter.content.toc).not_to include('#header-1')
       expect(chapter.content.toc).to include('#header-2')

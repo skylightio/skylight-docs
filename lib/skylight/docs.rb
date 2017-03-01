@@ -185,6 +185,17 @@ module Skylight
           ActionController::Base.helpers.image_tag(source, options)
         end
 
+        # Renders ERB partials, for example
+        # `<%= render partial: "installing_the_agent" %>` will return the
+        # contents of a file at partials/_installing_the_agent.md.erb
+        #
+        # @return [String] a string of markdown
+        def render(partial:)
+          path = "partials/_#{partial}#{FILE_EXTENSION}"
+          file = File.read(File.join(FOLDER, path))
+          ERB.new(file).result(binding)
+        end
+
         # Gets or sets the `path` attribute of the Chapter.
         #
         # @return [String] a string of the full path to the file
