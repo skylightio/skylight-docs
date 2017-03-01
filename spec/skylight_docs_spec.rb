@@ -36,7 +36,7 @@ describe 'Skylight::Docs::Chapter' do
     it 'raises an error if the id is not found in /source' do
       id_to_find = "blep"
       expect { Skylight::Docs::Chapter.find(id_to_find) }
-        .to raise_error("`#{id_to_find}` not found in #{Skylight::Docs::Chapter::FOLDER}")
+        .to raise_error(Skylight::Docs::Chapter::ChapterNotFoundError, "`#{id_to_find}` not found in #{Skylight::Docs::Chapter::FOLDER}")
     end
   end
 

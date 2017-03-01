@@ -10,7 +10,12 @@ module Skylight
       end
 
       def show
-        @chapter = Skylight::Docs::Chapter.find(params[:id])
+        begin
+          @chapter = Skylight::Docs::Chapter.find(params[:id])
+        rescue Skylight::Docs::Chapter::ChapterNotFoundError
+          flash[:error] = "Our docs have just received a makeover! \"#{params[:id].titleize}\" has been moved."
+          redirect_to chapters_path
+        end
       end
 
       private
