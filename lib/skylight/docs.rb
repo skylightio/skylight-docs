@@ -15,7 +15,11 @@ module Skylight
       FILE_EXTENSION = '.md.erb'
 
       # absolute path to the /markdown folder
-      FOLDER = File.expand_path('../../../source', __FILE__)
+      if Rails.env.test?
+        FOLDER = File.expand_path('../../../spec/test_source', __FILE__)
+      else
+        FOLDER = File.expand_path('../../../source', __FILE__)
+      end
 
       # options to pass into the Kramdown document constructor
       KRAMDOWN_OPTIONS = {

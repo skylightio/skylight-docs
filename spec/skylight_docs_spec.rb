@@ -5,7 +5,7 @@ include TestHelper
 describe 'Skylight::Docs::Chapter' do
   let(:chapter) { Skylight::Docs::Chapter.new('01-markdown-styleguide') }
   let(:second_chapter) { Skylight::Docs::Chapter.new('02-a-aardvark-chapter') }
-  let(:third_chapter) { Skylight::Docs::Chapter.new('03-blank-chapter') }
+  let(:third_chapter) { Skylight::Docs::Chapter.new('03-third-chapter') }
 
   describe "initialize" do
     it "generates a filename, id, and order" do
@@ -74,14 +74,21 @@ describe 'Skylight::Docs::Chapter' do
       expect(chapter.description).to include('description')
     end
 
-    it 'throws an error if the description does not exist in the frontmatter' do
-      expect { second_chapter.description }
-        .to raise_error("Set frontmatter for `description` in #{second_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
-    end
+    describe 'with invalid frontmatter' do
+      let(:invalid_chapter) do
+        stub_const("Skylight::Docs::Chapter::FOLDER", File.expand_path('../test_source_invalid_files', __FILE__))
+        Skylight::Docs::Chapter.new('01-chapter-without-frontmatter')
+      end
 
-    it 'throws an error if there is no frontmatter for the chapter' do
-      expect { third_chapter.description }
-        .to raise_error("No frontmatter found for #{third_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
+      it 'throws an error if the description does not exist in the frontmatter' do
+        expect { invalid_chapter.description }
+          .to raise_error("Set frontmatter for `description` in #{invalid_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
+      end
+
+      it 'throws an error if there is no frontmatter for the chapter' do
+        expect { invalid_chapter.description }
+          .to raise_error("Set frontmatter for `description` in #{invalid_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
+      end
     end
   end
 
@@ -91,8 +98,10 @@ describe 'Skylight::Docs::Chapter' do
     end
 
     it 'throws an error if the title does not exist in the frontmatter' do
-      expect { second_chapter.title }
-        .to raise_error("Set frontmatter for `title` in #{second_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
+      stub_const("Skylight::Docs::Chapter::FOLDER", File.expand_path('../test_source_invalid_files', __FILE__))
+      invalid_chapter = Skylight::Docs::Chapter.new('01-chapter-without-frontmatter')
+      expect { invalid_chapter.title }
+        .to raise_error("Set frontmatter for `title` in #{invalid_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
     end
   end
 
@@ -102,8 +111,10 @@ describe 'Skylight::Docs::Chapter' do
     end
 
     it 'throws an error if the updated does not exist in the frontmatter' do
-      expect { second_chapter.updated }
-        .to raise_error("Set frontmatter for `updated` in #{second_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
+      stub_const("Skylight::Docs::Chapter::FOLDER", File.expand_path('../test_source_invalid_files', __FILE__))
+      invalid_chapter = Skylight::Docs::Chapter.new('01-chapter-without-frontmatter')
+      expect { invalid_chapter.updated }
+        .to raise_error("Set frontmatter for `updated` in #{invalid_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
     end
   end
 end
