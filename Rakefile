@@ -50,6 +50,9 @@ end
 desc "Runs the tests"
 task :test do
   sh "rspec"
+  Dir.chdir(DUMMY_APP_LOCATION) do
+    sh "rspec"
+  end
 end
 
 task default: :test
