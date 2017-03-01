@@ -3,6 +3,7 @@
 ## SETUP
 `rake setup` will bundle install both the engine and dummy app dependencies.
 `rake` or `rake server` will install dependencies and run the dummy app server on port 3001.
+If you would like the browser to auto reload when you update your markdown files, after running the server, in a new terminal window, run `bundle exec guard`.
 
 ## USAGE
 
