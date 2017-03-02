@@ -55,6 +55,8 @@ If linking to an anchor on the same page, use: `[check out this section](#anothe
 
 If linking to a page outside of the /support namespace, use: `[check out this blog](http://www.someones-blog.com){:target="_blank"}` or `[check out this page elsewhere on skylight.io](/pricing){:target="_blank"}`
 
+### Renaming or Removing Chapters
+If you rename or remove a chapter, make sure to update the redirect hash in `config/routes.rb`.
 
 ### Testing
 

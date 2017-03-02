@@ -1,0 +1,19 @@
+<%= content_for(:main_class, "support support-index support-not-found") %>
+<%= content_for :title, "Support" %>
+
+<%= render "support_monsters_header" %>
+
+<div class="page-section">
+  <div class="page-section-container">
+    <div class="card">
+      <% if @id %>
+        <h2>"<%= @id.titleize %>" has been moved.</h2>
+      <% end %>
+
+      <p class="lead">
+        Our docs have just received a makeover!<br>
+        Visit the <%= link_to "main support page", chapters_path %> to find what you are looking for.
+      </p>
+    </div>
+  </div>
+</div>

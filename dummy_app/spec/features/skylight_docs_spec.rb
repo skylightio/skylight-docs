@@ -20,8 +20,9 @@ describe "visiting a chapter page" do
   context "when the chapter name is invalid" do
     it "redirects to the support index page" do
       visit "/support/bork"
-      expect(page).to have_current_path('/support/')
-      expect(page).to have_content("Our docs have just received a makeover! \"Bork\" has been moved.")
+      expect(page).to have_current_path('/support/bork')
+      expect(page).to have_content("\"Bork\" has been moved.")
+      expect(page.status_code).to eq(404)
     end
   end
 end
