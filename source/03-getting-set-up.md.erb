@@ -4,18 +4,7 @@ description: Install, configure, and deploy the agent.
 updated: December 3, 2015
 ---
 
-## Requirements
-
-### Ruby Version
-
-#### Minimum: 1.9.2+, Preferred: 2.1+
-
-The agent will run with 1.9.2+. However, 2.1+ is required for memory allocation tracking.
-
-For the curious, our CI currently is testing against [these versions](https://github.com/skylightio/skylight-ruby/blob/master/.travis.yml){:target="_blank"}. Intermediate versions are expected to work as well.
-
-
-### Framework
+## Supported Frameworks
 
 Skylight has built in integration for Rails, Sinatra, and Grape.
 
@@ -40,13 +29,20 @@ Not running Rails? We also support Sinatra apps, though the default instrumentat
 
 We support Grape standalone as well as embedded in Rails and Sinatra. We recognize endpoints and instrument rendering and filters. As of version 0.13, ActiveSupport::Notifications is built-in to Grape making the instrumentation even more streamlined.
 
+## Requirements
 
-## Server Requirements
+### Ruby Version
+
+#### Minimum: 1.9.2+, Preferred: 2.1+
+
+The agent will run with 1.9.2+. However, 2.1+ is required for memory allocation tracking.
+
+For the curious, our CI currently is testing against [these versions](https://github.com/skylightio/skylight-ruby/blob/master/.travis.yml){:target="_blank"}. Intermediate versions are expected to work as well.
+
+
+### Server Requirements
 
 We aim to support all \*nix servers. Just add the gem to your Gemfile, add the configuration, then deploy as you normally would. You can also run the agent locally on OS X for testing, if desired.
-
-
-### Heroku
 
 The agent runs great on Heroku. No special actions required.
 
@@ -73,7 +69,7 @@ For Heroku, setup is as simple as setting the desired ENV vars and pushing your 
 
 ## Agent Configuration
 
-Though, all that’s necessary to set is the authentication token, there are a number of other configuration options available.
+The only thing you *need* to set is the authentication token, but there are a number of other [configuration options](#general-options){:class="js-scroll-link"} available.
 
 
 ### Setting Configuration Variables
@@ -82,20 +78,20 @@ The automatically generated configuration file `config/skylight.yml` looks like 
 
 ```yaml
 ---
-# The authentication token used when reporting data back to the Skylight
-# service.
+# The authentication token used when reporting data back to the
+# Skylight service.
 #
 # Required in production.
 authentication: <authentication token>
 
 # Path to the Skylight log file
-log_file: log/foo.log
+log_file: log/skylight.log
 
 # Path to store daemon-related temporary files
 daemon.sockdir_path: /var/run/myapp
 
-# Environment specific configuration. Any variable can be scoped by an
-# environment and will take precedence over a default.
+# Environment specific configuration. Any variable can be scoped by
+# an environment and will take precedence over a default.
 # NOTE: Currently this is only correctly utilized in Rails apps.
 production:
   authentication: <production auth token>
@@ -111,33 +107,37 @@ Alternatively, configuration can be set via ENV vars. In general, the ENV vars a
 
 ### General Options
 
-* `authentication` (required) — The authentication token for the app. Available on the application settings page under the ‘Apps’ section.
-* `log_file` — Change the location of the Skylight log. By default this is `log/skylight`.log with Rails or STDOUT otherwise.
-* `daemon.sockdir_path` – The path where the socket file for the daemon is created. In general you will not need to change this. However, if you’re using an NFS mount (say with Vagrant) you’ll need to point this to a non-NFS location.
+`authentication` (required) — The authentication token for the app. Available on the application settings page under the ‘Apps’ section.
+
+`log_file` — Change the location of the Skylight log. By default this is `log/skylight.log` with Rails or STDOUT otherwise.
+
+`daemon.sockdir_path` – The path where the socket file for the daemon is created. In general you will not need to change this. However, if you’re using an NFS mount (say with Vagrant) you’ll need to point this to a non-NFS location.
 
 
 ####  Ignoring heartbeat endpoints
 
-Sometimes, an endpoint exists solely for your load-balancer to determine whether your Rails process is up.
-
-If you would like to ignore this endpoint, you may add the `SKYLIGHT_IGNORED_ENDPOINTS` environment variable. Once configured, Skylight will not collect instrumentation and requests to this endpoint will not be counted in the application’s usage or be represented as part of the application’s aggregated response time and RPM graphs.
-
-The name of the endpoint can be found in the endpoints list on your Skylight application dashboard. For Rails actions, it will be `Controller#action`, for Sinatra it will be `VERB path`, and for Grape it will be `Module [VERB] path`. Always use the name in list UI if you’re unsure.
-
-An example of the environment variable would be: `SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,OtherController#heartbeat`
-
-You may also set the ignored heartbeat endpoint using the YAML configuration file as follows:
+Sometimes, an endpoint exists solely for your load-balancer to determine whether your Rails process is up. If you would like to ignore this endpoint, you can set the ignored heartbeat endpoint as follows:
 
 ```yaml
+# config/skylight.yml
 ignored_endpoints:
   - HeartbeatController#status
   - OtherController#heartbeat
 ```
 
+Once configured, Skylight will not collect instrumentation and requests to this endpoint will not be counted in the application’s usage or be represented as part of the application’s aggregated response time and RPM graphs.
+
+The name of the endpoint can be found in the endpoints list on your Skylight application dashboard. For Rails actions, it will be `Controller#action`, for Sinatra it will be `VERB path`, and for Grape it will be `Module [VERB] path`. Always use the name in the Skylight endpoints list if you’re unsure.
+
+Alternatively, you may add the `SKYLIGHT_IGNORED_ENDPOINTS` environment variable. For example:
+```
+SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,OtherController#heartbeat
+```
+
 
 ###  Rails
 
-There are also additional configuration options that can be set in the Rails environment. Unless otherwise noted, these settings should be added to `config/application.rb`. Do not attempt to set them via initializers as Skylight starts before initializers are run.
+There are additional configuration options that can be set in the Rails environment. Unless otherwise noted, these settings should be added to `config/application.rb`. Do not attempt to set them via initializers as Skylight starts before initializers are run.
 
 Skylight performs setup when the gem is required, at which time Rails will be detected and tapped into. However, you may find you have to manually require `skylight/railtie` if you need to load the Skylight gem before Rails.
 
@@ -148,7 +148,7 @@ By default, the Skylight agent only enables itself in the production Rails envir
 
 ```ruby
 # config/application.rb
-config.skylight.environments += ['staging']
+config.skylight.environments += ["staging"]
 ```
 
 Also be sure and check out the rest of our [documentation on setting up multiple environments](#setting-up-multiple-environments){:class="js-scroll-link"}.
@@ -178,7 +178,7 @@ To enable other probes:
 config.skylight.probes += %w(excon redis active_model_serializers)
 ```
 
-See the [Instrumentation section](./instrumentation#probes) to learn more about the probes.
+See the [Getting More From Skylight section](./getting-more-from-skylight#probes) to learn more about the probes.
 
 
 ### Sinatra
@@ -199,27 +199,17 @@ See the [Rails configuration instructions](#rails){:class="js-scroll-link"} for 
 
 Skylight works just as well in standalone Sinatra apps, though the instructions are just a touch more involved.
 
-Sinatra apps usually do not require all gems in the Gemfile, so you will want to add a line like this to your main file:
-
-```ruby
-require "skylight/sinatra"
-```
-
-You will also need to boot up the Skylight agent explicitly:
-
-```ruby
-Skylight.start!
-```
-
-(If you want to load your configuration from a file instead of from ENV, you can use `Skylight.start!(file: PATH_TO_CONFIG)`.)
-
-You generally do not want to run Skylight in development mode, and the most common way to do that in Sinatra apps is to use the `:production` environment.
-
+Sinatra apps usually do not require all gems in the Gemfile, so you will want to explicitly require Skylight. You will also need to boot up the Skylight agent explicitly. You generally do not want to run Skylight in development mode, so you will want to specify its use in the `:production` environment:
 ```ruby
 configure :production do
   require "skylight/sinatra"
   Skylight.start!
 end
+```
+
+NOTE: if you want to load your configuration from a file instead of from ENV, you can use:
+```ruby
+Skylight.start!(file: PATH_TO_CONFIG)
 ```
 
 You don’t need to install any middleware manually, or do anything with unicorn forking settings.
@@ -237,7 +227,7 @@ If you’re running 0.10 - 0.12 all you have to do is require the following prob
 
 ```ruby
 # config/application.rb
-config.skylight.probes += ['grape']
+config.skylight.probes += ["grape"]
 ```
 
 See the [Rails configuration instructions](#rails){:class="js-scroll-link"} for more information.
@@ -250,7 +240,7 @@ If your Grape app is mounted in a Sinatra app, first follow the [Sinatra instruc
 If you’re running Grape 0.13+, that’s all you need to do. For versions 0.10 - 0.12, you’ll also want to add this to your main file:
 
 ```ruby
-require 'skylight/probes/grape'
+require "skylight/probes/grape"
 ```
 
 
@@ -260,9 +250,10 @@ Grape apps usually do not require all gems in the `Gemfile`, so you’ll want to
 
 ```ruby
 require "skylight"
+# If you’re running grape 0.10 - 0.12 or earlier, you’ll also
+# need to explicitly require the probe:
+require "skylight/probes/grape"
 ```
-
-(If you’re running grape 0.10 - 0.12 or earlier, you’ll also need to explicitly require the probe: `require 'skylight/probes/grape'`.)
 
 You will also need to boot up the Skylight agent explicitly.
 
@@ -270,7 +261,10 @@ You will also need to boot up the Skylight agent explicitly.
 Skylight.start!
 ```
 
-(If you want to load your configuration from a file instead of from ENV, you can use `Skylight.start!(file: PATH_TO_CONFIG)`.)
+If you want to load your configuration from a file instead of from ENV, you can use:
+```ruby
+Skylight.start!(file: PATH_TO_CONFIG)
+```
 
 Since you probably don’t want to instrument your app locally, you should set up a conditional to ensure this this is only run in production environments.
 
@@ -285,11 +279,11 @@ use Skylight::Middleware
 
 In many cases, your applications will have two or more production-like environments. These are typically referred to as “production” and “staging”, and you may also have “test”, “QA”, “dev”, etc. environments.
 
-You can configure Skylight to separate data for each of these environments by creating a new application for each, and then configuring Skylight to use the appropriate app on a per-environment basis.
+You can configure Skylight to separate data for each of these environments by creating a new application for each, then configuring Skylight to use the appropriate app on a per-environment basis.
 
 To create a new environment, make a directory using the name you’d like:
 
-```sh
+```
 mkdir /tmp/appname-staging
 cd /tmp/appname-staging
 ```
