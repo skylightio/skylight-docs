@@ -13,6 +13,11 @@
       <%= link_to 'Index', main_app.support_path %>
     </header>
 
+    <% for type, message in flash %>
+      <% next unless %w(notice error).include?(type.to_s) && !message.blank? %>
+      <div class="flash <%= type %> flash-banner"><div class="flash-content"><%= message %></div></div>
+    <% end %>
+
     <main class="<%= content_for?(:main_class) ? yield(:main_class) : '' %>">
       <%= yield %>
     </main>

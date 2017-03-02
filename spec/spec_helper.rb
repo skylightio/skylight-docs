@@ -1,3 +1,5 @@
+ENV["RAILS_ENV"] = 'test'
+
 require 'rails/all'
 require 'pry'
 require 'skylight/docs'
@@ -7,8 +9,6 @@ RSpec.configure do |config|
   config.order = "random"
   config.color = true
 end
-
-Skylight::Docs::Chapter.const_set('FOLDER', File.expand_path('../test_source', __FILE__))
 
 module TestHelper
   def expected_elements

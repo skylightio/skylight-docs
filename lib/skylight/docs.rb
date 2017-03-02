@@ -6,13 +6,20 @@ module Skylight
       class Content < Struct.new(:toc, :main)
       end
 
+      class ChapterNotFoundError < ActionController::RoutingError
+      end
+
       attr_accessor :id, :filename, :order
 
       # file extension of the source markdown files
       FILE_EXTENSION = '.md.erb'
 
       # absolute path to the /markdown folder
-      FOLDER = File.expand_path('../../../source', __FILE__)
+      if Rails.env.test?
+        FOLDER = File.expand_path('../../../spec/test_source', __FILE__)
+      else
+        FOLDER = File.expand_path('../../../source', __FILE__)
+      end
 
       # options to pass into the Kramdown document constructor
       KRAMDOWN_OPTIONS = {
@@ -61,7 +68,7 @@ module Skylight
       #
       # @return [Chapter] the chapter
       def self.find(id_to_find)
-        all.find { |c| c.id == id_to_find } || raise(ActionController::RoutingError, "`#{id_to_find}` not found in #{FOLDER}")
+        all.find { |c| c.id == id_to_find } || raise(ChapterNotFoundError, "`#{id_to_find}` not found in #{FOLDER}")
       end
 
       # When sorting chapters, use their order for comparison
