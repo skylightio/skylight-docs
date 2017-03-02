@@ -185,6 +185,28 @@ module Skylight
           ActionController::Base.helpers.image_tag(source, options)
         end
 
+        # Wraps the link_to helper so we can use it to parse .erb to .md
+        # Adds target="_blank" to any external links (those starting with 'http')
+        # Adds class="js-scroll-link" to any anchor links
+        #
+        # @return [String] a string of html
+        def link_to(name=nil, location=nil, html_options=nil)
+          # If the location starts with 'http', it is an external link
+          # If the location starts with '/', it is a link to a location in
+          # skylight.io that is not within /support
+          if /^http|^\//.match(location)
+            html_options ||= {}
+            # External links should open in a new window
+            html_options[:target] ||= "_blank"
+          elsif /^#/.match(location)
+            # It's an anchor, so add the js-scroll-link class
+            html_options ||= {}
+            html_options[:class] ||= "js-scroll-link"
+          end
+
+          ActionController::Base.helpers.link_to(name, location, html_options)
+        end
+
         # Renders ERB partials, for example
         # `<%= render partial: "installing_the_agent" %>` will return the
         # contents of a file at partials/_installing_the_agent.md.erb

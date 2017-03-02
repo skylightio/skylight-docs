@@ -50,11 +50,16 @@ Make sure the Table of Contents for whichever page you're working on still makes
 
 ### Markdown Rules
 #### Links
-If linking to a page within /support, use: `[check out this other support page](./other-page)`
+Use `link_to`s for all links. We've implemented a custom `link_to` helper to maintain consistency of user experience. All external links (those starting with 'http') will be opened in a new tab. All anchor links will have the `.js-scroll-link` class added so that they get scroll-to functionality in the client app.
+NOTE: We have not yet implemented &block functionality in the helper.
 
-If linking to an anchor on the same page, use: `[check out this section](#another-section){:class="js-scroll-link"}`
-
-If linking to a page outside of the /support namespace, use: `[check out this blog](http://www.someones-blog.com){:target="_blank"}` or `[check out this page elsewhere on skylight.io](/pricing){:target="_blank"}`
+For example:
+A link internal to `/support`:
+`<%= link_to "support page", "./support-page" %>`
+A link to another skylight.io page, not within support:
+`<%= link_to "other Skylight page", "/smarket" %>`
+A link to an external page:
+`<%= link_to "blorgh", "http://www.blorgh.org" %>`
 
 #### Partials
 You can create partials to include in multiple chapters. Just create an `.md.erb` file in the `partials` folder with a filename beginning with an underscore (e.g. `_partial_name.md.erb`). You can then include this partial in chapters with:

@@ -15,6 +15,10 @@ Content of the markdown styleguide
 
 <%= render partial: "test_partial" %>
 
+<%= link_to "external", 'http://www.example.com' %>
+<%= link_to "internal", './a-aardvark-chapter' %>
+<%= link_to "anchor", '#header-1' %>
+
 this_should_not_be_italic
 
 ~~this should be strikethrough~~
@@ -86,5 +90,3 @@ test    | woo     | yeah
  1. is this
  2. a numbered
  3. list?
-
- [Linktime](http://www.isthislinked.org)
