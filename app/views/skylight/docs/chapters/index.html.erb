@@ -2,13 +2,7 @@
 <%= content_for :title, "Support" %>
 
 <% cache Skylight::Docs::REVISION do %>
-  <header class="page-header">
-    <div class="page-header-container">
-      <h1>Support</h1>
-
-      <%= image_tag "skylight/docs/support-monsters.svg", class: "support-monsters" %>
-    </div>
-  </header>
+  <%= render "support_monsters_header" %>
 
   <div class="page-section">
     <div class="page-section-container">
