@@ -4,36 +4,36 @@ description: Install, configure, and deploy the agent.
 updated: December 3, 2015
 ---
 
-## Installing the Agent
-
-```ruby
-# Gemfile
-gem 'skylight'
-```
-
-(You should make sure the gem is available in all of your environments. See the information about individual installations below to find out how to make sure the agent runs in the environments you care about.)
-
-Then run:
-
-```sh
-bundle install
-bundle exec skylight setup {SETUP_TOKEN}
-```
-
-To get the setup token, log in and head over to [http://skylight.io/app/setup](http://skylight.io/app/setup){:target="_blank"}.
 
 
-## Deployment
 
-Once you’ve run `skylight setup` you’ll need to get the configuration to your server. For this you have two options:
 
-* check in the `config/skylight.yml` file (which is automatically generated and includes the necessary auth token) OR
-* set the appropriate ENV vars, at the minimum `SKYLIGHT_AUTHENTICATION`. See below for more information.
 
-After this, all you need to do is run your standard deployment process.
+
+
+
+
+
 
 
 ### Heroku
+
+## Installing the Agent
+
+> Note: See the information about individual installations [below](#agent-configuration){:class="js-scroll-link"} to find out how to run the agent in the environments you care about.
+
+<%= render partial: "installing_the_agent" %>
+
+### Deploying the Agent
+
+Once you’ve run `skylight setup` you’ll need to get the configuration to your server. For this you have two options:
+
+1. Check in the `config/skylight.yml` file (which is automatically generated and includes the necessary auth token) OR
+1. Set the appropriate ENV vars, at the minimum `SKYLIGHT_AUTHENTICATION`. See below for more information.
+
+After this, all you need to do is run your standard deployment process.
+
+#### Heroku
 
 For Heroku, setup is as simple as setting the desired ENV vars and pushing your repo. Nothing fancy required!
 
