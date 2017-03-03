@@ -10,28 +10,9 @@ This walkthrough is current as of last check on November 11, 2015. We’re shipp
 
 This page also doesn’t cover everything in Skylight, but rather a selection we add to as we get the same frequently asked UI questions. Do reach out if there’s something else specific you’d like to see explained here.
 
-
-### Response Time
-
-There are several places that your application’s response times appear in Skylight. In most cases we talk about the numbers in one of two ways. The “Problem” response time is the 95th percentile, whereas the “Typical” response time is the median (50th percentile).
-
-See [below](#95th-percentiles-vs-averages){:class="js-scroll-link"} for a more detailed analysis.
-
-
-### Memory Allocation Tracking
-
-Though it’s not the most common cause, high memory allocations and the resulting GC churn can be a cause of app slowdowns. To help identify and resolve these situations, Skylight tracks allocation counts in addition to response times.
-
-In the list view, we call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill into the individual endpoint and see exactly where the allocations occur.
-
-
 ### App Dashboard
 
-<%= image_tag 'skylight/docs/getting_to_know_skylight/endpoints-list.png', alt: 'Screenshot of endpoints list' %>
-
-This is the app dashboard, and is the first thing you will see when you login to Skylight.
-
-The purpose of this page is to give you a high-level view of how your app is performing, and give you a starting point to digging into the details.
+<%= render partial: "features_app_dashboard" %>
 
 At the top we show a graph with the Typical and Problem response times and RPM for your app over the current time range. Hover over the graph to see the specific numbers at a given time. See above for more on “response time”.
 
@@ -48,11 +29,29 @@ Of course, we also allow you to sort the list by any of the other columns. Just 
 Once you’ve figured out where you’d like to focus your performance-tuning efforts, just click on the endpoint name and you’ll be taken to a wonderland of performance information.
 
 
+### Response Time
+
+<%= image_tag 'skylight/docs/features/response-times.png', alt: 'Screenshot of Response Times' %>
+
+There are several places that your application’s response times appear in Skylight. In most cases we talk about the numbers in one of two ways. The “Problem” response time is the 95th percentile, whereas the “Typical” response time is the median (50th percentile).
+
+See [below](#95th-percentiles-vs-averages){:class="js-scroll-link"} for a more detailed analysis.
+
+
+### Memory Allocation Tracking
+
+<%= image_tag 'skylight/docs/features/memory-allocation-tracking.png', alt: 'Screenshot of memory allocation issues' %>
+
+Though it’s not the most common cause, high memory allocations and the resulting garbage collection churn can be a cause of app slowdowns. To help identify and resolve these situations, Skylight tracks allocation counts in addition to response times.
+
+In the list view, we call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill into the individual endpoint and see exactly where the allocations occur.
+
+
 ### Time Explorer
 
 Before diving into the endpoint view, we should first mention the Time Explorer.
 
-<%= image_tag 'skylight/docs/getting_to_know_skylight/time-explorer.png', alt: 'Screenshot of Time Explorer' %>
+<%= image_tag 'skylight/docs/features/time-explorer.png', alt: 'Screenshot of Time Explorer' %>
 
 The time explorer lives at the bottom of your app views. For both the dashboard and the endpoint view the data shown is for the range selected in the explorer. Displayed in the graph is the Problem (95th percentile) response time for either the entire application or for the specific endpoint being viewed.
 
@@ -63,9 +62,7 @@ Pro Tip: The URL updates in response to new time selections. You can share the c
 
 ### Endpoint View
 
-<%= image_tag 'skylight/docs/getting_to_know_skylight/endpoint.png', alt: 'Screenshot of endpoint view' %>
-
-The endpoint view is the heart and soul of Skylight. More than just looking pretty, this page is the end result of distilling thousands of data points into actionable information that you can use to speed up your app.
+<%= render partial: "features_endpoint_view" %>
 
 At the top is the Response Time Distribution, showing you the distribution of the response times for this particular endpoint. This feature is awesome because it makes bi-modal distributions obvious. For example, imagine you are doing an additional SQL query when the logged in user is an admin. That particular query happens to be for a column that is not indexed, so it is very slow.
 
