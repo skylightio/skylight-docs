@@ -78,31 +78,3 @@ A couple notes about the aggregate trace. First, it’s important to remember th
 Second, the aggregate trace, by default, represents all of the requests in the selected time range. Often, it’s helpful to focus on slower requests to see exactly why they are so slow. You can focus on the slowest requests by clicking the Slower link in the Segments section, or the Faster requests by the clicking the (you guessed it) Faster link.
 
 You can also click and drag on the Response Time Distribution to only show the Aggregate Trace for requests in the selected region. To return to our example above about slow admin pages, you could click and drag to select the cluster of slower requests. This allows you to laser-focus on the requests that are causing the slow-down.
-
-
-## Pricing
-
-We charge for Skylight based on the total number of requests per month across all your apps.
-
-Skylight is free up to the first 100,000 requests. After that, pricing starts at $20 per million requests handled, and continues according to the schedule above. As you can also see, the more you need, the lower your cost per million; built-in bulk discounting.
-
-You can use [this calculator](/pricing){:target="_blank"} to determine what your monthly price would be for a given request volume.
-
-To be clear: no plans, nothing to choose. Skylight will automatically discount additional requests for you. We’re fond of simplicity.
-
-
-### Billing Details
-
-The billing page gives an overview of your current billing status.
-
-<%= image_tag 'skylight/docs/getting_to_know_skylight/billing-graph.png', alt: 'Screenshot of current billing status' %>
-
-At the top, we present the current billing period, including your total requests and price so far, along with a graph of your daily usage. Hovering over a specific bar in the usage chart will give you the specific number of requests each day.
-
-Below that we show your current billing tier. See above for more information on tiers.
-
-If you have multiple apps, we then show you how your usage breaks down across all of your apps.
-
-<%= image_tag 'skylight/docs/getting_to_know_skylight/billing-apps.png', alt: "Screenshot of usage per app" %>
-
-The UI does not currently support viewing historical usage. If you need details about past billing cycles, please contact us via the in-app messenger with your request.
