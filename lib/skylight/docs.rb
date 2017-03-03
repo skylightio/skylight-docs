@@ -23,7 +23,7 @@ module Skylight
 
       # options to pass into the Kramdown document constructor
       KRAMDOWN_OPTIONS = {
-        input: 'GFM',              # Use Github-flavored markdown
+        input: 'GFM',              # Use GitHub-flavored markdown
         coderay_css: :class,       # Output css classes to style
         toc_levels: (2..3),        # Generate TOC from <h2>s and <h3>s only
         syntax_highlighter_opts: {

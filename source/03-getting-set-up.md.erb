@@ -66,6 +66,16 @@ After this, all you need to do is run your standard deployment process.
 
 For Heroku, setup is as simple as setting the desired ENV vars and pushing your repo. Nothing fancy required!
 
+To make your Skylight API token available:
+
+```
+heroku config:set SKYLIGHT_AUTHENTICATION="<token>"
+```
+
+Note that changing a config var in Heroku will cause your application to restart. Once the app has restarted and handled several requests, you should begin seeing performance data about your application in Skylight.
+
+For more information about setting Heroku config vars, see <%= link_to "Configuration and Config Vars", "https://devcenter.heroku.com/articles/config-vars" %> in the Heroku documentation.
+
 
 ## Agent Configuration
 

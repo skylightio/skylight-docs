@@ -32,7 +32,7 @@ end
 ## DEVELOPMENT
 
 ### Adding New Markdown Files
-Add all new markdown files to the `/source` folder. Use Github flavored markdown (though this gem doesn't yet support checklists). Filenames should be dasherized. Input all appropriate frontmatter following the pattern below.
+Add all new markdown files to the `/source` folder. Use GitHub flavored markdown (though this gem doesn't yet support checklists). Filenames should be dasherized. Input all appropriate frontmatter following the pattern below.
 The routes, index page links, and table of contents on each page are automatically generated based on what's in the `/source` folder, so no need to worry about that!
 To see how they look, run `rake server` and navigate to `http://localhost:3001` to see the results!
 
