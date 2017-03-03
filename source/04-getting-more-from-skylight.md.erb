@@ -1,6 +1,6 @@
 ---
 title: Getting More from Skylight
-description: Enable instrumentation for additional libraries and add custom instrumentation to your own code.
+description: Learn how Skylight works. Enable instrumentation for additional libraries and add custom instrumentation to your own code.
 updated: December 3, 2015
 ---
 
@@ -107,12 +107,16 @@ _Enabled automatically with Sinatra or Add_ `tilt` _to [probes list](./getting-s
 
 If you're curious about how our instrumentation works, you're in the right place.
 
+###  Low Resource Overhead
+
+The Skylight agent is written primarily in <%= link_to "Rust", "https://www.rust-lang.org/" %>, a systems programming language on par with C. This means we have a very low overhead so it’s safe to run Skylight in production, even in memory limited environments like Heroku.
+
 
 ### Normalizers
 
 Our preferred method of instrumentation is [`ActiveSupport::Notifications`](http://api.rubyonrails.org/classes/ActiveSupport/Notifications.html){:target="_blank"} events. When a library has added instrumentation, all we need to do is subscribe to the event and do a little bit of normalization of the data.
 
-To standardize this process, we introduced `Normalizers`. Each type of instrumenation has its own normalizer which handles the, well, normalization. You can take a look at some of them [in the source](https://github.com/skylightio/skylight-ruby/tree/master/lib/skylight/normalizers){:target="_blank"}.
+To standardize this process, we introduced `Normalizers`. Each type of instrumentation has its own normalizer which handles the, well, normalization. You can take a look at some of them [in the source](https://github.com/skylightio/skylight-ruby/tree/master/lib/skylight/normalizers){:target="_blank"}.
 
 
 ### Probes
