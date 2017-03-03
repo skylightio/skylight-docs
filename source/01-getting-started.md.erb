@@ -28,3 +28,19 @@ Learn more <%= link_to "here", "./skylight-guides#app-dashboard" %>.
 <%= render partial: "features_endpoint_view" %>
 
 Learn more <%= link_to "here", "./skylight-guides#endpoint-view" %>.
+
+
+## The Theory Behind Skylight
+
+### 95th Percentiles vs. Averages
+
+Most tools only show averages, which are easy to calculate but provide limited usefulness on their own. In Skylight, we always show the 95th percentile response time as well. While this takes significantly more computation on the backend to determine, it is a much, much better number to indicate real world performance than the average.
+
+Averages are almost useless when thinking about web performance, and in the worst case, are actually misleading. For more information, see <%= link_to "DHH’s blog post, The problem with averages", "http://signalvnoise.com/posts/1836-the-problem-with-averages" %>. Google, Twitter, and GitHub (to name a few) all use 95th percentile numbers when tracking performance.
+
+
+### Aggregation vs. Sampling
+
+Most other profiling tools rely on sampling to give you detailed information about endpoints. While this provides some value, it doesn’t provide you information about every request. Depending on how frequently the sample happens, it’s quite likely that it will miss spikes and unusual behavior.
+
+In Skylight, we track information about every request. We then aggregate the data together to provide you a representative picture of your application. This means that no request is ignored so we can give you a full and accurate picture of your application.

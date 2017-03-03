@@ -1,6 +1,6 @@
 ---
 title: Skylight Guides
-description: Learn how to use Skylight to make your app faster. Get insight into the theory behind Skylight.
+description: Learn how to use Skylight to make your app faster.
 updated: February 14, 2017
 ---
 
@@ -109,19 +109,3 @@ If you have multiple apps, we then show you how your usage breaks down across al
 <%= image_tag 'skylight/docs/getting_to_know_skylight/billing-apps.png', alt: "Screenshot of usage per app" %>
 
 The UI does not currently support viewing historical usage. If you need details about past billing cycles, please contact us via the in-app messenger with your request.
-
-
-## The Theory
-
-### 95th Percentiles vs. Averages
-
-Most tools only show averages, which are easy to calculate but provide limited usefulness on their own. In Skylight, we always show the 95th percentile response time as well. While this takes significantly more computation on the backend to determine, it is a much, much better number to indicate real world performance than the average.
-
-Averages are almost useless when thinking about web performance, and in the worst case, are actually misleading. For more information, see [DHH’s blog post, The problem with averages](http://signalvnoise.com/posts/1836-the-problem-with-averages){:target="_blank"}. Google, Twitter, and GitHub (to name a few) all use 95th percentile numbers when tracking performance.
-
-
-### Aggregation vs. Sampling
-
-Most other profiling tools rely on sampling to give you detailed information about endpoints. While this provides some value, it doesn’t provide you information about every request. Depending on how frequently the sample happens, it’s quite likely that it will miss spikes and unusual behavior.
-
-In Skylight, we track information about every request. We then aggregate the data together to provide you a representative picture of your application. This means that no request is ignored so we can give you a full and accurate picture of your application.
