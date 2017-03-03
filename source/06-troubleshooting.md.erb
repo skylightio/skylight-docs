@@ -26,7 +26,7 @@ heroku config:set SKYLIGHT_AUTHENTICATION="<token>"
 
 Note that changing a config var in Heroku will cause your application to restart. Once the app has restarted and handled several requests, you should begin seeing performance data about your application in Skylight.
 
-For more information about setting Heroku config vars, see [Configuration and Config Vars](https://devcenter.heroku.com/articles/config-vars){:target="_blank"} in the Heroku documentation.
+For more information about setting Heroku config vars, see <%= link_to "Configuration and Config Vars", "https://devcenter.heroku.com/articles/config-vars" %> in the Heroku documentation.
 
 
 ## I’m using Heroku but no data is showing up in Skylight.
@@ -67,7 +67,7 @@ heroku config:set SKYLIGHT_AUTHENTICATION="<your token>"
 
 Verify that the application is running with the correct Rails environment. By default, the agent only starts in the `production` environment, but this can be configured.
 
-To learn how to change what environments Skylight starts in, see [Railtie Environments](./getting-set-up#rails).
+To learn how to change what environments Skylight starts in, see <%= link_to "Railtie Environments", "./getting-set-up#rails" %>.
 
 
 ### Is the `skylight` gem in the right group?
@@ -77,18 +77,18 @@ Verify that, in your app’s `Gemfile`, you’ve added the `skylight` gem to a g
 
 ### If you're using Sinatra or Grape without Rails, did you follow the installation instructions?
 
- * [Sinatra Instructions](./getting-set-up#sinatra)
- * [Grape Instructions](./getting-set-up#grape)
+ * <%= link_to "Sinatra Instructions", "./getting-set-up#sinatra" %>
+ * <%= link_to "Grape Instructions", "./getting-set-up#grape" %>
 
 
 ### Is the sockfile path writable?
 
-By default, Skylight uses your Rails tmp path as the sockfile directory. In the event that this path isn’t writable you should set `daemon.sockdir_path` in your [config](./getting-set-up#setting-configuration-variables).
+By default, Skylight uses your Rails tmp path as the sockfile directory. In the event that this path isn’t writable you should set `daemon.sockdir_path` in your <%= link_to "config", "./getting-set-up#setting-configuration-variables" %>.
 
 
 ### Are you using NFS, possibly with Vagrant?
 
-Skylight’s socket file can’t be located on an NFS mount. Set `daemon.sockdir_path` in your [config](./getting-set-up#setting-configuration-variables) to a non-NFS path.
+Skylight’s socket file can’t be located on an NFS mount. Set `daemon.sockdir_path` in your <%= link_to "config", "./getting-set-up#setting-configuration-variables" %> to a non-NFS path.
 
 
 ### If you're running Unicorn, did you restart your master?
