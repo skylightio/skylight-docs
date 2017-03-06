@@ -6,13 +6,12 @@ Skylight::Docs::Engine.routes.draw do
     "feature-walkthrough" => "skylight-guides",
     "filing-bugs" => "contributing",
     "get-to-know-skylight" => "skylight-guides",
-    "grape" => "getting-set-up",
+    "grape" => "advanced-setup",
     "instrumentation" => "getting-more-from-skylight",
-    "multiple-environments" => "getting-set-up",
-    "performance-tips" => "skylight-guides",
-    "problems/repeated-queries" => "skylight-guides",
-    "running-skylight" => "getting-set-up",
-    "sinatra" => "getting-set-up"
+    "multiple-environments" => "advanced-setup",
+    "problems/repeated-queries" => "performance-tips",
+    "running-skylight" => "advanced-setup",
+    "sinatra" => "advanced-setup"
   }
 
   redirects.each do |key, value|

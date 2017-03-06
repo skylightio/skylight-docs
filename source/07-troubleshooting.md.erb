@@ -14,7 +14,7 @@ Below are some troubleshooting steps you can try. If you’re still having troub
 
 Verify that the application is running with the correct Rails environment. By default, the agent only starts in the `production` environment, but this can be configured.
 
-To learn how to change what environments Skylight starts in, see <%= link_to "Railtie Environments", "./getting-set-up#rails" %>.
+To learn how to change what environments Skylight starts in, see <%= link_to "Railtie Environments", "./advanced-setup#rails" %>.
 
 
 #### Is the `skylight` gem in the right group?
@@ -24,18 +24,18 @@ Verify that, in your app’s `Gemfile`, you’ve added the `skylight` gem to a g
 
 #### If you're using Sinatra or Grape without Rails, did you follow the installation instructions?
 
- * <%= link_to "Sinatra Instructions", "./getting-set-up#sinatra-1" %>
- * <%= link_to "Grape Instructions", "./getting-set-up#grape-1" %>
+ * <%= link_to "Sinatra Instructions", "./advanced-setup#sinatra-1" %>
+ * <%= link_to "Grape Instructions", "./advanced-setup#grape-1" %>
 
 
 #### Is the sockfile path writable?
 
-By default, Skylight uses your Rails tmp path as the sockfile directory. In the event that this path isn’t writable you should set `daemon.sockdir_path` in your <%= link_to "config", "./getting-set-up#setting-configuration-variables" %>.
+By default, Skylight uses your Rails tmp path as the sockfile directory. In the event that this path isn’t writable you should set `daemon.sockdir_path` in your <%= link_to "config", "./advanced-setup#setting-configuration-variables" %>.
 
 
 #### Are you using NFS, possibly with Vagrant?
 
-Skylight’s socket file can’t be located on an NFS mount. Set `daemon.sockdir_path` in your <%= link_to "config", "./getting-set-up#setting-configuration-variables" %> to a non-NFS path.
+Skylight’s socket file can’t be located on an NFS mount. Set `daemon.sockdir_path` in your <%= link_to "config", "./advanced-setup#setting-configuration-variables" %> to a non-NFS path.
 
 
 #### If you're running Unicorn, did you restart your master?
@@ -75,7 +75,7 @@ If the gem is installed and up-to-date, the next step is to verify that it is ru
  1. In one terminal window, run `heroku logs -t` to show the application log.
  1. In another terminal window, run `heroku restart` to restart the app.
 
-Keep an eye on the log terminal. If you see an error message stating that the Skylight agent is missing an authentication token, verify that you have <%= link_to "configured Skylight in Heroku", "./getting-set-up#heroku" %> properly.
+Keep an eye on the log terminal. If you see an error message stating that the Skylight agent is missing an authentication token, verify that you have <%= link_to "configured Skylight in Heroku", "./advanced-setup#heroku" %> properly.
 
 
 ## Platform Issues
