@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 include TestHelper
 
 describe 'Skylight::Docs::Chapter' do
@@ -55,6 +54,20 @@ describe 'Skylight::Docs::Chapter' do
       TestHelper.expected_elements.each do |element|
         expect(chapter.content.main).to include(element)
       end
+    end
+
+    it 'parses .md.erb files containing partials' do
+      expect(chapter.content.main).to include('Test partial content')
+    end
+
+    it 'parses .md.erb files containing partials with erb helpers' do
+      expect(chapter.content.main).to include('Test nested partial content')
+    end
+
+    it 'parses `link_to` helpers, adding html options for external or anchor links' do
+      expect(chapter.content.main).to include('<a target="_blank" href="http://www.example.com">external</a>')
+      expect(chapter.content.main).to include('<a href="./a-aardvark-chapter">internal</a>')
+      expect(chapter.content.main).to include('<a class="js-scroll-link" href="#header-1">anchor</a>')
     end
 
     it 'generates HTML for a table of contents' do

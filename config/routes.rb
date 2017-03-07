@@ -2,13 +2,16 @@ Skylight::Docs::Engine.routes.draw do
   # When reorganizing or renaming source files, be sure to add the appropriate
   # redirects to this hash.
   redirects = {
-    "billing" => "get-to-know-skylight",
-    "feature-walkthrough" => "get-to-know-skylight",
+    "billing" => "app-management-and-billing",
+    "feature-walkthrough" => "skylight-guides",
     "filing-bugs" => "contributing",
-    "grape" => "getting-set-up",
-    "multiple-environments" => "getting-set-up",
+    "get-to-know-skylight" => "skylight-guides",
+    "grape" => "advanced-setup",
+    "instrumentation" => "getting-more-from-skylight",
+    "multiple-environments" => "advanced-setup",
     "problems/repeated-queries" => "performance-tips",
-    "sinatra" => "getting-set-up"
+    "running-skylight" => "advanced-setup",
+    "sinatra" => "advanced-setup"
   }
 
   redirects.each do |key, value|

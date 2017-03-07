@@ -21,4 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sprockets-es6"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "capybara"
+  s.add_development_dependency "guard"
+  s.add_development_dependency "guard-livereload", '~> 2.5', '>= 2.5.2'
+  s.add_development_dependency "rack-livereload"
 end

@@ -1,0 +1,80 @@
+---
+title: Skylight Guides
+description: Learn how to use Skylight to make your app faster.
+updated: March 6, 2017
+---
+
+## Navigating Your App
+
+### App Dashboard
+
+<%= render partial: "features_app_dashboard" %>
+
+At the top we show a graph with the Typical and Problem response times and RPM for your app over the current time range. Hover over the graph to see the specific numbers at a given time. See above for more on “response time”.
+
+This section is useful for keeping an eye on your application and making sure the response times don’t shoot up suddenly, or for detecting spikes in traffic.
+
+Below the graph is the endpoint list. This list shows you all of the endpoints in your application; that is, all of the controllers and their actions that have been used in the currently selected time range. Endpoints with high object allocations are marked with the pie icon and endpoints with repeated SQL queries are marked with the database icon. In addition to each endpoint’s name, we display the Typical and Problem response times, popularity, and agony.
+
+You may have noticed that by default, we order endpoints by our patent-pending Agony-Detection Algorithm™. (Just kidding about the patent-pending bit.) We determine how much agony your endpoint is causing customers by looking at response times and endpoint popularity. Using a combination of these factors, we determine which endpoint is having the most adverse affect on your users.
+
+For example, you might have one endpoint that has a problem response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a problem response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint.
+
+Of course, we also allow you to sort the list by any of the other columns. Just click on the column name to re-sort. If you ever forget what a column signifies, hover over the column header. We recommend you sort by Agony, though, and start at the top and work your way down.
+
+Once you’ve figured out where you’d like to focus your performance-tuning efforts, just click on the endpoint name and you’ll be taken to a wonderland of performance information.
+
+
+### Response Time
+
+<%= image_tag 'skylight/docs/features/response-times.png', alt: 'Screenshot of Response Times' %>
+
+There are several places that your application’s response times appear in Skylight. In most cases we talk about the numbers in one of two ways. The “Problem” response time is the 95th percentile, whereas the “Typical” response time is the median (50th percentile).
+
+See <%= link_to "here", "./getting-started#95th-percentiles-vs-averages" %> for a more detailed analysis.
+
+
+### Memory Allocation Tracking
+
+<%= image_tag 'skylight/docs/features/memory-allocation-tracking.png', alt: 'Screenshot of memory allocation issues' %>
+
+Though it’s not the most common cause, high memory allocations and the resulting garbage collection churn can be a cause of app slowdowns. To help identify and resolve these situations, Skylight tracks allocation counts in addition to response times.
+
+In the list view, we call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill into the individual endpoint and see exactly where the allocations occur.
+
+
+### Time Explorer
+
+Before diving into the endpoint view, we should first mention the Time Explorer.
+
+<%= image_tag 'skylight/docs/features/time-explorer.png', alt: 'Screenshot of Time Explorer' %>
+
+The time explorer lives at the bottom of your app views. For both the dashboard and the endpoint view the data shown is for the range selected in the explorer. Displayed in the graph is the Problem (95th percentile) response time for either the entire application or for the specific endpoint being viewed.
+
+You can drag the selected range, use the arrows buttons, or choose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
+
+Pro Tip: The URL updates in response to new time selections. You can share the current URL with other collaborators or even modify the range by modifying the URL!
+
+## Navigating Your Endpoint
+
+### Endpoint View
+
+<%= render partial: "features_endpoint_view" %>
+
+At the top is the Response Time Distribution, showing you the distribution of the response times for this particular endpoint. This feature is awesome because it makes bi-modal distributions obvious. For example, imagine you are doing an additional SQL query when the logged in user is an admin. That particular query happens to be for a column that is not indexed, so it is very slow.
+
+If all you had was an average, you’d have no idea this was happening. But because you have a histogram, you can see that the fast, non-admin requests cluster around one response time, and the slower, admin-only requests cluster around another time.
+
+Below the Response Time Distribution is the Average Timeline. The timeline shows you where exactly your Rails app is spending time when servicing this endpoint. Each row represents a different task, and they’re color coded. For example, blue rows are time spent in application code, and green rows represent database queries.
+
+If you see black segments, that represents garbage collection time. Because GC can happen sporadically throughout the request, we aggregate it up and show it at the end.
+
+Wondering what the light and darker segments mean? If you see a dark segment, that’s “self-time"—time that was spent for that particular task. Light colored segments represent child tasks. For example, if your controller’s Ruby code calls out to the database and then does something with that data, the time spent calling out to the database would be represented as a lighter shade of blue. You’ll see that the lighter shaded segments always line up with a child segment that appears below.
+
+Lastly, you can get more information about a particular segment by clicking on it to get the detail card. In database segments, for example, we show the SQL that was executed, so it’s easy to track down exactly what query was slow.
+
+A couple notes about the aggregate trace. First, it’s important to remember that this is not a single request—it represents many (potentially thousands) of requests all merged into one. Showing single requests can send you on a wild goose chase, because it may not be representative. Because we aggregate all requests together, if something looks like it’s taking a lot of time in the trace, that means it was taking enough time in your production environment to be statistically significant.
+
+Second, the aggregate trace, by default, represents all of the requests in the selected time range. Often, it’s helpful to focus on slower requests to see exactly why they are so slow. You can focus on the slowest requests by clicking the Slower link in the Segments section, or the Faster requests by the clicking the (you guessed it) Faster link.
+
+You can also click and drag on the Response Time Distribution to only show the Aggregate Trace for requests in the selected region. To return to our example above about slow admin pages, you could click and drag to select the cluster of slower requests. This allows you to laser-focus on the requests that are causing the slow-down.
