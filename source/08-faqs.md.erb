@@ -38,6 +38,31 @@ For example, Skylight will remove variables from your SQL queries and display ag
 
 Sure! You can find our Privacy Policy <%= link_to "here", "/privacy" %>.
 
+## GitHub Integration
+
+### Why do you need read and write access to all my repos?
+
+If you signed up for Skylight using GitHub, you may have seen this before:
+
+<%= image_tag 'skylight/docs/faqs/github-permissions.png' %>
+
+We don't really need write access to your repos, nor do we use it. We just want to check all the repos you have access to (public and private) to see if there are any apps on Skylight that are attached to those repos so we can give you automatic access.
+
+Unfortunately, <%= link_to "GitHub OAuth", "https://developer.github.com/v3/oauth/" %> does not offer read-only access to public and private user repos (you can see the scopes they offer <%= link_to 'here', 'https://developer.github.com/v3/oauth/#scopes' %>, so we have to ask for read/write access even though we're really just reading.
+
+### What about organizations?
+
+We also request read-only access to your organizations. This is so you can choose a repo belonging to a specific organization in order to attach it to your Skylight app. There is more information about this <%= link_to "here", "./app-and-account-management#add-multiple-users-through-github" %>.
+
+### What if I add or remove someone from a repo that's connected to Skylight?
+
+If someone is added to a repo, they should have access to the app on Skylight as soon as they log in with GitHub.
+
+We run a daily check to make sure everyone's access is exactly as it should be. If someone's repo access is removed, their Skylight access will be revoked when we run that check.
+
+### I'm having a different issue involving the GitHub integration.
+
+Check out the <%= link_to "GitHub section", "./troubleshooting#github-integration-issues" %> of our Troubleshooting page. If you don't see your issue there, feel free to email us at [support@skylight.io](mailto:support@skylight.io) and we'll help you out!
 
 ## Feature Requests
 
@@ -71,7 +96,6 @@ Right now we've chosen to focus on providing you the most useful performance inf
 ### Do you have this feature that New Relic has?
 
 New Relic has lots of features we don't have but, in our opinion, they're not all that useful. We've decided to focus on making sure that everything we show you provides immediate value. Our customers find that it's easier to make sense of our UI and to get _actionable_ information from it. Sure, we could throw more stats in, but sometimes less is more.
-
 
 ## I've got a different question.
 
