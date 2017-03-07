@@ -6,6 +6,7 @@ Skylight::Docs::Engine.routes.draw do
     "feature-walkthrough" => "skylight-guides",
     "filing-bugs" => "contributing",
     "get-to-know-skylight" => "skylight-guides",
+    "getting-set-up" => "advanced-setup",
     "grape" => "advanced-setup",
     "instrumentation" => "getting-more-from-skylight",
     "multiple-environments" => "advanced-setup",
