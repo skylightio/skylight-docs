@@ -1,7 +1,7 @@
 ---
 title: FAQs
 description: You guessed it — frequently asked questions!
-updated: March 6, 2017
+updated: March 7, 2017
 ---
 
 ## General Questions
@@ -9,6 +9,34 @@ updated: March 6, 2017
 ### Is Skylight compatible with other profilers and monitoring tools?
 
 Skylight plays nice with other profilers and monitoring solutions, including New Relic. Many of our customers run multiple tools with success! Go ahead and compare :)
+
+
+## Security
+
+Skylight follows generally acceptable security practices. Most importantly, we don't store any sensitive data ourselves.
+
+### What data does my app send to Skylight?
+
+When you install the Skylight agent in your app, it will send the following information to our servers:
+* Endpoint names (without parameter values), e.g, what’s in `rake routes`
+* Generic descriptions of different items in your call stack
+* Sanitized SQL queries (see below)
+* Response times
+* Generic metadata about your application such as OS and framework version.
+
+### Will my users' private data be sent to Skylight?
+
+Nope. All performance metrics are scrubbed of private data by the agent running on your server before anything is ever sent our way. Skylight doesn't collect sensitive data like request param or database query values.
+
+In fact, scrubbing parameters and values from the data your app sends is what allows Skylight to aggregate your data, providing you with an accurate view of your app’s performance on the whole.
+
+For example, Skylight will remove variables from your SQL queries and display aggregated queries in the UI along with average durations and allocations:
+
+<%= image_tag 'skylight/docs/faqs/sanitized-sql-query.png', alt: 'Screenshot of a sanitized SQL query' %>
+
+### Can I read your privacy policy?
+
+Sure! You can find our Privacy Policy <%= link_to "here", "/privacy" %>.
 
 
 ## Feature Requests
