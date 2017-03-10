@@ -84,6 +84,24 @@ Keep an eye on the log terminal. If you see an error message stating that the Sk
 
 To avoid taking your production application down due to an installation failure, Skylight does not raise an exception when it can’t install the native agent. Currently, we support Linux 2.6.18+ and Mac OS X 10.8+. If you’re running a compatible OS and still see errors, try running your application with `SKYLIGHT_REQUIRED=true`. This will cause Skylight to raise an exception when the native agent is missing. This exception may be useful in troubleshooting the problem. If you need help, send this to us at [support@skylight.io](mailto:support@skylight.io).
 
+## GitHub Integration Issues
+
+### I followed an email invitation and signed up with GitHub. How come I don't see any apps when I log in?
+
+This is actually a known bug, but it's quite rare these days and we've had trouble reproducing it, so have had trouble fixing it. Please do email [support@skylight.io](mailto:support@skylight.io) and let us know exactly what steps you took when signing up, especially if there were any errors or issues along the way, or if you refreshed the invitation signup page at all before clicking "sign up with GitHub." Any information about anything out of the ordinary helps!
+
+In the meantime, you can ask the person who initially invited you to send another invitation to the email address associated with your account. This will add you to the app automatically and you should have no further issues.
+
+### I'm trying to add a repo to my Skylight app but I don't see the field to do so.
+
+There are a few reasons why this might happen.
+
+1. You are not the owner of the app on Skylight. You may contact the owner to have them add a repo to the app, or have them transfer ownership to you (this would entail transferring billing to you as well, so you may not want to do that).
+1. You are the owner, but are not logged in with GitHub. We need to verify your credentials, so be sure you are logged in via GitHub.
+
+### I'm having problems connecting my Skylight app to a personal GitHub repo.
+
+Sorry, right now we only support repos that are connected to an organization, though we may allow use of personal repos in the future. Shoot us an email at [support@skylight.io](mailto:support@skylight.io) to let us know if this feature is important to you!
 
 ## Other Issues
 
