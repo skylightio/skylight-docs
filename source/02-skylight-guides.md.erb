@@ -1,7 +1,7 @@
 ---
 title: Skylight Guides
 description: Learn how to use Skylight to make your app faster.
-updated: March 6, 2017
+updated: March 10, 2017
 ---
 
 ## Navigating Your App
@@ -10,50 +10,59 @@ updated: March 6, 2017
 
 <%= render partial: "features_app_dashboard" %>
 
-At the top we show a graph with the Typical and Problem response times and RPM for your app over the current time range. Hover over the graph to see the specific numbers at a given time. See above for more on “response time”.
+### Response Timeline
 
-This section is useful for keeping an eye on your application and making sure the response times don’t shoot up suddenly, or for detecting spikes in traffic.
+<%= image_tag 'skylight/docs/features/response-timeline.gif', alt: 'Animation of Response Timeline' %>
 
-Below the graph is the endpoint list. This list shows you all of the endpoints in your application; that is, all of the controllers and their actions that have been used in the currently selected time range. Endpoints with high object allocations are marked with the pie icon and endpoints with repeated SQL queries are marked with the database icon. In addition to each endpoint’s name, we display the Typical and Problem response times, popularity, and agony.
+At the top of the App Dashboard, you will see a graph with the <%= link_to "Typical and Problem response times", "./getting-started#true-response-times" %> and requests per minute (RPM) for your app during the <%= link_to "currently selected time range", "#navigating-through-time" %>. Hover over the graph to see the specific numbers at a given time.
+
+The Response Timeline is useful for keeping an eye on your application and making sure the response times don’t shoot up suddenly, or for detecting spikes in traffic.
+
+### Endpoint List
+
+<%= image_tag 'skylight/docs/features/endpoint-list.png', alt: 'Screenshot of Endpoint List' %>
+
+Below the timeline is the Endpoint List. This list shows you all of the endpoints in your application that have been used in the <%= link_to "currently selected time range", "#navigating-through-time" %>; that is, all of the controllers and their actions.
+
+In addition to each endpoint’s name, we display the Response Type (in beta), the <%= link_to "Typical and Problem response times", "./getting-started#true-response-times" %>, Popularity, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that might cause slowdowns in your app.
+
+Once you’ve figured out where you’d like to focus your performance-tuning efforts, just click on the endpoint name and you’ll be taken to a <%= link_to "wonderland of performance information", "#navigating-your-endpoint" %>.
+
+#### Agony!!!
 
 You may have noticed that by default, we order endpoints by our patent-pending Agony-Detection Algorithm™. (Just kidding about the patent-pending bit.) We determine how much agony your endpoint is causing customers by looking at response times and endpoint popularity. Using a combination of these factors, we determine which endpoint is having the most adverse affect on your users.
 
-For example, you might have one endpoint that has a problem response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a problem response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint.
+**Pro Tip:** Focus on improving your most agonizing endpoints in order to achieve the maximum gains in overall app performance. For example, you might have one endpoint that has a problem response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a problem response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint.
+
+#### Sorting
 
 Of course, we also allow you to sort the list by any of the other columns. Just click on the column name to re-sort. If you ever forget what a column signifies, hover over the column header. We recommend you sort by Agony, though, and start at the top and work your way down.
 
-Once you’ve figured out where you’d like to focus your performance-tuning efforts, just click on the endpoint name and you’ll be taken to a wonderland of performance information.
+#### Heads Up
 
+Skylight notifies you of potential code mistakes that may slow down your app.
 
-### Response Time
+<%= image_tag 'skylight/docs/features/heads-up-allocation-hog.png', alt: 'Screenshot of Allocation Hog icon' %>
 
-<%= image_tag 'skylight/docs/features/response-times.png', alt: 'Screenshot of Response Times' %>
-
-There are several places that your application’s response times appear in Skylight. In most cases we talk about the numbers in one of two ways. The “Problem” response time is the 95th percentile, whereas the “Typical” response time is the median (50th percentile).
-
-See <%= link_to "here", "./getting-started#95th-percentiles-vs-averages" %> for a more detailed analysis.
-
-
-### Memory Allocation Tracking
-
-<%= image_tag 'skylight/docs/features/memory-allocation-tracking.png', alt: 'Screenshot of memory allocation issues' %>
-
-Though it’s not the most common cause, high memory allocations and the resulting garbage collection churn can be a cause of app slowdowns. To help identify and resolve these situations, Skylight tracks allocation counts in addition to response times.
+**Allocation Hogs:** Though it’s not the most common cause, high memory allocations and the resulting garbage collection churn can be a cause of app slowdowns. To help identify and resolve these situations, Skylight tracks allocation counts in addition to response times.
 
 In the list view, we call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill into the individual endpoint and see exactly where the allocations occur.
 
+<%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Repeated SQL Query icon' %>
 
-### Time Explorer
+**Repeated SQL Queries:** In general, you will get better performance out of your database if you group together similar queries. Skylight identifies endpoints and events that repeatedly make similar SQL queries <%= link_to "so that you can group them", "./performance-tips#repeated-queries" %>.
 
-Before diving into the endpoint view, we should first mention the Time Explorer.
+#### Endpoint Search
 
-<%= image_tag 'skylight/docs/features/time-explorer.png', alt: 'Screenshot of Time Explorer' %>
+With Endpoint Search, you can search for a particular endpoint or group of endpoints by typing all or part of an endpoint name into the field; a type of fuzzy search.
 
-The time explorer lives at the bottom of your app views. For both the dashboard and the endpoint view the data shown is for the range selected in the explorer. Displayed in the graph is the Problem (95th percentile) response time for either the entire application or for the specific endpoint being viewed.
+Insider users can also enable Advanced Search (currently in beta), which allows the user to search by filtering based on the Endpoint List column headings.
 
-You can drag the selected range, use the arrows buttons, or choose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
+<%= image_tag 'skylight/docs/features/advanced-search.gif', alt: 'Animation of Advanced Search' %>
 
-Pro Tip: The URL updates in response to new time selections. You can share the current URL with other collaborators or even modify the range by modifying the URL!
+#### Response Types (in beta)
+
+With the Response Types feature, Skylight separates html, json, and errors into their own endpoints so you get a clear picture of each. Message [support@skylight.io](mailto:support@skylight.io) or contact us via the in-app messenger to see if your app is a good candidate for helping us test the Response Types feature.
 
 ## Navigating Your Endpoint
 
@@ -61,20 +70,72 @@ Pro Tip: The URL updates in response to new time selections. You can share the c
 
 <%= render partial: "features_endpoint_view" %>
 
-At the top is the Response Time Distribution, showing you the distribution of the response times for this particular endpoint. This feature is awesome because it makes bi-modal distributions obvious. For example, imagine you are doing an additional SQL query when the logged in user is an admin. That particular query happens to be for a column that is not indexed, so it is very slow.
+### Response Time Distribution
 
-If all you had was an average, you’d have no idea this was happening. But because you have a histogram, you can see that the fast, non-admin requests cluster around one response time, and the slower, admin-only requests cluster around another time.
+<%= image_tag 'skylight/docs/features/response-time-distribution.gif', alt: 'Animation of Response Time Distribution filtering' %>
 
-Below the Response Time Distribution is the Average Timeline. The timeline shows you where exactly your Rails app is spending time when servicing this endpoint. Each row represents a different task, and they’re color coded. For example, blue rows are time spent in application code, and green rows represent database queries.
+At the top of the Endpoint View is the Response Time Distribution, showing you the distribution of the response times for this particular endpoint during the <%= link_to "currently selected time range", "#navigating-through-time" %>. The Endpoint View, by default, shows all of the requests in the selected time range.  Often, it’s helpful to focus on slower requests to see exactly why they are so slow. You can filter the endpoint data by selecting just part of the histogram to zero in on problematic requests.
 
-If you see black segments, that represents garbage collection time. Because GC can happen sporadically throughout the request, we aggregate it up and show it at the end.
+**Pro Tip:** This Response Time Distribution is awesome because it makes <%= link_to "bi-modal distributions", "https://en.wikipedia.org/wiki/Multimodal_distribution" %> obvious. For example, imagine you are doing an additional SQL query when the logged in user is an admin. That particular query happens to be for a column that is not indexed, so it is very slow. If all you had was an average, you’d have no idea this was happening. But because you have a histogram, you can see that the fast, non-admin requests cluster around one response time, and the slower, admin-only requests cluster around another time.
 
-Wondering what the light and darker segments mean? If you see a dark segment, that’s “self-time"—time that was spent for that particular task. Light colored segments represent child tasks. For example, if your controller’s Ruby code calls out to the database and then does something with that data, the time spent calling out to the database would be represented as a lighter shade of blue. You’ll see that the lighter shaded segments always line up with a child segment that appears below.
+### Selection Summary
 
-Lastly, you can get more information about a particular segment by clicking on it to get the detail card. In database segments, for example, we show the SQL that was executed, so it’s easy to track down exactly what query was slow.
+<%= image_tag 'skylight/docs/features/endpoint-summary.png', alt: 'Screenshot of Endpoint Summary' %>
 
-A couple notes about the aggregate trace. First, it’s important to remember that this is not a single request—it represents many (potentially thousands) of requests all merged into one. Showing single requests can send you on a wild goose chase, because it may not be representative. Because we aggregate all requests together, if something looks like it’s taking a lot of time in the trace, that means it was taking enough time in your production environment to be statistically significant.
+Once you've selected a target <%= link_to "time range", "#navigating-through-time" %> and <%= link_to "grouping of response times", "#response-time-distribution" %>, check out the selection Summary. Here, you can toggle between Time or Allocations modes. You can also condense or uncondense the trace shown in the Event Sequence.
 
-Second, the aggregate trace, by default, represents all of the requests in the selected time range. Often, it’s helpful to focus on slower requests to see exactly why they are so slow. You can focus on the slowest requests by clicking the Slower link in the Segments section, or the Faster requests by the clicking the (you guessed it) Faster link.
+The Summary gives you an overview of the currently selected requests, including:
 
-You can also click and drag on the Response Time Distribution to only show the Aggregate Trace for requests in the selected region. To return to our example above about slow admin pages, you could click and drag to select the cluster of slower requests. This allows you to laser-focus on the requests that are causing the slow-down.
+* The currently selected **Segment** of the Response Time Distribution.
+* The total number of **Requests**.
+* The **Average Response Time** or **Average Allocations**.
+
+In addition, the Summary shows the types of events that make up the selected requests, broken down in terms of percentage of average response time or percentage of average allocations.
+
+### Event Sequence
+
+<%= image_tag 'skylight/docs/features/event-sequence.png', alt: 'Screenshot of Event Sequence' %>
+
+The heart of the Endpoint View is the Event Sequence—also referred to as the "trace"—which shows you where exactly your app is spending time when servicing this endpoint. Each row represents a different event, and they’re color coded:
+ * Blue rows are time spent in application code.
+ * Green rows represent database queries.
+ * Purple rows represent time spent generating the view.
+ * Black segments represent garbage collection time. Because GC can happen sporadically throughout the request, we aggregate it and show it at the end.
+
+#### Request Aggregation
+
+It’s important to understand that the Event Sequence does not represent a single request. It represents many (potentially thousands) of requests all merged into one. Showing single requests can send you on a <%= link_to "wild goose chase", "./getting-started#aggregation-vs-sampling" %>, because that request may not be representative. Because we aggregate all requests together, if something looks like it’s taking a lot of time in the Event Sequence, that means it was taking enough time in your production environment to be statistically significant.
+
+#### Detail Cards and Aggregated SQL Queries
+
+<%= image_tag 'skylight/docs/features/detail-card.png', alt: 'Screenshot of Detail Card' %>
+
+You can get more information about a particular event by clicking on it to get the Detail Card. In database events, for example, we show the SQL that was executed, so it’s easy to track down exactly what query was slow. Note that the SQL query is aggregated. Any variables are stripped from SQL queries before they are sent to Skylight, allowing us to aggregate similar queries and give you a more holistic view of the performance of the query.
+
+#### Self Time and Child Events
+
+<%= image_tag 'skylight/docs/features/child-events.png', alt: 'Screenshot showing self time and child events' %>
+
+Wondering what the light and darker segments mean? If you see a dark segment, that’s “self-time"—time that was spent for that particular event. The total self-time for a row is shown at the end of the row.
+
+Light colored segments represent child events. For example, if your controller’s Ruby code calls out to the database and then does something with that data, the time spent calling out to the database would be represented as a lighter shade of blue. You’ll see that the lighter shaded segments always line up with a child segment that appears below.
+
+#### Uncondensing the Event Sequence
+
+In order to minimize the amount of noise in the Event Sequence, Skylight shows it as "condensed" by default. Events with no <%= link_to "children", "#self-time-and-child-events" %> that have a very brief total duration are either condensed into a single line or hidden from view. You can uncondense the Event Sequence by unchecking "condense trace" in the <%= link_to "Summary", "#selection-summary" %>.
+
+### Endpoint Hotspots (in beta)
+
+Endpoint Hotspots (available to Insiders via a feature flag) highlight events that take up more than 10% of the total response time or allocations on an endpoint. If your endpoint is slow, take a look at its hotspots to identify opportunities for performance improvements.
+
+## Navigating Through Time
+
+### Time Explorer
+
+<%= image_tag 'skylight/docs/features/time-explorer.png', alt: 'Screenshot of Time Explorer' %>
+
+The time explorer lives at the bottom of your app views. For both the <%= link_to "App Dashboard", "#app-dashboard" %> and the <%= link_to "Endpoint View", "#endpoint-view" %> the data shown is for the range selected in the explorer. Displayed in the graph is the <%= link_to "problem response time", "./getting-started#true-response-times" %> for either the entire application or for the specific endpoint being viewed.
+
+You can drag the selected range, use the arrows buttons, or choose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
+
+**Pro Tip:** The URL updates in response to new time selections. You can share the current URL with other collaborators or even modify the range by modifying the URL!
