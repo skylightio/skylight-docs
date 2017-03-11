@@ -18,10 +18,10 @@ Click <%= link_to "here", "./advanced-setup#installing-the-agent" %> for advance
 
 ### Actionable Insights
 
-Skylight visualizes all your app’s performance data in a way that makes it easy to understand and act on:
+Skylight makes it easy to understand and act on your app’s performance data:
 * <%= link_to "True Response Times", "#true-response-times" %> and <%= link_to "Request Aggregation", "#aggregation-vs-sampling" %> prevent you from going on a wild goose chase.
 * Sorting by <%= link_to "Agony", "./skylight-guides#agony" %> puts the endpoints most in need of improvement at the top of your list.
-* <%= link_to "Heads Ups", "./skylight-guides#heads-up" %> notify you to potential code mistakes that may slow down your app.
+* <%= link_to "Heads Ups", "./skylight-guides#heads-up" %> notify you to potential code issues that may slow down your app.
 
 ### App Dashboard
 
@@ -49,7 +49,7 @@ Learn more <%= link_to "here", "./skylight-guides#staying-the-course" %>.
 
 <%= image_tag 'skylight/docs/features/response-times.png', alt: 'Screenshot of Response Times' %>
 
-There are several places that your application’s response times appear in Skylight. In most cases we talk about the numbers in one of two ways. The “Problem” response time is the 95th percentile, whereas the “Typical” response time is the median (50th percentile).
+Your application's response times appear several places in Skylight. In most cases we talk about the numbers in one of two ways. The “Problem” response time is the 95th percentile, whereas the “Typical” response time is the median (50th percentile).
 
 Most tools only show averages, which are easy to calculate but provide limited usefulness on their own. In Skylight, we always show the 95th percentile response time as well. While this takes significantly more computation on the backend to determine, it is a much, much better number to indicate real world performance than the average.
 
