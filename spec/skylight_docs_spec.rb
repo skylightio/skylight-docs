@@ -117,17 +117,4 @@ describe 'Skylight::Docs::Chapter' do
         .to raise_error("Set frontmatter for `title` in #{invalid_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
     end
   end
-
-  describe '.updated' do
-    it 'returns the updated of the chapter' do
-      expect(chapter.updated).to eq('January 1, 2017')
-    end
-
-    it 'throws an error if the updated does not exist in the frontmatter' do
-      stub_const("Skylight::Docs::Chapter::FOLDER", File.expand_path('../test_source_invalid_files', __FILE__))
-      invalid_chapter = Skylight::Docs::Chapter.new('01-chapter-without-frontmatter')
-      expect { invalid_chapter.updated }
-        .to raise_error("Set frontmatter for `updated` in #{invalid_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
-    end
-  end
 end
