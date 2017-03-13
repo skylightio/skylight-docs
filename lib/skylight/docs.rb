@@ -122,13 +122,6 @@ module Skylight
         frontmatter_attr("title")
       end
 
-      # Gets the date last `updated` from the Chapter's frontmatter.
-      #
-      # @return [String] the date last updated
-      def updated
-        frontmatter_attr("updated")
-      end
-
       private
         # Gets or sets the `file_content` read from the file at the Chapter's path.
         #
@@ -149,8 +142,7 @@ module Skylight
         # Gets or sets the frontmatter attribute on the Chapter object. e.g.:
         # { 'title' => 'title',
         #   'description' => 'description',
-        #   'order' => #,
-        #   'updated' => 'date last updated' }
+        #   'order' => # }
         #
         # @return [Hash] see above
         def frontmatter
