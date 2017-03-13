@@ -23,7 +23,7 @@ The Response Timeline is useful for keeping an eye on your application and makin
 
 Below the timeline is the Endpoints List. This list shows you all of the endpoints in your application that have been used in the <%= link_to "currently selected time range", "#navigating-through-time" %>; that is, all of the controllers and their actions.
 
-In addition to each endpoint’s name, we display the Response type (in beta), the <%= link_to "Typical Response and Problem Response times", "./getting-started#true-response-times" %>, Popularity, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that could cause slowdowns in your app.
+In addition to each endpoint’s name, we display the Response type (in <%= link_to "beta", "./faqs#accessing-agent-beta-features" %>), the <%= link_to "Typical Response and Problem Response times", "./getting-started#true-response-times" %>, Popularity, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that could cause slowdowns in your app.
 
 Once you’ve figured out where you’d like to focus your performance-tuning efforts, just click on the endpoint name and you’ll be taken to a <%= link_to "wonderland of performance information", "#navigating-your-endpoint" %>.
 
@@ -55,13 +55,13 @@ In the list view, we call out endpoints with abnormally high allocations that co
 
 With Endpoint Search, you can search for a particular endpoint or group of endpoints by typing all or part of an endpoint name into the field; a type of fuzzy search.
 
-Insider users can also enable Advanced Search (currently in beta), which allows the user to search by filtering based on the Endpoints List column headings.
+Insider users can also enable Advanced Search (currently in <%= link_to "beta", "./faqs#accessing-user-interface-beta-features" %>), which allows the user to search by filtering based on the Endpoints List column headings.
 
 <%= image_tag 'skylight/docs/features/advanced-search.gif', alt: 'Animation of Advanced Search' %>
 
 #### Response Types (in beta)
 
-With the Response Types feature, Skylight separates html, json, and errors into their own endpoints so you get a clear picture of each. Message [support@skylight.io](mailto:support@skylight.io) or contact us via the in-app messenger to see if your app is a good candidate for helping us test the Response Types feature.
+With the Response Types <%= link_to "beta feature", "./faqs#accessing-agent-beta-features" %>, Skylight separates html, json, and errors into their own endpoints so you get a clear picture of each. Message [support@skylight.io](mailto:support@skylight.io) or contact us via the in-app messenger to see if your app is a good candidate for helping us test the Response Types feature.
 
 ## Navigating Your Endpoint
 
@@ -125,7 +125,7 @@ In order to minimize the amount of noise in the Event Sequence, Skylight shows i
 
 ### Endpoint Hotspots (in beta)
 
-Endpoint Hotspots (available to Insiders via a feature flag) highlight events that take up more than 10% of the total response time or allocations on an endpoint. If your endpoint is slow, take a look at its hotspots to identify opportunities for performance improvements.
+The Endpoint Hotspots <%= link_to "beta feature", "./faqs#accessing-user-interface-beta-features" %> highlights events that take up more than 10% of the total response time or allocations on an endpoint. If your endpoint is slow, take a look at its hotspots to identify opportunities for performance improvements.
 
 ## Navigating Through Time
 
