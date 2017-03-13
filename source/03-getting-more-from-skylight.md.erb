@@ -184,7 +184,7 @@ Clearly the `OctokitService#repo_summaries` method was the culprit of the slowdo
 
 If you're curious about how our instrumentation works, you're in the right place.
 
-###  Low Resource Overhead
+###  Featherweight Agent
 
 The Skylight agent is written primarily in <%= link_to "Rust", "https://www.rust-lang.org/" %>, a systems programming language on par with C. This means we have a very low overhead so it’s safe to run Skylight in production, even in memory limited environments like Heroku. You can read more about this aspect of our agent <%= link_to "here", "http://blog.skylight.io/our-new-featherweight-agent/" %> and more about the agent's 1.0 release <%= link_to "here", "http://blog.skylight.io/skylight-gem-goes-1-0/" %>.
 
