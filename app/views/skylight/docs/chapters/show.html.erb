@@ -3,12 +3,11 @@
 
 <% cache @chapter do %>
   <section class="support-chapter-container">
-    <%= render partial: 'table_of_contents' %>
+    <%= render "table_of_contents" %>
 
-    <div class='support-content card'>
+    <div class="support-content card">
       <h1><%= @chapter.title %></h1>
-      <p class="support-chapter-last-updated">Last updated <%= @chapter.updated %></p>
-      <p><%= @chapter.description %></p>
+      <p class="support-chapter-description"><%= @chapter.description %></p>
       <%= @chapter.content.main.html_safe %>
     </div>
   </section>
