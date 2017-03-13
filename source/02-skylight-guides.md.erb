@@ -14,25 +14,25 @@ updated: March 10, 2017
 
 <%= image_tag 'skylight/docs/features/response-timeline.gif', alt: 'Animation of Response Timeline' %>
 
-At the top of the App Dashboard, you will see a graph with the <%= link_to "Typical and Problem response times", "./getting-started#true-response-times" %> and requests per minute (RPM) for your app during the <%= link_to "currently selected time range", "#navigating-through-time" %>. Hover over the graph to see the specific numbers at a given time.
+At the top of the App Dashboard, you will see a graph with the <%= link_to '"typical" and "problem" response times', "./getting-started#true-response-times" %> and requests per minute (RPM) for your app during the <%= link_to "currently selected time range", "#navigating-through-time" %>. Hover over the graph to see the specific numbers at a given time.
 
-The Response Timeline is useful for keeping an eye on your application and making sure the response times don’t shoot up suddenly, or for detecting spikes in traffic.
+The Response Timeline is useful for keeping an eye on your application and making sure the response times don’t shoot up suddenly, and for detecting spikes in traffic.
 
-### Endpoint List
+### Endpoints List
 
-<%= image_tag 'skylight/docs/features/endpoint-list.png', alt: 'Screenshot of Endpoint List' %>
+<%= image_tag 'skylight/docs/features/endpoint-list.png', alt: 'Screenshot of Endpoints List' %>
 
-Below the timeline is the Endpoint List. This list shows you all of the endpoints in your application that have been used in the <%= link_to "currently selected time range", "#navigating-through-time" %>; that is, all of the controllers and their actions.
+Below the timeline is the Endpoints List. This list shows you all of the endpoints in your application that have been used in the <%= link_to "currently selected time range", "#navigating-through-time" %>; that is, all of the controllers and their actions.
 
-In addition to each endpoint’s name, we display the Response Type (in beta), the <%= link_to "Typical and Problem response times", "./getting-started#true-response-times" %>, Popularity, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that might cause slowdowns in your app.
+In addition to each endpoint’s name, we display the Response type (in beta), the <%= link_to "Typical Response and Problem Response times", "./getting-started#true-response-times" %>, Popularity, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that could cause slowdowns in your app.
 
 Once you’ve figured out where you’d like to focus your performance-tuning efforts, just click on the endpoint name and you’ll be taken to a <%= link_to "wonderland of performance information", "#navigating-your-endpoint" %>.
 
 #### Agony!!!
 
-You may have noticed that by default, we order endpoints by our patent-pending Agony-Detection Algorithm™. (Just kidding about the patent-pending bit.) We determine how much agony your endpoint is causing customers by looking at response times and endpoint popularity. Using a combination of these factors, we determine which endpoint is having the most adverse affect on your users.
+You may have noticed that by default, we order endpoints by our patent-pending Agony-Detection Algorithm™. (Just kidding about the patent-pending bit.) We calculate how much agony your endpoint is causing customers by looking at response times and endpoint popularity. Using a combination of these factors, we determine which endpoint is having the most adverse affect on your users.
 
-**Pro Tip:** Focus on improving your most agonizing endpoints in order to achieve the maximum gains in overall app performance. For example, you might have one endpoint that has a problem response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a problem response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint.
+**Pro Tip:** To achieve the biggest gains in overall app performance, focus on improving your most agonizing endpoints. For example, you might have one endpoint that has a problem response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a problem response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint.
 
 #### Sorting
 
@@ -56,7 +56,7 @@ In the list view, we call out endpoints with abnormally high allocations that co
 
 With Endpoint Search, you can search for a particular endpoint or group of endpoints by typing all or part of an endpoint name into the field; a type of fuzzy search.
 
-Insider users can also enable Advanced Search (currently in beta), which allows the user to search by filtering based on the Endpoint List column headings.
+Insider users can also enable Advanced Search (currently in beta), which allows the user to search by filtering based on the Endpoints List column headings.
 
 <%= image_tag 'skylight/docs/features/advanced-search.gif', alt: 'Animation of Advanced Search' %>
 
@@ -82,7 +82,7 @@ At the top of the Endpoint View is the Response Time Distribution, showing you t
 
 <%= image_tag 'skylight/docs/features/endpoint-summary.png', alt: 'Screenshot of Endpoint Summary' %>
 
-Once you've selected a target <%= link_to "time range", "#navigating-through-time" %> and <%= link_to "grouping of response times", "#response-time-distribution" %>, check out the selection Summary. Here, you can toggle between Time or Allocations modes. You can also condense or uncondense the trace shown in the Event Sequence.
+Once you've selected a target <%= link_to "time range", "#navigating-through-time" %> and <%= link_to "grouping of response times", "#response-time-distribution" %>, check out the Selection Summary. Here, you can toggle between Time or Allocations modes. You can also condense or uncondense the trace shown in the Event Sequence.
 
 The Summary gives you an overview of the currently selected requests, including:
 
@@ -110,7 +110,7 @@ It’s important to understand that the Event Sequence does not represent a sing
 
 <%= image_tag 'skylight/docs/features/detail-card.png', alt: 'Screenshot of Detail Card' %>
 
-You can get more information about a particular event by clicking on it to get the Detail Card. In database events, for example, we show the SQL that was executed, so it’s easy to track down exactly what query was slow. Note that the SQL query is aggregated. Any variables are stripped from SQL queries before they are sent to Skylight, allowing us to aggregate similar queries and give you a more holistic view of the performance of the query.
+You can get more information about a particular event by clicking on it to get the Detail Card. In database events, for example, we show the SQL that was executed, so it’s easy to track down exactly what query was slow. Note that the SQL query is aggregated. Any variables are stripped from SQL queries before they are sent to Skylight, allowing us to aggregate similar queries and give you a more holistic view of the performance of the query (not to mention the <%= link_to "information security benefits", "./faqs#will-my-users-private-data-be-sent-to-skylight" %>).
 
 #### Self Time and Child Events
 
@@ -146,4 +146,4 @@ You can drag the selected range, use the arrows buttons, or choose a predefined 
 
 <%= render partial: "features_trends_email" %>
 
-Track <%= link_to "Typical and Problem response times", "./getting-started#true-response-times" %> with lists of your most improved endpoints your biggest slowdowns. Endpoints that have slowly declined over a 6 week period will be called out as "Frog Boils".
+Track <%= link_to '"typical" and "problem" response times', "./getting-started#true-response-times" %> with lists of your most improved endpoints your biggest slowdowns. Endpoints that have slowly declined over a 6 week period will be called out as "Frog Boils".
