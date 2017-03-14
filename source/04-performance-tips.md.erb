@@ -280,3 +280,59 @@ Depending on how many customers this code is looping over, we might have saved a
 The last point deserves a special mention: by guaranteeing the immutability of your string literals, Ruby can reuse the same instance of the string object across multiple calls. This essentially allows Ruby to hoist the string for you (similar to how we moved the blacklist into a constant) while keeping the string inline for readability.
 
 The `freeze` call introduced some visual noise here, but this might soon be a thing in the past. Matz has announced plans to make this the default behavior in the long term. Regular expressions, integers (`Fixnum`s) and most floating point values already receive similar optimizations on modern Rubies, so you normally wouldn't have to worry about hoisting them manually either.
+
+
+## Expensive Views
+
+One of the easiest ways to get a decent performance boost out of a Rails app is to find ways to cache expensive HTML or JSON fragments.
+
+### Identifying Expensive Views
+
+To get the best bang for your buck, you should focus your energy on areas of your templates that are doing the most work. Using Skylight, you can look at your endpoint's Event Sequence to get a sense of which templates to focus on. In this example, the bulk of the time is actually spent in just one HTML fragment:
+
+<%= image_tag 'skylight/docs/performance_tips/expensive-view.png', alt: 'Screenshot of an expensive view' %>
+
+Additionally, the bulk of the allocations for this endpoint occur within the same HTML fragment:
+
+<%= image_tag 'skylight/docs/performance_tips/expensive-view-allocations.png', alt: 'Screenshot of an expensive view in allocations mode' %>
+
+Adding caching to this template will improve time spent for this endpoint _and_ reduce <%= link_to "garbage collection pauses", "#garbage-collection-pauses" %> across the application.
+
+### Use Basic Fragment Caching
+
+Looking into `index.html.erb`, we find a few truly dynamic bits, like this:
+
+```erb
+<%%= render partial: 'shared/flash',  
+    locals: { flash: flash, class_name: "banner" } %>
+```
+
+But for the most part, it's a large template whose dynamic bits look like this:
+
+```erb
+<%%= link_to "Sign Up For Free", signup_path, class: 'signup' %>
+```
+
+Fortunately, **Rails makes caching really easy!** Just wrap the area of the template that you want to cache with a cache block:
+
+```erb
+<%% cache(action_suffix: "primary") do %>  
+<section class="hero">  
+  <div class="container">
+    ...
+  </div>
+</section>
+
+<section class="data">  
+  <div class="container">
+    ...
+  </div>
+</section>  
+<%% end %>
+```
+
+When using fragment caching, remember three things:
+
+1. **Pick a key that describes the fragment you are caching.** You can use `action_suffix`, as in this example, if the key is unique only inside of this action. (You can also <%= link_to "use an Active Record object as your cache key", "http://apidock.com/rails/ActiveRecord/Integration/cache_key" %>, which is quite convenient and simple in the right situations.)
+1. **The easiest caching backend is memcached.** This is because <%= link_to "memcached", "http://guides.rubyonrails.org/caching_with_rails.html#activesupport-cache-memcachestore" %> automatically expires keys that haven't been used in a while (an "LRU" or "least recently used" expiration strategy), and cache expiration is the hardest part of a good caching strategy.
+1. **Focus on the big spenders.** It's tempting to spend a lot of time caching all of your HTML and trying to identify good cache keys for everything. In practice, you can get big wins by just caching expensive fragments that have easy cache keys (either because the template is relatively static, or because it's derived from an Active Record object, which has built-in caching support).
