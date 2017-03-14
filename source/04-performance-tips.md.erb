@@ -336,3 +336,28 @@ When using fragment caching, remember three things:
 1. **Pick a key that describes the fragment you are caching.** You can use `action_suffix`, as in this example, if the key is unique only inside of this action. (You can also <%= link_to "use an Active Record object as your cache key", "http://apidock.com/rails/ActiveRecord/Integration/cache_key" %>, which is quite convenient and simple in the right situations.)
 1. **The easiest caching backend is memcached.** This is because <%= link_to "memcached", "http://guides.rubyonrails.org/caching_with_rails.html#activesupport-cache-memcachestore" %> automatically expires keys that haven't been used in a while (an "LRU" or "least recently used" expiration strategy), and cache expiration is the hardest part of a good caching strategy.
 1. **Focus on the big spenders.** It's tempting to spend a lot of time caching all of your HTML and trying to identify good cache keys for everything. In practice, you can get big wins by just caching expensive fragments that have easy cache keys (either because the template is relatively static, or because it's derived from an Active Record object, which has built-in caching support).
+
+
+## Synchronous HTTP Requests
+
+When you’re just starting out, it’s too easy to make synchronous HTTP requests inside your requests, because why not? Getting a worker setup up and running takes time and it adds operational cost to your app when you're still trying to get it off the ground (usually with a tiny team).
+
+But once you get going, synchronous HTTP requests are one of the biggest culprits when it comes to slow requests. It's also easy to lose track of them because you're likely synchronizing with third party services in `before_filter`s or middlewares, both areas of code you don't look at very often.
+
+### Identifying Slow Synchronous HTTP Requests
+
+Using Skylight, be on the lookout for grey boxes indicating synchronous HTTP requests:
+
+<%= image_tag 'skylight/docs/performance_tips/synchronous-http-request.png', alt: 'Screenshot of an synchronous http request' %>
+
+In most cases, you can collect quick wins by moving this work from your request/response cycle into a background worker.
+
+### Move Third-Party Integration to Workers
+
+Or, put another way: _do as little as possible in your request_.
+
+One of the biggest things we did to improve the Skylight Rails app over time was to move third-party integrations (like updating Mixpanel/Intercom or notifying Slack) from the request itself into a worker.
+
+If you feel daunted by the process of getting background jobs up and running, don't! **It's one of the highest leverage improvements you can make to a Rails app.** Once you have the ability to send work to background jobs, you'll be surprised how often you use it.
+
+If you're using Rails 4.2 or newer, <%= link_to "ActiveJob", "http://guides.rubyonrails.org/active_job_basics.html" %> makes the process even simpler. Rails now bakes the notion of background jobs into the framework, complete with generators to get your started and seamless integration into the rest of Rails. We strongly recommend it.
