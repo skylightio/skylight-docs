@@ -91,13 +91,16 @@ In addition, the Summary shows the types of events that make up the selected req
 
 ### Event Sequence
 
-<%= image_tag 'skylight/docs/features/event-sequence.png', alt: 'Screenshot of Event Sequence' %>
+<%= image_tag 'skylight/docs/features/allocations-mode.gif', alt: 'Animation of Allocations Mode transition' %>
 
-The heart of the Endpoint View is the Event Sequence—also referred to as the "trace"—which shows you where exactly your app is spending time when servicing this endpoint. Each row represents a different event, and they’re color coded:
- * Blue rows are time spent in application code.
- * Green rows represent database queries.
- * Purple rows represent time spent generating the view.
- * Black segments represent garbage collection time. Because GC can happen sporadically throughout the request, we aggregate it and show it at the end.
+The heart of the Endpoint View is the Event Sequence—also referred to as the "trace"—which shows you where exactly your app is spending time or allocating objects when servicing this endpoint. Each row represents a different event, and they’re color coded:
+  * Blue rows represent **application** code.
+  * Green rows represent **database** queries. Queries with the red database repetition symbol are generating <%= link_to "repeated queries", "./performance-tips#repeated-queries" %>.
+  * Purple rows represent **view** generation. When these rows get long, <%= link_to "caching", "./performance-tips#expensive-views" %> may help you speed up your app.
+  * Black segments represent **garbage collection**. Because GC can happen sporadically throughout the request, we aggregate it and show it at the end.
+  * Grey rows capture **other** events that are not represented by the other colors. Frequently, this means <%= link_to "synchronous HTTP requests", "./performance-tips#synchronous-http-requests" %>.
+
+When looking at an endpoint with the high object allocations <%= link_to "heads up", "#heads-up" %>, be sure to switch to Allocations Mode. In this mode, the same trace will be re-scaled based on the number of allocations during each event, allowing you to quickly identify potentially problematic events (i.e. the largest bars in your traces), helping you to pinpoint your <%= link_to "allocation hogs", "./performance-tips#allocation-hogs" %>.
 
 #### Request Aggregation
 
