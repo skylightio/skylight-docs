@@ -59,4 +59,4 @@ Averages are almost useless when thinking about web performance, and in the wors
 
 Most other profiling tools rely on sampling to give you detailed information about endpoints. While this provides some value, it doesn’t provide you information about every request. Depending on how frequently the sample happens, it’s quite likely that it will miss spikes and unusual behavior.
 
-In Skylight, we track information about every request. We then aggregate the data to provide a <%= link_to "representative picture of your application", "./skylight-guides#request-aggregation" %>. This means that no request is ignored, and we can give you a full and accurate picture of your application.
+In Skylight, we track information about every request. We then aggregate the data to provide a <%= link_to "representative picture of your application", "./skylight-guides#request-aggregation" %>, dropping only the outliers. This means that no request is ignored, and we can give you a full and accurate picture of your application.
