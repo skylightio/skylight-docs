@@ -5,6 +5,26 @@ description: Having trouble with the agent? Take a look here.
 
 Below are some troubleshooting steps you can try. If you’re still having trouble, please contact us via email at [support@skylight.io](mailto:support@skylight.io).
 
+## Skylight Doctor
+
+If you're having issues setting up Skylight, run `skylight doctor` in your production terminal. You should see something like this as the output:
+
+```
+Checking for Rails
+  Rails application detected
+
+Checking for native agent
+  Native agent installed
+
+Checking for valid configuration
+  Configuration is invalid
+    authentication token required
+```
+
+**Pro-tip:** On Heroku you can access your production terminal with `heroku run bash`.
+
+If you don't see any helpful information after running `skylight doctor`, be sure to check out the rest of our troubleshooting guide below.
+
 ## Data Not Reporting
 
 ### I deployed my application, but no data is appearing in Skylight.
