@@ -2,6 +2,7 @@ Skylight::Docs::Engine.routes.draw do
   # When reorganizing or renaming source files, be sure to add the appropriate
   # redirects to this hash.
   redirects = {
+    "agent" => "getting-more-from-skylight",
     "billing" => "app-and-account-management",
     "feature-walkthrough" => "skylight-guides",
     "filing-bugs" => "contributing",

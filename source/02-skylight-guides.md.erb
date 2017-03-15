@@ -23,7 +23,7 @@ The Response Timeline is useful for keeping an eye on your application and makin
 
 Below the timeline is the Endpoints List. This list shows you all of the endpoints in your application that have been used in the <%= link_to "currently selected time range", "#navigating-through-time" %>; that is, all of the controllers and their actions.
 
-In addition to each endpoint’s name, we display the Response type (in beta), the <%= link_to "Typical Response and Problem Response times", "./getting-started#true-response-times" %>, Popularity, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that could cause slowdowns in your app.
+In addition to each endpoint’s name, we display the Response type (in <%= link_to "beta", "./faqs#accessing-agent-beta-features" %>), the <%= link_to "Typical Response and Problem Response times", "./getting-started#true-response-times" %>, Popularity, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that could cause slowdowns in your app.
 
 Once you’ve figured out where you’d like to focus your performance-tuning efforts, just click on the endpoint name and you’ll be taken to a <%= link_to "wonderland of performance information", "#navigating-your-endpoint" %>.
 
@@ -41,27 +41,25 @@ Of course, we also allow you to sort the list by any of the other columns. Just 
 
 Skylight notifies you of potential code mistakes that may slow down your app.
 
-<%= image_tag 'skylight/docs/features/heads-up-allocation-hog.png', alt: 'Screenshot of Allocation Hog icon' %>
-
-**Allocation Hogs:** Though it’s not the most common cause, high memory allocations and the resulting garbage collection churn can be a cause of app slowdowns. To help identify and resolve these situations, Skylight tracks allocation counts in addition to response times.
-
-In the list view, we call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill into the individual endpoint and see exactly where the allocations occur.
-
 <%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Repeated SQL Query icon' %>
 
-**Repeated SQL Queries:** In general, you will get better performance out of your database if you group together similar queries. Skylight identifies endpoints and events that repeatedly make similar SQL queries <%= link_to "so that you can group them", "./performance-tips#repeated-queries" %>.
+**Repeated SQL Queries:** In general, you will get better performance out of your database if you group similar queries together. Skylight identifies endpoints and events that repeatedly make similar SQL queries <%= link_to "so that you can group them", "./performance-tips#repeated-queries" %>.
+
+<%= image_tag 'skylight/docs/features/heads-up-allocation-hog.png', alt: 'Screenshot of Allocation Hog icon' %>
+
+**Allocation Hogs:** We call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill into the individual endpoint and see exactly where the allocations occur <%= link_to "so that you can optimize them", "./performance-tips#allocation-hogs" %>.
 
 #### Endpoint Search
 
 With Endpoint Search, you can search for a particular endpoint or group of endpoints by typing all or part of an endpoint name into the field; a type of fuzzy search.
 
-Insider users can also enable Advanced Search (currently in beta), which allows the user to search by filtering based on the Endpoints List column headings.
+Insider users can also enable Advanced Search (currently in <%= link_to "beta", "./faqs#accessing-user-interface-beta-features" %>), which allows the user to search by filtering based on the Endpoints List column headings.
 
 <%= image_tag 'skylight/docs/features/advanced-search.gif', alt: 'Animation of Advanced Search' %>
 
 #### Response Types (in beta)
 
-With the Response Types feature, Skylight separates html, json, and errors into their own endpoints so you get a clear picture of each. Message [support@skylight.io](mailto:support@skylight.io) or contact us via the in-app messenger to see if your app is a good candidate for helping us test the Response Types feature.
+With the Response Types <%= link_to "beta feature", "./faqs#accessing-agent-beta-features" %>, Skylight separates html, json, and errors into their own endpoints so you get a clear picture of each. Message [support@skylight.io](mailto:support@skylight.io) or contact us via the in-app messenger to see if your app is a good candidate for helping us test the Response Types feature.
 
 ## Navigating Your Endpoint
 
@@ -93,13 +91,16 @@ In addition, the Summary shows the types of events that make up the selected req
 
 ### Event Sequence
 
-<%= image_tag 'skylight/docs/features/event-sequence.png', alt: 'Screenshot of Event Sequence' %>
+<%= image_tag 'skylight/docs/features/allocations-mode.gif', alt: 'Animation of Allocations Mode transition' %>
 
-The heart of the Endpoint View is the Event Sequence—also referred to as the "trace"—which shows you where exactly your app is spending time when servicing this endpoint. Each row represents a different event, and they’re color coded:
- * Blue rows are time spent in application code.
- * Green rows represent database queries.
- * Purple rows represent time spent generating the view.
- * Black segments represent garbage collection time. Because GC can happen sporadically throughout the request, we aggregate it and show it at the end.
+The heart of the Endpoint View is the Event Sequence—also referred to as the "trace"—which shows you exactly where your app is spending time or allocating objects when servicing an endpoint. Each row represents a different event, and they’re color coded:
+  * Blue rows represent **application** code.
+  * Green rows represent **database** queries. Queries with the red database repetition symbol are generating <%= link_to "repeated queries", "./performance-tips#repeated-queries" %>.
+  * Purple rows represent **view** generation. When these rows get long, <%= link_to "caching", "./performance-tips#expensive-views" %> may help you speed up your app.
+  * Black segments represent **garbage collection**. Because GC can happen sporadically throughout the request, we aggregate it and show it at the end.
+  * Grey rows capture **other** events that are not represented by the other colors. Frequently, this means <%= link_to "synchronous HTTP requests", "./performance-tips#synchronous-http-requests" %>.
+
+When looking at an endpoint with the high object allocations <%= link_to "heads up", "#heads-up" %>, be sure to switch to Allocations Mode. In this mode, the same trace will be re-scaled based on the number of allocations during each event, allowing you to quickly identify potentially problematic events (i.e. the largest bars in your traces), helping you to pinpoint your <%= link_to "allocation hogs", "./performance-tips#allocation-hogs" %>.
 
 #### Request Aggregation
 
@@ -125,7 +126,7 @@ In order to minimize the amount of noise in the Event Sequence, Skylight shows i
 
 ### Endpoint Hotspots (in beta)
 
-Endpoint Hotspots (available to Insiders via a feature flag) highlight events that take up more than 10% of the total response time or allocations on an endpoint. If your endpoint is slow, take a look at its hotspots to identify opportunities for performance improvements.
+The Endpoint Hotspots <%= link_to "beta feature", "./faqs#accessing-user-interface-beta-features" %> highlights events that take up more than 10% of the total response time or allocations on an endpoint. If your endpoint is slow, take a look at its hotspots to identify opportunities for performance improvements.
 
 ## Navigating Through Time
 

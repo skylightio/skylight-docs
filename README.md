@@ -65,6 +65,19 @@ A link to an external page:
 You can create partials to include in multiple chapters. Just create an `.md.erb` file in the `partials` folder with a filename beginning with an underscore (e.g. `_partial_name.md.erb`). You can then include this partial in chapters with:
 `<%= render partial: "partial_name" %>`
 
+#### Fenced Code Blocks
+Add the language for the fenced code block where possible. e.g.
+~~~
+```ruby
+  # ruby code
+```
+~~~
+
+For erb within a code block, add a second `%` to erb tags, e.g.
+```
+<%%= link_to "a thing", "www.example.com" %>
+```
+
 ### Renaming or Removing Chapters
 If you rename or remove a chapter, make sure to update the redirect hash in `config/routes.rb`.
 
