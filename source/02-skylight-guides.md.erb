@@ -43,7 +43,7 @@ Skylight notifies you of potential code mistakes that may slow down your app.
 
 <%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Repeated SQL Query icon' %>
 
-**Repeated SQL Queries:** In general, you will get better performance out of your database if you group together similar queries. Skylight identifies endpoints and events that repeatedly make similar SQL queries <%= link_to "so that you can group them", "./performance-tips#repeated-queries" %>.
+**Repeated SQL Queries:** In general, you will get better performance out of your database if you group similar queries together. Skylight identifies endpoints and events that repeatedly make similar SQL queries <%= link_to "so that you can group them", "./performance-tips#repeated-queries" %>.
 
 <%= image_tag 'skylight/docs/features/heads-up-allocation-hog.png', alt: 'Screenshot of Allocation Hog icon' %>
 
@@ -93,7 +93,7 @@ In addition, the Summary shows the types of events that make up the selected req
 
 <%= image_tag 'skylight/docs/features/allocations-mode.gif', alt: 'Animation of Allocations Mode transition' %>
 
-The heart of the Endpoint View is the Event Sequence—also referred to as the "trace"—which shows you where exactly your app is spending time or allocating objects when servicing this endpoint. Each row represents a different event, and they’re color coded:
+The heart of the Endpoint View is the Event Sequence—also referred to as the "trace"—which shows you exactly where your app is spending time or allocating objects when servicing an endpoint. Each row represents a different event, and they’re color coded:
   * Blue rows represent **application** code.
   * Green rows represent **database** queries. Queries with the red database repetition symbol are generating <%= link_to "repeated queries", "./performance-tips#repeated-queries" %>.
   * Purple rows represent **view** generation. When these rows get long, <%= link_to "caching", "./performance-tips#expensive-views" %> may help you speed up your app.

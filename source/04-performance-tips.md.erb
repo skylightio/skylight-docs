@@ -5,15 +5,15 @@ description: Tips for fixing common problems you might encounter in your applica
 
 ## Ship First, Optimize Later
 
-Like many others in the Ruby community, we highly value developer productivity and writing beautiful, maintainable code. While it is very important to be mindful of performance when <%= link_to "writing framework code", "https://github.com/rails/rails/pull/21057" %>, when it comes to working on our apps, we would rather spend our precious time (and brain cycles!) shipping new features instead of hoisting variables and bending over backwards to tear apart nested loops.
+Like many others in the Ruby community, we value developer productivity and writing beautiful, maintainable code. Of course it's important to be mindful of performance when <%= link_to "writing framework code", "https://github.com/rails/rails/pull/21057" %>. That said, when it comes to working on our apps, we'd rather spend our precious time (and brain cycles!) shipping new features. Hoisting variables and tearing apart nested loops is fun and all, but not the _best_ use of time if we can help you avoid it.
 
-With Skylight, you can rest easy knowing that we will give you a <%= link_to "heads up", "./skylight-guides#heads-up" %> to any potential performance problems, allowing you to focus your limited time on places where is matters the most.
+With Skylight, you can rest easy knowing that we'll give you a <%= link_to "heads up", "./skylight-guides#heads-up" %> on any potential performance problems. That way, you can focus your limited time in the places where it matters to you the most.
 
 ## Repeated Queries
 
 In general, you will get better performance out of your database if you group together similar queries.
 
-For example, if your application is making these queries:
+For example, let's say your application is making these queries:
 
 ```sql
 SELECT * FROM "users" WHERE "id" = 12;
@@ -35,12 +35,12 @@ SELECT * FROM "users" WHERE "id" = ?;
 
 ### Identifying Repeated Queries
 
-Skylight highlights endpoints and events that repeatedly make similar SQL queries with the database "heads up":
-<%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Allocation Hog icon' %>
+Skylight highlights endpoints and events that repeatedly make similar SQL queries with the database "heads up" icon:
+<%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Repeat SQL icon' %>
 
 ### Possible Cause: N+1 Query
 
-A very common cause of repeated queries in Rails applications is known as “N+1 Queries”. This happens because you make a request for a single row in one table, and then make an additional request per element in a `has_many` relationship.
+“N+1 Queries” are a very common cause of repeated queries in Rails applications. This happens when you make a request for a single row in one table, and then make an additional request per element in a `has_many` relationship.
 
 Here’s an example offender (<%= link_to "from the Rails guides", "http://guides.rubyonrails.org/active_record_querying.html#eager-loading-associations" %>):
 
@@ -88,7 +88,7 @@ SELECT * from "addresses" WHERE "client_id" IN (7, 8, 10, 12, 13, 15, 16, 17, 21
 
 ### Other Possibilities
 
-Skylight will report any kind of repeated query that includes more than 4 repetitions, happens on a regular basis, and consumes a large part of the total request.
+Skylight will report any kind of repeated query that includes more than four repetitions, happens on a regular basis, and consumes a large part of the total request.
 
 This includes those involving `INSERT` statements. We tuned the heuristic for reporting the problems so that virtually all reported problems will benefit from grouping.
 
@@ -97,7 +97,7 @@ Not all repeated queries can be resolved using the “eager loading” technique
 
 ## Allocation Hogs
 
-Even if your Rails app is humming along just fine most of the time, your users probably still occasionally experience painfully slow requests seemingly at random. While unexplained slowdowns can happen for many reasons, the most common root cause is excessive object allocations.
+Your Rails app is probably humming along just fine most of the time. Still, your users probably have the occasionally painfully slow request seemingly at random. While unexplained slowdowns can happen for many reasons, the most common root cause is excessive object allocations.
 
 ### Garbage Collection Pauses
 
@@ -105,7 +105,7 @@ When you create objects in Ruby, they eventually need to be cleaned up. That cle
 
 Even worse, it's not uncommon for the garbage collection to happen in a completely different request. Each request has a small chance of tipping the scales and triggering a GC run, resulting in seemingly random slowdowns for your users.
 
-While this explains the mystery, it doesn't help you resolve the problem. Fortunately, Skylight tracks object allocations throughout all of your requests, helping you zero in on parts of your app that are doing the most damage.
+While this explains the mystery, it doesn't help resolve the problem. Fortunately, Skylight tracks object allocations throughout your requests, helping you zero in on parts of your app that are doing the most damage.
 
 ### Identifying Allocation Hogs
 
@@ -120,7 +120,7 @@ By default, Skylight focuses on how much time your endpoints and events are taki
 
 Now that you've zeroed in on exactly which part of your app to work on, let's talk about the most effective ways to reduce allocations.
 
-**Pro-tip:** Before you spend weeks applying the tips in this section to every line of code, here's a disclaimer: reducing allocations is a **micro-optimization**. This means that they produce very little benefit outside of hot paths and they may reduce your future productivity (which may reduce your ability to do important macro-optimizations like caching). Be sure to use Skylight to identify allocation hot spots and focus your energy in those areas.
+**Pro-tip:** Before you spend weeks applying the tips in this section to every line of code, here's a disclaimer: reducing allocations is a **micro-optimization**. This means that they produce very little benefit outside of hot paths and that they may reduce your future productivity (which may reduce your ability to do important macro-optimizations like caching). Be sure to use Skylight to identify allocation hot spots and focus your energy in those areas.
 
 **What do we mean by hot paths? In short, loops.** A piece of code that produces 200 objects might be completely fine if called occasionally; but if you call that code thousands of times in a loop, it can really add up. This is even worse if you nest loops inside of other loops, where a small piece of code can inadvertently be run hundreds of thousands of times.
 
@@ -144,7 +144,7 @@ At first glance, you can see that this code has a loop, but it looks pretty inno
 user.apps.includes(:organization).map(&:organization)
 ```
 
-Here, we are looping through each user in an organization, then looping through all the apps for each user. Now imagine that sync_organization itself is called multiple times in a single request. You can see how this can quickly add up.
+Here, we are looping through each user in an organization, then looping through all the apps for each user. Now imagine that `sync_organization` itself is called multiple times in a single request. You can see how this can quickly add up.
 
 This short line of code involves multiple **hidden loops**, allocating a large number of intermediate objects. When digging in to an allocation hot spot, the first step is to identify loops, and you should especially be on the lookout for these hidden loops, because they are very easy to miss.
 
@@ -159,7 +159,7 @@ Keep in mind that the problem is not the loop itself, but rather that the loop a
 
 #### Iterate Less
 
-One of the most common ways to reduce the amount of iterations you do in Ruby is to use Active Record methods to combine work and take advantage of your database for the heavy-lifting.
+One of the most common ways to reduce the number of iterations you do in Ruby is to use Active Record methods to combine work and take advantage of your database for the heavy-lifting.
 
 For example, if you're trying to get a list of unique countries across all your users, you might be tempted to write something like this:
 
@@ -181,7 +181,7 @@ This generates a SQL query that looks like:
 SELECT DISTINCT "country" FROM "users";
 ```
 
-Instead of making intermediate Ruby objects for every user and loops over those objects multiple times, this directly produces the array of countries in the database itself. This not only does less work in your application, but it also significantly reduces the work that your database has to do.
+Instead of making intermediate Ruby objects for every user and looping over those objects multiple times, this directly produces the array of countries in the database itself. This not only does less work in your application, but it also significantly reduces the work that your database has to do.
 
 This technique works for updating and deleting too. Instead of iterating over the objects you want to change in Ruby:
 
@@ -205,7 +205,7 @@ However, because the database is in charge of deleting the records, your Active 
 
 If you find yourself looping over Active Record objects in Ruby, there is likely a way to shift some of the work to the database. The <%= link_to "Active Record Query Interface guide", "http://guides.rubyonrails.org/active_record_querying.html" %> is a good place to start.
 
-Along the same lines, when looping through a large amount of Active Record objects, considering using <%= link_to "batching APIs", "http://api.rubyonrails.org/classes/ActiveRecord/Batches.html" %> such as `find_each`. While they don't ultimately reduce the total number of allocations, they ensure that you are holding on to fewer objects at the same time, allowing the garbage collector to work more effectively.
+Along the same lines, when looping through a large number of Active Record objects, consider using <%= link_to "batching APIs", "http://api.rubyonrails.org/classes/ActiveRecord/Batches.html" %> such as `find_each`. While they don't ultimately reduce the total number of allocations, they ensure that you are holding on to fewer objects at the same time, allowing the garbage collector to work more effectively.
 
 #### Allocate Fewer Objects Per Iteration
 
@@ -279,7 +279,7 @@ Depending on how many customers this code is looping over, we might have saved a
 
 The last point deserves a special mention: by guaranteeing the immutability of your string literals, Ruby can reuse the same instance of the string object across multiple calls. This essentially allows Ruby to hoist the string for you (similar to how we moved the blacklist into a constant) while keeping the string inline for readability.
 
-The `freeze` call introduced some visual noise here, but this might soon be a thing in the past. Matz has announced plans to make this the default behavior in the long term. Regular expressions, integers (`Fixnum`s) and most floating point values already receive similar optimizations on modern Rubies, so you normally wouldn't have to worry about hoisting them manually either.
+The `freeze` call introduced some visual noise here, but this might soon be a thing of the past. <%= link_to "Matz", "https://en.wikipedia.org/wiki/Yukihiro_Matsumoto" %> has announced long term plans to make this the default behavior. Regular expressions, integers (`Fixnum`s), and most floating point values already receive similar optimizations in modern Rubies, so you normally wouldn't have to worry about hoisting them manually either.
 
 
 ## Expensive Views
@@ -335,18 +335,18 @@ When using fragment caching, remember three things:
 
 1. **Pick a key that describes the fragment you are caching.** You can use `action_suffix`, as in this example, if the key is unique only inside of this action. (You can also <%= link_to "use an Active Record object as your cache key", "http://apidock.com/rails/ActiveRecord/Integration/cache_key" %>, which is quite convenient and simple in the right situations.)
 1. **The easiest caching backend is memcached.** This is because <%= link_to "memcached", "http://guides.rubyonrails.org/caching_with_rails.html#activesupport-cache-memcachestore" %> automatically expires keys that haven't been used in a while (an "LRU" or "least recently used" expiration strategy), and cache expiration is the hardest part of a good caching strategy.
-1. **Focus on the big spenders.** It's tempting to spend a lot of time caching all of your HTML and trying to identify good cache keys for everything. In practice, you can get big wins by just caching expensive fragments that have easy cache keys (either because the template is relatively static, or because it's derived from an Active Record object, which has built-in caching support).
+1. **Focus on the big spenders.** It's tempting to spend a lot of time caching all of your HTML and trying to identify good cache keys for everything. In practice, you can get big wins by just caching expensive fragments that have easy cache keys (either because the template is relatively static, or because they're derived from an Active Record object, which has built-in caching support).
 
 
 ## Synchronous HTTP Requests
 
-When you’re just starting out, it’s too easy to make synchronous HTTP requests inside your requests, because why not? Getting a worker setup up and running takes time and it adds operational cost to your app when you're still trying to get it off the ground (usually with a tiny team).
+When you’re just starting out, it’s too easy to make synchronous HTTP requests inside your requests, because why not? Getting a worker setup up and running takes time and it adds operational cost to your app while you're still trying to get it off the ground (usually with a tiny team).
 
-But once you get going, synchronous HTTP requests are one of the biggest culprits when it comes to slow requests. It's also easy to lose track of them because you're likely synchronizing with third party services in `before_filter`s or middlewares, both areas of code you don't look at very often.
+Once you get going though, synchronous HTTP requests are one of the biggest culprits when it comes to slow requests. It's also easy to lose track of them because you're likely synchronizing with third party services in `before_filter`s or middlewares, two areas of code you don't look at very often.
 
 ### Identifying Slow Synchronous HTTP Requests
 
-Using Skylight, be on the lookout for grey boxes indicating synchronous HTTP requests:
+When using Skylight, be on the lookout for grey boxes indicating synchronous HTTP requests:
 
 <%= image_tag 'skylight/docs/performance_tips/synchronous-http-request.png', alt: 'Screenshot of an synchronous http request' %>
 
@@ -356,8 +356,8 @@ In most cases, you can collect quick wins by moving this work from your request/
 
 Or, put another way: _do as little as possible in your request_.
 
-One of the biggest things we did to improve the Skylight Rails app over time was to move third-party integrations (like updating Mixpanel/Intercom or notifying Slack) from the request itself into a worker.
+One of the biggest things we did to improve the Skylight Rails app over time was to move third-party integrations (like updating Intercom or notifying Slack) from the request itself into a worker.
 
 If you feel daunted by the process of getting background jobs up and running, don't! **It's one of the highest leverage improvements you can make to a Rails app.** Once you have the ability to send work to background jobs, you'll be surprised how often you use it.
 
-If you're using Rails 4.2 or newer, <%= link_to "ActiveJob", "http://guides.rubyonrails.org/active_job_basics.html" %> makes the process even simpler. Rails now bakes the notion of background jobs into the framework, complete with generators to get your started and seamless integration into the rest of Rails. We strongly recommend it.
+If you're using Rails 4.2 or newer, <%= link_to "ActiveJob", "http://guides.rubyonrails.org/active_job_basics.html" %> makes the process even simpler. Rails now seamlessly bakes the notion of background jobs into the framework, complete with generators to get you started. We strongly recommend it.
