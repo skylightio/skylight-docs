@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://skylight.io/support"
   s.summary     = "Skylight documentation"
   s.description = "Skylight documentation files"
-  s.license     = "Creative Commons"
+  s.licenses     = ["CC BY-NC-SA 4.0", "MIT"]
 
   s.files = Dir["{app,config,source,lib}/**/*", "Rakefile", "README.md"]
 
