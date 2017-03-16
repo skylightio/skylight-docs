@@ -129,6 +129,15 @@ Showing weeks and months of data on demand is not as simple as it might seem. We
 At this stage, we haven't been pre-aggregating data past one hour sizes. This means that if we were to query for a two month period, we'd need to make 24 x 60 queries to fetch the data. This can quickly escalate to 100s of 1000s of queries for a single application.
 
 
+### Can I cap the number of requests that I send to Skylight?
+
+Alas, there's no way to set a limit or cap right now. This was possible in the very first version of Skylight, and contrary to our expectations, more people disliked it than found it helpful.
+
+It turned out most of our users were already accustomed to usage-based services since they were already using them for things like hosting (Heroku, AWS, etc) and other parts of the stack. When we had the ability to set a limit, people would set it aggressively low in an effort to be frugal and then get annoyed by the notifications when they consistently hit those unrealistic thresholds. While we're sure some people would still appreciate it, overall it made significantly more people unhappy than happy, so we didn't build it into our next version.
+
+It's also worth mentioning that Skylight is most accurate when reviewing <%= link_to "aggregated requests", "./getting-started#aggregation-vs-sampling" %> over a longer period of time, so by capping your requests and not giving Skylight all the information available, you may end up on some wild goose chases.
+
+
 ### Do you have this feature that New Relic has?
 
 New Relic has lots of features we don't have but, in our opinion, they're not all that useful. We've decided to focus on making sure that everything we show you provides immediate value. Our customers find that it's easier to make sense of our UI and to get _actionable_ information from it. Sure, we could throw more stats in, but sometimes less is more.
