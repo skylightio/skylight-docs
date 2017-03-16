@@ -103,11 +103,11 @@ _Enabled automatically with Sinatra or Add_ `tilt` _to [probes list](./advanced-
 
 ## Custom App Instrumentation
 
-The easiest way to add custom instrumentation to your application is by specifying <%= link_to "methods to instrument", "#method-instrumentation" %>, but it is also possible to instrument <%= link_to "specific blocks of code", "#block-instrumentation" %>. This way, you can see where particular methods or blocks of code are called in the <%= link_to "event sequence", "./skylight-guides#event-sequence" %>. Check out an example of custom instrumentation in action <%= link_to "here", "#custom-instrumentation-in-action" %>.
+The easiest way to add custom instrumentation to your application is by specifying <%= link_to "methods to instrument", "#method-instrumentation" %>, but it is also possible to instrument <%= link_to "specific blocks of code", "#block-instrumentation" %>. This way, you can see where particular methods or blocks of code are called in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %>. Check out an example of custom instrumentation in action <%= link_to "here", "#custom-instrumentation-in-action" %>. Be sure to follow our <%= link_to "custom instrumentation best practices", "#custom-instrumentation-best-practices" %> in order to avoid causing errors in your Skylight trace.
 
 ### Method instrumentation
 
-Instrumenting a specific method will cause an event to be created every time that method is called. The event will be inserted at the appropriate place in the Skylight <%= link_to "event sequence", "./skylight-guides#event-sequence" %>. You can see an example of how this looks <%= link_to "below", "#custom-instrumentation-in-action" %>.
+Instrumenting a specific method will cause an event to be created every time that method is called. The event will be inserted at the appropriate place in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %>. You can see an example of how this looks <%= link_to "below", "#custom-instrumentation-in-action" %>.
 
 To instrument a method, the first thing to do is include `Skylight::Helpers` into the class that you will be instrumenting. Then, annotate each method that you wish to instrument with `instrument_method`.
 
@@ -136,7 +136,7 @@ class MyClass
 end
 ~~~
 
-By default, the event will be titled using the name of the class and the method. The event name in our previous example would be: `MyClass#my_method`. You can customize this by using the **:title** option.
+By default, the event will be titled using the name of the class and the method. The event name in our previous example would be: `MyClass#my_method`. Alternatively, you can <%= link_to "customize the title", "#use-static-string-literals-for-custom-titles" %> by using the **:title** option.
 
 ~~~ ruby
 class MyClass
@@ -154,8 +154,6 @@ end
 
 Method instrumentation is preferred, but if more fine-grained instrumentation is required, you may use the block instrumenter.
 
-> IMPORTANT! The title of the event needs to be the same for all requests that hit the code path. Skylight aggregates <%= link_to "event sequences", "./skylight-guides#event-sequence" %> using the title. You should pass a string literal and not use any interpolation. Otherwise, there will be an explosion of nodes that show up in your aggregate Skylight <%= link_to "event sequence", "./skylight-guides#event-sequence" %>.
-
 ~~~ ruby
 class MyClass
   def my_method
@@ -168,12 +166,26 @@ class MyClass
 end
 ~~~
 
-Just like above, the title of the event can be configured with the **:title** option. If you don't add a title, the default for block instrumentation is `app.block`. We recommend creating your own titles to differentiate the various instrumented code blocks from one another in the Skylight UI. If you don't, they will be aggregated together, which won't be helpful for you.
+Just like above, the <%= link_to "title of the event can be configured", "#use-static-string-literals-for-custom-titles" %> with the **:title** option. If you don't add a title, the default for block instrumentation is `app.block`. We recommend creating your own titles to differentiate the various instrumented code blocks from one another in the Skylight UI. If you don't, they will be aggregated together, which won't be helpful for you.
 
+
+### Custom Instrumentation Best Practices
+
+#### Use Static String Literals for Custom Titles
+
+The title of an event must be the same for all requests that hit the code path. Skylight aggregates <%= link_to "Event Sequences", "./skylight-guides#event-sequence" %> using the title. You should pass a string literal and avoid any interpolation. Otherwise, there will be an explosion of nodes that show up in your aggregate Event Sequence.
+
+#### Use Method Instrumentation Wherever Possible
+
+While <%= link_to "block instrumentation", "#block-instrumentation" %> can be very useful for zeroing in on problematic minutiae, it can lead to overly complex request traces. Prefer <%= link_to "method instrumentation", "#method-instrumentation" %> where possible.
+
+#### Avoid Over-Instrumenting Your Action
+
+Add custom instrumentation only where necessary to understand an issue in order to avoid overwhelming yourself with too much information. Additionally, avoid instrumenting a method or block that happens a ton of times in repetition (e.g. a method called within a loop). Doing so may cause your event to exceed the size limit for an event trace in the Skylight agent.
 
 ### Custom instrumentation in action
 
-When we first implemented <%= link_to "GitHub sign-in and sign-up", "http://blog.skylight.io/oauth-is-easy-right/" %>, we noticed the act of signing in or signing up with GitHub was pretty slow. We wanted to see which methods in our GitHub integration were taking the longest, so we added a bit of <%= link_to "method instrumentation", "#method-instrumentation" %>. The <%= link_to "event sequence", "./skylight-guides#event-sequence" %> for the endpoint that included those methods then looked more like this:
+When we first implemented <%= link_to "GitHub sign-in and sign-up", "http://blog.skylight.io/oauth-is-easy-right/" %>, we noticed the act of signing in or signing up with GitHub was pretty slow. We wanted to see which methods in our GitHub integration were taking the longest, so we added a bit of <%= link_to "method instrumentation", "#method-instrumentation" %>. The <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %> for the endpoint that included those methods then looked more like this:
 
 <%= image_tag "skylight/docs/getting-more-from-skylight/custom-instrumentation.png" %>
 
