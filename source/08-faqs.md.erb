@@ -80,12 +80,12 @@ Message [support@skylight.io](mailto:support@skylight.io) or contact us via the 
 
 ### Can I get alerts when my performance changes?
 
-While we don't yet give you up to the minute alerts, you can get insight into your app's weekly changes by signing up for Trends emails in your <%= link_to "account settings", "/app/settings/account" %>. Down the road, we may add more immediate alerting when significant slowdowns occur in your app.
+While we don't yet give you up to the minute alerts, you can get insight into your app's weekly changes by signing up for <%= link_to "Trends emails", "./skylight-guides#trends" %> in your <%= link_to "account settings", "/app/settings/account" %>. Down the road, we may add more immediate alerting when significant slowdowns occur in your app.
 
 
 ### Can I track deploys?
 
-Soon! We've got work underway to make this happen. Sign up for our daily emails in your <%= link_to "account settings", "/app/settings/account" %> to get the latest scoop on development.
+Soon! We've got work underway to make this happen. Sign up for our Insider emails in your <%= link_to "account settings", "/app/settings/account" %> to get the latest scoop on development.
 
 
 ### Can I instrument background jobs like Sidekiq?
@@ -97,12 +97,21 @@ But, we ourselves use Sidekiq and agree that it would be great to have more insi
 
 ### Can I administer my apps with organizations?
 
-Not yet, but it's something we've got on our roadmap. Our current thought it something based around GitHub organizations. If you've got any thoughts on this, we'd love to hear them.
+Not yet, but it's something we've got on our roadmap. Our current thought is something based around GitHub organizations. If you've got any thoughts on this, we'd love to hear them.
 
 
 ### Do you plan to add error tracking?
 
 Right now we've chosen to focus on providing you the most useful performance information we can. That said, in the future we'd love to provide some basic notifications, especially around increased error rates. For more robust error tracking, we recommend a dedicated tool like Bugsnag.
+
+
+### Can I view more than one day's worth of data at a time?
+
+Yes, you can, via the <%= link_to "Trends email", "./skylight-guides#trends" %>, which you'll get after your first two weeks of using Skylight. The Trends email shows the last six weeks of your application's performance.
+
+Showing weeks and months of data on demand is not as simple as it might seem. We use a technique that many time-series databases use called pre-aggregation. This means that we store all your data collated into timeslices. Timeslices make it possible to fetch arbitrarily large time ranges or time ranges that are not simply aligned to the day or hour.
+
+At this stage, we haven't been pre-aggregating data past one hour sizes. This means that if we were to query for a two month period, we'd need to make 24 x 60 queries to fetch the data. This can quickly escalate to 100s of 1000s of queries for a single application.
 
 
 ### Do you have this feature that New Relic has?

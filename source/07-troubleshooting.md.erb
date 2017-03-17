@@ -124,6 +124,28 @@ Sorry, right now we only support repos that are connected to an organization, th
 
 ## Other Issues
 
+### I ran a memory profiler. Why are so many object allocations attributed to Skylight?
+
+Memory profiler gems like <%= link_to "`memory_profiler`", "https://github.com/SamSaffron/memory_profiler" %> and <%= link_to "`derailed`", "https://github.com/schneems/derailed_benchmarks" %> generally use Ruby's <%= link_to "`ObjectSpace`", "https://ruby-doc.org/core-2.4.0/ObjectSpace.html" %>—a really nifty way to get information about all the objects allocated in your Ruby application that is great for troubleshooting memory issues.
+
+Digging into the source of both `derailed` and `memory_profiler` (which is used by derailed), we discovered the following line (<%= link_to "source", "https://github.com/SamSaffron/memory_profiler/blob/6ff1bb359e5dc0ff15603cb71687f6ee6d75cfc6/lib/memory_profiler/reporter.rb#L93" %>):
+
+```ruby
+file = ObjectSpace.allocation_sourcefile(obj)
+```
+
+This line looks at an object and asks `ObjectSpace` who caused it to be allocated. As it turns out, objects allocated at require time are attributed to the file that calls the original `Kernel#require` method.
+
+Now, this is all well and good except for one small problem: Skylight <%= link_to "overwrites", "https://github.com/skylightio/skylight-ruby/blob/2ccc1c573e7b7d17e24c0afb238f42c2e0a650a5/lib/skylight/probes.rb#L77-L91" %> `Kernel#require` in order to properly install probes. This means that it is Skylight that calls the original `Kernel#require`, not whatever other gem is _really_ doing the require. So, as soon as Skylight is loaded, every future `require` call is attributed to Skylight.
+
+Skylight isn't the only library to do this. ActiveSupport has a <%= link_to "similar hook", "https://github.com/rails/rails/blob/v4.2.2/activesupport/lib/active_support/dependencies.rb#L272-L276" %> in it's `Loadable` module that is included into `Object`. Without Skylight, it would be ActiveSupport taking the blame. However, because this hook uses `super`, it calls to the superclass `Kernel` that is now the version that Skylight created.
+
+Even RubyGems itself gets in on the <%= link_to "overwriting behavior", "https://github.com/rubygems/rubygems/blob/master/lib/rubygems/core_ext/kernel_require.rb#L38-L47" %>. Though, if you use Bundler (as everyone is), this is <%= link_to "actually reversed", "https://github.com/bundler/bundler/blob/bc87d05ff3565551ec3b2d32a5c08aa3cf24beb8/lib/bundler/rubygems_integration.rb#L254-L264" %>.
+
+So there you have it, run `derailed` without Bundler and you'll see RubyGems blamed for your requires. Add in Bundler and the correct files will get blamed. Bring in ActiveSupport and then ActiveSupport will be blamed. Include Skylight and blame will shift to us. Good times!
+
+So what's the moral here? Know your tools. `ObjectSpace` and the libraries that use it do some really useful things. They aren't perfect, but they're open source. Read the code and find out a bit about how they work and you'll be able to put them to better use!
+
 ### What if I need to load the Skylight gem before Rails?
 
 Skylight performs setup when the gem is required, at which time Rails will be detected and tapped into. However, you may find you have to manually require `skylight/railtie` if you need to load the Skylight gem before Rails.
