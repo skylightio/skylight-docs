@@ -139,11 +139,9 @@ This error occurs when an event is too complex for Skylight's agent to track. He
 
 #### `internal error: failed to lex SQL query`
 
-These errors indicate that the agent is unable to parse a SQL query in your application. There errors won't prevent your application from operating, though they will reduce the information that we can display in the UI for these queries. They will be displayed in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %> as simply "SQL", not the full sanitized query. There are a few reasons why you might be seeing this error:
-1. **Your query might be too complex for Skylight's SQL lexer.** Right now we can only have 1024 items in an event trace. Very complex queries might put your event over that limit. We plan to increase this number in the near future.
-1. **You might be using a non-standard SQL syntax.** We support most valid standard SQL, with optimizations for Postgres and MySQL. Custom syntax extensions may not be supported. For example, the agent doesn't currently support square brackets allowed by MS SQL.
+These errors indicate that the agent is unable to parse a SQL query in your application. There errors won't prevent your application from operating, though they will reduce the information that we can display in the UI for these queries. They will be displayed in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %> as simply "SQL", not the full sanitized query.
 
-When running across this error, please feel free to <%= link_to "report it", "./contributing#reporting-bugs-and-submitting-feedback" %> so we can learn what queries we're failing to parse.
+Generally, the reason you will see this error is because you're using a syntax we can't recognize, often a more complex syntax or a non-standard syntax. For example, the agent doesn't currently support square brackets allowed by MS SQL and Postgres. We've optimized for the most common syntax constructions and hope to support more in the future. When running across this error, please feel free to <%= link_to "report it", "./contributing#reporting-bugs-and-submitting-feedback" %> so we can learn what queries we're failing to parse.
 
 ## Other Issues
 
