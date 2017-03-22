@@ -122,6 +122,27 @@ There are a few reasons why this might happen.
 
 Sorry, right now we only support repos that are connected to an organization, though we may allow use of personal repos in the future. Shoot us an email at [support@skylight.io](mailto:support@skylight.io) to let us know if this feature is important to you!
 
+
+## Skylight Errors
+
+The Skylight agent will log errors to `log/skylight.log` or on Heroku in STDOUT (Look for lines starting with `[SKYLIGHT]`).
+
+### Event Errors
+
+#### `failed to instrument span; msg=native Trace#start_span failed`
+
+This error occurs when an event is too complex for Skylight's agent to track. Here are a few potential causes for this issue:
+1. **The request itself is very complex.** For example, requests that generate a significant number of SQL queries have been known to trigger this error. Be sure to check out our <%= link_to "Performance Tips", "./performance-tips" %> to reduce the complexity of your request.
+1. **Your custom instrumentation is overly complex.** Be sure to follow our <%= link_to "custom instrumentation best practices", "./getting-more-from-skylight#custom-instrumentation-best-practices" %>.
+
+### SQL Query Errors
+
+#### `internal error: failed to lex SQL query`
+
+These errors indicate that the agent is unable to parse a SQL query in your application. There errors won't prevent your application from operating, though they will reduce the information that we can display in the UI for these queries. They will be displayed in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %> as simply "SQL", not the full sanitized query.
+
+Generally, the reason you will see this error is because you're using a syntax we can't recognize, often a more complex syntax or a non-standard syntax. For example, the agent doesn't currently support square brackets allowed by MS SQL and Postgres. We've optimized for the most common syntax constructions and hope to support more in the future. When running across this error, please feel free to <%= link_to "report it", "./contributing#reporting-bugs-and-submitting-feedback" %> so we can learn what queries we're failing to parse.
+
 ## Other Issues
 
 ### I ran a memory profiler. Why are so many object allocations attributed to Skylight?
