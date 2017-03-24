@@ -1,0 +1,15 @@
+<%# TODO: fix `render` to accept a block, then modify all uses of this partial to accept a block. https://github.com/tildeio/direwolf-docs/issues/37 %>
+
+<div class="interaction-bubble
+            <%= 'interaction-bubble-perky' if locals[:type] == 'pro_tip' %>
+            <%= 'interaction-bubble-error' if locals[:type] == 'important' %>
+            ">
+  <div class="interaction-bubble-text">
+    <b>
+      <%= 'Note:' unless locals[:type] %>
+      <%= 'Pro Tip:' if locals[:type] == 'pro_tip' %>
+      <%= 'IMPORTANT:' if locals[:type] == 'important' %>
+    </b>
+    <%= locals[:note] %>
+  </div>
+</div>

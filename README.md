@@ -65,6 +65,8 @@ A link to an external page:
 You can create partials to include in multiple chapters. Just create an `.md.erb` file in the `partials` folder with a filename beginning with an underscore (e.g. `_partial_name.md.erb`). You can then include this partial in chapters with:
 `<%= render partial: "partial_name" %>`
 
+Note: blocks are currently not supported in our partials, but you can use locals.
+
 #### Fenced Code Blocks
 Add the language for the fenced code block where possible. e.g.
 ~~~
@@ -76,6 +78,25 @@ Add the language for the fenced code block where possible. e.g.
 For erb within a code block, add a second `%` to erb tags, e.g.
 ```
 <%%= link_to "a thing", "www.example.com" %>
+```
+
+#### Note Callouts
+
+Use the `note` partial to call attention to special information. There are three types of notes:
+
+**Note:**
+```
+<%= render partial: "note", locals: {note: "Here are some notes. HTML is OK but ERB and markdown don't work yet."} %>
+```
+
+**Pro Tip:**
+```
+<%= render partial: "note", locals: {type: "pro_tip", note: "Here's a tip from the pros."} %>
+```
+
+**IMPORTANT:**
+```
+<%= render partial: "note", locals: {type: "important", note: "This is important information."} %>
 ```
 
 ### Renaming or Removing Chapters

@@ -204,7 +204,7 @@ module Skylight
         # contents of a file at partials/_installing_the_agent.md.erb
         #
         # @return [String] a string of markdown
-        def render(partial:)
+        def render(partial:, locals:{})
           path = "partials/_#{partial}#{FILE_EXTENSION}"
           file = File.read(File.join(FOLDER, path))
           ERB.new(file).result(binding)

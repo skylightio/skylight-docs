@@ -120,7 +120,7 @@ By default, Skylight focuses on how much time your endpoints and events are taki
 
 Now that you've zeroed in on exactly which part of your app to work on, let's talk about the most effective ways to reduce allocations.
 
-**Pro-tip:** Before you spend weeks applying the tips in this section to every line of code, here's a disclaimer: reducing allocations is a **micro-optimization**. This means that they produce very little benefit outside of hot paths and that they may reduce your future productivity (which may reduce your ability to do important macro-optimizations like caching). Be sure to use Skylight to identify allocation hot spots and focus your energy in those areas.
+<%= render partial: "note", locals: {type: "pro_tip", note: "Before you spend weeks applying the tips in this section to every line of code, here's a disclaimer: reducing allocations is a <b>micro-optimization</b>. This means that they produce very little benefit outside of hot paths and that they may reduce your future productivity (which may reduce your ability to do important macro-optimizations like caching). Be sure to use Skylight to identify allocation hot spots and focus your energy in those areas."} %>
 
 **What do we mean by hot paths? In short, loops.** A piece of code that produces 200 objects might be completely fine if called occasionally; but if you call that code thousands of times in a loop, it can really add up. This is even worse if you nest loops inside of other loops, where a small piece of code can inadvertently be run hundreds of thousands of times.
 
