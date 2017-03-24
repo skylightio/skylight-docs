@@ -142,6 +142,9 @@ Alternatively, you may add the `SKYLIGHT_IGNORED_ENDPOINTS` environment variable
 SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,OtherController#heartbeat
 ```
 
+You can not add an endpoint name using a wildcard like `ControllerName#*`. We generally discourage folks from ignoring any endpoints that are not heartbeat endpoints, as it can reduce the usefulness of Skylight. If you don't think an endpoint is going to be a problem, but then you ignore it, you won't know that it's causing an issue until it's too late!
+
+
 #### Log File
 
 To change the location of the Skylight log:
