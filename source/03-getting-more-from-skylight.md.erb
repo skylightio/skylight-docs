@@ -85,7 +85,7 @@ _Add_ `redis` _to <%= link_to "probes list", "#probes" %>._
 
 * All Commands
 
-> NOTE: We do not instrument AUTH as it would include sensitive data.
+<%= render partial: "note", locals: {note: "We do not instrument AUTH as it would include sensitive data."} %>
 
 
 ### Sequel
@@ -173,7 +173,7 @@ Just like above, the <%= link_to "title of the event can be configured", "#use-s
 
 #### Use Static String Literals for Custom Titles
 
-The title of an event must be the same for all requests that hit the code path. Skylight aggregates <%= link_to "Event Sequences", "./skylight-guides#event-sequence" %> using the title. You should pass a string literal and avoid any interpolation. Otherwise, there will be an explosion of nodes that show up in your aggregate Event Sequence.
+<%= render partial: "note", locals: {type: "important", note: "The title of an event must be the same for all requests that hit the code path. Skylight aggregates <a href='./skylight-guides#event-sequence'>Event Sequences</a> using the title. You should pass a string literal and avoid any interpolation. Otherwise, there will be an explosion of nodes that show up in your aggregate Event Sequence."} %>
 
 #### Use Method Instrumentation Wherever Possible
 

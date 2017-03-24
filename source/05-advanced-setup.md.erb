@@ -57,7 +57,7 @@ The agent runs great on Heroku. No special actions required.
 
 ## Installing the Agent
 
-> Note: See the information about individual installations <%= link_to "below", "#agent-configuration" %> to find out how to run the agent in the environments you care about.
+<%= render partial: "note", locals: {note: "See the information about individual installations <a class='js-scroll-link' href='#agent-configuration'>below</a> to find out how to run the agent in the environments you care about."} %>
 
 <%= render partial: "installing_the_agent" %>
 
@@ -232,7 +232,7 @@ Skylight.start!(file: PATH_TO_CONFIG)
 
 You don’t need to install any middleware manually, or do anything with unicorn forking settings.
 
-> NOTE: Padrino is not currently supported as it differs from base Sinatra in some significant ways. We are investigating adding support in future releases.
+<%= render partial: "note", locals: {note: "Padrino is not currently supported as it differs from base Sinatra in some significant ways. We are investigating adding support in future releases."} %>
 
 
 ### Grape
