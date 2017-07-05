@@ -23,7 +23,7 @@ The Response Timeline is useful for keeping an eye on your application and makin
 
 Below the timeline is the Endpoints List. This list shows you all of the endpoints in your application that have been used in the <%= link_to "currently selected time range", "#navigating-through-time" %>; that is, all of the controllers and their actions.
 
-In addition to each endpoint’s name, we display the Response type (in <%= link_to "beta", "./faqs#accessing-agent-beta-features" %>), the <%= link_to "Typical Response and Problem Response times", "./getting-started#true-response-times" %>, Popularity, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that could cause slowdowns in your app.
+In addition to each endpoint’s name, we display the <%= link_to "Response type", "#response-types" %>, the <%= link_to "Typical Response and Problem Response times", "./getting-started#true-response-times" %>, Popularity, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that could cause slowdowns in your app.
 
 Once you’ve figured out where you’d like to focus your performance-tuning efforts, just click on the endpoint name and you’ll be taken to a <%= link_to "wonderland of performance information", "#navigating-your-endpoint" %>.
 
@@ -36,6 +36,10 @@ You may have noticed that by default, we order endpoints by our patent-pending A
 #### Sorting
 
 Of course, we also allow you to sort the list by any of the other columns. Just click on the column name to re-sort. If you ever forget what a column signifies, hover over the column header. We recommend you sort by Agony, though, and start at the top and work your way down.
+
+#### Response Types
+
+Skylight separates html, json, and errors into their own endpoints so you get a clear picture of each. Learn more about response types <%= link_to "here", "http://blog.skylight.io/hello-vaidehi-hello-agent-1-2/" %>.
 
 #### Heads Up
 
@@ -57,9 +61,11 @@ Insider users can also enable Advanced Search (currently in <%= link_to "beta", 
 
 <%= image_tag 'skylight/docs/features/advanced-search.gif', alt: 'Animation of Advanced Search' %>
 
-#### Response Types (in beta)
+#### Grades (in Beta)
 
-With the Response Types <%= link_to "beta feature", "./faqs#accessing-agent-beta-features" %>, Skylight separates html, json, and errors into their own endpoints so you get a clear picture of each. Message [support@skylight.io](mailto:support@skylight.io) or contact us via the in-app messenger to see if your app is a good candidate for helping us test the Response Types feature.
+Our new Grades <%= link_to "beta", "./faqs#accessing-user-interface-beta-features" %> feature gives you perspective on the performance of your endpoints, relative to other Skylight apps, so you can focus on meeting your customers' expectations. Learn more about Grades <%= link_to "here", "http://blog.skylight.io/introducing-grades/" %>.
+
+<%= image_tag 'skylight/docs/features/grades.png', alt: 'Screenshot of Grades feature' %>
 
 ## Navigating Your Endpoint
 
