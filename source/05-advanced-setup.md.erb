@@ -57,16 +57,17 @@ The agent runs great on Heroku. No special actions required.
 
 ## Installing the Agent
 
-<%= render partial: "note", locals: {note: "See the information about individual installations <a class='js-scroll-link' href='#agent-configuration'>below</a> to find out how to run the agent in the environments you care about."} %>
-
 <%= render partial: "installing_the_agent" %>
 
-### Deploying the Agent
+See the information about individual installations <%= link_to "below", "#agent-configuration" %> to find out how to run the agent in the environments you care about.
+
+### Deploying the Agent {#deployment}
 
 Once you’ve run `skylight setup` you’ll need to get the configuration to your server. For this you have two options:
 
 1. Check in the `config/skylight.yml` file (which is automatically generated and includes the necessary auth token) OR
-1. Set the appropriate ENV vars, at the minimum `SKYLIGHT_AUTHENTICATION`. See below for more information.
+
+1. Set the appropriate ENV vars, at the minimum `SKYLIGHT_AUTHENTICATION`. See <%= link_to "below", "#setting-configuration-variables" %> for more information.
 
 After this, all you need to do is run your standard deployment process.
 
