@@ -143,6 +143,26 @@ These errors indicate that the agent is unable to parse a SQL query in your appl
 
 Generally, the reason you will see this error is because you're using a syntax we can't recognize, often a more complex syntax or a non-standard syntax. For example, the agent doesn't currently support square brackets allowed by MS SQL and Postgres. We've optimized for the most common syntax constructions and hope to support more in the future. When running across this error, please feel free to <%= link_to "report it", "./contributing#reporting-bugs-and-submitting-feedback" %> so we can learn what queries we're failing to parse.
 
+### Other Errors
+
+#### `ERROR:skylight::cli: skylightd exiting abnormally; err=DaemonLockFailed`
+
+As per <%= link_to "this issue in the agent repo", "https://github.com/skylightio/skylight-ruby/issues/21#issuecomment-67730166" %>, the fix for this is relatively quick. Just explicitly set the `sockfile_path` in your `config/skylight.yml` file like so:
+
+```
+daemon:
+  sockdir_path: /tmp/my-app-name
+```
+
+If that doesn't work and you are using an earlier version of Skylight, you can also try:
+
+```
+agent:
+  sockfile_path: /tmp/my-app-name
+```
+
+If that _still_ doesn't work, <%= link_to "drop us a line", "./contributing#reporting-bugs-and-submitting-feedback" %> and we'd be happy to help debug! 
+
 ## Other Issues
 
 ### I ran a memory profiler. Why are so many object allocations attributed to Skylight?

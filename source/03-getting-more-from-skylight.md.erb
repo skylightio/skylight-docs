@@ -215,3 +215,5 @@ While we think most libraries should include `ActiveSupport::Notifications` (any
 To make sure we do this in a sane fashion, we developed `Probes`. Probes are small classes that keep an eye out for specific modules and then hook into them when they're loaded. All probes can be disabled in the event of any conflicts and we only autoload probes that we have a high degree of confidence in. You can take a look at some probes <%= link_to "in the source", "https://github.com/skylightio/skylight-ruby/tree/master/lib/skylight/probes" %>.
 
 And, since we don't really like having to monkey-patch things either, when at all possible, we <%= link_to "submit pull requests", "https://github.com/ruby-grape/grape/pull/1086" %> to relevant projects to add in `ActiveSupport::Notifications`.
+
+For more information about how to add an existing probe (such as Mongo, Moped, Excon, etc.) to your Skylight setup, go <%= link_to "here", "./advanced-setup#probes" %>.
