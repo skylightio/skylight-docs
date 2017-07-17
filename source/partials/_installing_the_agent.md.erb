@@ -1,3 +1,5 @@
+<%= render partial: "note", locals: {type: "important", note: "The following steps should be performed in your local development environment."} %>
+
 1. Add Skylight to your Gemfile. Be sure to include it in all of your environments.
 ```ruby
 # Gemfile
@@ -6,9 +8,11 @@ gem "skylight"
 
 1. Get your setup token from <%= link_to "http://skylight.io/app/setup", "/app/setup" %>.
 
-1. Then run:
+1. Then run the following commands in your terminal:
 ```
 bundle install
-bundle exec skylight setup {SETUP_TOKEN}
+bundle exec skylight setup <setup token>
 ```
-This will automatically generate your `config/skylight.yml` file.
+This will automatically generate your <%= link_to "`config/skylight.yml`", "advanced-setup#agent-configuration" %> file.
+
+1. <%= link_to "Deploy your application", "./advanced-setup#deployment" %> to production.

@@ -57,16 +57,17 @@ The agent runs great on Heroku. No special actions required.
 
 ## Installing the Agent
 
-<%= render partial: "note", locals: {note: "See the information about individual installations <a class='js-scroll-link' href='#agent-configuration'>below</a> to find out how to run the agent in the environments you care about."} %>
-
 <%= render partial: "installing_the_agent" %>
 
-### Deploying the Agent
+See the information about individual installations <%= link_to "below", "#agent-configuration" %> to find out how to run the agent in the environments you care about.
+
+### Deploying the Agent {#deployment}
 
 Once you’ve run `skylight setup` you’ll need to get the configuration to your server. For this you have two options:
 
 1. Check in the `config/skylight.yml` file (which is automatically generated and includes the necessary auth token) OR
-1. Set the appropriate ENV vars, at the minimum `SKYLIGHT_AUTHENTICATION`. See below for more information.
+
+1. Set the appropriate ENV vars, at the minimum `SKYLIGHT_AUTHENTICATION`. See <%= link_to "below", "#setting-configuration-variables" %> for more information.
 
 After this, all you need to do is run your standard deployment process.
 
@@ -87,52 +88,41 @@ For more information about setting Heroku config vars, see <%= link_to "Configur
 
 ## Agent Configuration
 
-The only thing you *need* to set is the authentication token, but there are a number of other <%= link_to "configuration options", "#general-options" %> available.
-
-
-### Setting Configuration Variables
-
 The automatically generated configuration file `config/skylight.yml` looks like this:
 
 ```yaml
 ---
-# The authentication token used when reporting data back to the
-# Skylight service.
-#
-# Required in production.
+# The authentication token for the application.
 authentication: <authentication token>
-
-# Path to the Skylight log file
-log_file: log/skylight.log
-
-# Path to store daemon-related temporary files
-daemon.sockdir_path: /var/run/myapp
-
-# Environment specific configuration. Any variable can be scoped by
-# an environment and will take precedence over a default.
-# NOTE: Currently this is only correctly utilized in Rails apps.
-production:
-  authentication: <production auth token>
-
-staging:
-  authentication: <staging auth token>
 ```
 
-The configuration file will be parsed as ERB so you can add additional logic if desired.
+The only thing you *need* to set is the <%= link_to "authentication token", "#setting-authentication-tokens" %>, but there are a number of other <%= link_to "configuration options", "#general-options" %> available.
 
-Alternatively, configuration can be set via ENV vars. In general, the ENV vars are capitalized versions of the YAML versions prefixed with `SKYLIGHT_`, e.g. `SKYLIGHT_AUTHENTICATION`, `SKYLIGHT_LOG_FILE`.
 
+### Setting Configuration Variables
+
+Add additional configuration options to `config/skylight.yml`. This configuration file will be parsed as ERB so you can add additional logic if desired.
+
+Alternatively, configuration can be set via environment variables. In general, the ENV variables are capitalized versions of the YAML versions prefixed with `SKYLIGHT_`.
+
+See also: <%= link_to "Environment-Specific Configuration", "#environment-specific-configuration" %>
 
 ### General Options
 
-`authentication` (required) — The authentication token for the app. Available on the application settings page under the ‘Apps’ section.
+#### Setting Authentication Tokens
 
-`log_file` — Change the location of the Skylight log. By default this is `log/skylight.log` with Rails or STDOUT otherwise.
+The authentication token is *required* when reporting data back to the Skylight service. You can find your authentication token on <%= link_to "your app settings page", "/app/settings" %> under "Your Apps" or "Shared Apps."
 
-`daemon.sockdir_path` – The path where the socket file for the daemon is created. In general you will not need to change this. However, if you’re using an NFS mount (say with Vagrant) you’ll need to point this to a non-NFS location.
+```yaml
+# config/skylight.yml
+---
+# The authentication token for the application.
+authentication: <authentication token>
+```
 
+Or set the `SKYLIGHT_AUTHENTICATION` environment variable.
 
-####  Ignoring heartbeat endpoints
+####  Ignoring Heartbeat Endpoints
 
 Sometimes, an endpoint exists solely for your load-balancer to determine whether your Rails process is up. If you would like to ignore this endpoint, you can set the ignored heartbeat endpoint as follows:
 
@@ -145,11 +135,32 @@ ignored_endpoints:
 
 Once configured, Skylight will not collect instrumentation and requests to this endpoint will not be counted in the application’s usage or be represented as part of the application’s aggregated response time and RPM graphs.
 
-The name of the endpoint can be found in the endpoints list on your Skylight application dashboard. For Rails actions, it will be `Controller#action`, for Sinatra it will be `VERB path`, and for Grape it will be `Module [VERB] path`. Always use the name in the Skylight endpoints list if you’re unsure.
+The name of the endpoint can be found in the endpoints list on your Skylight application dashboard. For Rails actions, it will be `Controller#action`, for Sinatra it will be `VERB path`, and for Grape it will be `Module [VERB] path`. You can find the name in the Skylight <%= link_to "endpoints list", "./skylight-guides#endpoints-list" %> if you’re unsure.
 
 Alternatively, you may add the `SKYLIGHT_IGNORED_ENDPOINTS` environment variable. For example:
 ```
 SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,OtherController#heartbeat
+```
+
+#### Log File
+
+To change the location of the Skylight log:
+
+```yaml
+# config/skylight.yml
+log_file: log/skylight.log
+```
+
+Or set the `SKYLIGHT_LOG_FILE` environment variable. By default the log can be found at `log/skylight.log` with Rails or STDOUT otherwise.
+
+#### Daemon Socket Path
+
+The path where the socket file for the daemon is created. In general you will not need to change this. However, if you’re using an NFS mount (say with Vagrant) you’ll need to point this to a non-NFS location.
+
+```yaml
+# config/skylight.yml
+# Path to store daemon-related temporary files
+daemon.sockdir_path: /var/run/myapp
 ```
 
 
@@ -189,6 +200,8 @@ We currently have probes for **Net::HTTP**, **ActionView**, **Grape**, **Excon**
 
 The **Net::HTTP**, **ActionView**, and **Grape** probes are enabled by default.
 
+With the <%= link_to "1.4.0beta agent", "https://rubygems.org/gems/skylight/versions/1.4.0.beta" %>, you can also enable the **middleware** probe to show individual middleware in your <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %>.
+
 To enable other probes:
 
 ```ruby
@@ -197,6 +210,23 @@ config.skylight.probes += %w(excon redis active_model_serializers)
 ```
 
 See <%= link_to "Getting More From Skylight", "./getting-more-from-skylight#probes" %> to learn more about the probes.
+
+#### Middleware Stack
+
+By default, Skylight is positioned at the top of the middleware stack. You can check Skylight's position in the middleware stack by running `rake middleware`. With the <%= link_to "1.4.0beta agent", "https://rubygems.org/gems/skylight/versions/1.4.0.beta" %>, you can require Skylight in a specific location in the middleware stack:
+
+```ruby
+# config/application.rb
+
+# To give Skylight a specific index:
+config.skylight.middleware_position = 0 # default
+
+# To position Skylight before a specific middleware:
+config.skylight.middleware_position = { after: MiddlewareName }
+
+# To position Skylight after a specific middleware:
+config.skylight.middleware_position = { before: MiddlewareName }
+```
 
 
 ### Sinatra
@@ -316,6 +346,20 @@ Once `skylight setup` has finished running, a new `config/skylight.yml` file wil
 
 You’ll need to <%= link_to "configure", "#setting-configuration-variables" %> this new environment with these new credentials.
 
+### Environment-Specific Configuration
+
+Any variable can be scoped to an environment's namespace and will take precedence over a default.
+
+<%= render partial: "note", locals: {type: "important", note: "Currently, environment-specific configuration is correctly utilized only in Rails apps."} %>
+
+```yaml
+# config/skylight.yml
+production:
+  authentication: <production auth token>
+
+staging:
+  authentication: <staging auth token>
+```
 
 ## Regenerating the App Token
 
