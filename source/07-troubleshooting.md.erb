@@ -161,7 +161,7 @@ agent:
   sockfile_path: /tmp/my-app-name
 ```
 
-If that _still_ doesn't work, <%= link_to "drop us a line", "./contributing#reporting-bugs-and-submitting-feedback" %> and we'd be happy to help debug! 
+If that _still_ doesn't work, <%= link_to "drop us a line", "./contributing#reporting-bugs-and-submitting-feedback" %> and we'd be happy to help debug!
 
 ## Other Issues
 
@@ -190,3 +190,11 @@ So what's the moral here? Know your tools. `ObjectSpace` and the libraries that 
 ### What if I need to load the Skylight gem before Rails?
 
 Skylight performs setup when the gem is required, at which time Rails will be detected and tapped into. However, you may find you have to manually require `skylight/railtie` if you need to load the Skylight gem before Rails.
+
+### I'm suddenly seeing many more requests than usual and my bill has gone way up, but my app has very few page views. What's going on?
+
+Unfortunately, it's possible that your app has been the target of some malicious bots or abusive requests. Even if you see very few page views, that is not an accurate indicator of how many requests your app is receiving behind the scenes. An overzealous health checker is another possible source, if you are using such a service.
+
+We strongly recommend that you look into the source of the abusive requests so they don't continue or return. Many Skylight users have reported success using something like <%= link_to  "Rack Attack", "https://github.com/kickstarter/rack-attack" %> to deal with these requests. If you block any requests using Rack Attack and are using the <%= link_to "1.4.0beta agent to instrument middleware", "./advanced-setup#probes" %>, you will begin to see `Rack::Attack` listed as an endpoint in Skylight, which you can then <%= link_to "ignore", "./advanced-setup#ignoring-heartbeat-endpoints" %> if you like. If you are not instrumenting your middleware, `Rack::Attack` will not be separated out into its own endpoint. Instead, you will only see the `Rack` endpoint (which you would then need to <%= link_to "ignore", "./advanced-setup#ignoring-heartbeat-endpoints" %>).
+
+You may gain additional insight by <%= link_to "reordering", "./advanced-setup#middleware-stack" %> or <%= link_to "instrumenting", "./advanced-setup#probes" %> your middleware. If you find that a particular middleware is causing the issue and none of the above suggestions have helped, you can configure Skylight to <%= link_to "run after the problematic middleware", "./advanced-setup#middleware-stack" %>.
