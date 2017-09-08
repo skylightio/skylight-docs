@@ -92,11 +92,7 @@ For more information about setting Heroku config vars, see <%= link_to "Configur
 
 The automatically generated configuration file `config/skylight.yml` looks like this:
 
-```yaml
----
-# The authentication token for the application.
-authentication: <authentication token>
-```
+<%= render partial: "default_config_file" %>
 
 The only thing you *need* to set is the <%= link_to "authentication token", "#setting-authentication-tokens" %>, but there are a number of other <%= link_to "configuration options", "#general-options" %> available.
 
@@ -115,12 +111,7 @@ See also: <%= link_to "Environment-Specific Configuration", "#environment-specif
 
 The authentication token is *required* when reporting data back to the Skylight service. You can find your authentication token on <%= link_to "your app settings page", "/app/settings" %> under "Your Apps" or "Shared Apps."
 
-```yaml
-# config/skylight.yml
----
-# The authentication token for the application.
-authentication: <authentication token>
-```
+<%= render partial: "default_config_file" %>
 
 Or set the `SKYLIGHT_AUTHENTICATION` environment variable.
 
@@ -365,6 +356,8 @@ production:
 staging:
   authentication: <staging auth token>
 ```
+
+For an alternative method of creating multiple environments, check out our <%= link_to 'manual app creation', "./getting-started#manual-app-creation" %> beta feature.
 
 ## Regenerating the App Token
 
