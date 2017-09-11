@@ -11,26 +11,6 @@ First, check that your app meets the <%= link_to "requirements", "./advanced-set
 
 Click <%= link_to "here", "./advanced-setup" %> for advanced installation procedures like setting environment variables, custom configurations, and using Skylight on a framework other than Rails.
 
-### Manual App Creation
-
-In some cases, you might need to set up an app on Skylight manually, including if you're using the <%= link_to "Phoenix agent", "advanced-setup#phoenix-beta" %>. Manual app creation is a way of setting up an app in Skylight _without_ having to run `bundle exec skylight setup <setup token>`, and can be an easier way of <%= link_to "setting up multiple environments", "advanced-setup#setting-up-multiple-environments" %> without having to create temporary directories.
-
-In order to manually create an app on Skylight, you must first enable the manual app creation <%= link_to "beta feature", "./faqs#accessing-user-interface-beta-features" %>. After enabling this feature, you can navigate to your app's <%= link_to "setup screen", "/app/setup" %>, and click the "Or create the application manually." link towards the bottom of the page. Then, you'll be able to type in the name of your new app.
-
-<%= image_tag 'skylight/docs/getting_set_up/add-an-app-manually.png', alt: 'Screenshot of adding an app manually' %>
-
-Next, you will need to set the authentication token for your application. You will find your app's authentication token on your app's <%= link_to "settings page", "/app/settings/account" %>.
-
-<%= image_tag 'skylight/docs/getting_set_up/authentication-set-up.png', alt: 'Screenshot of adding an app manually' %>
-
-There are two ways to set the auth token for your Skylight app. One option is to create a <%= link_to "`config/skylight.yml`", "advanced-setup#agent-configuration" %> file, and set the authentication token for your new app within it.
-
-<%= render partial: "default_config_file" %>
-
-Alternatively, you can set the token as the `SKYLIGHT_AUTHENTICATION` environment variable, in which case you will not need to create a `config/skylight.yml` file.
-
-Once you have set an auth token in either one of these two ways, you can <%= link_to "deploy your application", "./advanced-setup#deployment" %> to production. After deploying, be sure to check your Skylight dashboard; you should begin seeing request data appear shortly!
-
 ## Feature Overview
 
 ### Actionable Insights
