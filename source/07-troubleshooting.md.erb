@@ -105,6 +105,10 @@ To avoid taking your production application down due to an installation failure,
 
 ## GitHub Integration Issues
 
+### I logged in with GitHub but still don't see the GitHub-connected app(s) I'm expecting to see!
+
+First, try <%= link_to "syncing your GitHub account with Skylight", "https://www.skylight.io/app/settings/account" %>. If that doesn't work, it's possible the GitHub organization that owns the repo needs to <%= link_to "whitelist Skylight", "https://github.com/blog/1941-organization-approved-applications" %> in order for us to see that you are a member of the repo. Have an admin for that GitHub org add Skylight to its whitelist, then <%= link_to "sync your GitHub account again", "https://www.skylight.io/app/settings/account" %>. You should then have access to the app(s) you were expecting to see!
+
 ### I followed an email invitation and signed up with GitHub. How come I don't see any apps when I log in?
 
 This is actually a known bug, but it's quite rare these days and we've had trouble reproducing it, so have had trouble fixing it. Please do email [support@skylight.io](mailto:support@skylight.io) and let us know exactly what steps you took when signing up, especially if there were any errors or issues along the way, or if you refreshed the invitation signup page at all before clicking "sign up with GitHub." Any information about anything out of the ordinary helps!
@@ -121,7 +125,6 @@ There are a few reasons why this might happen.
 ### I'm having problems connecting my Skylight app to a personal GitHub repo.
 
 Sorry, right now we only support repos that are connected to an organization, though we may allow use of personal repos in the future. Shoot us an email at [support@skylight.io](mailto:support@skylight.io) to let us know if this feature is important to you!
-
 
 ## Skylight Errors
 
