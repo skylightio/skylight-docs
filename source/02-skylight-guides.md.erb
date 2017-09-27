@@ -17,6 +17,12 @@ At the top of the App Dashboard, you will see a graph with the <%= link_to '"typ
 
 The Response Timeline is useful for keeping an eye on your application and making sure the response times don’t shoot up suddenly, and for detecting spikes in traffic.
 
+#### Deploy Tracking (in beta) {#deploy-tracking}
+
+<%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships' %>
+
+Skylight's deploy tracking <%= link_to "beta feature", "./faqs#accessing-user-interface-beta-features" %> allows you to zero in on performance improvements or regressions caused by a deployment. With the deploy tracking feature enabled, each of your deployments will be marked on the Response Timeline. (If deploys occurred very close to one another, they will be grouped under a single rocket with an indicator of the number of the deploys represented by that rocket.) Learn more <%= link_to "here", "./advanced-setup#deploy-tracking" %>.
+
 ### Endpoints List
 
 <%= image_tag 'skylight/docs/features/endpoint-list.png', alt: 'Screenshot of Endpoints List' %>
