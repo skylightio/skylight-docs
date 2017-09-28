@@ -157,6 +157,23 @@ SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,OtherController#heartbeat
 
 You can not add an endpoint name using a wildcard like `ControllerName#*`. We generally discourage folks from ignoring any endpoints that are not heartbeat endpoints, as it can reduce the usefulness of Skylight. If you don't think an endpoint is going to be a problem, but then you ignore it, you won't know that it's causing an issue until it's too late!
 
+#### Deploy Tracking (in beta) {#deploy-tracking}
+
+If you deploy with Heroku (or if you deploy a git repository in another way), <%= link_to "deploy tracking", "./skylight-guides#deploy-tracking" %> should Just Work™ (not actually trademarked). You can, however, override the default deploy id, git sha, and deploy descriptions with configuration variables as shown below.
+
+If you don't deploy a git repo (e.g. you use a script that copies your files onto a server or a non-git VCS), deploy tracking will not be automated. Instead, you'll need to manually configure Skylight to track your deployments:
+
+```yaml
+# config/skylight.yml
+deploy:
+  # Set an id and/or a sha. If no id is provided, the sha will be used.
+  id: <%%= some_code_that_returns_a_unique_id %>
+  git_sha: <%%= some_code_that_returns_the_sha %>
+  # The deploy description is optional.
+  description: <%%= some_code_that_returns_a_description %>
+```
+
+You can also set `SKYLIGHT_DEPLOY_ID`, `SKYLIGHT_DEPLOY_GIT_SHA`, and `SKYLIGHT_DEPLOY_DESCRIPTION` as environment variables.
 
 #### Log File
 
