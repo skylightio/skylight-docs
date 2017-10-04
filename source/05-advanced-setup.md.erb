@@ -251,7 +251,7 @@ require 'skylight/probes/PROBE_NAME'
 
 #### Middleware Stack
 
-By default, Skylight is positioned at the top of the middleware stack. You can check Skylight's position in the middleware stack by running `rake middleware`. With the <%= link_to "1.4.0beta agent", "https://rubygems.org/gems/skylight/versions/1.4.0.beta" %>, you can require Skylight in a specific location in the middleware stack:
+By default, Skylight is positioned at the top of the middleware stack. You can check Skylight's position in the middleware stack by running `rake middleware`. In the unlikely event that you need to change this, you can require Skylight in a specific location in the middleware stack:
 
 ```ruby
 # config/application.rb
