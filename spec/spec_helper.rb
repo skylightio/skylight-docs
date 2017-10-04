@@ -12,7 +12,7 @@ end
 
 module TestHelper
   def expected_elements
-    ['<table>', '</table>', '<td>', '<tr>', '<tbody>', '<thead>', '<h2 id="checklist-fun">',
+    ['<table>', '</table>', '<td>', '<tr>', '<tbody>', '<thead>', '<h2 id="header-2">',
       '</h3>', '<em>', '</em>', '<p>', '</p>', '<div class="language-yaml highlighter-coderay">', "<div class=\"language-ruby highlighter-coderay\">",
       '<li>', '</li>', '<pre>', '<del>', '</del>', '<a href=', '</a>', '<img ']
   end
