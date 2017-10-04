@@ -18,6 +18,7 @@ In Rails applications, we use ActiveSupport::Notifications to track the followin
 * View Template Rendering
 * View Layout Rendering
 * ActiveRecord SQL Queries
+* ActiveRecord Instantiation
 * ActiveSupport Cache
 
 
@@ -39,35 +40,47 @@ _See the <%= link_to "Sinatra setup instructions", "./advanced-setup#sinatra-1" 
 
 ### ActiveModel::Serializers
 
-_Add_ `active_model_serializers` _to <%= link_to "probes list", "#probes" %>._
+_Add_ `active_model_serializers` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * Serialization
 
 
 ### Excon
 
-_Add_ `excon` _to <%= link_to "probes list", "#probes" %>._
+_Add_ `excon` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * HTTP Requests
+
+### Faraday
+
+_Add_ `faraday` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
+
+* HTTP Requests
+
+### Middleware
+
+_Enabled by default_
+
+* Tracks Rack Middleware in Rails applications.
 
 
 ### Mongo (Official Driver)
 
-_Add_ `mongo` _to <%= link_to "probes list", "#probes" %>._
+_Add_ `mongo` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * Database Queries
 
 
 ### Moped
 
-_Add_ `moped` _to <%= link_to "probes list", "#probes" %>._
+_Add_ `moped` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * Database Queries
 
 
 ### Mongoid
 
-_Add_ `mongoid` _to <%= link_to "probes list", "#probes" %>._
+_Add_ `mongoid` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 Depending on the version, Mongoid either uses Moped or the official Mongo driver under the hood. This probe will just enable the correct probe for one of these two libraries.
 
@@ -81,7 +94,7 @@ _Enabled by default_
 
 ### Redis
 
-_Add_ `redis` _to <%= link_to "probes list", "#probes" %>._
+_Add_ `redis` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * All Commands
 
@@ -90,14 +103,14 @@ _Add_ `redis` _to <%= link_to "probes list", "#probes" %>._
 
 ### Sequel
 
-_Enabled automatically with Sinatra or Add_ `sequel` _to <%= link_to "probes list", "#probes" %>._
+_Enabled automatically with Sinatra or Add_ `sequel` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * SQL Queries
 
 
 ### Tilt
 
-_Enabled automatically with Sinatra or Add_ `tilt` _to [probes list](./advanced-setup#probes)._
+_Enabled automatically with Sinatra or Add_ `tilt` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * Template Rendering
 

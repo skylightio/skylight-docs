@@ -227,26 +227,31 @@ config.skylight.logger = Logger.new(STDOUT)
 
 ####  Probes
 
-In order to instrument other libraries outside of Rails, the agent includes probes which are only activated if the related files are required. Since this is an experimental feature, it’s opt-in for now.
+In order to instrument other libraries outside of Rails, the agent includes probes which are only activated if the related files are required. For a full list of probes see our <%= link_to "Available Instrumentation Options](./getting-more-from-skylight#available-instrumentation-options). You may also want [to learn more about how probes work", "./getting-more-from-skylight#probes" %>.
 
-We currently have probes for **Net::HTTP**, **ActionView**, **Grape**, **Excon**, **Redis**, **ActiveModel::Serializers**, **Moped**, **Mongo**, **Sinatra**, **Tilt**, and **Sequel**.
-
-The **Net::HTTP**, **ActionView**, and **Grape** probes are enabled by default.
-
-With the <%= link_to "1.4.0beta agent", "https://rubygems.org/gems/skylight/versions/1.4.0.beta" %>, you can also enable the **middleware** probe to show individual middleware in your <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %>.
-
-To enable other probes:
+You can add additional probes in your Rails config:
 
 ```ruby
 # config/application.rb
 config.skylight.probes += %w(excon redis active_model_serializers)
 ```
 
-See <%= link_to "Getting More From Skylight", "./getting-more-from-skylight#probes" %> to learn more about the probes.
+In the event that you want to disable a probe that is on by default, you can also remove it from the list:
+
+```ruby
+# config/application.rb
+config.skylight.probes -= ['middleware']
+```
+
+If you're not using Rails, you can require probes instead:
+
+```ruby
+require 'skylight/probes/PROBE_NAME'
+```
 
 #### Middleware Stack
 
-By default, Skylight is positioned at the top of the middleware stack. You can check Skylight's position in the middleware stack by running `rake middleware`. With the <%= link_to "1.4.0beta agent", "https://rubygems.org/gems/skylight/versions/1.4.0.beta" %>, you can require Skylight in a specific location in the middleware stack:
+By default, Skylight is positioned at the top of the middleware stack. You can check Skylight's position in the middleware stack by running `rake middleware`. In the unlikely event that you need to change this, you can require Skylight in a specific location in the middleware stack:
 
 ```ruby
 # config/application.rb
