@@ -25,10 +25,8 @@ module Skylight
       KRAMDOWN_OPTIONS = {
         input: 'GFM',              # Use GitHub-flavored markdown
         coderay_css: :class,       # Output css classes to style
-        toc_levels: (2..3),        # Generate TOC from <h2>s and <h3>s only
-        syntax_highlighter_opts: {
-          line_number_anchors: false  # Don't add anchors to line numbers
-        }
+        coderay_line_numbers: nil, # Don't generate line numbers
+        toc_levels: (2..3)         # Generate TOC from <h2>s and <h3>s only
       }
 
       # found this Regex in the Jekyll repo, used to parse frontmatter

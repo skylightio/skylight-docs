@@ -17,11 +17,13 @@ At the top of the App Dashboard, you will see a graph with the <%= link_to '"typ
 
 The Response Timeline is useful for keeping an eye on your application and making sure the response times don’t shoot up suddenly, and for detecting spikes in traffic.
 
-#### Deploy Tracking (in beta) {#deploy-tracking}
+#### Deploy Tracking
 
 <%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships' %>
 
-Skylight's deploy tracking <%= link_to "beta feature", "./faqs#accessing-user-interface-beta-features" %> allows you to zero in on performance improvements or regressions caused by a deployment. With the deploy tracking feature enabled, each of your deployments will be marked on the Response Timeline. (If deploys occurred very close to one another, they will be grouped under a single rocket with an indicator of the number of the deploys represented by that rocket.) Learn more <%= link_to "here", "./advanced-setup#deploy-tracking" %>.
+Skylight's deploy tracking feature allows you to zero in on performance improvements or regressions caused by a deployment. With the deploy tracking feature <%= link_to "configured", "./advanced-setup#deploy-tracking" %>, each of your deployments will be marked on the Response Timeline. Hover over the deploy icon to see information about that deploy. Depending on your configuration, you will see the deploy id, the git sha of the commit you deployed, and a deploy description.
+
+Multiple deploys in a short timespan will be combined into one icon, with the deploy count indicated next to the icon. You can click on the deploy info popover to see a modal with deploy info for all deploys in that timespan. As you zoom in, the collapsed deploys will expand.
 
 ### Endpoints List
 
