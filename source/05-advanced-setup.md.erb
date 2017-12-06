@@ -34,7 +34,7 @@ We support Grape standalone as well as embedded in Rails and Sinatra. We recogni
 
 While we still love Ruby, we know that a number of users have been exploring Phoenix as an alternative to Ruby and Rails. To that end we've been working on a version of the Skylight agent for Phoenix. You can find that <%= link_to "on Github", "https://github.com/skylightio/skylight-phoenix" %> right now. It should work, though it's definitely in an early state.
 
-In order to create a Phoenix app in Skylight, you'll need to enable our manual app creation <%= link_to "beta feature", "./faqs#accessing-user-interface-beta-features" %>. In Ruby apps, you can run `bundle exec skylight setup` but there's no Phoenix equivalent yet. After enabling this feature, when you go to the <%= link_to "Setup screen", "/app/setup" %> you can manually create a new app to connect to your Phoenix agent.
+In order to create a Phoenix app in Skylight, you'll need to create a new Skylight app <%= link_to "manually", "#manual-app-creation" %>. In Ruby apps, you can run `bundle exec skylight setup` but there's no Phoenix equivalent yet. After enabling this feature, when you go to the <%= link_to "Setup screen", "/app/setup" %> you can manually create a new app to connect to your Phoenix agent.
 
 If you give the Phoenix agent a try, we'd [love to hear](mailto:support@skylight.io) how that goes. We're pretty excited about it!
 
@@ -89,23 +89,19 @@ For more information about setting Heroku config vars, see <%= link_to "Configur
 
 ### Manual App Creation
 
-In some cases, you might need to set up an app on Skylight manually, including if you're using the <%= link_to "Phoenix agent", "advanced-setup#phoenix-beta" %>. Manual app creation is a way of setting up an app in Skylight _without_ having to run `bundle exec skylight setup <setup token>`, and can be an easier way of <%= link_to "setting up multiple environments", "advanced-setup#setting-up-multiple-environments" %> without having to create temporary directories.
+In some cases, you might need to set up an app on Skylight manually, (e.g. to set up <%= link_to "multiple-environments", "#setting-up-multiple-environments" %> or to use the <%= link_to "Phoenix agent", "#phoenix-beta" %>). Manual app creation is a way of setting up an app in Skylight _without_ having to run `bundle exec skylight setup <setup token>`.
 
-In order to manually create an app on Skylight, you must first enable the manual app creation <%= link_to "beta feature", "./faqs#accessing-user-interface-beta-features" %>. After enabling this feature, you can navigate to your app's <%= link_to "setup screen", "/app/setup" %>, and click the "Or create the application manually." link towards the bottom of the page. Then, you'll be able to type in the name of your new app.
+Navigate to your app <%= link_to "setup screen", "/app/setup" %>, and click the "Or create the application manually." link towards the bottom of the page. Then, you'll be able to type in the name of your new app.
 
 <%= image_tag 'skylight/docs/getting_set_up/add-an-app-manually.png', alt: 'Screenshot of adding an app manually' %>
 
-Next, you will need to set the authentication token for your application. You will find your app's authentication token on your app's <%= link_to "settings page", "/app/settings/account" %>.
+Once the Skylight app is created, you'll be redirected to the app settings page, where you can retrieve the authentication token for your application.
 
 <%= image_tag 'skylight/docs/getting_set_up/authentication-set-up.png', alt: 'Screenshot of adding an app manually' %>
 
-There are two ways to set the auth token for your Skylight app. One option is to create a <%= link_to "`config/skylight.yml`", "advanced-setup#agent-configuration" %> file, and set the authentication token for your new app within it.
+Next, you'll need to set your authentication token. For a single environment, <%= link_to "set your default auth token", "#setting-authentication-tokens" %>. For multiple environments, <%= link_to "set your auth tokens by environment", "#enabling-additional-environments" %>.
 
-<%= render partial: "default_config_file" %>
-
-Alternatively, you can set the token as the `SKYLIGHT_AUTHENTICATION` environment variable, in which case you will not need to create a `config/skylight.yml` file.
-
-Once you have set an auth token in either one of these two ways, you can <%= link_to "deploy your application", "./advanced-setup#deployment" %> to production. After deploying, be sure to check your Skylight dashboard; you should begin seeing request data appear shortly!
+Finally, <%= link_to "deploy your application", "#deployment" %>. After deploying, be sure to check your Skylight dashboard; you should begin seeing request data appear shortly!
 
 
 ## Agent Configuration
@@ -213,21 +209,6 @@ Alternatively, you can set `SKYLIGHT_DEPLOY_ID`, `SKYLIGHT_DEPLOY_GIT_SHA`, and 
 There are additional configuration options that can be set in the Rails environment. Unless otherwise noted, these settings should be added to `config/application.rb`. Do not attempt to set them via initializers as Skylight starts before initializers are run.
 
 Skylight performs setup when the gem is required, at which time Rails will be detected and tapped into. However, you may find you have to manually require `skylight/railtie` if you need to load the Skylight gem before Rails.
-
-
-####  Environments
-
-By default, the Skylight agent only enables itself in the production Rails environment. If, for example, you wish to enable Skylight in staging, you can do the following:
-
-```ruby
-# config/application.rb
-config.skylight.environments += ["staging"]
-```
-
-Alternatively, set ENV var `SKYLIGHT_ENABLED` to value other than `false` and Skylight agent will be activated.
-
-Also be sure and check out the rest of our <%= link_to "documentation on setting up multiple environments", "#setting-up-multiple-environments" %>.
-
 
 ####  Logger
 
@@ -369,32 +350,23 @@ use Skylight::Middleware
 
 ## Setting Up Multiple Environments
 
-In many cases, your applications will have two or more production-like environments. These are typically referred to as “production” and “staging”, and you may also have “test”, “QA”, “dev”, etc. environments.
+### Environments
 
-You can configure Skylight to separate data for each of these environments by creating a new application for each, then configuring Skylight to use the appropriate app on a per-environment basis.
+By default, the Skylight agent only enables itself in the "production" environment. In many cases, your applications will have other production-like environments. For example, Rails ships with "development" and "test" environments by default. You can also <%= link_to "create additional Rails environments", "http://guides.rubyonrails.org/configuring.html#creating-rails-environments" %>, such as "staging."
 
-To create a new environment, make a directory using the name you’d like:
+Configure Skylight to separate data for each of these environments by creating a new application for each, then telling Skylight to use the appropriate app on a per-environment basis.
 
-```
-mkdir /tmp/appname-staging
-cd /tmp/appname-staging
-```
+### Enabling Additional Environments
 
-Then follow the instructions available on the app setup screen, running them in this temporary directory instead of in your main Rails app.
+Enabling an additional environment is as easy as 1, 2, 3...4!
 
-If you are using Rails and have not already done so, also be sure to add the new environment to your `application.rb` file if you are using Rails.
+#### 1. Create a new Skylight app.
 
-This will create a new application on Skylight, using the directory name as the default. You can always change the application’s name via the Skylight web UI.
+Create a new Skylight app <%= link_to "manually", "#manual-app-creation" %> in the Skylight UI (e.g. "Monster App - Staging").
 
-Once `skylight setup` has finished running, a new `config/skylight.yml` file will be generated containing a new application ID and authentication token.
+#### 2. Configure your app to use the new auth token.
 
-You’ll need to <%= link_to "configure", "#setting-configuration-variables" %> this new environment with these new credentials.
-
-### Environment-Specific Configuration
-
-Any variable can be scoped to an environment's namespace and will take precedence over a default.
-
-<%= render partial: "note", locals: {type: "important", note: "Currently, environment-specific configuration is correctly utilized only in Rails apps."} %>
+Add the new auth token to your Skylight config file following the pattern described in <%= link_to "Environment-Specific Configuration", "#environment-specific-configuration" %>:
 
 ```yaml
 # config/skylight.yml
@@ -405,7 +377,68 @@ staging:
   authentication: <staging auth token>
 ```
 
-For an alternative method of creating multiple environments, check out our <%= link_to 'manual app creation', "./advanced-setup#manual-app-creation" %> beta feature.
+Alternatively, set the ENV variable `SKYLIGHT_AUTHENTICATION` to the appropriate token in each environment.
+
+#### 3. Activate the Skylight agent in the new environment.
+
+**For Rails:**
+
+```ruby
+# config/application.rb
+config.skylight.environments += ["staging"]
+```
+
+<%= render partial: "note", locals: {type: "important", note: "Make sure to use `+=` and not `=` to add your environment to `config.skylight.environments`, lest you accidentally turn off Skylight in your production environment."} %>
+
+Alternatively, set ENV var `SKYLIGHT_ENABLED` to any value other than `false`.
+
+**For Sinatra or Grape:**
+
+You will need to require and start the Skylight agent in each of your desired environments. For example, in Sinatra:
+
+```ruby
+configure :production, :staging do
+  require "skylight/sinatra"
+  Skylight.start!(file: PATH_TO_CONFIG, environment: ENVIRONMENT)
+end
+```
+`PATH_TO_CONFIG` should point to your `config/skylight.yml` file and `ENVIRONMENT` should return the current environment as a string (e.g. `Rails.env.to_s`).
+
+Alternatively, set ENV var `SKYLIGHT_ENABLED` to any value other than `false` and call `Skylight.start!` without arguments.
+
+
+#### 4. <%= link_to "Deploy", "#deployment" %> and watch your data trickle in!
+
+### Environment-Specific Configuration
+
+If you have Skylight enabled in multiple environments, you may want to configure each environment differently.
+
+Environment-specific configuration can be set easily in `config/skylight.yml`. You can set default configuration that will apply to all environments or namespaced configuration to apply to a specific environment. Any variable scoped to an environment's namespace will override a default.
+
+```yaml
+# config/skylight.yml
+
+# default configuration goes here
+log_file: log/skylight.log
+
+production:
+  authentication: <production auth token>
+
+staging:
+  authentication: <staging auth token>
+  log_file: twig/skylight.log # overrides log/skylight.log
+```
+
+Alternatively, just set the appropriate ENV variables in each environment.
+
+#### Sinatra and Grape {#environment-specific-configuration-sinatra-grape}
+
+If you are setting environment-specific configuration using the `config/skylight.yml` file in Sinatra or Grape, you will need to pass both the config file location and environment when starting Skylight.
+
+```ruby
+Skylight.start!(file: PATH_TO_CONFIG, environment: ENVIRONMENT)
+```
+`PATH_TO_CONFIG` should point to your `config/skylight.yml` file and `ENVIRONMENT` should return the current environment as a string (e.g. `Rails.env.to_s`).
 
 ## Regenerating the App Token
 
