@@ -1,6 +1,6 @@
 language: ruby
 rvm:
- - 2.3
+ - 2.5
 script:
   - bundle exec rake setup
   - bundle exec rake test
