@@ -180,6 +180,17 @@ If you have any questions, please feel free to reach out at [support@skylight.io
 [discourse]: https://www.discourse.org/
 [errbit]: https://github.com/errbit/errbit
 
+### Are there pieces of customer information that will be available via my public Skylight dashboard?
+
+Skylight works differently than other similar products, in that we rely heavily on aggregation, both for presenting useful data in the UI and also to keep our backend scalable. We don't keep parts of individual requests; the requests are essentially only used as "data points" to build statistical models about your app and its endpoints. For example, any SQL queries are parsed and sanitized on your server before they are sent to us. There is no way to get from the aggregated data back to an individual request.
+
+Read more about <%= link_to "security and Skylight", "./faqs#will-my-users-private-data-be-sent-to-skylight" %>.
+
+### Why did you create the Skylight for Open Source program?
+
+Great question! We created the Skylight for Open Source program to make it easy for open source maintainers to share performance data with their contributors. You can read more about the Skylight for Open Source program and why it exists <%= link_to "here", "http://blog.skylight.io/announcing-the-skylight-for-open-source-program/" %>.
+
+
 ## I've got a different question.
 
 We would love to hear your questions. Just shoot us an email at [support@skylight.io](mailto:support@skylight.io) or use the in-app messenger ("?" in the bottom right of the web UI). See our section on <%= link_to "Submitting Feedback", "./contributing#reporting-bugs-and-submitting-feedback" %> for more details.
