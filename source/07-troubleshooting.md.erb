@@ -132,19 +132,37 @@ The Skylight agent will log errors to `log/skylight.log` or on Heroku in STDOUT 
 
 ### Event Errors
 
-#### `failed to instrument span; msg=native Trace#start_span failed`
+### Span out of order errors {#e0001}
 
-This error occurs when an event is too complex for Skylight's agent to track. Here are a few potential causes for this issue:
+#### `[E0001] Spans were closed out of order` and `invalid span nesting`
+
+This error indicates that a parent span (event sequence item) was closed before all of its children were.
+
+One common cause of this issue is a Middleware that doesn't conform to the <%= link_to "Rack SPEC", "http://www.rubydoc.info/github/rack/rack/file/SPEC" %>. Specifically, "If the body is replaced by a middleware after action, the original body must be closed first, if it responds to `close`." If you are unable to fix the Middleware, you can remove the Middleware probe with `config.skylight.probes -= ['middleware']` in your Rails config (note that you will no longer see individual Middleware in your endpoints list or endpoint event sequences; all Middleware will show up as "Rack" instead).
+
+### Too many unique span descriptions {#e0002}
+
+#### `[E0002] You've exceeded the number of unique span descriptions per-request.` and `A payload description produced &lt;too many uniques&gt;`
+
+Skylight limits the number of unique span (event sequence item) descriptions in a request to 100 to prevent misbehaving apps from causing trouble. In most cases, this will be fine as even items such as similar repeated queries will be normalized into a single description (e.g. `SELECT * FROM users WHERE id = 1` and `SELECT * FROM users WHERE id = 2` both become `SELECT * FROM users WHERE id = ?`). However, if your request is extremely complex it is possible to exceed this limit. To resolve this issue, reduce the number of uniquely named items that you instrument.
+
+### Exceeded maximum number of spans {#e0003}
+
+#### `[E0003]` Exceeded maximum number of spans
+
+Skylight limits the maximum number of spans (event sequent items) in a request to 2,048 to prevent a data overload. If your request is very complex, you may hit this limit and data will no longer be tracked for that request. A couple common causes include:
+
 1. **The request itself is very complex.** For example, requests that generate a significant number of SQL queries have been known to trigger this error. Be sure to check out our <%= link_to "Performance Tips", "./performance-tips" %> to reduce the complexity of your request.
 1. **Your custom instrumentation is overly complex.** Be sure to follow our <%= link_to "custom instrumentation best practices", "./getting-more-from-skylight#custom-instrumentation-best-practices" %>.
 
-### SQL Query Errors
+### Failed to extract binds from SQL query {#e0004}
 
-#### `internal error: failed to lex SQL query`
+#### `[E0004] Failed to extract binds from SQL query.` and `Failed to lex SQL query`
 
 These errors indicate that the agent is unable to parse a SQL query in your application. There errors won't prevent your application from operating, though they will reduce the information that we can display in the UI for these queries. They will be displayed in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %> as simply "SQL", not the full sanitized query.
 
-Generally, the reason you will see this error is because you're using a syntax we can't recognize, often a more complex syntax or a non-standard syntax. For example, the agent doesn't currently support square brackets allowed by MS SQL and Postgres. We've optimized for the most common syntax constructions and hope to support more in the future. When running across this error, please feel free to <%= link_to "report it", "./contributing#reporting-bugs-and-submitting-feedback" %> so we can learn what queries we're failing to parse.
+Generally, the reason you will see this error is because you're using a syntax we do not recognize (often a more complex or non-standard syntax). We've optimized for the most common syntax constructions and plan to support more in the future. When running across this error, please feel free to <%= link_to "report it", "./contributing#reporting-bugs-and-submitting-feedback" %> so we can learn what queries are important to our customers.
+
 
 ### Other Errors
 
