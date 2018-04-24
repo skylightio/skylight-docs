@@ -3,6 +3,10 @@ title: Advanced Setup
 description: Install, configure, and deploy the agent.
 ---
 
+<%= render partial: "note",
+    locals: { note: "Our intent is to support all maintained versions of the respective libraries. If library maintainers drop support for a version of their library we may also drop support." } %>
+
+
 ## Supported Frameworks
 
 Skylight has built in integration for Rails, Sinatra, and Grape. We also offer alpha support for Phoenix!
@@ -14,21 +18,19 @@ Skylight has built in integration for Rails, Sinatra, and Grape. We also offer a
 
 Skylight utilizes Rails’ Railties to autoload. It then watches the built `ActiveSupport::Notifications` to get information about controller actions, database queries, view rendering, and more.
 
-Rails 3.0+ should work, but is no longer actively supported.
-
 
 ###  Sinatra
 
-#### Minimum: 1.2+
+#### Minimum: 1.4+
 
 Not running Rails? We also support Sinatra apps, though the default instrumentation will be less detailed. By default, we’ll recognize your Sinatra routes and also instrument any <%= link_to "supported gems", "getting-more-from-skylight#available-instrumentation-options" %>. You can also add <%= link_to "custom instrumentation", "getting-more-from-skylight#custom-app-instrumentation" %>).
 
 
 ###  Grape
 
-#### Minimum: 0.10+, Preferred: 0.13+
+#### Minimum: 0.13+
 
-We support Grape standalone as well as embedded in Rails and Sinatra. We recognize endpoints and instrument rendering and filters. As of version 0.13, ActiveSupport::Notifications is built-in to Grape making the instrumentation even more streamlined.
+We support Grape standalone as well as embedded in Rails and Sinatra. We recognize endpoints and instrument rendering and filters.
 
 ### Phoenix (Alpha)
 
@@ -43,16 +45,14 @@ If you give the Phoenix agent a try, we'd [love to hear](mailto:support@skylight
 
 ### Ruby Version
 
-#### Minimum: 1.9.2+, Preferred: 2.1+
-
-The agent will run with 1.9.2+. However, 2.1+ is required for memory allocation tracking.
+#### Minimum: 2.2+
 
 For the curious, our CI currently is testing against <%= link_to "these versions", "https://github.com/skylightio/skylight-ruby/blob/master/.travis.yml" %>. Intermediate versions are expected to work as well.
 
 
 ### Server Requirements
 
-We aim to support all \*nix servers. Just add the gem to your Gemfile, add the configuration, then deploy as you normally would. You can also run the agent locally on OS X for testing, if desired.
+We aim to support all \*nix servers with glibc 2.15+ as well as FreeBSD and musl. Just add the gem to your Gemfile, add the configuration, then deploy as you normally would. You can also run the agent locally on macOS for testing, if desired.
 
 The agent runs great on Heroku. No special actions required.
 
@@ -295,20 +295,14 @@ You don’t need to install any middleware manually, or do anything with unicorn
 
 #### On Rails
 
-If your Grape app is mounted in Rails and is version 0.10+, it works out of the box with no further configuration! Congrats!
+If your Grape app is mounted in Rails, it works out of the box with no further configuration! Congrats!
 
 See the <%= link_to "Rails configuration instructions", "#rails-configuration" %> for more information.
 
 
 ####  On Sinatra
 
-If your Grape app is mounted in a Sinatra app, first follow the <%= link_to "Sinatra instructions", "#sinatra-configuration" %>.
-
-If you’re running Grape 0.13+, that’s all you need to do. For versions 0.10 - 0.12, you’ll also want to add this to your main file:
-
-```ruby
-require "skylight/probes/grape"
-```
+If your Grape app is mounted in a Sinatra app, just follow the <%= link_to "Sinatra instructions", "#sinatra-configuration" %>.
 
 
 #### Standalone
@@ -317,10 +311,6 @@ Grape apps usually do not require all gems in the Gemfile, so you will want to e
 
 ```ruby
 require "skylight"
-# If you’re running grape 0.10 - 0.12 or earlier, you’ll also
-# need to explicitly require the probe:
-require "skylight/probes/grape"
-
 Skylight.start!(file: PATH_TO_CONFIG)
 ```
 
