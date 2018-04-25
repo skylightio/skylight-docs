@@ -218,14 +218,14 @@ The Skylight agent is written primarily in <%= link_to "Rust", "https://www.rust
 
 Our preferred method of instrumentation is <%= link_to "`ActiveSupport::Notifications`", "http://api.rubyonrails.org/classes/ActiveSupport/Notifications.html" %> events. When a library has added instrumentation, all we need to do is subscribe to the event and do a little bit of normalization of the data.
 
-To standardize this process, we introduced `Normalizers`. Each type of instrumentation has its own normalizer which handles the, well, normalization. You can take a look at some of them <%= link_to "in the source", "https://github.com/skylightio/skylight-ruby/tree/master/lib/skylight/normalizers" %>.
+To standardize this process, we introduced `Normalizers`. Each type of instrumentation has its own normalizer which handles the, well, normalization. You can take a look at some of them <%= link_to "in the source", "https://github.com/skylightio/skylight-ruby/tree/v2.0.0/skylight-core/lib/skylight/core/normalizers" %>.
 
 
 ### Probes
 
 While we think most libraries should include `ActiveSupport::Notifications` (anyone can subscribe to these notifications, not just Skylight), unfortunately, many still don't. In these circumstances, we have to carefully monkey-patch the libraries at their key points.
 
-To make sure we do this in a sane fashion, we developed `Probes`. Probes are small classes that keep an eye out for specific modules and then hook into them when they're loaded. All probes can be disabled in the event of any conflicts and we only autoload probes that we have a high degree of confidence in. You can take a look at some probes <%= link_to "in the source", "https://github.com/skylightio/skylight-ruby/tree/master/lib/skylight/probes" %>.
+To make sure we do this in a sane fashion, we developed `Probes`. Probes are small classes that keep an eye out for specific modules and then hook into them when they're loaded. All probes can be disabled in the event of any conflicts and we only autoload probes that we have a high degree of confidence in. You can take a look at some probes <%= link_to "in the source", "https://github.com/skylightio/skylight-ruby/tree/v2.0.0/skylight-core/lib/skylight/core/probes" %>.
 
 And, since we don't really like having to monkey-patch things either, when at all possible, we <%= link_to "submit pull requests", "https://github.com/ruby-grape/grape/pull/1086" %> to relevant projects to add in `ActiveSupport::Notifications`.
 

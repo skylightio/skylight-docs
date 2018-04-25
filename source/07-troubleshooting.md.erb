@@ -202,7 +202,7 @@ Now, this is all well and good except for one small problem: Skylight <%= link_t
 
 Skylight isn't the only library to do this. ActiveSupport has a <%= link_to "similar hook", "https://github.com/rails/rails/blob/v4.2.2/activesupport/lib/active_support/dependencies.rb#L272-L276" %> in it's `Loadable` module that is included into `Object`. Without Skylight, it would be ActiveSupport taking the blame. However, because this hook uses `super`, it calls to the superclass `Kernel` that is now the version that Skylight created.
 
-Even RubyGems itself gets in on the <%= link_to "overwriting behavior", "https://github.com/rubygems/rubygems/blob/master/lib/rubygems/core_ext/kernel_require.rb#L38-L47" %>. Though, if you use Bundler (as everyone is), this is <%= link_to "actually reversed", "https://github.com/bundler/bundler/blob/bc87d05ff3565551ec3b2d32a5c08aa3cf24beb8/lib/bundler/rubygems_integration.rb#L254-L264" %>.
+Even RubyGems itself gets in on the <%= link_to "overwriting behavior", "https://github.com/rubygems/rubygems/blob/bdc8f0d60d17eb689b85cc318ea948b9581c0fdc/lib/rubygems/core_ext/kernel_require.rb#L39-L52" %>. Though, if you use Bundler (as everyone is), this is <%= link_to "actually reversed", "https://github.com/bundler/bundler/blob/bc87d05ff3565551ec3b2d32a5c08aa3cf24beb8/lib/bundler/rubygems_integration.rb#L254-L264" %>.
 
 So there you have it, run `derailed` without Bundler and you'll see RubyGems blamed for your requires. Add in Bundler and the correct files will get blamed. Bring in ActiveSupport and then ActiveSupport will be blamed. Include Skylight and blame will shift to us. Good times!
 
