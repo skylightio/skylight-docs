@@ -15,7 +15,7 @@ module Skylight
       end
 
       def show
-        @chapter = Skylight::Docs::Chapter.find(params[:id])
+        @chapter = Skylight::Docs::Chapter.find(params[:id], @chapters)
       end
 
       private

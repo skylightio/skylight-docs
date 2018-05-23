@@ -3,7 +3,7 @@ require "skylight/docs/engine"
 module Skylight
   module Docs
     class Chapter
-      class Content < Struct.new(:toc, :main)
+      Content = Struct.new(:toc, :main) do
       end
 
       class ChapterNotFoundError < ActionController::RoutingError
@@ -65,8 +65,8 @@ module Skylight
       # Chapter object from the @chapters array.
       #
       # @return [Chapter] the chapter
-      def self.find(id_to_find)
-        all.find { |c| c.id == id_to_find } || raise(ChapterNotFoundError, "`#{id_to_find}` not found in #{FOLDER}")
+      def self.find(id_to_find, collection = all)
+        collection.find { |c| c.id == id_to_find } || raise(ChapterNotFoundError, "`#{id_to_find}` not found in #{FOLDER}")
       end
 
       # When sorting chapters, use their order for comparison
@@ -98,7 +98,6 @@ module Skylight
           # Add Kramdown Inline Attribute List to generate a table of contents,
           # followed by the split_token in a new paragraph
           raw_content = "* TOC \n {:toc .support-menu-detail-list #support-menu-detail} \n \n #{split_token} \n \n" + raw_content
-
           full_html = Kramdown::Document.new(raw_content, KRAMDOWN_OPTIONS).to_html
           toc, main = full_html.split("<p>#{split_token}</p>", 2)
 
@@ -202,10 +201,15 @@ module Skylight
         # contents of a file at partials/_installing_the_agent.md.erb
         #
         # @return [String] a string of markdown
-        def render(partial:, locals:{})
+        def render(partial:, locals: {}, **opts)
           path = "partials/_#{partial}#{FILE_EXTENSION}"
           file = File.read(File.join(FOLDER, path))
-          ERB.new(file).result(binding)
+          rendered = ERB.new(file).result(binding)
+          return rendered unless (indent_level = opts[:indent_level])
+
+          # add indentation to support callout partials within ordered lists
+          indentation = ' ' * indent_level
+          rendered.lines.map { |x| "#{indentation}#{x}" }.join("\n")
         end
 
         # Gets or sets the `path` attribute of the Chapter.
