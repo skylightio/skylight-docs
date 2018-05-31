@@ -428,39 +428,3 @@ If your application token may have been compromised, you can regenerate it from 
 <%= image_tag 'skylight/docs/getting_set_up/regenerate-token.png', alt: 'Screenshot of settings page' %>
 
 Once you have regenerated the token, you will need to <%= link_to "update your production application", "#setting-configuration-variables" %> with the new token.
-
-## Setting Up An Open Source App {#open-source-setup}
-
-Once you have applied and been accepted to the Skylight For Open Source Program, the next step is to get set up with your free Skylight account! Once you have signed up for a Skylight account, you will need to set up your app instance using either our quick start guide, or by creating your app <%= link_to "manually", "#manual-app-creation" %>.
-
-<%= render partial: "note", locals: {
-  type: 'important',
-  note: <<~NOTE
-          The contents of the skylight.yml file should be considered secret,
-          so be careful not to commit it
-          to your repo. Click #{link_to "here", "./advanced-setup#setting-authentication-tokens"}
-          to learn how to set an environment variable instead.
-        NOTE
-}
-%>
-
-After you have your open source app set up and reporting data, please [let us know](mailto:support@skylight.io) so that we can activate open source mode for you! Once your app is in open source mode, you will see an open source badge, as well as a public link on your dashboard.
-
-<%= image_tag 'skylight/docs/getting_set_up/open-source-public-links.png', alt: 'Screenshot of open source public links in dashboard' %>
-
-Both of these will link you to your open source public dashboard, where contributors to your open source project will be able to access your public performance data. You can see examples of other open source apps' public dashboards <%= link_to "here", "http://oss.skylight.io" %>.
-
-Finally, on <%= link_to "your app settings page", "/app/settings" %>, you will find a section for GitHub badges.
-
-<%= image_tag 'skylight/docs/getting_set_up/open-source-performance-badge.png', alt: 'Screenshot of performance badge on settings page' %>
-
-You will need to include the performance monitoring badge within your app's README as part of the program's <%= link_to "requirements", "./faqs#skylight-for-open-source" %>.
-
-<%= render partial: "note", locals: {
-  type: "pro_tip",
-  note: <<~NOTE
-          You can invite contributors of your open source project to collaborate on your app's settings page. Please note that this will allow them to see application settings, such as the application's authentication token and the emails of other collaborators. It also will allow them to invite and remove collaborators themselves.
-        NOTE
-}%>
-
-To read more about the specific requirements for the Skylight for Open Source Program, click <%= link_to "here", "./faqs#skylight-for-open-source" %>.

@@ -141,55 +141,6 @@ It's also worth mentioning that Skylight is most accurate when reviewing <%= lin
 
 New Relic has lots of features we don't have but, in our opinion, they're not all that useful. We've decided to focus on making sure that everything we show you provides immediate value. Our customers find that it's easier to make sense of our UI and to get _actionable_ information from it. Sure, we could throw more stats in, but sometimes less is more.
 
-## Skylight for Open Source
-
-### I have an open source app. Can I get a free Skylight account? {#skylight-for-open-source}
-
-Yes! You can apply for a free [Skylight for Open Source][skylight-for-oss] account.
-
-The goal of this program is to help encourage your contributors to find and address performance issues in your open source app, by giving them actionable insights and feedback with Skylight. To ensure we can be effective in achieving these goals, your app must meet the following requirements to qualify for the program:
-
-- Its source code is publicly available on Github, and
-- Its source code is licensed under an [open source license][oss-license], and
-- It is accessible to anyone on the public Internet, and
-- Its primary utility and the majority of its functionality is available for anyone to use for free, and
-- It includes a link to its public Skylight dashboard in the README (if that is not feasible, the link can be included in an alternative prominent location that is easy for potential contributors to find, such as the site footer).
-
-Here are some specific examples:
-
-- [The Odin Project][odin] and the [Homebrew Formulae Browser][homebrew] are both examples of _single-deployment_ apps that meet the requirements. Their source code is available on Github under an open source license. They are deployed as publicly accessible website available for anyone to use or sign up for free, other than any administration functionality.
-
-- [Discourse][discourse] is an example of a _multi-deployment_ app. While its source code is available on Github under an open source license, it is up to the individual site operators to deploy their own installation of the app (either with the official managed hosting option or self-hosting).
-
-  In this case, the purpose of the program is to help the site operators find performance issues in the underlying open source software (Discourse in this example), so that they can easily report problems to the maintainers or upstream any patches.
-
-  The accessibility and purpose of the specific deployment will determine if it qualifies for the program. For example, [discuss.emberjs.com](https://discuss.emberjs.com) will qualify as it is publicly accessible and anyone can participate in the discussions on the forum.
-
-  On the other hand, a private Discourse forum for your patreons will not qualify for the program at this time. Similarly, an [Errbit][errbit] instance or an open-source Slack bot deployed for your company's internal use will also not qualify.
-
-- Finally, an open-source app that requires payment to access its features will generally not be accepted into the program at this time. Examples of this include blogs with paywalls, bitcoin exchanges and ICO websites. Companion websites for paid products, such as support websites or apps that are meant to used with a paid smartphone app, will also not qualify as they lose their primary utility without the paid product.
-
-Skylight for Open Source is a new program that we're still experimenting with. We reserve the right to update or clarify these guidelines, make exceptions to them, or revoke access as the program evolves.
-
-If you have any questions, please feel free to reach out at [support@skylight.io](mailto:support@skylight.io).
-
-[skylight-for-oss]: https://www.skylight.io/oss
-[oss-license]: https://opensource.org/licenses/alphabetical
-[odin]: https://www.theodinproject.com/
-[homebrew]: http://formulae.brew.sh/
-[discourse]: https://www.discourse.org/
-[errbit]: https://github.com/errbit/errbit
-
-### Are there pieces of customer information that will be available via my public Skylight dashboard?
-
-Skylight works differently than other similar products, in that we rely heavily on aggregation, both for presenting useful data in the UI and also to keep our backend scalable. We don't keep parts of individual requests; the requests are essentially only used as "data points" to build statistical models about your app and its endpoints. For example, any SQL queries are parsed and sanitized on your server before they are sent to us. There is no way to get from the aggregated data back to an individual request.
-
-Read more about <%= link_to "security and Skylight", "./faqs#will-my-users-private-data-be-sent-to-skylight" %>.
-
-### Why did you create the Skylight for Open Source program?
-
-Great question! We created the Skylight for Open Source program to make it easy for open source maintainers to share performance data with their contributors. You can read more about the Skylight for Open Source program and why it exists <%= link_to "here", "http://blog.skylight.io/announcing-the-skylight-for-open-source-program/" %>.
-
 
 ## I've got a different question.
 
