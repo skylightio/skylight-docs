@@ -61,6 +61,9 @@ Skylight’s socket file can’t be located on an NFS mount. Set `daemon.sockdir
 
 To make sure Skylight is activated, you may need to restart your Unicorn masters.
 
+<%= render partial: "note", locals: {type: "important", note: "If you notice that the pre-fork (master) has not restarted on a typical deploy, make sure that you run a true restart (stop/start), rather than a reload."} %>
+
+
 ### Skylight was working before, but now I’m only seeing “No requests in this time range” when viewing an app.
 
 You might see this bug if the agent running in your Rails app stops reporting performance data to Skylight. If you were able to see data before but it has stopped working recently, restarting your server will usually fix the issue.
