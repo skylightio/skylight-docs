@@ -1,0 +1,199 @@
+---
+title: Environments (Beta)
+description: Setting up and managing multiple environments.
+keep_secret: true # hide during beta
+---
+
+## Welcome to the Environments Beta :-)
+
+In order to enable the beta's Top Secret UI feature-flag, go to <%= link_to "the Skylight app", "/app" %>, open the JavaScript console, and run `DW.enableFlag('environments')`. Once you have enabled this flag in your browser, you will see new Environments front-end features as they are added.
+
+## Skylight Environments
+
+By default, the Skylight agent only enables itself in the `production` environment. In many cases, your applications will have other environments that you would like to profile using Skylight. For example, Rails ships with `development` and `test` environments by default. (You can also <%= link_to "create additional Rails environments", "http://guides.rubyonrails.org/configuring.html#creating-rails-environments" %>, such as `staging.`) This page shows you how to configure Skylight to profile these other environments so that you can view them separately in the Skylight UI:
+
+<%= image_tag "skylight/docs/environments/environments-dropdown.png", alt: "Screenshot of Environments Dropdown", style: "width: 100%; max-width: 350px;" %>
+
+### Skylight Environments vs. Rails Environments
+
+Your Skylight environment name can differ from your Rails environment. For example, you might have multiple staging servers running different versions of your app, so you want to see the Skylight data for them separately: `staging-1`, `staging-2`, etc. Because Skylight relies heavily on <%= link_to "request aggregation", "./skylight-guides#request-aggregation" %>, we recommend that all servers running the same version of your app be given the same environment name.
+
+### Migrating Your Existing Environment Setup
+
+<%= render partial: "note", locals: {
+  type: "important",
+  note: <<~NOTE
+          If you already have multiple environments set up using the legacy method of creating separate apps, the instructions on this page do not apply to you. Instead, click #{link_to "here", "/app/settings/merging"} for details on how to merge these legacy environment apps into their parent apps.
+        NOTE
+}%>
+
+## Enabling Additional Environments
+
+The process for enabling additional environments is straightforward but varies depending on how you configure Skylight and whether or not you use Rails. Be sure you are following the correct set of instructions below.
+
+### For Rails, Using skylight.yml
+
+#### 1. Add the new environment to Skylight's environments list.
+
+```ruby
+# config/application.rb
+config.skylight.environments += ["staging"]
+```
+
+<%= render partial: "note", locals: {type: "important", note: "Make sure to use `+=` and not `=` to add your environment to `config.skylight.environments`, lest you accidentally turn off Skylight in your production environment."} %>
+
+#### 2. Enable environment detection or specify an environment.
+
+**If your environment name is always the _same_ as your Rails environment:**
+```yaml
+# config/skylight.yml
+report_rails_env: true
+```
+
+<%= render partial: "note", locals: {note: "`report_rails_env` is a temporary opt-in setting for beta users. Eventually, this will be the default."} %>
+
+**If your environment name <%= link_to "differs from your Rails environment", "#skylight-environments-vs-rails-environments" %>:**
+
+Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to specify the environment name:
+
+```yaml
+# config/skylight.yml
+staging:                                 # Rails environment
+  env: <%%= "staging-#{server_number}" %> # Skylight environment
+```
+
+<%= render partial: "dynamic_environment_names_warning" %>
+
+#### 3. No need to set an environment-specific authentication token.
+
+All environments use the same auth token, so as long as you have a token set in your <%= link_to "default configuration", "#environment-specific-configuration" %>, you are good to go.
+
+#### 4. Deploy and watch your data trickle in!
+
+Deploy the above changes following your normal deploy process. Your new environment should show up in the environments selector in the Skylight UI nav bar.
+
+### For Rails, Using Environment Variables
+
+Alternatively, if you use environment variables to configure Skylight, follow these instructions:
+
+#### 1. Enable Skylight in the new environment.
+
+Set the following environment variables in the new environment to enable Skylight.
+
+```shell
+SKYLIGHT_AUTHENTICATION=<app auth token>
+SKYLIGHT_ENABLED=true
+```
+
+#### 2. Enable environment detection or specify an environment.
+
+**If your environment name is always the _same_ as your Rails environment:**
+
+```shell
+SKYLIGHT_REPORT_RAILS_ENV=true
+```
+
+<%= render partial: "note", locals: {note: "`SKYLIGHT_REPORT_RAILS_ENV` is a temporary opt-in setting for beta users. Eventually, this will be the default."} %>
+
+**If your environment name <%= link_to "differs from your Rails environment", "#skylight-environments-vs-rails-environments" %>:**
+
+Set the environment name explicitly. For example:
+
+```shell
+SKYLIGHT_ENV=staging-42
+```
+
+
+### For Sinatra or Grape, using skylight.yml
+
+#### 1. Require and start the Skylight agent in each of your desired environments.
+
+For example, in Sinatra:
+
+```ruby
+configure :production, :staging do
+  require "skylight/sinatra"
+  Skylight.start!(file: PATH_TO_CONFIG, environment: ENVIRONMENT)
+end
+```
+
+`PATH_TO_CONFIG` should point to your `config/skylight.yml` file and `ENVIRONMENT` should return the current environment as a string (e.g. `Rails.env.to_s`).
+
+#### 2. Specify an environment name.
+
+Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to specify the environment name. The environment name can be dynamic if your environment name <%= link_to "differs from the environment specified", "#skylight-environments-vs-rails-environments" %> in `Skylight.start!`:
+
+```yaml
+# config/skylight.yml
+staging:
+  env: "staging" # or <%%= "staging-#{server_number}" %>
+```
+
+<%= render partial: "dynamic_environment_names_warning" %>
+
+#### 3. No need to set an environment-specific authentication token.
+
+All environments use the same auth token, so as long as you have a token set in your <%= link_to "default configuration", "#environment-specific-configuration" %>, you are good to go.
+
+#### 4. Deploy and watch your data trickle in!
+
+Deploy the above changes following your normal deploy process. Your new environment should show up in the environments selector in the Skylight UI nav bar.
+
+### For Sinatra or Grape, Using Environment Variables
+
+#### 1. Require and start the Skylight agent in each of your desired environments.
+
+For example, in Sinatra:
+
+```ruby
+configure :production, :staging do
+  require "skylight/sinatra"
+  Skylight.start!(environment: ENVIRONMENT)
+end
+```
+
+`ENVIRONMENT` should return the current environment as a string (e.g. `Rails.env.to_s`).
+
+#### 2. Enable Skylight in the new environment.
+
+Set the following environment variables in the new environment to enable Skylight.
+
+```shell
+SKYLIGHT_AUTHENTICATION=<app auth token>
+SKYLIGHT_ENABLED=true
+```
+
+#### 3. Specify an environment name in the new environment.
+
+```shell
+SKYLIGHT_ENV=staging
+```
+
+Your environment name can be <%= link_to "more specific", "#skylight-environments-vs-rails-environments" %> for finer-grained control over your Skylight data:
+
+```shell
+SKYLIGHT_ENV=staging-42
+```
+
+#### 4. Deploy and watch your data trickle in!
+
+Deploy the above changes following your normal deploy process. Your new environment should show up in the environments selector in the Skylight UI nav bar.
+
+## Environment-Specific Configuration
+
+If you have Skylight enabled in multiple environments, you may want to configure each environment differently.
+
+Environment-specific configuration can be set easily in `config/skylight.yml`. You can set _default configuration_ that will apply to all environments or _namespaced configuration_ to apply to a specific environment. Any variable scoped to an environment's namespace will override a default.
+
+```yaml
+# config/skylight.yml
+
+# default configuration used in all environments goes here
+authentication: <the app's auth token>
+log_file: log/skylight.log
+
+staging:
+  log_file: twig/skylight.log # overrides log/skylight.log
+```
+
+Alternatively, just set the appropriate ENV variables in each environment.
