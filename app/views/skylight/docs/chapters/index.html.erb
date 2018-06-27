@@ -10,9 +10,11 @@
 
         <% @chapters.sort.each do |chapter| %>
           <% cache chapter do %>
-            <%= link_to chapter_path(chapter.id), class: "support-index-tile" do %>
-              <h3><%= chapter.title %></h3>
-              <p><%= chapter.description %></p>
+            <% if chapter.show_in_index %>
+              <%= link_to chapter_path(chapter.id), class: "support-index-tile" do %>
+                <h3><%= chapter.title %></h3>
+                <p><%= chapter.description %></p>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>

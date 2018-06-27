@@ -119,6 +119,22 @@ module Skylight
         frontmatter_attr("title")
       end
 
+      # Gets `keep_secret` from the Chapter's frontmatter. Defaults to false
+      # if not found in the frontmatter.
+      #
+      # @return [Boolean] whether the chapter is a secret chapter
+      def keep_secret
+        frontmatter["keep_secret"] || false
+      end
+
+      # Whether the chapter should be shown on the index page and in other
+      # chapters' TOCs.
+      #
+      # @return [Boolean] whether the chapter should be shown in the TOCs
+      def show_in_index
+        !keep_secret
+      end
+
       private
         # Gets or sets the `file_content` read from the file at the Chapter's path.
         #
