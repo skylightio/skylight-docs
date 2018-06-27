@@ -9,7 +9,7 @@ Below are some troubleshooting steps you can try. If you’re still having troub
 
 If you're having issues setting up Skylight, run `skylight doctor` in your production terminal. You should see something like this as the output:
 
-```
+```shell
 Checking for Rails
   Rails application detected
 
@@ -19,7 +19,7 @@ Checking for native agent
 Checking for valid configuration
   Configuration is invalid
     authentication token required
-````
+```
 
 <%= render partial: "note", locals: {type: "pro_tip", note: "On Heroku you can access your production terminal with <code>heroku run bash</code>."} %>
 
@@ -82,13 +82,13 @@ If your app is running and has traffic, but you’re still not seeing anything i
 
 Make sure you are using the latest version of the Skylight gem. In the directory for your Rails app, run this command:
 
-```
+```shell
 bundle list | grep skylight
 ```
 
 You should see something like the following output:
 
-```
+```shell
 * skylight (version number)
 ```
 
@@ -177,14 +177,14 @@ Generally, the reason you will see this error is because you're using a syntax w
 
 As per <%= link_to "this issue in the agent repo", "https://github.com/skylightio/skylight-ruby/issues/21#issuecomment-67730166" %>, the fix for this is relatively quick. Just explicitly set the `sockfile_path` in your `config/skylight.yml` file like so:
 
-```
+```yaml
 daemon:
   sockdir_path: /tmp/my-app-name
 ```
 
 If that doesn't work and you are using an earlier version of Skylight, you can also try:
 
-```
+```yaml
 agent:
   sockfile_path: /tmp/my-app-name
 ```
