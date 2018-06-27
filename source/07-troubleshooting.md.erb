@@ -224,6 +224,5 @@ Skylight performs setup when the gem is required, at which time Rails will be de
 Unfortunately, it's possible that your app has been the target of some malicious bots or abusive requests. Even if you see very few page views, that is not an accurate indicator of how many requests your app is receiving behind the scenes. An overzealous health checker is another possible source, if you are using such a service.
 
 We strongly recommend that you look into the source of the abusive requests so they don't continue or return. Many Skylight users have reported success using something like <%= link_to  "Rack Attack", "https://github.com/kickstarter/rack-attack" %> to deal with these requests.
-If you want to avoid seeing these requests in Skylight, we recommend placing Rack::Attack
-at the top of your middleware stack (good practice even without Skylight) and then [running
-Skylight immediately afterward](./advanced-setup#middleware-stack).
+
+If you want to avoid seeing these requests in Skylight, we recommend placing Rack::Attack at the top of your middleware stack (good practice even without Skylight) and then [running Skylight immediately afterward](./advanced-setup#middleware-stack).
