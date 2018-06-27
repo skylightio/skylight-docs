@@ -77,7 +77,7 @@ After this, all you need to do is run your standard deployment process.
 
 As an alternative to using the `config/skylight.yml` file,  you can set the authentication token as an ENV variable in your Heroku configuration:
 
-```
+```shell
 heroku config:set SKYLIGHT_AUTHENTICATION="<token>"
 ```
 
@@ -145,7 +145,7 @@ Once configured, Skylight will not collect instrumentation and requests to this 
 The name of the endpoint can be found in the endpoints list on your Skylight application dashboard. For Rails actions, it will be `Controller#action`, for Sinatra it will be `VERB path`, and for Grape it will be `Module [VERB] path`. You can find the name in the Skylight <%= link_to "endpoints list", "./skylight-guides#endpoints-list" %> if you’re unsure.
 
 Alternatively, you may add the `SKYLIGHT_IGNORED_ENDPOINTS` environment variable. For example:
-```
+```shell
 SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,OtherController#heartbeat
 ```
 
