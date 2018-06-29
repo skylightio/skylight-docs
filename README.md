@@ -42,9 +42,10 @@ Be sure to include the following frontmatter in your markdown file:
 ---
 title: This is the Title That Shows Up on the Support Index Page and as the Header for the Chapter Page
 description: This is what shows up on the index and chapter pages as the description.
-updated: October 11, 2017 <This is a string of a date.>
 ---
 ```
+
+Optionally, you can include `keep_secret: true` to hide the chapter in the chapter index page and TOCs for other chapters and to keep the chapter from being indexed by search engines.
 
 Make sure the Table of Contents for whichever page you're working on still makes sense when you're done! It's generated based on header tags, so keep that in mind when writing.
 
