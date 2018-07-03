@@ -52,9 +52,11 @@ report_rails_env: true
 
 <%= render partial: "note", locals: {note: "`report_rails_env` is a temporary opt-in setting for beta users. Eventually, this will be the default."} %>
 
-**If your environment name <%= link_to "differs from your Rails environment", "#skylight-environments-vs-rails-environments" %>:**
+**If your environment name differs from your Rails environment:**
 
-Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to specify the environment name:
+<%= link_to "Click here for an example of why this might be the case.", "#skylight-environments-vs-rails-environments" %>
+
+Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to specify the environment name.
 
 ```yaml
 # config/skylight.yml
@@ -95,7 +97,9 @@ SKYLIGHT_REPORT_RAILS_ENV=true
 
 <%= render partial: "note", locals: {note: "`SKYLIGHT_REPORT_RAILS_ENV` is a temporary opt-in setting for beta users. Eventually, this will be the default."} %>
 
-**If your environment name <%= link_to "differs from your Rails environment", "#skylight-environments-vs-rails-environments" %>:**
+**If your environment name differs from your Rails environment:**
+
+<%= link_to "Click here for an example of why this might be the case.", "#skylight-environments-vs-rails-environments" %>
 
 Set the environment name explicitly. For example:
 
@@ -121,7 +125,7 @@ end
 
 #### 2. Specify an environment name.
 
-Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to specify the environment name. The environment name can be dynamic if your environment name <%= link_to "differs from the environment specified", "#skylight-environments-vs-rails-environments" %> in `Skylight.start!`:
+Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to specify the environment name. The environment name can be dynamic if your environment name "differs from the environment specified in `Skylight.start!`. <%= link_to "(Click here for an example of why this might be the case.)", "#skylight-environments-vs-rails-environments" %> For example:
 
 ```yaml
 # config/skylight.yml
