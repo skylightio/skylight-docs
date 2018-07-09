@@ -6,7 +6,28 @@ keep_secret: true # hide during beta
 
 ## Welcome to the Environments Beta :-)
 
-In order to enable the beta's Top Secret UI feature-flag, go to <%= link_to "the Skylight app", "/app" %>, open the JavaScript console, and run `DW.enableFlag('environments')`. Once you have enabled this flag in your browser, you will see new Environments front-end features as they are added.
+Thanks again for joining this beta program. If you have questions, comments, or suggestions at any time, get in touch with us at [support@skylight.io](mailto:support@skylight.io) or by clicking the Intercom button in the lower right-hand corner of the Skylight app. We can't wait to hear what you think!
+
+Use the following instructions to get started with the beta:
+
+1. **Install the beta agent.**
+
+    Point your Gemfile to the Skylight agent master branch then `bundle install`.
+
+    ```ruby
+    # Gemfile
+    gem "skylight",
+      git: "https://github.com/skylightio/skylight-ruby",
+      branch: "master"
+    ```
+
+    (This is the branch we run in production on the Skylight Rails app to dogfood the latest and greatest production-ready features.)
+
+1. **Enable the beta's Top Secret UI feature-flag.**
+
+    Go to <%= link_to "the Skylight app", "/app" %>, open the JavaScript console, and run `DW.enableFlag('environments')`. Once you have enabled this flag in your browser, you will see new Environments front-end features as they are added.
+
+1. **Read on for further instructions specific to your configuration style.**
 
 ## Skylight Environments
 
@@ -16,7 +37,7 @@ By default, the Skylight agent only enables itself in the `production` environme
 
 ### Skylight Environments vs. Rails Environments
 
-Your Skylight environment name can differ from your Rails environment. For example, you might have multiple staging servers running different versions of your app, so you want to see the Skylight data for them separately: `staging-1`, `staging-2`, etc. Because Skylight relies heavily on <%= link_to "request aggregation", "./skylight-guides#request-aggregation" %>, we recommend that all servers running the same version of your app be given the same environment name.
+Your Skylight environment name can differ from your Rails environment. For example, many `staging` servers are actually running the `production` environment. Or, you might have multiple staging servers running different versions of your app, so you want to see the Skylight data for them separately: `staging-1`, `staging-2`, etc. Because Skylight relies heavily on <%= link_to "request aggregation", "./skylight-guides#request-aggregation" %>, we recommend that all servers running the same version of your app be given the same environment name.
 
 ### Migrating Your Existing Environment Setup
 
@@ -56,7 +77,7 @@ report_rails_env: true
 
 <%= link_to "Click here for an example of why this might be the case.", "#skylight-environments-vs-rails-environments" %>
 
-Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to specify the environment name.
+Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to override the environment name.
 
 ```yaml
 # config/skylight.yml
@@ -125,7 +146,7 @@ end
 
 #### 2. Specify an environment name.
 
-Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to specify the environment name. The environment name can be dynamic if your environment name "differs from the environment specified in `Skylight.start!`. <%= link_to "(Click here for an example of why this might be the case.)", "#skylight-environments-vs-rails-environments" %> For example:
+Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to override the environment name. The environment name can be dynamic if your environment name "differs from the environment specified in `Skylight.start!`. <%= link_to "(Click here for an example of why this might be the case.)", "#skylight-environments-vs-rails-environments" %> For example:
 
 ```yaml
 # config/skylight.yml
