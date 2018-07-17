@@ -99,6 +99,11 @@ If the gem is installed and up-to-date, the next step is to verify that it is ru
 
 Keep an eye on the log terminal. If you see an error message stating that the Skylight agent is missing an authentication token, verify that you have <%= link_to "configured Skylight in Heroku", "./advanced-setup#heroku" %> properly.
 
+### I selected a time range that reports at least one request, but I see a message that indicates otherwise.
+
+<%= image_tag "skylight/docs/troubleshooting/mismatch-error.png", alt: "Screenshot of an endpoint page with a time frame selected that has 1 request but displays the message 'Please select a range with more requests in order to view a trace.'" %>
+
+This is due to our use of two different compression algorithms for the data. In some rare cases, especially when there were only one or two requests in a range, there's a slight mismatch between the algorithms. We hope to resolve this in future iterations.
 
 ## Platform Issues
 
