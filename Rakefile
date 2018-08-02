@@ -25,19 +25,8 @@ load 'rails/tasks/statistics.rake'
 
 require 'bundler/gem_tasks'
 
-def puts_in_pink(text)
-  puts "\e[35m#{text}\e[0m"
-end
-
-desc "Sets up dependencies for engine and dummy app"
-task :setup do
-  puts_in_pink "Bundling in #{Dir.pwd}"
-  sh "bundle install"
-  puts_in_pink "Done bundling. Yay!"
-end
-
 desc "Sets up dependencies and runs the Rails server in the dummy app"
-task :server => [:setup] do
+task :server do
   exec "bundle exec #{DUMMY_APP_LOCATION}/bin/rails server -p 3001"
 end
 

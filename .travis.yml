@@ -1,7 +1,5 @@
 language: ruby
 rvm:
  - 2.5
-script:
-  - bundle exec rake setup
-  - bundle exec rake test
+# Get latest bundler
 before_install: gem install bundler
