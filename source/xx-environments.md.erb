@@ -10,22 +10,20 @@ Thanks again for joining this beta program. If you have questions, comments, or 
 
 Use the following instructions to get started with the beta:
 
+1. **Enable the beta's Top Secret UI feature-flag.**
+
+    Go to your <%= link_to "Skylight Labs page", "/app/settings/labs" %> and enable the "Environments" <%= link_to "feature flag", "./faqs#accessing-user-interface-beta-features" %>. Once you have enabled this flag in your browser, you will see new Environments front-end features as they are added.
+
 1. **Install the beta agent.**
 
     Point your Gemfile to the Skylight agent master branch then `bundle install`.
 
     ```ruby
     # Gemfile
-    gem "skylight",
-      git: "https://github.com/skylightio/skylight-ruby",
-      branch: "master"
+    gem "skylight", "3.0.0.beta"
     ```
 
     (This is the branch we run in production on the Skylight Rails app to dogfood the latest and greatest production-ready features.)
-
-1. **Enable the beta's Top Secret UI feature-flag.**
-
-    Go to <%= link_to "the Skylight app", "/app" %>, open the JavaScript console, and run `DW.enableFlag('environments')`. Once you have enabled this flag in your browser, you will see new Environments front-end features as they are added.
 
 1. **Read on for further instructions specific to your configuration style.**
 
