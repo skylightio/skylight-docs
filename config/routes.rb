@@ -10,7 +10,7 @@ Skylight::Docs::Engine.routes.draw do
     "getting-set-up" => "advanced-setup",
     "grape" => "advanced-setup",
     "instrumentation" => "getting-more-from-skylight",
-    "multiple-environments" => "advanced-setup",
+    "multiple-environments" => "environments",
     "problems/repeated-queries" => "performance-tips",
     "running-skylight" => "advanced-setup",
     "sinatra" => "advanced-setup",
