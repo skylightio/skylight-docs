@@ -13,14 +13,13 @@ Skylight plays nice with other profilers and monitoring solutions, including New
 
 ### What is the "Rack" endpoint?
 
-Skylight measures the time spent in Rails actions, and most of the time, your requests end up making their way into Rails actions eventually. Once a request makes its way to an endpoint, Skylight tags the request with the endpoint's name. However, it is possible for Rack middleware to intercept the request and return a response without delegating to an endpoint. When this happens, Skylight uses the generic "Rack" name for the request, and in practice, these requests tend to be very fast. Upgrading to the 1.4 agent will split these out by the name of the
-middleware that handled the request.
+Skylight measures the time spent in Rails actions, and most of the time, your requests end up making their way into Rails actions eventually. Once a request makes its way to an endpoint, Skylight tags the request with the endpoint's name. However, it is possible for Rack middleware to intercept the request and return a response without delegating to an endpoint. When this happens, Skylight uses the generic "Rack" name for the request, and in practice, these requests tend to be very fast. Upgrading to agent version 1.4+ will split these out by the name of the middleware that handled the request.
 
 There are a number of different reasons why you might see "Rack" listed in your <%= link_to "Endpoints List", "./skylight-guides#endpoints-list" %>. For example, `Rack::Cache` may be intercepting your request when your app gets a cache hit. Another example is `ActionDispatch::Static`, which is an interesting case. This middleware handles requests in the /public folder and acts as an endpoint for static files. While it is not a Rails action, it does behave quite similar to a Rails action: it uniquely handles a particular URL and returns a result.
 
-### What does it mean when the "rack.request" event is slow?
+### What is the "rack.request" event?
 
-In Rails apps, "rack.request" will usually be the first item listed in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %>. This event represents the time spent before the actual Rails controller action is hit. Usually this event has minimal self-time, but some middleware may cause slowdowns in the "rack.request" event. Upgrading to the 1.4 agent will show detail about Rails middleware.
+In Rails apps, "rack.request" will usually be the first item listed in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %>. This event represents the time spent before the actual Rails controller action is hit. Usually this event has minimal self-time.
 
 
 ## Security
@@ -97,21 +96,11 @@ Message [support@skylight.io](mailto:support@skylight.io) or contact us via the 
 While we don't yet give you up to the minute alerts, you can get insight into your app's weekly changes by signing up for <%= link_to "Trends emails", "./skylight-guides#trends" %> in your <%= link_to "account settings", "/app/settings/account" %>. Down the road, we may add more immediate alerting when significant slowdowns occur in your app.
 
 
-### Can I track deploys?
-
-Soon! We've got work underway to make this happen. Sign up for our Insider emails in your <%= link_to "account settings", "/app/settings/account" %> to get the latest scoop on development.
-
-
 ### Can I instrument background jobs like Sidekiq?
 
 Background job instrumentation is a high priority for us. The technical aspect of it isn't too hard, but the big blocker is the UI. We don't just want to throw the background jobs into the regular UI since in most cases, they'll take much longer than normal requests and won't have the same immediate impact on the end-user.
 
 But, we ourselves use Sidekiq and agree that it would be great to have more insight into our background jobs performance.
-
-
-### Can I administer my apps with organizations?
-
-Not yet, but it's something we've got on our roadmap. Our current thought is something based around GitHub organizations. If you've got any thoughts on this, we'd love to hear them.
 
 
 ### Do you plan to add error tracking?
