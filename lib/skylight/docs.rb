@@ -203,6 +203,8 @@ module Skylight
             html_options ||= {}
             # External links should open in a new window
             html_options[:target] ||= "_blank"
+            # Security precautions for external links
+            html_options[:rel] ||= "noopener noreferrer"
           elsif /^#/.match(location)
             # It's an anchor, so add the js-scroll-link class
             html_options ||= {}

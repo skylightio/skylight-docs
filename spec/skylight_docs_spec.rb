@@ -65,7 +65,7 @@ describe 'Skylight::Docs::Chapter' do
     end
 
     it 'parses `link_to` helpers, adding html options for external or anchor links' do
-      expect(chapter.content.main).to include('<a target="_blank" href="http://www.example.com">external</a>')
+      expect(chapter.content.main).to include('<a target="_blank" rel="noopener noreferrer" href="http://www.example.com">external</a>')
       expect(chapter.content.main).to include('<a href="./a-aardvark-chapter">internal</a>')
       expect(chapter.content.main).to include('<a class="js-scroll-link" href="#header-1">anchor</a>')
     end
