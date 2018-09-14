@@ -13,6 +13,12 @@ By default, the Skylight agent only enables itself in the `production` environme
 
 Your Skylight environment name can differ from your Rails environment. For example, many `staging` servers are actually running the `production` environment. Or, you might have multiple staging servers running different versions of your app, so you want to see the Skylight data for them separately: `staging-1`, `staging-2`, etc. Because Skylight relies heavily on <%= link_to "request aggregation", "./skylight-guides#request-aggregation" %>, we recommend that all servers running the same version of your app be given the same environment name.
 
+### Prioritizing the "Production" Environment
+
+We have designed the Skylight user experience to prioritize the `production` environment. In addition to being enabled by default, the `production` environment will always be listed first in the Skylight user interface. Furthermore, only the `production` environment will be displayed in your weekly <%= link_to "Trends emails", "./skylight-guides#trends" %> (though you can still view Trends for all environments using the Trends in the UI beta feature).
+
+For this reason, we strongly recommend against naming your primary production environment something other than `production`.
+
 ### Migrating Your Existing Environment Setup
 
 <%= render partial: "note", locals: {
