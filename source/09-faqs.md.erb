@@ -93,7 +93,7 @@ Message [support@skylight.io](mailto:support@skylight.io) or contact us via the 
 
 ### Can I get alerts when my performance changes?
 
-While we don't yet give you up to the minute alerts, you can get insight into your app's weekly changes by signing up for <%= link_to "Trends emails", "./skylight-guides#trends" %> in your <%= link_to "account settings", "/app/settings/account" %>. Down the road, we may add more immediate alerting when significant slowdowns occur in your app.
+While we don't yet give you up to the minute alerts, you can get insight into your app's weekly changes by signing up for <%= link_to "Trends emails", "./skylight-guides#trends" %> in your <%= link_to "account settings", "/app/settings/account" %>, or by viewing your historical trends data from your dashboard. Down the road, we may add more immediate alerting when significant slowdowns occur in your app.
 
 
 ### Can I instrument background jobs like Sidekiq?
@@ -110,7 +110,7 @@ Right now we've chosen to focus on providing you the most useful performance inf
 
 ### Can I view more than one day's worth of data at a time?
 
-Yes, you can, via the <%= link_to "Trends email", "./skylight-guides#trends" %>, which you'll get after your first two weeks of using Skylight. The Trends email shows the last six weeks of your application's performance.
+Yes, you can, via the <%= link_to "Trends feature", "./skylight-guides#trends" %>, which is available after your first two weeks of Skylight. The Trends feature shows you the last six weeks of your application's performance. You can sign up to receive your Trends reports via email, as well as view your historical trends data on your app's dashboard.
 
 Showing weeks and months of data on demand is not as simple as it might seem. We use a technique that many time-series databases use called pre-aggregation. This means that we store all your data collated into timeslices. Timeslices make it possible to fetch arbitrarily large time ranges or time ranges that are not simply aligned to the day or hour.
 
