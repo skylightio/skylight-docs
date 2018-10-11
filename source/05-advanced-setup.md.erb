@@ -235,10 +235,10 @@ By default, Skylight is positioned at the top of the middleware stack. You can c
 # To give Skylight a specific index:
 config.skylight.middleware_position = 0 # default
 
-# To position Skylight before a specific middleware:
+# To position Skylight after a specific middleware:
 config.skylight.middleware_position = { after: MiddlewareName }
 
-# To position Skylight after a specific middleware:
+# To position Skylight before a specific middleware:
 config.skylight.middleware_position = { before: MiddlewareName }
 ```
 
