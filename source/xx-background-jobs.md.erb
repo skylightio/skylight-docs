@@ -65,14 +65,21 @@ The process for enabling background jobs instrumentation is straightforward but 
 
 <%= render partial: "background_jobs_version_disclaimer" %>
 
-#### 2. Add the probes for your framework to Skylight's probes list. {#enabling-probes}
+#### 2. Enable Skylight for your job processing framework. {#enabling-frameworks}
 
+
+**If you use Sidekiq:**
+Set `SKYLIGHT_ENABLE_SIDEKIQ=true` or `enable_sidekiq: true` in your `skylight.yml` file.
+
+**If you use ActiveJob:**
 <%= render partial: "note", locals: {type: "important", note: "Make sure to use `+=` and not `=` to add your probe to `config.skylight.probes`, lest you accidentally turn off Skylight's default probes."} %>
 
 ```ruby
 # config/application.rb
-config.skylight.probes += %w(sidekiq activejob)
+config.skylight.probes += %w(active_job)
 ```
+
+If you use Sidekiq with ActiveJob, you can enable either the Sidekiq config or the ActiveJob probe, or both (it's not necessary to do both, but it won't hurt).
 
 #### 3. [OPTIONAL] Specify a component name.
 
@@ -113,10 +120,10 @@ Set the following environment variables wherever your start your jobs to enable 
 
 ```shell
 SKYLIGHT_AUTHENTICATION=<app auth token>
-SKYLIGHT_ENABLE_SIDEKIQ=true # for the sidekiq probe
+SKYLIGHT_ENABLE_SIDEKIQ=true # for sidekiq instrumentation
 ```
 
-For probes other than `sidekiq`, you'll need to <%= link_to "enable them", "#enabling-probes" %> in `config/application.rb`.
+For ActiveJob, you'll need to <%= link_to "enable the probe", "#enabling-probes" %> in `config/application.rb`.
 
 #### 3. [OPTIONAL] Specify a component name.
 
