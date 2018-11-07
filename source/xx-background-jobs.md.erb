@@ -24,12 +24,14 @@ By default, the Skylight agent only enables itself for web requests. In many cas
 
 ### Currently Supported Libraries and Frameworks {#probes}
 
-We currently have probes for:
+#### We currently have instrumentation for:
 
 * <%= link_to "Sidekiq", "https://sidekiq.org/" %>
 * <%= link_to "ActiveJob", "https://guides.rubyonrails.org/active_job_basics.html" %> (supporting Sidekiq, Backburner, Que, Delayed::Job, Sneakers, and others)
 
-The following probes are in progress:
+If you use Sidekiq with ActiveJob, you can enable either the Sidekiq config or the ActiveJob probe, or both (it's not necessary to do both, but it won't hurt).
+
+#### The following probes are in progress:
 * <%= link_to "Delayed::Job", "https://github.com/collectiveidea/delayed_job" %>
 
 <%= link_to "Resque", "https://github.com/resque/resque" %> is officially **not** supported for now (and doesn’t work via ActiveJob either).
@@ -59,7 +61,7 @@ The process for enabling background jobs instrumentation is straightforward but 
 
 <!-- TODO: [jobs] verify these instructions, probe names, etc -->
 
-### For Rails, Using skylight.yml
+### Using skylight.yml
 
 #### 1. Upgrade to the latest Skylight agent.
 
@@ -67,9 +69,13 @@ The process for enabling background jobs instrumentation is straightforward but 
 
 #### 2. Enable Skylight for your job processing framework. {#enabling-frameworks}
 
-
 **If you use Sidekiq:**
-Set `SKYLIGHT_ENABLE_SIDEKIQ=true` or `enable_sidekiq: true` in your `skylight.yml` file.
+
+```yaml
+# config/skylight.yml
+authentication: <app auth token>
+enable_sidekiq: true
+```
 
 **If you use ActiveJob:**
 <%= render partial: "note", locals: {type: "important", note: "Make sure to use `+=` and not `=` to add your probe to `config.skylight.probes`, lest you accidentally turn off Skylight's default probes."} %>
@@ -78,8 +84,6 @@ Set `SKYLIGHT_ENABLE_SIDEKIQ=true` or `enable_sidekiq: true` in your `skylight.y
 # config/application.rb
 config.skylight.probes += %w(active_job)
 ```
-
-If you use Sidekiq with ActiveJob, you can enable either the Sidekiq config or the ActiveJob probe, or both (it's not necessary to do both, but it won't hurt).
 
 #### 3. [OPTIONAL] Specify a component name.
 
@@ -96,6 +100,7 @@ Use <%= link_to "environment-specific configuration", "#environment-specific-con
 ```yaml
 # config/skylight.yml
 authentication: <app auth token>
+enable_sidekiq: true # if you are using sidekiq
 worker_component: 'sidekiq' # or <%%= worker_component_name %>
 ```
 <!-- TODO: [jobs] the above config doesn't work yet -->
@@ -106,7 +111,7 @@ worker_component: 'sidekiq' # or <%%= worker_component_name %>
 
 Deploy the above changes following your normal deploy process. Your new worker component should show up in the components selector in the Skylight UI nav bar.
 
-### For Rails, Using Environment Variables
+### Using Environment Variables
 
 Alternatively, if you use environment variables to configure Skylight, follow these instructions:
 
@@ -123,7 +128,7 @@ SKYLIGHT_AUTHENTICATION=<app auth token>
 SKYLIGHT_ENABLE_SIDEKIQ=true # for sidekiq instrumentation
 ```
 
-For ActiveJob, you'll need to <%= link_to "enable the probe", "#enabling-probes" %> in `config/application.rb`.
+For ActiveJob, you'll need to <%= link_to "enable the probe", "#enabling-frameworks" %> in `config/application.rb`.
 
 #### 3. [OPTIONAL] Specify a component name.
 
