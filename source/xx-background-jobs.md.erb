@@ -4,23 +4,30 @@ description: Setting up and managing instrumentation for your workers.
 keep_secret: true
 ---
 
-## Coming Soon: The Background Jobs Alpha!
+## Welcome to the Background Jobs Alpha!
 
 Thank you so much for your interest in joining the background jobs alpha. If you haven't yet been accepted, make sure that you've submitted an application <%= link_to "here", "/surveys/background_jobs" %>.
 
-### Instructions for Alpha Participants
+Once you have been accepted into the program, you can follow the instructions below to start instrumenting your background jobs with Skylight.
 
-<!-- TODO: [jobs] write this section -->
-* Must be accepted
-* Beta agent
-* UI feature flag
+### Alpha Caveats
+
+We are still working through some `TODO`s for background jobs, so there are some limitations to the feature in its current state. These include:
+* We currently only support jobs running via ActiveJob, or Sidekiq as a standalone. Click <%= link_to "here", "#probes" %> for a full list.
+* Jobs running over 5 minutes will not be tracked.
+* Jobs and requests with more than 2,048 items in the event sequence will have their traces "pruned", with "error.code.3" displayed in the UI instead of the trace data. You can read more about this limitation <%= link_to "here", "./troubleshooting#e0003-exceeded-maximum-number-of-spans" %>.
+
+### Submitting Feedback
+
+We may periodically request feedback via the <%= link_to "in-app messenger", "./contributing#reporting-bugs-and-submitting-feedback" %> or by email. In the meantime, if you spot a bug or have any suggestions, please click the "Send feedback" link in the UI and tell us all about it.
+
+<%= image_tag "skylight/docs/background-jobs/submitting-feedback.png", alt: "Screenshot showing the 'Submit feedback' link", style: "width: 100%; max-width: 600px;" %>
 
 ## Background Jobs
 
 By default, the Skylight agent only enables itself for web requests. In many cases, your applications might run processes in the background, via <%= link_to "Sidekiq", "https://sidekiq.org/" %>, <%= link_to "Delayed::Job", "https://github.com/collectiveidea/delayed_job" %>, or some other framework. In fact, we recommend moving certain slow actions into background jobs in our <%= link_to "Performance Tips", "./performance-tips#move-third-party-integration-to-workers" %>. This page shows you how to configure Skylight to profile your background jobs so that you can view them separately in the Skylight UI:
 
-<!-- TODO: [jobs] Screenshot showing off jobs UI -->
-<%= image_tag "skylight/docs/environments/environments-dropdown.png", alt: "TODO: [jobs] placeholder for jobs screenshot", style: "width: 100%; max-width: 350px;" %>
+<%= image_tag "skylight/docs/background-jobs/background-jobs.png", alt: "Screenshot of the Background Jobs user interface", style: "width: 100%; max-width: 600px;" %>
 
 ### Currently Supported Libraries and Frameworks {#probes}
 
@@ -51,15 +58,13 @@ By default, we will detect that you are running jobs and report them as a `worke
 <%= render partial: "note", locals: {
   type: "important",
   note: <<~NOTE
-          If you already have background jobs set up using the legacy method of creating a separate app for your workers and using a third-party gem, click #{link_to "here", "/app/settings/merging"} for details on how to merge these legacy worker apps into their parent apps.
+          If you already have background jobs set up using the legacy method of creating a separate app for your workers and using a third-party gem, click #{link_to "here", "/app/settings/merging"} for details on how to merge these legacy worker apps into their parent apps to maintain data continuity.
         NOTE
 }%>
 
 ## Enabling Background Job Instrumentation {#enabling}
 
 The process for enabling background jobs instrumentation is straightforward but varies depending on how you configure Skylight and whether or not you use Rails. Be sure you are following the correct set of instructions below.
-
-<!-- TODO: [jobs] verify these instructions, probe names, etc -->
 
 ### Using skylight.yml
 
@@ -103,7 +108,6 @@ authentication: <app auth token>
 enable_sidekiq: true # if you are using sidekiq
 worker_component: 'sidekiq' # or <%%= worker_component_name %>
 ```
-<!-- TODO: [jobs] the above config doesn't work yet -->
 
 <%= render partial: "dynamic_component_names_warning" %>
 
@@ -119,16 +123,16 @@ Alternatively, if you use environment variables to configure Skylight, follow th
 
 <%= render partial: "background_jobs_version_disclaimer" %>
 
-#### 2. Enable Skylight in the new environment.
+#### 2. Enable Skylight for your jobs.
 
-Set the following environment variables wherever your start your jobs to enable Skylight.
+Set the following environment variables wherever you start your jobs (e.g. in the `Procfile` on Heroku):
 
 ```shell
 SKYLIGHT_AUTHENTICATION=<app auth token>
 SKYLIGHT_ENABLE_SIDEKIQ=true # for sidekiq instrumentation
 ```
 
-For ActiveJob, you'll need to <%= link_to "enable the probe", "#enabling-frameworks" %> in `config/application.rb`.
+For ActiveJob, you'll need to <%= link_to "enable the probe", "#enabling-frameworks" %> in `config/application.rb` and deploy that change.
 
 #### 3. [OPTIONAL] Specify a component name.
 
@@ -140,7 +144,7 @@ For ActiveJob, you'll need to <%= link_to "enable the probe", "#enabling-framewo
 
 **If you would like to use a _custom_ component name:**
 
-Set the environment name explicitly. For example:
+Set the environment name explicitly wherever you start your jobs. For example:
 
 ```shell
 SKYLIGHT_COMPONENT=sidekiq
@@ -149,13 +153,19 @@ SKYLIGHT_COMPONENT=sidekiq
 ## Background Jobs for OSS Apps {#oss}
 
 <!-- TODO: [jobs] Link here from OSS page when un-beta-ing -->
+<!-- TODO: [jobs] Remove this note when un-beta-ing -->
+
+<%= render partial: "note", locals: {
+  note: <<~NOTE
+          The Background Jobs alpha is not currently available for OSS apps. Please stay tuned!
+        NOTE
+}%>
 
 By default, the Skylight agent only enables itself for web requests, but enabling Skylight for background jobs is super easy!
 
 We welcome our <%= link_to "Skylight for Open Source", "/oss" %> customers and their contributors to profile their background jobs so that you can view them separately in the Skylight UI:
 
-<!-- TODO: [jobs] Screenshot showing off jobs OSS UI -->
-<%= image_tag "skylight/docs/environments/environments-dropdown-oss.png", alt: "TODO: [jobs] placeholder for OSS jobs screenshot", style: "width: 100%; max-width: 350px;" %>
+<%= image_tag "skylight/docs/background-jobs/background-jobs-oss.png", alt: "Screenshot of the Background Jobs for OSS user interface", style: "width: 100%; max-width: 600px;" %>
 
 If you would like to help an open source app enable Skylight background job instrumentation, click <%= link_to "here", "#background-jobs" %> to learn about Background Jobs, then open a PR to the open source project.
 
