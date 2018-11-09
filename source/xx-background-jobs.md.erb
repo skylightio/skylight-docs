@@ -14,8 +14,9 @@ Once you have been accepted into the program, you can follow the instructions be
 
 We are still working through some `TODO`s for background jobs, so there are some limitations to the feature in its current state. These include:
 * We currently only support jobs running via ActiveJob, or Sidekiq as a standalone. Click <%= link_to "here", "#probes" %> for a full list.
-* Jobs running over 5 minutes will not be tracked.
+* Currently, jobs running over 5 minutes will not be tracked (though we are putting the finishing touches on some infrastructure improvements that will raise this limit to one hour)
 * Jobs and requests with more than 2,048 items in the event sequence will have their traces "pruned", with "error.code.3" displayed in the UI instead of the trace data. You can read more about this limitation <%= link_to "here", "./troubleshooting#e0003-exceeded-maximum-number-of-spans" %>.
+
 
 ### Submitting Feedback
 
@@ -36,12 +37,10 @@ By default, the Skylight agent only enables itself for web requests. In many cas
 * <%= link_to "Sidekiq", "https://sidekiq.org/" %>
 * <%= link_to "ActiveJob", "https://guides.rubyonrails.org/active_job_basics.html" %> (supporting Sidekiq, Backburner, Que, Delayed::Job, Sneakers, and others)
 
-If you use Sidekiq with ActiveJob, you can enable either the Sidekiq config or the ActiveJob probe, or both (it's not necessary to do both, but it won't hurt).
-
-#### The following probes are in progress:
+#### The following probes are in progress, and will be available soon:
 * <%= link_to "Delayed::Job", "https://github.com/collectiveidea/delayed_job" %>
 
-<%= link_to "Resque", "https://github.com/resque/resque" %> is officially **not** supported for now (and doesn’t work via ActiveJob either).
+<%= link_to "Resque", "https://github.com/resque/resque" %> is officially **not** supported for now, due to incompatibilities between Resque and Skylight's process model (it doesn’t work via ActiveJob either).
 
 ### Default Jobs Component Naming {#component-names}
 By default, we will detect that you are running jobs and report them as a `worker` component. If you would like to see another name in the Skylight user interface, the component name can be customized, according to the <%= link_to "instructions", "#enabling" %> for your specific configuration setup.
@@ -81,6 +80,8 @@ The process for enabling background jobs instrumentation is straightforward but 
 authentication: <app auth token>
 enable_sidekiq: true
 ```
+
+If you use Sidekiq with ActiveJob, you can enable either the Sidekiq config or the ActiveJob probe (read on to the next section), or both (it's not necessary to do both, but it won't hurt).
 
 **If you use ActiveJob:**
 <%= render partial: "note", locals: {type: "important", note: "Make sure to use `+=` and not `=` to add your probe to `config.skylight.probes`, lest you accidentally turn off Skylight's default probes."} %>
