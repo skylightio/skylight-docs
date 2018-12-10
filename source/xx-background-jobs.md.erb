@@ -14,7 +14,7 @@ Once you have been accepted into the program, you can follow the instructions be
 
 We are still working through some `TODO`s for background jobs, so there are some limitations to the feature in its current state. These include:
 * We currently only support jobs running via ActiveJob, or Sidekiq as a standalone. Click <%= link_to "here", "#probes" %> for a full list.
-* Currently, jobs running over 5 minutes will not be tracked (though we are putting the finishing touches on some infrastructure improvements that will raise this limit to one hour)
+* Currently, jobs running over 60 minutes will not be tracked (we recently raised this limit from 5 minutes, and are investigate the potential effects of raising it further)
 * Jobs and requests with more than 2,048 items in the event sequence will have their traces "pruned", with "error.code.3" displayed in the UI instead of the trace data. You can read more about this limitation <%= link_to "here", "./troubleshooting#e0003-exceeded-maximum-number-of-spans" %>.
 
 
