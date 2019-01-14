@@ -109,7 +109,13 @@ This is due to our use of two different compression algorithms for the data. In 
 
 ### The Skylight native extension wasn’t found, but my platform claims to be supported.
 
-To avoid taking your production application down due to an installation failure, Skylight does not raise an exception when it can’t install the native agent. Currently, we support all *nix servers with glibc 2.15+ and Mac OS X 10.8+. We also have experimental support for FreeBSD and musl. If you’re running a compatible OS and still see errors, try running your application with `SKYLIGHT_REQUIRED=true`. This will cause Skylight to raise an exception when the native agent is missing. This exception may be useful in troubleshooting the problem. If you need help, send this to us at [support@skylight.io](mailto:support@skylight.io).
+To avoid taking your production application down due to an installation failure, Skylight does not raise an exception when it can’t install the native agent. Currently, we support all *nix servers with glibc 2.15+ and Mac OS X 10.8+. We also have experimental support for FreeBSD and musl. If you’re running a compatible OS and still see this warning, it’s possible that when the gem was installed, the native extension libraries failed to download from S3. If this is the case, re-installing the `skylight` gem may fix the issue:
+
+```shell
+bundle pristine skylight
+```
+
+If you still see errors after re-installing, try running your application with `SKYLIGHT_REQUIRED=true`. This will cause Skylight to raise an exception when the native agent is missing. This exception may be useful in troubleshooting the problem. If you need help, send the exception message and backtrace to us at [support@skylight.io](mailto:support@skylight.io).
 
 ## GitHub Integration Issues
 
