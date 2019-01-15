@@ -10,6 +10,14 @@ Thank you so much for your interest in joining the background jobs alpha. If you
 
 Once you have been accepted into the program, you can follow the instructions below to start instrumenting your background jobs with Skylight.
 
+<%= render partial: "note", locals: {
+  type: "important",
+  note: <<~NOTE
+          The Background Jobs Alpha phase is ending February 14th, 2019. On that date, we will begin billing
+          for usage according to our #{link_to "standard pricing structure", "/pricing"}.
+        NOTE
+}%>
+
 ### Alpha Caveats
 
 We are still working through some `TODO`s for background jobs, so there are some limitations to the feature in its current state. These include:
