@@ -4,6 +4,7 @@ module Skylight
       isolate_namespace Docs
 
       require 'kramdown'
+      require 'kramdown-syntax-coderay'
       require 'sprockets/es6'
     end
   end
