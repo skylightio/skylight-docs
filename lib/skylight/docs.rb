@@ -23,10 +23,13 @@ module Skylight
 
       # options to pass into the Kramdown document constructor
       KRAMDOWN_OPTIONS = {
-        input: 'GFM',              # Use GitHub-flavored markdown
-        coderay_css: :class,       # Output css classes to style
-        coderay_line_numbers: nil, # Don't generate line numbers
-        toc_levels: (2..3)         # Generate TOC from <h2>s and <h3>s only
+        input: 'GFM', # Use GitHub-flavored markdown
+        syntax_highlighter: :coderay,
+        syntax_highlighter_opts: {
+          css: :class, # use css classes instead of style attributes
+          line_numbers: false
+        },
+        toc_levels: (2..3) # Generate TOC from <h2>s and <h3>s only
       }
 
       # found this Regex in the Jekyll repo, used to parse frontmatter
