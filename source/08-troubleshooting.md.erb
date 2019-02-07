@@ -3,13 +3,18 @@ title: Troubleshooting
 description: Having trouble with the agent? Take a look here.
 ---
 
-Below are some troubleshooting steps you can try. If you’re still having trouble, please contact us via email at [support@skylight.io](mailto:support@skylight.io).
+Before proceeding, make sure that you are running the <%= link_to "latest version", "#gem-version" %> of the Skylight agent.
+
+If you’re still having trouble after following this guide, please <%= link_to "drop us a line", "./contributing#reporting-bugs-and-submitting-feedback" %>.
 
 ## Skylight Doctor
 
-If you're having issues setting up Skylight, run `skylight doctor` in your production terminal. You should see something like this as the output:
+Run `bundle exec skylight doctor` in your production terminal to check for common issues with the Skylight agent. You should see something like this as the output:
 
 ```shell
+Checking SSL
+  OK
+
 Checking for Rails
   Rails application detected
 
@@ -17,68 +22,79 @@ Checking for native agent
   Native agent installed
 
 Checking for valid configuration
-  Configuration is invalid
-    authentication token required
+  Configuration is valid
+
+Checking Skylight startup
+  Successfully started
+  Waiting for daemon...   Success
 ```
 
 <%= render partial: "note", locals: {type: "pro_tip", note: "On Heroku you can access your production terminal with <code>heroku run bash</code>."} %>
 
-If you don't see any helpful information after running `skylight doctor`, be sure to check out the rest of our troubleshooting guide below.
+Common issues reported by `skylight doctor` include:
 
-## Data Not Reporting
+### Configuration is invalid
 
-### I deployed my application, but no data is appearing in Skylight.
+#### Authentication token required / Could not load config file
 
-#### Is your environment correct?
+The <%= link_to "`skylight setup`", "./getting-started" %> command automatically generates a valid <%= link_to "`config/skylight.yml`", "advanced-setup#agent-configuration" %> file.
 
-Verify that the application is running with the correct Rails environment. By default, the agent only starts in the `production` environment, but this can be configured.
+If you have edited this file, check that you haven't introduced any syntax errors or invalid configuration.
 
-To learn how to change what environments Skylight starts in, see <%= link_to "Environments", "./environments" %>.
+If you have removed this file, you will need to set the equivalent <%= link_to "environment variables", "advanced-setup#setting-configuration-variables" %> in any environments where you are running Skylight.
 
+See also our documentation on <%= link_to "setting your authentication token", "advanced-setup#setting-authentication-tokens" %>.
 
-#### Is the `skylight` gem in the right group?
+#### Sockfile path is not writeable / is an NFS mount and will not allow sockets
 
-Verify that, in your app’s `Gemfile`, you’ve added the `skylight` gem to a group that will be installed in production. For example, if you add `skylight` to the `development` group, it will not run when you deploy to production.
+By default, Skylight uses your Rails `tmp` path as the sockfile directory. This directory must be writeable and cannot be located on an NFS mount (e.g. Vagrant).
 
+Set `daemon.sockdir_path` in your <%= link_to "config", "./advanced-setup#daemon-socket-path" %> to a writeable, non-NFS path.
 
-#### If you're using Sinatra or Grape without Rails, did you follow the installation instructions?
+#### Logfile path is not writeable
 
- * <%= link_to "Sinatra Instructions", "./advanced-setup#sinatra-configuration" %>
- * <%= link_to "Grape Instructions", "./advanced-setup#grape-1" %>
+By default, Skylight logs to `log/skylight.log`. In the event that this path is not writeable, set `log_file` in your <%= link_to "config", "./advanced-setup#log-file" %> to a writeable path.
 
+### Other Issues
 
-#### Is the sockfile path writable?
+#### bundler: command not found: skylight
 
-By default, Skylight uses your Rails tmp path as the sockfile directory. In the event that this path isn’t writable you should set `daemon.sockdir_path` in your <%= link_to "config", "./advanced-setup#setting-configuration-variables" %>.
+Verify that the Skylight gem is <%= link_to "in the right group", "#is-the-skylight-gem-in-the-right-group" %> and that you have run `bundle install`.
 
+#### No Rails application detected
 
-#### Are you using NFS, possibly with Vagrant?
+If you're using Sinatra or Grape, did you follow the installation instructions?
 
-Skylight’s socket file can’t be located on an NFS mount. Set `daemon.sockdir_path` in your <%= link_to "config", "./advanced-setup#setting-configuration-variables" %> to a non-NFS path.
+* <%= link_to "Sinatra Instructions", "./advanced-setup#sinatra-configuration" %>
+* <%= link_to "Grape Instructions", "./advanced-setup#grape-configuration" %>
 
+#### Unable to load native extension
 
-#### If you're running Unicorn, did you restart your master?
+Check the Skylight agent <%= link_to "server requirements", "./advanced-setup#server-requirements" %> to make sure your platform is supported.
 
-To make sure Skylight is activated, you may need to restart your Unicorn masters.
+To avoid taking your production application down due to an installation failure, Skylight does not raise an exception when it can’t install the native agent. If you’re running a compatible OS and still see this warning, it’s possible that when the gem was installed, the native extension libraries failed to download from S3. If this is the case, re-installing the gem with `bundle pristine skylight` may fix the issue.
 
-<%= render partial: "note", locals: {type: "important", note: "If you notice that the pre-fork (master) has not restarted on a typical deploy, make sure that you run a true restart (stop/start), rather than a reload."} %>
+If you still see errors after re-installing, try running your application with `SKYLIGHT_REQUIRED=true`. This will cause Skylight to raise an exception when the native agent is missing. This exception may be useful in troubleshooting the problem. If you need help, send the exception message and backtrace to us at [support@skylight.io](mailto:support@skylight.io).
 
+#### Failed to verify SSL certificate
 
-### Skylight was working before, but now I’m only seeing “No requests in this time range” when viewing an app.
+Looks like your SSL certificates are out of date. The `skylight doctor` command will provide further instructions. By default, we try to use your local SSL root certificates, but in the event those are out of date, you can force `skylight setup` to use Skylight's bundled root certificates by running:
 
-You might see this bug if the agent running in your Rails app stops reporting performance data to Skylight. If you were able to see data before but it has stopped working recently, restarting your server will usually fix the issue.
+```shell
+SKYLIGHT_FORCE_OWN_CERTS=1 bundle exec skylight setup <setup token>
+```
 
-If the agent encounters multiple errors in a short span of time, it will shut itself down. This is done out of an abundance of caution to ensure that a potential bug in the agent doesn’t bring down your app in production.
+#### Unable to reach Skylight servers
 
-We are working to add more logging to the agent so we can better diagnose what causes the agent to shutdown and recover gracefully in the event of an error. If you find this is happening regularly, please let us know!
+Likely this is due a temporary network issue. Please try again.
 
-### I’m using Heroku but no data is showing up in Skylight.
+## No Data Reporting {#no-data}
 
-First, make sure that there is traffic to your application. If your Rails app is handling requests, you should start to see data in Skylight in just a few minutes.
+If—after updating the agent and fixing issues identified by <%= link_to "Skylight Doctor", "#skylight-doctor" %>—your data is still not reporting, consider the following questions:
 
-We have received reports of problems running on the `cedar-10` stack. You should upgrade to the `cedar-14` stack.
+### Troubleshooting Questions
 
-If your app is running and has traffic, but you’re still not seeing anything in Skylight, verify that the `skylight` gem is installed and running properly.
+#### Do you have the latest version of the Skylight gem? {#gem-version}
 
 Make sure you are using the latest version of the Skylight gem. In the directory for your Rails app, run this command:
 
@@ -92,30 +108,103 @@ You should see something like the following output:
 * skylight (version number)
 ```
 
-If the gem is installed and up-to-date, the next step is to verify that it is running correctly:
+Find the latest version on <%= link_to "RubyGems", "https://rubygems.org/gems/skylight" %>.
 
- 1. In one terminal window, run `heroku logs -t` to show the application log.
- 1. In another terminal window, run `heroku restart` to restart the app.
+#### Did you deploy your app since setting up Skylight?
 
-Keep an eye on the log terminal. If you see an error message stating that the Skylight agent is missing an authentication token, verify that you have <%= link_to "configured Skylight in Heroku", "./advanced-setup#heroku" %> properly.
+Sometimes people forget to deploy their change. Oops! Don't worry, we won't tell anyone.
 
-### I selected a time range that reports at least one request, but I see a message that indicates otherwise.
+#### Has your app received any requests since deploying with Skylight?
+
+Make sure that there is traffic to your application. If your Rails app is handling requests, you should start to see data in Skylight in just a few minutes.
+
+#### Is Skylight enabled in your current environment?
+
+Verify that the application is running with the correct Rails environment. By default, the agent only starts in the `production` environment, but this can be configured.
+
+To learn how to change what environments Skylight starts in, see <%= link_to "Environments", "./environments" %>.
+
+One surprisingly common mistake people make is disabling Skylight in their production environment:
+
+```ruby
+# config/application.rb
+config.skylight.environments = ["staging"]  # DO NOT DO THIS
+config.skylight.environments += ["staging"] # DO THIS
+```
+
+#### Is the `skylight` gem in the right group?
+
+Verify that, in your app’s `Gemfile`, you’ve added the `skylight` gem to a group that will be installed in production. For example, if you add `skylight` to the `development` group, it will not run when you deploy to production.
+
+#### If you're running Unicorn, did you restart your master?
+
+To make sure Skylight is activated, you may need to restart your Unicorn masters.
+
+<%= render partial: "note", locals: {type: "important", note: "If you notice that the pre-fork (master) has not restarted on a typical deploy, make sure that you run a true restart (stop/start), rather than a reload."} %>
+
+## Data Gaps
+
+### Agent Stops Reporting
+
+You might see the "No data within this time range" message if the agent running in your Rails app stops reporting performance data to Skylight. If you were able to see data before but it has stopped working recently, restarting your server will usually fix the issue.
+
+If the agent encounters multiple errors in a short span of time, it will shut itself down. This is done out of an abundance of caution to ensure that a potential bug in the agent doesn’t bring down your app in production.
+
+We are working to add more logging to the agent so we can better diagnose what causes the agent to shutdown and recover gracefully in the event of an error. If you find this is happening regularly, please let us know!
+
+### Missing Requests
+
+Please check your logs for <%= link_to "Skylight errors", "#skylight-errors" %>.
+
+### Select a Range with More Requests
 
 <%= image_tag "skylight/docs/troubleshooting/mismatch-error.png", alt: "Screenshot of an endpoint page with a time frame selected that has 1 request but displays the message 'Please select a range with more requests in order to view a trace.'" %>
 
 This is due to our use of two different compression algorithms for the data. In some rare cases, especially when there were only one or two requests in a range, there's a slight mismatch between the algorithms. We hope to resolve this in future iterations.
 
-## Platform Issues
+## Skylight Errors
 
-### The Skylight native extension wasn’t found, but my platform claims to be supported.
+The Skylight agent will log errors to `log/skylight.log` or on Heroku in STDOUT (Look for lines starting with `[SKYLIGHT]`).
 
-To avoid taking your production application down due to an installation failure, Skylight does not raise an exception when it can’t install the native agent. Currently, we support all *nix servers with glibc 2.15+ and Mac OS X 10.8+. We also have experimental support for FreeBSD and musl. If you’re running a compatible OS and still see this warning, it’s possible that when the gem was installed, the native extension libraries failed to download from S3. If this is the case, re-installing the `skylight` gem may fix the issue:
+### Event Errors
 
-```shell
-bundle pristine skylight
-```
+#### `[E0001] Spans were closed out of order` and `invalid span nesting` {#e0001}
 
-If you still see errors after re-installing, try running your application with `SKYLIGHT_REQUIRED=true`. This will cause Skylight to raise an exception when the native agent is missing. This exception may be useful in troubleshooting the problem. If you need help, send the exception message and backtrace to us at [support@skylight.io](mailto:support@skylight.io).
+This error indicates that a parent span (event sequence item) was closed before all of its children were.
+
+One common cause of this issue is a Middleware that doesn't conform to the <%= link_to "Rack SPEC", "http://www.rubydoc.info/github/rack/rack/file/SPEC" %>. Specifically, "If the body is replaced by a middleware after action, the original body must be closed first, if it responds to `close`." If you are unable to fix the Middleware, you can remove the Middleware probe with `config.skylight.probes -= ['middleware']` in your Rails config (note that you will no longer see individual Middleware in your endpoints list or endpoint event sequences; all Middleware will show up as "Rack" instead).
+
+### Too many unique span descriptions
+
+#### `[E0002] You've exceeded the number of unique span descriptions per-request.` and `A payload description produced <too many uniques>` {#e0002}
+
+Skylight limits the number of unique span (event sequence item) descriptions in a request to 100 to prevent misbehaving apps from causing trouble. In most cases, this will be fine as even items such as similar repeated queries will be normalized into a single description (e.g. `SELECT * FROM users WHERE id = 1` and `SELECT * FROM users WHERE id = 2` both become `SELECT * FROM users WHERE id = ?`). However, if your request is extremely complex it is possible to exceed this limit. To resolve this issue, reduce the number of uniquely named items that you instrument.
+
+### Exceeded maximum number of spans
+
+#### `[E0003]` Exceeded maximum number of spans {#e0003}
+
+Skylight limits the maximum number of spans (event sequent items) in a request to 2,048 to prevent a data overload. If your request is very complex, you may hit this limit and data will no longer be tracked for that request. A couple common causes include:
+
+1. **The request itself is very complex.** For example, requests that generate a significant number of SQL queries have been known to trigger this error. Be sure to check out our <%= link_to "Performance Tips", "./performance-tips" %> to reduce the complexity of your request.
+2. **Your custom instrumentation is overly complex.** Be sure to follow our <%= link_to "custom instrumentation best practices", "./getting-more-from-skylight#custom-instrumentation-best-practices" %>.
+
+### Failed to extract binds from SQL query {#e0004}
+
+#### `[E0004] Failed to extract binds from SQL query.` and `Failed to lex SQL query`
+
+These errors indicate that the agent is unable to parse a SQL query in your application. There errors won't prevent your application from operating, though they will reduce the information that we can display in the UI for these queries. They will be displayed in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %> as simply "SQL", not the full sanitized query.
+
+Generally, the reason you will see this error is because you're using a syntax we do not recognize (often a more complex or non-standard syntax). We've optimized for the most common syntax constructions and plan to support more in the future.
+
+When running across this error, please <%= link_to "report it", "./contributing#reporting-bugs-and-submitting-feedback" %> so we can learn what queries are important to our customers. If this error becomes too noisy, you can disable it by setting `log_sql_parse_errors: false` in your <%= link_to "config", "advanced-setup#setting-configuration-variables" %>.
+
+
+### Other Errors
+
+#### `ERROR:skylight::cli: skylightd exiting abnormally; err=DaemonLockFailed`
+
+As per <%= link_to "this issue in the agent repo", "https://github.com/skylightio/skylight-ruby/issues/21#issuecomment-67730166" %>, the fix for this is relatively quick. Just explicitly set `daemon.sockdir_path` in your <%= link_to "config", "./advanced-setup#daemon-socket-path" %> to a writeable, non-NFS path.
 
 ## GitHub Integration Issues
 
@@ -140,7 +229,7 @@ Your organization must allow third-party access to Skylight so that we can use t
 There are a few reasons why this might happen.
 
 1. You are not the owner of the app on Skylight. You may contact the owner to have them add a repo to the app, or have them transfer ownership to you (this would entail transferring billing to you as well, so you may not want to do that).
-1. You are the owner, but are not logged in with GitHub. We need to verify your credentials, so be sure you are logged in via GitHub.
+2. You are the owner, but are not logged in with GitHub. We need to verify your credentials, so be sure you are logged in via GitHub.
 
 ### I'm having problems connecting my Skylight app to a personal GitHub repo.
 
@@ -151,64 +240,6 @@ Sorry, right now we only support repos that are connected to an organization, th
 This is actually a known bug, but it's quite rare these days and we've had trouble reproducing it, so have had trouble fixing it. Please do email [support@skylight.io](mailto:support@skylight.io) and let us know exactly what steps you took when signing up, especially if there were any errors or issues along the way, or if you refreshed the invitation signup page at all before clicking "sign up with GitHub." Any information about anything out of the ordinary helps!
 
 In the meantime, you can ask the person who initially invited you to send another invitation to the email address associated with your account. This will add you to the app automatically and you should have no further issues.
-
-## Skylight Errors
-
-The Skylight agent will log errors to `log/skylight.log` or on Heroku in STDOUT (Look for lines starting with `[SKYLIGHT]`).
-
-### Event Errors
-
-### Span out of order errors {#e0001}
-
-#### `[E0001] Spans were closed out of order` and `invalid span nesting`
-
-This error indicates that a parent span (event sequence item) was closed before all of its children were.
-
-One common cause of this issue is a Middleware that doesn't conform to the <%= link_to "Rack SPEC", "http://www.rubydoc.info/github/rack/rack/file/SPEC" %>. Specifically, "If the body is replaced by a middleware after action, the original body must be closed first, if it responds to `close`." If you are unable to fix the Middleware, you can remove the Middleware probe with `config.skylight.probes -= ['middleware']` in your Rails config (note that you will no longer see individual Middleware in your endpoints list or endpoint event sequences; all Middleware will show up as "Rack" instead).
-
-### Too many unique span descriptions {#e0002}
-
-#### `[E0002] You've exceeded the number of unique span descriptions per-request.` and `A payload description produced &lt;too many uniques&gt;`
-
-Skylight limits the number of unique span (event sequence item) descriptions in a request to 100 to prevent misbehaving apps from causing trouble. In most cases, this will be fine as even items such as similar repeated queries will be normalized into a single description (e.g. `SELECT * FROM users WHERE id = 1` and `SELECT * FROM users WHERE id = 2` both become `SELECT * FROM users WHERE id = ?`). However, if your request is extremely complex it is possible to exceed this limit. To resolve this issue, reduce the number of uniquely named items that you instrument.
-
-### Exceeded maximum number of spans {#e0003}
-
-#### `[E0003]` Exceeded maximum number of spans
-
-Skylight limits the maximum number of spans (event sequent items) in a request to 2,048 to prevent a data overload. If your request is very complex, you may hit this limit and data will no longer be tracked for that request. A couple common causes include:
-
-1. **The request itself is very complex.** For example, requests that generate a significant number of SQL queries have been known to trigger this error. Be sure to check out our <%= link_to "Performance Tips", "./performance-tips" %> to reduce the complexity of your request.
-1. **Your custom instrumentation is overly complex.** Be sure to follow our <%= link_to "custom instrumentation best practices", "./getting-more-from-skylight#custom-instrumentation-best-practices" %>.
-
-### Failed to extract binds from SQL query {#e0004}
-
-#### `[E0004] Failed to extract binds from SQL query.` and `Failed to lex SQL query`
-
-These errors indicate that the agent is unable to parse a SQL query in your application. There errors won't prevent your application from operating, though they will reduce the information that we can display in the UI for these queries. They will be displayed in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %> as simply "SQL", not the full sanitized query.
-
-Generally, the reason you will see this error is because you're using a syntax we do not recognize (often a more complex or non-standard syntax). We've optimized for the most common syntax constructions and plan to support more in the future. When running across this error, please feel free to <%= link_to "report it", "./contributing#reporting-bugs-and-submitting-feedback" %> so we can learn what queries are important to our customers.
-
-
-### Other Errors
-
-#### `ERROR:skylight::cli: skylightd exiting abnormally; err=DaemonLockFailed`
-
-As per <%= link_to "this issue in the agent repo", "https://github.com/skylightio/skylight-ruby/issues/21#issuecomment-67730166" %>, the fix for this is relatively quick. Just explicitly set the `sockfile_path` in your `config/skylight.yml` file like so:
-
-```yaml
-daemon:
-  sockdir_path: /tmp/my-app-name
-```
-
-If that doesn't work and you are using an earlier version of Skylight, you can also try:
-
-```yaml
-agent:
-  sockfile_path: /tmp/my-app-name
-```
-
-If that _still_ doesn't work, <%= link_to "drop us a line", "./contributing#reporting-bugs-and-submitting-feedback" %> and we'd be happy to help debug!
 
 ## Other Issues
 
