@@ -45,6 +45,8 @@ If you have removed this file, you will need to set the equivalent <%= link_to "
 
 See also our documentation on <%= link_to "setting your authentication token", "advanced-setup#setting-authentication-tokens" %>.
 
+If you are still having trouble, please run `Skylight.instrumenter.config` in your production terminal, and <%= link_to "contact us", "./contributing#reporting-bugs-and-submitting-feedback" %> with the results.
+
 #### Sockfile path is not writeable / is an NFS mount and will not allow sockets
 
 By default, Skylight uses your Rails `tmp` path as the sockfile directory. This directory must be writeable and cannot be located on an NFS mount (e.g. Vagrant).
@@ -53,7 +55,7 @@ Set `daemon.sockdir_path` in your <%= link_to "config", "./advanced-setup#daemon
 
 #### Logfile path is not writeable
 
-By default, Skylight logs to `log/skylight.log`. In the event that this path is not writeable, set `log_file` in your <%= link_to "config", "./advanced-setup#log-file" %> to a writeable path.
+By default, Skylight writes logs to `log/skylight.log`. In the event that this path is not writeable, set `log_file` in your <%= link_to "config", "./advanced-setup#log-file" %> to a writeable path.
 
 ### Other Issues
 
@@ -63,7 +65,7 @@ Verify that the Skylight gem is <%= link_to "in the right group", "#is-the-skyli
 
 #### No Rails application detected
 
-If you're using Sinatra or Grape, did you follow the installation instructions?
+If you're using Sinatra or Grape, make sure you followed the installation instructions
 
 * <%= link_to "Sinatra Instructions", "./advanced-setup#sinatra-configuration" %>
 * <%= link_to "Grape Instructions", "./advanced-setup#grape-configuration" %>
@@ -88,6 +90,16 @@ SKYLIGHT_FORCE_OWN_CERTS=1 bundle exec skylight setup <setup token>
 
 Likely this is due a temporary network issue. Please try again.
 
+If on subsequent retries, you are still having issues, try running the following command to verify that you can connect to our authorization server:
+```shell
+curl -v https://auth.skylight.io/status
+```
+
+If `curl` fails, you may need to allow access to `*.skylight.io` on port 443 (e.g. if you are behind a firewall).
+
+Finally, check our <%= link_to "Status Page", "https://status.skylight.io/" %> for the unlikely event that we are experiencing infrastructure issues.
+
+
 ## No Data Reporting {#no-data}
 
 If—after updating the agent and fixing issues identified by <%= link_to "Skylight Doctor", "#skylight-doctor" %>—your data is still not reporting, consider the following questions:
@@ -106,6 +118,7 @@ You should see something like the following output:
 
 ```shell
 * skylight (version number)
+* skylight-core (version number)
 ```
 
 Find the latest version on <%= link_to "RubyGems", "https://rubygems.org/gems/skylight" %>.
@@ -210,11 +223,11 @@ As per <%= link_to "this issue in the agent repo", "https://github.com/skylighti
 
 ### I logged in with GitHub but still don't see the GitHub-connected app(s) I'm expecting to see!
 
-First, try <%= link_to "syncing your GitHub account with Skylight", "https://www.skylight.io/app/settings/account" %>. If that doesn't work, it's possible the GitHub organization that owns the repo needs to <%= link_to "whitelist Skylight", "#whitelist-skylight" %> in order for us to see that you are a member of the repo. Have an admin for that GitHub org add Skylight to its whitelist, then <%= link_to "sync your GitHub account again", "https://www.skylight.io/app/settings/account" %>. You should then have access to the app(s) you were expecting to see!
+First, try <%= link_to "syncing your GitHub account with Skylight", "https://www.skylight.io/app/settings/account" %>. If that doesn't work, it's possible the GitHub organization that owns the repo needs to <%= link_to "whitelist Skylight", "#whitelist-skylight" %> in order for us to see that you are a member of the repo. Ask your GitHub org's administrator to add Skylight to the whitelist, then <%= link_to "sync your GitHub account again", "https://www.skylight.io/app/settings/account" %>. You should then have access to the app(s) you expected to see!
 
 ### I am having trouble accessing my GitHub organization in Skylight. {#whitelist-skylight}
 
-If you aren't seeing your organization in the dropdown when trying to connect an app or your users are having issues accessing your GitHub-connected apps, you may have your GitHub organization's "Third-party application access policy" set to "Access restricted."
+If you don't see your organization in the dropdown when trying to connect an app or your users encounter issues accessing your GitHub-connected apps, you may have your GitHub organization's "Third-party application access policy" set to "Access restricted."
 
 You can check our current permissions by visiting the "Third-party access" settings for your organization. If the permissions are correct, Skylight will be marked as "Approved":
 
