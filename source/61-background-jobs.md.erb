@@ -1,36 +1,30 @@
 ---
 title: Background Jobs
 description: Setting up and managing instrumentation for your workers.
-keep_secret: true
 ---
 
-## Welcome to the Background Jobs Alpha!
+## Skylight for Background Jobs (Beta)
 
-Thank you so much for your interest in joining the background jobs alpha. If you haven't yet been accepted, make sure that you've submitted an application <%= link_to "here", "/surveys/background_jobs" %>.
-
-Once you have been accepted into the program, you can follow the instructions below to start instrumenting your background jobs with Skylight.
+While Skylight was originally designed to profile web requests, we understand that the web interface is only a part of your server-side application. We developed Skylight for Background Jobs in order to help you discover and correct hidden performance issues in your Sidekiq, DelayedJob, and ActiveJob queues.
 
 <%= render partial: "note", locals: {
-  type: "important",
   note: <<~NOTE
-          The Background Jobs Alpha phase is ending February 14th, 2019. On that date, we will begin billing
-          for usage according to our #{link_to "standard pricing structure", "/pricing"}.
+          Skylight for Background Jobs is currently available as a #{link_to("beta", "./faqs/#accessing-user-interface-beta-features")}
+          feature to Skylight Insiders. As an app owner, you must subscribe to Insiders before activating the background jobs feature in
+          the agent.
         NOTE
 }%>
 
-### Alpha Caveats
+### Beta Caveats
 
 We are still working through some `TODO`s for background jobs, so there are some limitations to the feature in its current state. These include:
-* We currently only support jobs running via ActiveJob (with most backend frameworks), or Sidekiq and Delayed::Job as standalone processors. Click <%= link_to "here", "#probes" %> for a full list.
-* Currently, jobs running over 60 minutes will not be tracked (we recently raised this limit from 5 minutes, and are investigating the potential effects of raising it further)
-* Jobs and requests with more than 2,048 items in the event sequence will have their traces "pruned", with "error.code.3" displayed in the UI instead of the trace data. You can read more about this limitation <%= link_to "here", "./troubleshooting#e0003-exceeded-maximum-number-of-spans" %>.
-
+* We currently support jobs running via ActiveJob (with most backend frameworks), or Sidekiq and Delayed::Job as standalone processors. Click <%= link_to "here", "#probes" %> for a full list.
+* Currently, jobs running over four hours will not be tracked (we have incrementally raised this limit and are still investigating the potential effects of raising it further).
+* Jobs and requests with more than 2,048 items in the event sequence will result in "pruned" traces. In the job view in the UI, you may see nodes with the description "exceeded the maximum number of events allowed by the Skylight agent," which means that some nodes where dropped from the trace before it was submitted. You can read more about this limitation <%= link_to "here", "./troubleshooting#e0003-exceeded-maximum-number-of-spans" %>. Typically, you would see this error for individual jobs that do a lot of repetitive work--- we generally recommend splitting these up so one job instance performs one unit of work.
 
 ### Submitting Feedback
 
-We may periodically request feedback via the <%= link_to "in-app messenger", "./contributing#reporting-bugs-and-submitting-feedback" %> or by email. In the meantime, if you spot a bug or have any suggestions, please click the "Send feedback" link in the UI and tell us all about it.
-
-<%= image_tag "skylight/docs/background-jobs/submitting-feedback.png", alt: "Screenshot showing the 'Submit feedback' link", style: "width: 100%; max-width: 600px;" %>
+We welcome feedback and bug reports via the <%= link_to "in-app messenger", "./contributing#reporting-bugs-and-submitting-feedback" %> or by email at [support@skylight.io](mailto:support@skylight.io).
 
 ## Background Jobs
 
@@ -167,21 +161,10 @@ SKYLIGHT_COMPONENT=sidekiq
 
 ## Background Jobs for OSS Apps {#oss}
 
-<!-- TODO: [jobs] Link here from OSS page when un-beta-ing -->
-<!-- TODO: [jobs] Remove this note when un-beta-ing -->
-
-<%= render partial: "note", locals: {
-  note: <<~NOTE
-          The Background Jobs alpha is not currently available for OSS apps. Please stay tuned!
-        NOTE
-}%>
-
-By default, the Skylight agent only enables itself for web requests, but enabling Skylight for background jobs is super easy!
-
-We welcome our <%= link_to "Skylight for Open Source", "/oss" %> customers and their contributors to profile their background jobs so that you can view them separately in the Skylight UI:
+By default, the Skylight agent only enables itself for web requests, but enabling Skylight for background jobs is super easy! We welcome our <%= link_to "Skylight for Open Source", "/oss" %> customers and their contributors to profile their background jobs so that you can view them separately in the Skylight UI:
 
 <%= image_tag "skylight/docs/background-jobs/background-jobs-oss.png", alt: "Screenshot of the Background Jobs for OSS user interface", style: "width: 100%; max-width: 600px;" %>
 
-If you would like to help an open source app enable Skylight background job instrumentation, click <%= link_to "here", "#background-jobs" %> to learn about Background Jobs, then open a PR to the open source project.
+If you would like to help an open source app enable Skylight background job instrumentation, read the above documentation to learn about Background Jobs, then open a PR to the open source project.
 
 Learn more about the Skylight for Open Source program <%= link_to "here", "./skylight-for-open-source" %>.
