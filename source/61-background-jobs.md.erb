@@ -61,6 +61,13 @@ By default, we will detect that you are running jobs and report them as a `worke
         NOTE
 }%>
 
+<%= render partial: "note", locals: {
+  type: "important",
+  note: <<~NOTE
+          If you have previously used the third-party `sidekiq-skylight` gem, we recommend removing it from your Gemfile. It is incompatible with Skylight 4.0.
+        NOTE
+}%>
+
 ## Enabling Background Job Instrumentation {#enabling}
 
 The process for enabling background jobs instrumentation is straightforward but varies depending on how you configure Skylight and whether or not you use Rails. Be sure you are following the correct set of instructions below.
