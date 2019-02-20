@@ -98,10 +98,7 @@ While we don't yet give you up to the minute alerts, you can get insight into yo
 
 ### Can I instrument background jobs like Sidekiq?
 
-Background job instrumentation is a high priority for us. The technical aspect of it isn't too hard, but the big blocker is the UI. We don't just want to throw the background jobs into the regular UI since in most cases, they'll take much longer than normal requests and won't have the same immediate impact on the end-user.
-
-But, we ourselves use Sidekiq and agree that it would be great to have more insight into our background jobs performance.
-
+Although Skylight was originally designed to profile web requests, background jobs are an important aspect of performance. We use Sidekiq ourselves, and often find ourselves wanting more insight into our background jobs performance. To that end, we recently launched a Skylight for Background Jobs <%= link_to "beta program", "./background-jobs" %> to help you discover and correct hidden performance issues in your Sidekiq, DelayedJob, and ActiveJob queues. This program is available to all Skylight Insiders.
 
 ### Do you plan to add error tracking?
 
