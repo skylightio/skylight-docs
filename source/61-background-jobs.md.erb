@@ -175,3 +175,25 @@ By default, the Skylight agent only enables itself for web requests, but enablin
 If you would like to help an open source app enable Skylight background job instrumentation, read the above documentation to learn about Background Jobs, then open a PR to the open source project.
 
 Learn more about the Skylight for Open Source program <%= link_to "here", "./skylight-for-open-source" %>.
+
+## Background Job Terminology {#terminology}
+
+Although most of the Skylight UI remains unchanged when viewing your jobs, there are a few subtle differences in terminology that you'll see in your Skylight dashboard. Below are a few helpful definitions to help you understand your worker requests.
+
+#### Problem duration
+The 95th percentile job duration. One out of every 20 jobs processed is slower than the 95th percentile (equivalent to <%= link_to 'problem response time', "./getting-started#true-response-times" %> for web requests). {#problem-response}
+
+#### Typical duration
+The 50th percentile job duration. This number indicates the median of your processed jobs duration, which is to say that half of the jobs processed will be faster than this, while the other half will be slower (equivalent to <%= link_to 'typical response time', "./getting-started#true-response-times" %> for web requests).
+
+#### Jobs processed
+The total number of jobs that were processed in a given time period.
+
+#### Queues
+The queue in which a background job was run. This may be the default queue or a specific, named queue.
+
+#### Frequency
+The number of times this job was processed per minute. A higher frequency of a job means more jobs processed.
+
+#### Agony
+A weighted measure of how slow a job was and how frequently it was processed, ranging from 0 to 3; equivalent to our web request version of <%= link_to "endpoint agony", "./skylight-guides#agony" %>.
