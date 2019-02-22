@@ -282,7 +282,7 @@ So what's the moral here? Know your tools. `ObjectSpace` and the libraries that 
 
 Skylight performs setup when the gem is required, at which time Rails will be detected and tapped into. However, you may find you have to manually require `skylight/railtie` if you need to load the Skylight gem before Rails.
 
-### I'm suddenly seeing many more requests than usual and my bill has gone way up, but my app has very few page views. What's going on?
+### I'm suddenly seeing many more requests than usual and my bill has gone way up, but my app has very few page views. What's going on? {#more-requests-than-usual}
 
 Unfortunately, it's possible that your app has been the target of some malicious bots or abusive requests. Even if you see very few page views, that is not an accurate indicator of how many requests your app is receiving behind the scenes. An overzealous health checker is another possible source, if you are using such a service.
 
