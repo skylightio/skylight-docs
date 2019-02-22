@@ -31,9 +31,17 @@ Multiple deploys in a short timespan will be combined into one icon, with the de
 
 Below the timeline is the Endpoints List. This list shows you all of the endpoints in your application that have been used in the <%= link_to "currently selected time range", "#navigating-through-time" %>; that is, all of the controllers and their actions.
 
-In addition to each endpoint’s name, we display the <%= link_to "Response type", "#response-types" %>, the <%= link_to "Typical Response and Problem Response times", "./getting-started#true-response-times" %>, Popularity, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that could cause slowdowns in your app.
+In addition to each endpoint’s name, we display the <%= link_to "Response type", "#response-types" %>, the <%= link_to "Typical Response and Problem Response times", "./getting-started#true-response-times" %>, <%= link_to "Popularity", "#popularity" %>, and <%= link_to "Agony", "#agony" %>, as well as <%= link_to '"heads up"', "#heads-up" %> icons to alert you to potential code mistakes that could cause slowdowns in your app.
 
 Once you’ve figured out where you’d like to focus your performance-tuning efforts, just click on the endpoint name and you’ll be taken to a <%= link_to "wonderland of performance information", "#navigating-your-endpoint" %>.
+
+#### Popularity
+
+Skylight allows you to view your endpoints based on how popular they are. The popularity of an endpoint is determined by the total number of requests per minute (RPM) it received. On the endpoints page, you can hover over a specific endpoints popularity to see its exact RPM during the selected time range.
+
+<%= image_tag 'skylight/docs/features/popularity.png', alt: 'Screenshot of hovering over endpoint popularity for RPM', style: "width: 100%; max-width: 350px;"%>
+
+The more bars an endpoint's popularity has, the more requests it received. We recommend sorting by popularity when trying to determine which endpoints have the most requests per minute. This can be particularly useful if you are trying to <%= link_to "troubleshoot", "./troubleshooting#more-requests-than-usual" %> an uptick in requests.
 
 #### Agony!!!
 
