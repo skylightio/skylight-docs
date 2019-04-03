@@ -12,7 +12,7 @@
     <%= render "table_of_contents" %>
 
     <div class="support-content card">
-      <h1><%= @chapter.title %></h1>
+      <h1 id="title-<%= @chapter.title.downcase.dasherize %>"><%= @chapter.title %></h1>
       <p class="support-chapter-description"><%= @chapter.description %></p>
       <%= @chapter.content.main.html_safe %>
     </div>
