@@ -1,5 +1,5 @@
 <% if ENV['ALGOLIA_API_KEY'] %>
-  <div class="support-search-input-wrapper">
+  <div class="support-search-input-wrapper" role="search">
     <%= text_field_tag "search", nil, class: "support-search-input round", placeholder: "Search documentation…" %>
   </div>
 <% end %>
