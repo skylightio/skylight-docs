@@ -1,17 +1,20 @@
 <div class="support-menu-container">
   <nav class="support-menu" id="support-menu">
-    <%= link_to "Support Topics", main_app.support_path, class: "support-menu-toggle", id: "support-menu-toggle" %>
-    <ul class="support-menu-chapter-list" id="support-menu-list">
-      <% @chapters.sort.each do |chapter| %>
-        <% if is_current_chapter?(chapter.id) || chapter.show_in_index %>
-          <li class="support-menu-chapter">
-            <%= link_to chapter.title, chapter_path(chapter.id), class: "support-menu-chapter-link" + (is_current_chapter?(chapter.id) ? " active": "") %>
-            <% if is_current_chapter?(chapter.id) %>
-              <%= chapter.content.toc.html_safe %>
-            <% end %>
-          </li>
+    <%= link_to "Support Topics & Search", main_app.support_path, class: "support-menu-toggle", id: "support-menu-toggle" %>
+    <div class="support-menu-list-container" id="support-menu-list">
+      <%= render "support_search_input" %>
+      <ul class="support-menu-chapter-list">
+        <% @chapters.sort.each do |chapter| %>
+          <% if is_current_chapter?(chapter.id) || chapter.show_in_index %>
+            <li class="support-menu-chapter">
+              <%= link_to chapter.title, chapter_path(chapter.id), class: "support-menu-chapter-link" + (is_current_chapter?(chapter.id) ? " active": "") %>
+              <% if is_current_chapter?(chapter.id) %>
+                <%= chapter.content.toc.html_safe %>
+              <% end %>
+            </li>
+          <% end %>
         <% end %>
-      <% end %>
-    </ul>
+      </ul>
+    </div>
   </nav>
 </div>
