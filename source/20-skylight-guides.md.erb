@@ -156,7 +156,13 @@ The time explorer lives at the bottom of your app views. For both the <%= link_t
 
 You can drag the selected range, use the arrows buttons, or choose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
 
-<%= render partial: "note", locals: {type: "pro_tip", note: "The URL updates in response to new time selections. You can share the current URL with other collaborators or even modify the range by modifying the URL!"} %>
+<%= render partial: "note", locals: {type: "pro_tip", note: "The URL updates in response to new time selections. Click the permalink icon to share the current time range with collaborators or even modify the range by modifying the URL!"} %>
+
+#### Live Mode (in Beta) {#live-mode}
+
+With the Live Mode <%= link_to "beta", "./faqs#accessing-user-interface-beta-features" %> feature enabled, you can view live data (updated once per minute) for any current time frames by selecting a "Live Stats" option on the left-hand side of the Time Explorer:
+
+<%= image_tag 'skylight/docs/features/time-explorer-live-mode.png', alt: 'Screenshot of Time Explorer in Live Mode' %>
 
 ## Staying the Course
 
