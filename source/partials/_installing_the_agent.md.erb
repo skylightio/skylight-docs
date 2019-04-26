@@ -1,15 +1,15 @@
-<%= render partial: "note", locals: {type: "important", note: "The following steps should be performed in your local development environment."} %>
+1. Visit the Skylight app to get your <%= link_to "setup token", "/app/setup" %>.
 
-1. Add Skylight to your Gemfile. Be sure to include it in all of your environments.
+1. Add Skylight to all environments your Gemfile.
     ```ruby
     # Gemfile
     gem "skylight"
     ```
 
-1. Get your setup token from <%= link_to "http://skylight.io/app/setup", "/app/setup" %>.
-
-1. Then run the following commands in your terminal:
-    ```shell
+1. Run the following commands in your _development environment_:
+   <!-- NOTE: This isn't actually ruby but the "shell" code formatting wasn't as nice -->
+    ```ruby
+    # Shell
     bundle install
     bundle exec skylight setup <setup token>
     ```
