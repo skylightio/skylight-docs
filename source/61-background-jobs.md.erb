@@ -3,9 +3,30 @@ title: Background Jobs
 description: Setting up and managing instrumentation for your workers.
 ---
 
-## Skylight for Background Jobs
+## Skylight for Background Jobs (Beta)
 
 While Skylight was originally designed to profile web requests, we understand that the web interface is only a part of your server-side application. We developed Skylight for Background Jobs in order to help you discover and correct hidden performance issues in your Sidekiq, DelayedJob, and ActiveJob queues.
+
+<%= render partial: "note", locals: {
+  note: <<~NOTE
+          Skylight for Background Jobs is currently available as a #{link_to("beta", "./faqs/#accessing-user-interface-beta-features")}
+          feature to Skylight Insiders. As an app owner, you must subscribe to Insiders before activating the background jobs feature in
+          the agent.
+        NOTE
+}%>
+
+### Beta Caveats
+
+We are still working through some `TODO`s for background jobs, so there are some limitations to the feature in its current state. These include:
+* We currently support jobs running via ActiveJob (with most backend frameworks), or Sidekiq and Delayed::Job as standalone processors. Click <%= link_to "here", "#probes" %> for a full list.
+* Currently, jobs running over four hours will not be tracked (we have incrementally raised this limit and are still investigating the potential effects of raising it further).
+* Jobs and requests with more than 2,048 items in the event sequence will result in "pruned" traces. In the job view in the UI, you may see nodes with the description "exceeded the maximum number of events allowed by the Skylight agent," which means that some nodes where dropped from the trace before it was submitted. You can read more about this limitation <%= link_to "here", "./troubleshooting#e0003-exceeded-maximum-number-of-spans" %>. Typically, you would see this error for individual jobs that do a lot of repetitive work--- we generally recommend splitting these up so one job instance performs one unit of work.
+
+### Submitting Feedback
+
+We welcome feedback and bug reports via the <%= link_to "in-app messenger", "./contributing#reporting-bugs-and-submitting-feedback" %> or by email at [support@skylight.io](mailto:support@skylight.io).
+
+## Background Jobs
 
 By default, the Skylight agent only enables itself for web requests. In many cases, your applications might run processes in the background, via <%= link_to "Sidekiq", "https://sidekiq.org/" %>, <%= link_to "Delayed::Job", "https://github.com/collectiveidea/delayed_job" %>, or some other framework. In fact, we recommend moving certain slow actions into background jobs in our <%= link_to "Performance Tips", "./performance-tips#move-third-party-integration-to-workers" %>. This page shows you how to configure Skylight to profile your background jobs so that you can view them separately in the Skylight UI:
 
@@ -17,14 +38,9 @@ By default, the Skylight agent only enables itself for web requests. In many cas
 
 * <%= link_to "Sidekiq", "https://sidekiq.org/" %>
 * <%= link_to "Delayed::Job", "https://github.com/collectiveidea/delayed_job" %>
-* <%= link_to "ActiveJob", "https://guides.rubyonrails.org/active_job_basics.html" %> (supporting Sidekiq, Backburner, Que, Delayed::Job, Sneakers, Shoryuken, and others)
+* <%= link_to "ActiveJob", "https://guides.rubyonrails.org/active_job_basics.html" %> (supporting Sidekiq, Backburner, Que, Delayed::Job, Sneakers, and others)
 
 <%= link_to "Resque", "https://github.com/resque/resque" %> is officially **not** supported for now, due to incompatibilities between Resque and Skylight's process model (it doesn’t work via ActiveJob either).
-
-### Limitations
-
-* Currently, jobs running over four hours will not be tracked (we have incrementally raised this limit and are still investigating the potential effects of raising it further).
-* Jobs and requests with more than 2,048 items in the event sequence will result in "pruned" traces. In the job view in the UI, you may see nodes with the description "exceeded the maximum number of events allowed by the Skylight agent," which means that some nodes where dropped from the trace before it was submitted. You can read more about this limitation <%= link_to "here", "./troubleshooting#e0003-exceeded-maximum-number-of-spans" %>. Typically, you would see this error for individual jobs that do a lot of repetitive work--- we generally recommend splitting these up so one job instance performs one unit of work.
 
 ### Default Jobs Component Naming {#component-names}
 By default, we will detect that you are running jobs and report them as a `worker` component. If you would like to see another name in the Skylight user interface, the component name can be customized, according to the <%= link_to "instructions", "#enabling" %> for your specific configuration setup.
@@ -181,8 +197,3 @@ The number of times this job was processed per minute. A higher frequency of a j
 
 #### Agony
 A weighted measure of how slow a job was and how frequently it was processed, ranging from 0 to 3; equivalent to our web request version of <%= link_to "endpoint agony", "./skylight-guides#agony" %>.
-
-### Submitting Feedback
-
-We welcome feedback and bug reports via the <%= link_to "in-app messenger", "./contributing#reporting-bugs-and-submitting-feedback" %> or by email at [support@skylight.io](mailto:support@skylight.io).
-
