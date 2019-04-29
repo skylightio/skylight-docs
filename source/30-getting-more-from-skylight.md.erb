@@ -20,6 +20,7 @@ In Rails applications, we use ActiveSupport::Notifications to track the followin
 * ActiveRecord SQL Queries
 * ActiveRecord Instantiation
 * ActiveSupport Cache
+* ActiveStorage
 
 
 ### Grape
@@ -33,9 +34,21 @@ _See the <%= link_to "Grape setup instructions", "./advanced-setup#grape-1" %>._
 
 ### Sinatra
 
-_See the <%= link_to "Sinatra setup instructions", "./advanced-setup#sinatra-configuration" %>.._
+_See the <%= link_to "Sinatra setup instructions", "./advanced-setup#sinatra-configuration" %>._
 
 * Endpoint Execution
+
+
+### Background Jobs
+
+_See the <%= link_to "Background jobs setup instructions", "./background-jobs" %>_
+
+
+### Active Job Enqueueing
+
+_Enabled by default_
+
+* Enqueuing of Active Jobs
 
 
 ### ActiveModel::Serializers
@@ -44,6 +57,26 @@ _Add_ `active_model_serializers` _to <%= link_to "probes list", "./advanced-setu
 
 * Serialization
 
+### Coach
+
+_Enabled by default_
+
+* Middleware
+
+
+### Couch Potato
+
+_Add_ `couch_potato` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
+
+* Database Queries
+
+
+### Elasticsearch
+
+_Add_ `elasticsearch` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
+
+* Search Queries
+
 
 ### Excon
 
@@ -51,11 +84,20 @@ _Add_ `excon` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * HTTP Requests
 
+
 ### Faraday
 
 _Add_ `faraday` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * HTTP Requests
+
+
+### HTTPClient
+
+_Add_ `httpclient` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
+
+* HTTP Requests
+
 
 ### Middleware
 
@@ -113,6 +155,7 @@ _Enabled automatically with Sinatra or Add_ `sequel` _to <%= link_to "probes lis
 _Enabled automatically with Sinatra or Add_ `tilt` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * Template Rendering
+
 
 ## Custom App Instrumentation
 
