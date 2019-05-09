@@ -175,6 +175,14 @@ Please check your logs for <%= link_to "Skylight errors", "#skylight-errors" %>.
 
 This is due to our use of two different compression algorithms for the data. In some rare cases, especially when there were only one or two requests in a range, there's a slight mismatch between the algorithms. We hope to resolve this in future iterations.
 
+### Web Requests are Sent to the Background Jobs Component (or vice versa)
+
+When the Skylight instrumenter starts, it attempts to determine what sort of process is running (either a web server or a background job processor). As there is no standard interface for doing so, it relies on a number of known hints. If your app uses a more bespoke setup, Skylight may send data to the wrong component. This is more likely to happen if you have set a custom worker component name, in which case it can be solved by setting `SKYLIGHT_COMPONENT=web` in the environment that runs your web server. 
+
+Similarly, if you have background job data reported to your web server, setting `SKYLIGHT_COMPONENT=worker` when running your background jobs should tell Skylight to direct these traces to your worker component.
+
+Even if this fixes your issue, please do email [support@skylight.io](mailto:support@skylight.io) and let us know exactly what commands you use to start your server or background jobs processors&mdash; we'd like automatically handle as much of these as possible.
+
 ## Skylight Errors
 
 The Skylight agent will log errors to `log/skylight.log` or on Heroku in STDOUT (Look for lines starting with `[SKYLIGHT]`).
