@@ -24,7 +24,7 @@ For this reason, we strongly recommend against naming your primary production en
 <%= render partial: "note", locals: {
   type: "important",
   note: <<~NOTE
-          If you already have multiple environments set up using the legacy method of creating separate apps, the instructions on this page do not apply to you. Instead, click #{link_to "here", "/app/settings/merging"} for details on how to merge these legacy environment apps into their parent apps.
+          If you already have multiple environments set up using the legacy method of creating separate apps, the instructions on this page do not apply to you. Instead, visit #{link_to "the merge settings page", "/app/settings/merging"} for details on how to merge these legacy environment apps into their parent apps.
         NOTE
 }%>
 
@@ -53,7 +53,7 @@ config.skylight.environments += ["staging"]
 
 **If your environment name _differs_ from your Rails environment:**
 
-<%= link_to "Click here for an example of why this might be the case.", "#skylight-environments-vs-rails-environments" %>
+<%= link_to "See an example of why this might be the case.", "#skylight-environments-vs-rails-environments" %>
 
 Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to override the environment name.
 
@@ -94,7 +94,7 @@ SKYLIGHT_ENABLED=true
 
 **If your environment name _differs_ from your Rails environment:**
 
-<%= link_to "Click here for an example of why this might be the case.", "#skylight-environments-vs-rails-environments" %>
+<%= link_to "See an example of why this might be the case.", "#skylight-environments-vs-rails-environments" %>
 
 Set the environment name explicitly. For example:
 
@@ -124,7 +124,7 @@ end
 
 #### 3. Specify an environment name.
 
-Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to override the environment name. The environment name can be dynamic if your environment name "differs from the environment specified in `Skylight.start!`. <%= link_to "(Click here for an example of why this might be the case.)", "#skylight-environments-vs-rails-environments" %> For example:
+Use <%= link_to "environment-specific configuration", "#environment-specific-configuration" %> to override the environment name. The environment name can be dynamic if your environment name "differs from the environment specified in `Skylight.start!`. <%= link_to "(See an example of why this might be the case.)", "#skylight-environments-vs-rails-environments" %> For example:
 
 ```yaml
 # config/skylight.yml
@@ -212,6 +212,6 @@ We welcome our <%= link_to "Skylight for Open Source", "/oss" %> customers and t
 
 <%= image_tag "skylight/docs/environments/environments-dropdown-oss.png", alt: "Screenshot of Environments Dropdown for an OSS app", style: "width: 100%; max-width: 350px;" %>
 
-If you would like to help an open source app enable Skylight in a new environment, click <%= link_to "here", "#skylight-environments" %> to learn about Skylight Environments, then open a PR to the open source project.
+If you would like to help an open source app enable Skylight in a new environment, see the <%= link_to "Skylight Environments", "#skylight-environments" %> section to learn more, then open a PR to the open source project.
 
-Learn more about the Skylight for Open Source program <%= link_to "here", "./skylight-for-open-source" %>.
+Learn more about the Skylight for Open Source program at the <%= link_to "OSS page", "./skylight-for-open-source" %>.

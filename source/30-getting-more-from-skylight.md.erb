@@ -165,7 +165,7 @@ _Enabled automatically with Sinatra or Add_ `tilt` _to <%= link_to "probes list"
 
 ## Custom App Instrumentation
 
-The easiest way to add custom instrumentation to your application is by specifying <%= link_to "methods to instrument", "#method-instrumentation" %>, but it is also possible to instrument <%= link_to "specific blocks of code", "#block-instrumentation" %>. This way, you can see where particular methods or blocks of code are called in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %>. Check out an example of custom instrumentation in action <%= link_to "here", "#custom-instrumentation-in-action" %>. Be sure to follow our <%= link_to "custom instrumentation best practices", "#custom-instrumentation-best-practices" %> in order to avoid causing errors in your Skylight trace.
+The easiest way to add custom instrumentation to your application is by specifying <%= link_to "methods to instrument", "#method-instrumentation" %>, but it is also possible to instrument <%= link_to "specific blocks of code", "#block-instrumentation" %>. This way, you can see where particular methods or blocks of code are called in the <%= link_to "Event Sequence", "./skylight-guides#event-sequence" %>. Check out <%= link_to "an example of custom instrumentation in action", "#custom-instrumentation-in-action" %>. Be sure to follow our <%= link_to "custom instrumentation best practices", "#custom-instrumentation-best-practices" %> in order to avoid causing errors in your Skylight trace.
 
 ### Method instrumentation
 
@@ -260,7 +260,7 @@ If you're curious about how our instrumentation works, you're in the right place
 
 ###  Featherweight Agent
 
-The Skylight agent is written primarily in <%= link_to "Rust", "https://www.rust-lang.org/" %>, a systems programming language on par with C. This means we have a very low overhead so it’s safe to run Skylight in production, even in memory limited environments like Heroku. You can read more about this aspect of our agent <%= link_to "here", "http://blog.skylight.io/our-new-featherweight-agent/" %> and more about the agent's 1.0 release <%= link_to "here", "http://blog.skylight.io/skylight-gem-goes-1-0/" %>.
+The Skylight agent is written primarily in <%= link_to "Rust", "https://www.rust-lang.org/" %>, a systems programming language on par with C. This means we have a very low overhead so it’s safe to run Skylight in production, even in memory limited environments like Heroku. You can read more about this aspect of our agent in our <%= link_to "Featherweight Agent blog post", "http://blog.skylight.io/our-new-featherweight-agent/" %> and more about the agent's 1.0 release in our <%= link_to "announcment post", "http://blog.skylight.io/skylight-gem-goes-1-0/" %>.
 
 
 ### Normalizers
@@ -278,4 +278,4 @@ To make sure we do this in a sane fashion, we developed `Probes`. Probes are sma
 
 And, since we don't really like having to monkey-patch things either, when at all possible, we <%= link_to "submit pull requests", "https://github.com/ruby-grape/grape/pull/1086" %> to relevant projects to add in `ActiveSupport::Notifications`.
 
-For more information about how to add an existing probe (such as Mongo, Moped, Excon, etc.) to your Skylight setup, go <%= link_to "here", "./advanced-setup#probes" %>.
+For more information about how to add an existing probe (such as Mongo, Moped, Excon, etc.) to your Skylight setup, see the <%= link_to "Advanced Setup Probes", "./advanced-setup#probes" %> page.

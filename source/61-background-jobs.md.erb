@@ -24,7 +24,7 @@ By default, the Skylight agent only enables itself for web requests. In many cas
 ### Limitations
 
 * Currently, jobs running over four hours will not be tracked (we have incrementally raised this limit and are still investigating the potential effects of raising it further).
-* Jobs and requests with more than 2,048 items in the event sequence will result in "pruned" traces. In the job view in the UI, you may see nodes with the description "exceeded the maximum number of events allowed by the Skylight agent," which means that some nodes where dropped from the trace before it was submitted. You can read more about this limitation <%= link_to "here", "./troubleshooting#e0003-exceeded-maximum-number-of-spans" %>. Typically, you would see this error for individual jobs that do a lot of repetitive work--- we generally recommend splitting these up so one job instance performs one unit of work.
+* Jobs and requests with more than 2,048 items in the event sequence will result in "pruned" traces. In the job view in the UI, you may see nodes with the description "exceeded the maximum number of events allowed by the Skylight agent," which means that some nodes where dropped from the trace before it was submitted. You can read more about this limitation in our <%= link_to "Troubleshooting docs", "./troubleshooting#e0003-exceeded-maximum-number-of-spans" %>. Typically, you would see this error for individual jobs that do a lot of repetitive work--- we generally recommend splitting these up so one job instance performs one unit of work.
 
 ### Default Jobs Component Naming {#component-names}
 By default, we will detect that you are running jobs and report them as a `worker` component. If you would like to see another name in the Skylight user interface, the component name can be customized, according to the <%= link_to "instructions", "#enabling" %> for your specific configuration setup.
@@ -41,7 +41,7 @@ By default, we will detect that you are running jobs and report them as a `worke
 <%= render partial: "note", locals: {
   type: "important",
   note: <<~NOTE
-          If you already have background jobs set up using the legacy method of creating a separate app for your workers and using a third-party gem, click #{link_to "here", "/app/settings/merging"} for details on how to merge these legacy worker apps into their parent apps to maintain data continuity.
+          If you already have background jobs set up using the legacy method of creating a separate app for your workers and using a third-party gem, visit the #{link_to "merge settings page", "/app/settings/merging"} for details on how to merge these legacy worker apps into their parent apps to maintain data continuity.
         NOTE
 }%>
 
@@ -92,7 +92,7 @@ config.skylight.probes << 'delayed_job'
 
 <%= render partial: "note", locals: {
   note: <<~NOTE
-          If you would like to use the default `worker` component name, skip this step. #{link_to "Click here for more information.", "#component-names"}
+          If you would like to use the default `worker` component name, skip this step. See #{link_to "Component Names", "#component-names"} for more information.
         NOTE
 }%>
 
@@ -138,7 +138,7 @@ For ActiveJob and Delayed::Job, you'll need to <%= link_to "enable the appropria
 
 <%= render partial: "note", locals: {
   note: <<~NOTE
-          If you would like to use the default `worker` component name, skip this step. #{link_to "Click here for more information.", "#component-names"}
+          If you would like to use the default `worker` component name, skip this step. See #{link_to "Component Names", "#component-names"} for more information.
         NOTE
 }%>
 
@@ -158,7 +158,7 @@ By default, the Skylight agent only enables itself for web requests, but enablin
 
 If you would like to help an open source app enable Skylight background job instrumentation, read the above documentation to learn about Background Jobs, then open a PR to the open source project.
 
-Learn more about the Skylight for Open Source program <%= link_to "here", "./skylight-for-open-source" %>.
+Learn more about the Skylight for Open Source program at the <%= link_to "OSS page", "./skylight-for-open-source" %>.
 
 ## Background Job Terminology {#terminology}
 
