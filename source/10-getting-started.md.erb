@@ -9,12 +9,12 @@ First, check that your app meets the <%= link_to "requirements", "./advanced-set
 
 <%= render partial: "installing_the_agent" %>
 
-Click <%= link_to "here", "./advanced-setup" %> for advanced installation procedures like setting environment variables, using custom configuration, setting up multiple environments, and using Skylight on a framework other than Rails.
+See the <%= link_to "Advanced Setup", "./advanced-setup" %> section for more details on setting environment variables, using custom configuration, setting up multiple environments, and using Skylight on a framework other than Rails.
 
 <%= render partial: "note", locals: {
   type: "pro_tip",
   note: <<~NOTE
-          Setting up an open source app? Click #{link_to "here", "./skylight-for-open-source#setup"} for more detailed setup instructions.
+          Setting up an open source app? #{link_to "See the detailed setup instructions.", "./skylight-for-open-source#setup"}
         NOTE
 }%>
 
@@ -31,20 +31,20 @@ Skylight makes it easy to understand and act on your app’s performance data:
 
 <%= render partial: "features_app_dashboard" %>
 
-Learn more <%= link_to "here", "./skylight-guides#navigating-your-app" %>.
+See <%= link_to "Navigating Your App", "./skylight-guides#navigating-your-app" %> to learn more.
 
 
 ### Endpoint View
 
 <%= render partial: "features_endpoint_view" %>
 
-Learn more <%= link_to "here", "./skylight-guides#navigating-your-endpoint" %>.
+See <%= link_to "Navigating Your Endpoint", "./skylight-guides#navigating-your-endpoint" %> to learn more.
 
 ### Trends
 
 <%= render partial: "features_trends" %>
 
-Learn more <%= link_to "here", "./skylight-guides#staying-the-course" %>.
+See <%= link_to "Staying the Course", "./skylight-guides#staying-the-course" %> to learn more.
 
 
 ## The Theory Behind Skylight
@@ -69,7 +69,7 @@ Most tools only show averages, which are easy to calculate but provide limited u
 
 Averages are almost useless when thinking about web performance, and in the worst case, are actually misleading. For more information, see <%= link_to "DHH’s blog post, The Problem with Averages", "http://signalvnoise.com/posts/1836-the-problem-with-averages" %>. Google, Twitter, and GitHub (to name a few) all use 95th percentile numbers when tracking performance.
 
-Learn more about Skylight's approach to percentiles <%= link_to "here", "http://blog.skylight.io/the-log-normal-reality/" %>.
+Learn more about Skylight's approach to percentiles <%= link_to "at our blog", "http://blog.skylight.io/the-log-normal-reality/" %>.
 
 
 ### Aggregation vs. Sampling

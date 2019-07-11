@@ -11,7 +11,7 @@ Yes! You can apply for a free [Skylight for Open Source][skylight-for-oss] accou
 
 The goal of this program is to help encourage your contributors to find and address performance issues in your open source app, by giving them actionable insights and feedback with Skylight. To ensure we can be effective in achieving these goals, your app must meet the following requirements to qualify for the program:
 
-- Its source code is publicly available on Github, and
+- Its source code is publicly available on GitHub, and
 - Its source code is licensed under an [open source license][oss-license], and
 - It is accessible to anyone on the public Internet, and
 - Its primary utility and the majority of its functionality is available for anyone to use for free, and
@@ -19,9 +19,9 @@ The goal of this program is to help encourage your contributors to find and addr
 
 Here are some specific examples:
 
-- [The Odin Project][odin] and the [Homebrew Formulae Browser][homebrew] are both examples of _single-deployment_ apps that meet the requirements. Their source code is available on Github under an open source license. They are deployed as publicly accessible website available for anyone to use or sign up for free, other than any administration functionality.
+- [The Odin Project][odin] and the [Homebrew Formulae Browser][homebrew] are both examples of _single-deployment_ apps that meet the requirements. Their source code is available on GitHub under an open source license. They are deployed as publicly accessible website available for anyone to use or sign up for free, other than any administration functionality.
 
-- [Discourse][discourse] is an example of a _multi-deployment_ app. While its source code is available on Github under an open source license, it is up to the individual site operators to deploy their own installation of the app (either with the official managed hosting option or self-hosting).
+- [Discourse][discourse] is an example of a _multi-deployment_ app. While its source code is available on GitHub under an open source license, it is up to the individual site operators to deploy their own installation of the app (either with the official managed hosting option or self-hosting).
 
   In this case, the purpose of the program is to help the site operators find performance issues in the underlying open source software (Discourse in this example), so that they can easily report problems to the maintainers or upstream any patches.
 
@@ -51,7 +51,7 @@ Once you have <%=link_to "applied", "https://www.skylight.io/oss#oss-sign-up"%> 
   note: <<~NOTE
           The contents of the skylight.yml file should be considered secret,
           so be careful not to commit it
-          to your repo! Click #{link_to "here", "./advanced-setup#setting-authentication-tokens"}
+          to your repo! See #{link_to "Setting Authentication Tokens", "./advanced-setup#setting-authentication-tokens"}
           to learn how to set an environment variable instead.
         NOTE
 }
@@ -70,7 +70,7 @@ After your open source app is set up and reporting data, please [let us know](ma
 
 <%= image_tag 'skylight/docs/skylight-for-open-source/public-links.png', alt: 'Screenshot of open source public links in dashboard' %>
 
-Both of these will link to your open source public dashboard, where your contributors can explore your public performance data. You can see examples of other open source apps' public dashboards <%= link_to "here", "http://oss.skylight.io" %>.
+Both of these will link to your open source public dashboard, where your contributors can explore your public performance data. You can see examples of other open source apps' public dashboards at our <%= link_to "OSS site", "http://oss.skylight.io" %>.
 
 On <%= link_to "your app settings page", "/app/settings" %>, you will find a place to add an app URL, which should be specific to your open source app.
 
@@ -78,7 +78,7 @@ On <%= link_to "your app settings page", "/app/settings" %>, you will find a pla
 
 The app URL will add a direct link to your project's app, directly from the Skylight dashboard. This link will make it easy for contributors to your project to navigate between your public dashboard and your actual app.
 
-Finally, you will need to include the performance monitoring badge within your app's README as part of the program's requirements, which you can read more about <%= link_to "here", "#requirements" %>.
+Finally, you will need to include the performance monitoring badge within your app's README as part of the <%= link_to "program's requirements", "#requirements" %>.
 
 <%= image_tag 'skylight/docs/skylight-for-open-source/performance-badge.png', alt: 'Screenshot of performance badge on settings page' %>
 
@@ -96,4 +96,4 @@ Read more about <%= link_to "security and Skylight", "./faqs#will-my-users-priva
 
 ### Why did you create the Skylight for Open Source program? {#why}
 
-Great question! We created the Skylight for Open Source program to make it easy for open source maintainers to share performance data with their contributors. You can read more about the Skylight for Open Source program and why it exists <%= link_to "here", "http://blog.skylight.io/announcing-the-skylight-for-open-source-program/" %>.
+Great question! We created the Skylight for Open Source program to make it easy for open source maintainers to share performance data with their contributors. You can read more about the Skylight for Open Source program and why it exists in our <%= link_to "announcement blog post", "http://blog.skylight.io/announcing-the-skylight-for-open-source-program/" %>.
