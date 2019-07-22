@@ -222,7 +222,7 @@ These errors indicate that the agent is unable to parse a SQL query in your appl
 
 Generally, the reason you will see this error is because you're using a syntax we do not recognize (often a more complex or non-standard syntax). We've optimized for the most common syntax constructions and plan to support more in the future.
 
-When running across this error, please <%= link_to "report it", "./contributing#reporting-bugs-and-submitting-feedback" %> so we can learn what queries are important to our customers. If this error becomes too noisy, you can disable it by setting `log_sql_parse_errors: false` in your <%= link_to "config", "advanced-setup#setting-configuration-variables" %>.
+When running across this error, please <%= link_to "report it", "./contributing#reporting-bugs-and-submitting-feedback" %> so we can learn what queries are important to our customers. If this error becomes too noisy, you can disable it by setting `log_sql_parse_errors: false` in your <%= link_to "config", "advanced-setup#setting-configuration-variables" %>. Alternately, you may selectively disable Skylight for certain noisy spans using <%= link_to "Skylight.mute", "./getting-more-from-skylight#mute" %>.
 
 
 ### Other Errors
