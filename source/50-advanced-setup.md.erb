@@ -121,9 +121,9 @@ The authentication token is *required* when reporting data back to the Skylight 
 
 Or set the `SKYLIGHT_AUTHENTICATION` environment variable.
 
-####  Ignoring Heartbeat Endpoints
+####  Ignoring Heartbeat/Health Check Endpoints
 
-Sometimes, an endpoint exists solely for your load-balancer to determine whether your Rails process is up. If you would like to ignore this endpoint, you can set the ignored heartbeat endpoint as follows:
+Sometimes, an endpoint exists solely for your load-balancer to determine whether your Rails process is up. If you would like to ignore this endpoint, you can set the ignored heartbeat/health check endpoint as follows:
 
 ```yaml
 # config/skylight.yml
@@ -141,7 +141,7 @@ Alternatively, you may add the `SKYLIGHT_IGNORED_ENDPOINTS` environment variable
 SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,OtherController#heartbeat
 ```
 
-You can not add an endpoint name using a wildcard like `ControllerName#*`. We generally discourage folks from ignoring any endpoints that are not heartbeat endpoints, as it can reduce the usefulness of Skylight. If you don't think an endpoint is going to be a problem, but then you ignore it, you won't know that it's causing an issue until it's too late!
+You can not add an endpoint name using a wildcard like `ControllerName#*`. We generally discourage folks from ignoring any endpoints that are not heartbeat/health check endpoints, as it can reduce the usefulness of Skylight. If you don't think an endpoint is going to be a problem, but then you ignore it, you won't know that it's causing an issue until it's too late!
 
 #### Log File
 
