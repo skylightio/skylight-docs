@@ -51,7 +51,7 @@ If you are still having trouble, please run `Skylight.instrumenter.config` in yo
 
 By default, Skylight uses your Rails `tmp` path as the sockfile directory. This directory must be writeable and cannot be located on an NFS mount (e.g. Vagrant).
 
-Set `daemon.sockdir_path` in your <%= link_to "config", "./advanced-setup#daemon-socket-path" %> to a writeable, non-NFS path.
+Set `SKYLIGHT_SOCKDIR_PATH` (in your env) or `daemon.sockdir_path` (in your <%= link_to "config", "./advanced-setup#daemon-socket-path" %>) to a writeable, non-NFS path, like `/tmp`.
 
 #### Logfile path is not writeable
 
