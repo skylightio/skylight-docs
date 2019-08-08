@@ -83,7 +83,7 @@ module Skylight
       #
       # @return [Array<String>]
       def cache_key
-        [filename, Skylight::Docs::REVISION]
+        [filename, Skylight::Docs::REVISION, ENV["SKYLIGHT_AGENT_EDGE_VERSION"]]
       end
 
       # Gets or sets the `content` of a Chapter object.
