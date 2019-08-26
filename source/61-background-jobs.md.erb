@@ -48,7 +48,7 @@ By default, we will detect that you are running jobs and report them as a `worke
 <%= render partial: "note", locals: {
   type: "important",
   note: <<~NOTE
-          If you have previously used the third-party `sidekiq-skylight` gem, we recommend removing it from your Gemfile. It is incompatible with Skylight 4.0.
+          If you have previously used the third-party `sidekiq-skylight` gem, we recommend removing it from your Gemfile. It is incompatible with Skylight 4.0. Additionally, you may need to update your #{link_to "ignored endpoints configuration", "./advanced-setup#ignoring-heartbeathealth-check-endpoints"} to remove the `#perform` method name from the worker name.
         NOTE
 }%>
 
