@@ -129,16 +129,16 @@ Sometimes, an endpoint exists solely for your load-balancer to determine whether
 # config/skylight.yml
 ignored_endpoints:
   - HeartbeatController#status
-  - OtherController#heartbeat
+  - StatusWorker
 ```
 
 Once configured, Skylight will not collect instrumentation and requests to this endpoint will not be counted in the application’s usage or be represented as part of the application’s aggregated response time and RPM graphs.
 
-The name of the endpoint can be found in the endpoints list on your Skylight application dashboard. For Rails actions, it will be `Controller#action`, for Sinatra it will be `VERB path`, and for Grape it will be `Module [VERB] path`. You can find the name in the Skylight <%= link_to "endpoints list", "./skylight-guides#endpoints-list" %> if you’re unsure.
+The name of the endpoint can be found in the endpoints list on your Skylight application dashboard. For Rails actions, it will be `ControllerName#action`. For workers, it will be `WorkerName`. For Sinatra it will be `VERB path`, and for Grape it will be `Module [VERB] path`. You can find the name in the Skylight <%= link_to "endpoints list", "./skylight-guides#endpoints-list" %> if you’re unsure.
 
 Alternatively, you may add the `SKYLIGHT_IGNORED_ENDPOINTS` environment variable. For example:
 ```shell
-SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,OtherController#heartbeat
+SKYLIGHT_IGNORED_ENDPOINTS=HeartbeatController#status,StatusWorker
 ```
 
 You can not add an endpoint name using a wildcard like `ControllerName#*`. We generally discourage folks from ignoring any endpoints that are not heartbeat/health check endpoints, as it can reduce the usefulness of Skylight. If you don't think an endpoint is going to be a problem, but then you ignore it, you won't know that it's causing an issue until it's too late!
