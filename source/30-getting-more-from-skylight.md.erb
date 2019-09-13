@@ -140,6 +140,23 @@ _Enabled by default_
 * HTTP Requests
 
 
+### GraphQL (Beta!)
+
+_Add_ `graphql` _to <%= "probes list", "./advanced-setup#probes" %>
+
+* Available in Skylight version 4.2.0.beta2 and graphql-ruby versions >= 1.7.
+* Traces invocations of `GraphQL::Schema#excecute` and `GraphQL::Schema#multiplex`
+
+The GraphQL probe conditionally adds the `GraphQL::Tracing::NotificationsTracing` module to your schema
+the first time a query is executed (You may see a note about this in STDOUT).
+
+In order for Skylight's trace aggregation to work properly, we highly encourage the use of named queries.
+Your query names will be used as endpoint names on your Skylight dashboard, so all similar queries should
+be grouped together. Anonymous queries will also be tracked, but instrumentation is disabled below the
+`Schema#execute` span (we don't believe aggregating divergent anonymous queries would provide you
+with actionable insights).
+
+
 ### Redis
 
 _Add_ `redis` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
