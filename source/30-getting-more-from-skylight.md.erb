@@ -140,9 +140,9 @@ _Enabled by default_
 * HTTP Requests
 
 
-### GraphQL (Beta!)
+### GraphQL (Beta!) {#graphql}
 
-_Add_ `graphql` _to <%= "probes list", "./advanced-setup#probes" %>
+_Add_ `graphql` _to <%= link_to "probes list", "./advanced-setup#probes" %>_
 
 * Available in Skylight version 4.2.0.beta2 and graphql-ruby versions >= 1.7.
 * Traces invocations of `GraphQL::Schema#excecute` and `GraphQL::Schema#multiplex`
@@ -156,6 +156,7 @@ be grouped together. Anonymous queries will also be tracked, but instrumentation
 `Schema#execute` span (we don't believe aggregating divergent anonymous queries would provide you
 with actionable insights).
 
+<%= render partial: "note", locals: { type: "important", note: "If you have added `use(GraphQL::Tracing::SkylightTracing)` to your schema, please remove it before adding the official Skylight probe."} %>
 
 ### Redis
 
