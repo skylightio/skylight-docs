@@ -16,7 +16,7 @@ module MarkdownHandler
   def self.call(view, source)
     source = source.sub(frontmatter_regex, "")
     compiled_source = erb.call(view, source)
-    "Kramdown::Document.new(begin;#{compiled_source};end, #{kramdown_options}).to_html"
+    "Kramdown::Document.new(begin;#{compiled_source};end, #{kramdown_options}).to_html.html_safe"
   end
 end
 

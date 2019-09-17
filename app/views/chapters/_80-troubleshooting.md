@@ -29,7 +29,9 @@ Checking Skylight startup
   Waiting for daemon...   Success
 ```
 
-<%= render partial: "note", locals: {type: "pro_tip", note: "On Heroku you can access your production terminal with <code>heroku run bash</code>."} %>
+<%= render layout: 'note', locals: { type: 'pro_tip' } do %>
+  On Heroku you can access your production terminal with `heroku run bash`.
+<% end %>
 
 Common issues reported by `skylight doctor` include:
 
@@ -153,7 +155,9 @@ Verify that, in your app’s `Gemfile`, you’ve added the `skylight` gem to a g
 
 To make sure Skylight is activated, you may need to restart your Unicorn masters.
 
-<%= render partial: "note", locals: {type: "important", note: "If you notice that the pre-fork (master) has not restarted on a typical deploy, make sure that you run a true restart (stop/start), rather than a reload."} %>
+<%= render layout: 'note', locals: { type: 'important' } do %>
+  If you notice that the pre-fork (master) has not restarted on a typical deploy, make sure that you run a true restart (stop/start), rather than a reload.
+<% end %>
 
 ## Data Gaps
 

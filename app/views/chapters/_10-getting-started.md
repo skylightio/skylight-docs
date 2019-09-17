@@ -11,12 +11,9 @@ First, check that your app meets the <%= link_to "requirements", "./advanced-set
 
 See the <%= link_to "Advanced Setup", "./advanced-setup" %> section for more details on setting environment variables, using custom configuration, setting up multiple environments, and using Skylight on a framework other than Rails.
 
-<%= render partial: "note", locals: {
-  type: "pro_tip",
-  note: <<~NOTE
-          Setting up an open source app? #{link_to "See the detailed setup instructions.", "./skylight-for-open-source#setup"}
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: 'pro_tip' } do %>
+  Setting up an open source app? <%= link_to "See the detailed setup instructions.", "./skylight-for-open-source#setup" %>
+<% end %>
 
 ## Feature Overview
 

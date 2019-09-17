@@ -9,7 +9,7 @@
             <li class="support-menu-chapter">
               <%= link_to chapter.title, chapter_path(chapter.id), class: "support-menu-chapter-link" + (is_current_chapter?(chapter.id) ? " active": "") %>
               <% if is_current_chapter?(chapter.id) %>
-                <%= chapter.content.toc.html_safe %>
+                <%= chapter.toc.html_safe %>
               <% end %>
             </li>
           <% end %>

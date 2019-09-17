@@ -57,6 +57,7 @@ _Add_ `active_model_serializers` _to <%= link_to "probes list", "./advanced-setu
 
 * Serialization
 
+
 ### Coach
 
 _Enabled by default_
@@ -91,12 +92,30 @@ _Add_ `faraday` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * HTTP Requests
 
+
 ### Graphiti
 
 _Enabled by default for Graphiti 1.2+_
 
 * Resource Resolving
 * Resource Rendering
+
+
+### GraphQL (Beta!) {#graphql}
+
+_Add_ `graphql` _to <%= link_to "probes list", "./advanced-setup#probes" %>_
+
+* Available in Skylight version 4.2.0.beta2 and graphql-ruby versions >= 1.7.
+* Traces invocations of `GraphQL::Schema#excecute` and `GraphQL::Schema#multiplex`
+
+The GraphQL probe conditionally adds the `GraphQL::Tracing::NotificationsTracing` module to your schema the first time a query is executed (You may see a note about this in STDOUT).
+
+In order for Skylight's trace aggregation to work properly, we highly encourage the use of named queries. Your query names will be used as endpoint names on your Skylight dashboard, so all similar queries should be grouped together. Anonymous queries will also be tracked, but instrumentation is disabled below the `Schema#execute` span (we don't believe aggregating divergent anonymous queries would provide you with actionable insights).
+
+<%= render layout: "note", locals: { type: "important" } do %>
+  If you have added `use(GraphQL::Tracing::SkylightTracing)` to your schema, please remove it before adding the official Skylight probe.
+<% end %>
+
 
 ### HTTPClient
 
@@ -140,31 +159,15 @@ _Enabled by default_
 * HTTP Requests
 
 
-### GraphQL (Beta!) {#graphql}
-
-_Add_ `graphql` _to <%= link_to "probes list", "./advanced-setup#probes" %>_
-
-* Available in Skylight version 4.2.0.beta2 and graphql-ruby versions >= 1.7.
-* Traces invocations of `GraphQL::Schema#excecute` and `GraphQL::Schema#multiplex`
-
-The GraphQL probe conditionally adds the `GraphQL::Tracing::NotificationsTracing` module to your schema
-the first time a query is executed (You may see a note about this in STDOUT).
-
-In order for Skylight's trace aggregation to work properly, we highly encourage the use of named queries.
-Your query names will be used as endpoint names on your Skylight dashboard, so all similar queries should
-be grouped together. Anonymous queries will also be tracked, but instrumentation is disabled below the
-`Schema#execute` span (we don't believe aggregating divergent anonymous queries would provide you
-with actionable insights).
-
-<%= render partial: "note", locals: { type: "important", note: "If you have added `use(GraphQL::Tracing::SkylightTracing)` to your schema, please remove it before adding the official Skylight probe."} %>
-
 ### Redis
 
 _Add_ `redis` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 
 * All Commands
 
-<%= render partial: "note", locals: {note: "We do not instrument AUTH as it would include sensitive data."} %>
+<%= render layout: "note" do %>
+  We do not instrument AUTH as it would include sensitive data.
+<% end %>
 
 
 ### Sequel
@@ -253,7 +256,9 @@ Just like above, the <%= link_to "title of the event can be configured", "#use-s
 
 #### Use Static String Literals for Custom Titles
 
-<%= render partial: "note", locals: {type: "important", note: "The title of an event must be the same for all requests that hit the code path. Skylight aggregates <a href='./skylight-guides#event-sequence'>Event Sequences</a> using the title. You should pass a string literal and avoid any interpolation. Otherwise, there will be an explosion of nodes that show up in your aggregate Event Sequence."} %>
+<%= render layout: 'note', locals: { type: 'important' } do %>
+  The title of an event must be the same for all requests that hit the code path. Skylight aggregates <%= link_to 'Event Sequences', './skylight-guides#event-sequence' %> using the title. You should pass a string literal and avoid any interpolation. Otherwise, there will be an explosion of nodes that show up in your aggregate Event Sequence.
+<% end %>
 
 #### Use Method Instrumentation Wherever Possible
 

@@ -88,17 +88,23 @@ Use the `note` partial to call attention to special information. There are three
 
 **Note:**
 ```
-<%= render partial: "note", locals: {note: "Here are some notes. HTML is OK but ERB and markdown don't work yet."} %>
+<%= render layout: "note" do %>
+  Here are some notes. HTML, ERB, and markdown are OK here.
+<% end %>
 ```
 
 **Pro Tip:**
 ```
-<%= render partial: "note", locals: {type: "pro_tip", note: "Here's a tip from the pros."} %>
+<%= render layout: "note", locals: { type: "pro_tip" } do %>
+  Here's a tip from the pros.
+<% end %>
 ```
 
 **IMPORTANT:**
 ```
-<%= render partial: "note", locals: {type: "important", note: "This is important information."} %>
+<%= render layout: "note", locals: { type: "important" } do %>
+  This is important information.
+<% end %>
 ```
 
 ### Renaming or Removing Chapters

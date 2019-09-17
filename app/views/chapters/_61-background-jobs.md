@@ -29,28 +29,19 @@ By default, the Skylight agent only enables itself for web requests. In many cas
 ### Default Jobs Component Naming {#component-names}
 By default, we will detect that you are running jobs and report them as a `worker` component. If you would like to see another name in the Skylight user interface, the component name can be customized, according to the <%= link_to "instructions", "#enabling" %> for your specific configuration setup.
 
-<%= render partial: "note", locals: {
-  type: "important",
-  note: <<~NOTE
-          Customizing the component name only works for background job processes. Web requests will always be reported as `web`.
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: 'important' } do %>
+  Customizing the component name only works for background job processes. Web requests will always be reported as `web`.
+<% end %>
 
 ### Migrating Your Existing Background Jobs Setup
 
-<%= render partial: "note", locals: {
-  type: "important",
-  note: <<~NOTE
-          If you already have background jobs set up using the legacy method of creating a separate app for your workers and using a third-party gem, visit the #{link_to "merge settings page", "/app/settings/merging"} for details on how to merge these legacy worker apps into their parent apps to maintain data continuity.
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: 'important' } do %>
+  If you already have background jobs set up using the legacy method of creating a separate app for your workers and using a third-party gem, visit the <%= link_to "merge settings page", "/app/settings/merging" %> for details on how to merge these legacy worker apps into their parent apps to maintain data continuity.
+<% end %>
 
-<%= render partial: "note", locals: {
-  type: "important",
-  note: <<~NOTE
-          If you have previously used the third-party `sidekiq-skylight` gem, we recommend removing it from your Gemfile. It is incompatible with Skylight 4.0. Additionally, you may need to update your #{link_to "ignored endpoints configuration", "./advanced-setup#ignoring-heartbeathealth-check-endpoints"} to remove the `#perform` method name from the worker name.
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: 'important' } do %>
+  If you have previously used the third-party `sidekiq-skylight` gem, we recommend removing it from your Gemfile. It is incompatible with Skylight 4.0. Additionally, you may need to update your <%= link_to "ignored endpoints configuration", "./advanced-setup#ignoring-heartbeathealth-check-endpoints" %> to remove the `#perform` method name from the worker name.
+<% end %>
 
 ## Enabling Background Job Instrumentation {#enabling}
 
@@ -90,11 +81,9 @@ config.skylight.probes << 'delayed_job'
 
 #### 3. [OPTIONAL] Specify a component name.
 
-<%= render partial: "note", locals: {
-  note: <<~NOTE
-          If you would like to use the default `worker` component name, skip this step. See #{link_to "Component Names", "#component-names"} for more information.
-        NOTE
-}%>
+<%= render(layout: "note") do %>
+    If you would like to use the default `worker` component name, skip this step. See <%= link_to "Component Names", "#component-names" %> for more information.
+<% end %>
 
 **If you would like to use a _custom_ component name:**
 
@@ -136,11 +125,9 @@ For ActiveJob and Delayed::Job, you'll need to <%= link_to "enable the appropria
 
 #### 3. [OPTIONAL] Specify a component name.
 
-<%= render partial: "note", locals: {
-  note: <<~NOTE
-          If you would like to use the default `worker` component name, skip this step. See #{link_to "Component Names", "#component-names"} for more information.
-        NOTE
-}%>
+<%= render layout: "note" do %>
+  If you would like to use the default `worker` component name, skip this step. See <%= link_to "Component Names", "#component-names" %> for more information.
+<% end %>
 
 **If you would like to use a _custom_ component name:**
 

@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
   def capture_errs
     yield
   rescue => e
-    # binding.pry
     raise
   end
 end

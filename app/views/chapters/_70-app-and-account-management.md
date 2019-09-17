@@ -29,7 +29,9 @@ We're sorry to see you go! If you wish to cancel your account, we recommend that
 
 Currently, only one single Skylight user can retain ownership of an app. The owner of an app is responsible for managing payments and credit card information, has access to an app's billing history, and can also rename and delete an app.
 
-<%= render partial: "note", locals: {type: "note", note: "You can transfer app ownership to another Skylight user by contacting us via the in-app messenger."} %>
+<%= render layout: 'note', locals: { type: 'note' } do %>
+  You can transfer app ownership to another Skylight user by contacting us via the in-app messenger.
+<% end %>
 
 ### Sharing an app with others
 
@@ -111,7 +113,9 @@ For example, if you estimate that your app(s) will have a monthly request count 
 
 Once you have estimated your request usage and determined how many Skylight credits you'll likely need to pre-purchase, please contact us via the in-app messenger with the total amoufnt of Skylight credit you'd like to purchase. We will send you a custom invoice for the amount of Skylight credits you'd like to buy. Once we have received a payment from you, we'll add those credits into our system for the pre-paid amount.
 
-<%= render partial: "note", locals: {type: "note", note: "Pre-purchased Skylight credits are non-refundable and non-transferrable."} %>
+<%= render layout: 'note', locals: { type: 'note' } do %>
+  Pre-purchased Skylight credits are non-refundable and non-transferrable.
+<% end %>
 
 Each month, you will receive an invoice on your billing page that will indicate how many requests you used that month, as well as how many credits you have remaining. If you run out of credits, you will be billed monthly based on your usage from the prior month. You'll need to check these invoices every month to ensure that you have not run out of credits faster than expected, based on your request usage.
 

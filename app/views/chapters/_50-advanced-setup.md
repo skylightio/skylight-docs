@@ -3,8 +3,9 @@ title: Advanced Setup
 description: Install, configure, and deploy the agent.
 ---
 
-<%= render partial: "note",
-    locals: { note: "Our intent is to support all maintained versions of the respective libraries. If library maintainers drop support for a version of their library we may also drop support." } %>
+<%= render layout: "note" do %>
+  Our intent is to support all maintained versions of the respective libraries. If library maintainers drop support for a version of their library we may also drop support.
+<% end %>
 
 
 ## Supported Frameworks
@@ -190,9 +191,13 @@ deploy:
 
 Alternatively, you can set `SKYLIGHT_DEPLOY_ID`, `SKYLIGHT_DEPLOY_GIT_SHA`, and `SKYLIGHT_DEPLOY_DESCRIPTION` as environment variables.
 
-<%= render partial: "note", locals: {type: "pro_tip", note: "If you link your app to GitHub and provide a valid git sha, you can leave the description blank. We’ll get it for you from GitHub!"} %>
+<%= render layout: "note", locals: { type: "pro_tip" } do %>
+  If you link your app to GitHub and provide a valid git sha, you can leave the description blank. We’ll get it for you from GitHub!
+<% end %>
 
-<%= render partial: "note", locals: {type: "important", note: "If you override one of these variables, our server will assume they are all overridden. For example, if you deploy with Heroku and override your deploy descriptions, you’ll also need to override the deploy id and/or sha."} %>
+<%= render layout: "note", locals: { type: "important" } do %>
+  If you override one of these variables, our server will assume they are all overridden. For example, if you deploy with Heroku and override your deploy descriptions, you’ll also need to override the deploy id and/or sha.
+<% end %>
 
 ### Setting Up Multiple Environments
 
@@ -202,7 +207,9 @@ By default, the Skylight agent only enables itself in the "production" environme
 
 There are additional configuration options that can be set in the Rails environment.
 
-<%= render partial: "note", locals: {type: "important", note: "Unless otherwise noted, these settings should be added to config/application.rb. Do not attempt to set them via initializers as Skylight starts before initializers are run."} %>
+<%= render layout: "note", locals: { type: "important" } do %>
+  Unless otherwise noted, these settings should be added to `config/application.rb`. Do not attempt to set them via initializers as Skylight starts before initializers are run.
+<% end %>
 
 Skylight performs setup when the gem is required, at which time Rails will be detected and tapped into. However, you may find you have to manually require `skylight/railtie` if you need to load the Skylight gem before Rails.
 
@@ -284,7 +291,9 @@ You don’t need to install any middleware manually, or do anything with unicorn
 
 <%= render partial: "requiring_probes" %>
 
-<%= render partial: "note", locals: {note: "Padrino is not currently supported as it differs from base Sinatra in some significant ways. We are investigating adding support in future releases."} %>
+<%= render layout: "note" do %>
+  Padrino is not currently supported as it differs from base Sinatra in some significant ways. We are investigating adding support in future releases.
+<% end %>
 
 
 ### Grape {#grape-configuration}
@@ -322,7 +331,9 @@ use Skylight::Middleware
 
 <%= render partial: "requiring_probes" %>
 
-<%= render partial: "note", locals: {type: "important", note: "Since you probably don’t want to instrument your app locally, you should set up conditionals to ensure that Skylight is only run in production environments."} %>
+<%= render layout: "note", locals: { type: "important" } do %>
+  Since you probably don’t want to instrument your app locally, you should set up conditionals to ensure that Skylight is only run in production environments.
+<% end %>
 
 ## Regenerating the App Token
 

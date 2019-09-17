@@ -21,12 +21,9 @@ For this reason, we strongly recommend against naming your primary production en
 
 ### Migrating Your Existing Environment Setup
 
-<%= render partial: "note", locals: {
-  type: "important",
-  note: <<~NOTE
-          If you already have multiple environments set up using the legacy method of creating separate apps, the instructions on this page do not apply to you. Instead, visit #{link_to "the merge settings page", "/app/settings/merging"} for details on how to merge these legacy environment apps into their parent apps.
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: "important" } do %>
+  If you already have multiple environments set up using the legacy method of creating separate apps, the instructions on this page do not apply to you. Instead, visit <%= link_to "the merge settings page", "/app/settings/merging" %> for details on how to merge these legacy environment apps into their parent apps.
+<% end %>
 
 ## Enabling Additional Environments
 
@@ -40,7 +37,9 @@ The process for enabling additional environments is straightforward but varies d
 
 #### 2. Add the new environment to Skylight's environments list.
 
-<%= render partial: "note", locals: {type: "important", note: "Make sure to use `+=` and not `=` to add your environment to `config.skylight.environments`, lest you accidentally turn off Skylight in your production environment."} %>
+<%= render layout: 'note', locals: { type: 'important' } do %>
+  Make sure to use `+=` and not `=` to add your environment to `config.skylight.environments`, lest you accidentally turn off Skylight in your production environment.
+<% end %>
 
 ```ruby
 # config/application.rb
@@ -49,7 +48,9 @@ config.skylight.environments += ["staging"]
 
 #### 3. [OPTIONAL] Specify an environment name.
 
-<%= render partial: "note", locals: {note: "If your environment name is always the same as your Rails environment, the Skylight agent will automatically detect your environment! Skip this step."} %>
+<%= render layout: 'note' do %>
+  If your environment name is always the same as your Rails environment, the Skylight agent will automatically detect your environment! Skip this step.
+<% end %>
 
 **If your environment name _differs_ from your Rails environment:**
 
@@ -90,7 +91,9 @@ SKYLIGHT_ENABLED=true
 
 #### 3. [OPTIONAL] Specify an environment name.
 
-<%= render partial: "note", locals: {note: "If your environment name is always the same as your Rails environment, the Skylight agent will automatically detect your environment! Skip this step."} %>
+<%= render layout: "note" do %>
+  If your environment name is always the same as your Rails environment, the Skylight agent will automatically detect your environment! Skip this step.
+<% end %>
 
 **If your environment name _differs_ from your Rails environment:**
 

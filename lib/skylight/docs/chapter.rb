@@ -1,11 +1,6 @@
 module Skylight
   module Docs
     class Chapter
-      # 'Chapter' acts as the view context for partial rendering
-      # include Skylight::Docs::ApplicationHelper
-      Content = Struct.new(:toc, :main) do
-      end
-
       class ChapterNotFoundError < ActionController::RoutingError
       end
 
@@ -34,7 +29,7 @@ module Skylight
       def initialize(filename)
         @filename = filename.sub(/\A_/, '') # '00-dashified-file-name'
 
-        number, @id = filename.split('-', 2)
+        number, @id = @filename.split('-', 2)
         @order = number.to_i
       end
 
@@ -84,19 +79,16 @@ module Skylight
         [filename, Skylight::Docs::REVISION, ENV["SKYLIGHT_AGENT_EDGE_VERSION"]]
       end
 
-      # Gets or sets the `content` of a Chapter object.
+      # Gets or sets the `toc` of a Chapter object.
       # First, it gets the full contents of the file, minus the frontmatter.
-      # Then, it converts the ERB from the file to markdown.
       # Then, it parses markdown into html, splitting the table of contents off
       # from the main content.
       #
-      # @return [Struct::Content] an object containing .toc and .main attributes
-      def content
-        @content ||= begin
+      # @return  String containing toc fragment for this chapter
+      def toc
+        @toc ||= begin
           split_token = "split_toc"
 
-          # FIXME: this is probably doing too much work. See if we can just get the TOC
-          # raw_content = ERB.new(file_without_frontmatter).result(binding)
           # Add Kramdown Inline Attribute List to generate a table of contents,
           # followed by the split_token in a new paragraph
           raw_content = "* TOC \n {:toc .support-menu-detail-list #support-menu-detail} \n \n #{split_token} \n \n" + file_without_frontmatter
@@ -104,7 +96,7 @@ module Skylight
           full_html = Kramdown::Document.new(raw_content, KRAMDOWN_OPTIONS).to_html
           toc, _ = full_html.split("<p>#{split_token}</p>", 2)
 
-          Content.new('toc', '')
+          toc
         end
       end
 

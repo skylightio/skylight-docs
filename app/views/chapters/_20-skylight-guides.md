@@ -47,7 +47,9 @@ The more bars an endpoint's popularity has, the more requests it received. We re
 
 You may have noticed that by default, we order endpoints by our patent-pending Agony-Detection Algorithm™. (Just kidding about the patent-pending bit.) We calculate how much agony your endpoint is causing customers by looking at response times and endpoint popularity. Using a combination of these factors, we determine which endpoint is having the most adverse affect on your users.
 
-<%= render partial: "note", locals: {type: "pro_tip", note: "To achieve the biggest gains in overall app performance, focus on improving your most agonizing endpoints. For example, you might have one endpoint that has a problem response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a problem response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused on the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint."} %>
+<%= render layout: "note", locals: { type: "pro_tip" } do %>
+  To achieve the biggest gains in overall app performance, focus on improving your most agonizing endpoints. For example, you might have one endpoint that has a problem response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a problem response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused on the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint.
+<% end %>
 
 #### Sorting
 
@@ -93,7 +95,9 @@ Our new Grades <%= link_to "beta", "./faqs#accessing-user-interface-beta-feature
 
 At the top of the Endpoint View is the Response Time Distribution, showing you the distribution of the response times for this particular endpoint during the <%= link_to "currently selected time range", "#navigating-through-time" %>. The Endpoint View, by default, shows all of the requests in the selected time range.  Often, it’s helpful to focus on slower requests to see exactly why they are so slow. You can filter the endpoint data by selecting just part of the histogram to zero in on problematic requests.
 
-<%= render partial: "note", locals: {type: "pro_tip", note: "This Response Time Distribution is awesome because it makes <a target='\_blank' href='https://en.wikipedia.org/wiki/Multimodal_distribution'>bi-modal distributions</a> obvious. For example, imagine you are doing an additional SQL query when the logged in user is an admin. That particular query happens to be for a column that is not indexed, so it is very slow. If all you had was an average, you’d have no idea this was happening. But because you have a histogram, you can see that the fast, non-admin requests cluster around one response time, and the slower, admin-only requests cluster around another time."} %>
+<%= render layout: "note", locals: { type: "pro_tip" } do %>
+  This Response Time Distribution is awesome because it makes <%= link_to 'bi-model distributions', 'https://en.wikipedia.org/wiki/Multimodal_distribution' %> obvious. For example, imagine you are doing an additional SQL query when the logged in user is an admin. That particular query happens to be for a column that is not indexed, so it is very slow. If all you had was an average, you’d have no idea this was happening. But because you have a histogram, you can see that the fast, non-admin requests cluster around one response time, and the slower, admin-only requests cluster around another time.
+<% end %>
 
 ### Selection Summary
 
@@ -154,7 +158,9 @@ The time explorer lives at the bottom of your app views. For both the <%= link_t
 
 You can drag the selected range, use the arrows buttons, or choose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
 
-<%= render partial: "note", locals: {type: "pro_tip", note: "The URL updates in response to new time selections. Click the permalink icon to share the current time range with collaborators or even modify the range by modifying the URL!"} %>
+<%= render layout: 'note', locals: { type: 'pro_tip' } do %>
+  The URL updates in response to new time selections. Click the permalink icon to share the current time range with collaborators or even modify the range by modifying the URL!
+<% end %>
 
 #### Live Mode
 

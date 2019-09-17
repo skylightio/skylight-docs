@@ -71,10 +71,10 @@ describe 'Skylight::Docs::Chapter' do
     end
 
     it 'generates HTML for a table of contents' do
-      expect(chapter.content.toc).not_to include('#header-1')
-      expect(chapter.content.toc).to include('#header-2')
-      expect(chapter.content.toc).to include('#header-3')
-      expect(chapter.content.toc).not_to include('#header-4')
+      expect(chapter.toc).not_to include('#header-1')
+      expect(chapter.toc).to include('#header-2')
+      expect(chapter.toc).to include('#header-3')
+      expect(chapter.toc).not_to include('#header-4')
     end
 
     it 'does not include the frontmatter' do
