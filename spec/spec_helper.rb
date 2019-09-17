@@ -10,6 +10,10 @@ RSpec.configure do |config|
   config.color = true
 end
 
+Skylight::Docs::Engine.configure do
+  config.chapter_path = root.join("spec/test_source")
+end
+
 module TestHelper
   def expected_elements
     ['<table>', '</table>', '<td>', '<tr>', '<tbody>', '<thead>', '<h2 id="header-2">',

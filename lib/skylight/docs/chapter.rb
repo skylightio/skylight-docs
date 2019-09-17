@@ -45,7 +45,7 @@ module Skylight
         @chapters ||= begin
           # Match .md files in /source but not in /source/deprecated
           # pattern = File.join(FOLDER, "*#{FILE_EXTENSION}")
-          pattern = File.join(Skylight::Docs::Engine.root, "app/views/chapters", "*#{FILE_EXTENSION}")
+          pattern = chapter_path.join("_[0-9]*#{FILE_EXTENSION}")
 
           Dir[pattern].map do |path|
             Skylight::Docs::Chapter.new(File.basename(path, FILE_EXTENSION))
@@ -53,7 +53,11 @@ module Skylight
         end
       end
 
-      def partial_path
+      def self.chapter_path
+        Skylight::Docs::Engine.config.chapter_path
+      end
+
+      def to_partial_path
         File.join('chapters', @filename)
       end
 
@@ -62,7 +66,7 @@ module Skylight
       #
       # @return [Chapter] the chapter
       def self.find(id_to_find, collection = all)
-        collection.find { |c| c.id == id_to_find } || raise(ChapterNotFoundError, "`#{id_to_find}` not found in #{FOLDER}")
+        collection.find { |c| c.id == id_to_find } || raise(ChapterNotFoundError, "`#{id_to_find}` not found")
       end
 
       # When sorting chapters, use their order for comparison
@@ -230,11 +234,7 @@ module Skylight
         #
         # @return [String] a string of the full path to the file
         def path
-          @path ||= File.join(
-            Skylight::Docs::Engine.root,
-            "app/views/chapters",
-            "_#{filename}#{FILE_EXTENSION}"
-          )
+          @path ||= self.class.chapter_path.join("_#{filename}#{FILE_EXTENSION}")
         end
     end
   end
