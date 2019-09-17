@@ -39,4 +39,11 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.chapter_path = Skylight::Docs::Engine.root.join('spec/test_source/skylight/docs/chapters')
+
+  ApplicationController.instance_exec do
+    before_action do
+      prepend_view_path Skylight::Docs::Engine.root.join('spec/test_source')
+    end
+  end
 end

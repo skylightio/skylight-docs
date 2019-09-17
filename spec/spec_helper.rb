@@ -8,10 +8,12 @@ require 'kramdown'
 RSpec.configure do |config|
   config.order = "random"
   config.color = true
+
+  config.example_status_persistence_file_path = "tmp/test_status.txt"
 end
 
 Skylight::Docs::Engine.configure do
-  config.chapter_path = root.join("spec/test_source")
+  config.chapter_path = root.join("spec/test_source/skylight/docs/chapters")
 end
 
 module TestHelper

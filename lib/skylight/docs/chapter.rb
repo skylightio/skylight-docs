@@ -44,7 +44,6 @@ module Skylight
         @chapters = nil if Rails.env.development?
         @chapters ||= begin
           # Match .md files in /source but not in /source/deprecated
-          # pattern = File.join(FOLDER, "*#{FILE_EXTENSION}")
           pattern = chapter_path.join("_[0-9]*#{FILE_EXTENSION}")
 
           Dir[pattern].map do |path|
@@ -58,7 +57,7 @@ module Skylight
       end
 
       def to_partial_path
-        File.join('chapters', @filename)
+        filename
       end
 
       # Given a path, such as 'running-skylight', returns a particular
@@ -212,23 +211,6 @@ module Skylight
 
           ActionController::Base.helpers.link_to(name, location, html_options)
         end
-
-        # Renders ERB partials, for example
-        # `<%= render partial: "installing_the_agent" %>` will return the
-        # contents of a file at partials/_installing_the_agent.md.erb
-        #
-        # @return [String] a string of markdown
-        # FIXME: delete
-        # def render(partial:, locals: {}, **opts)
-        #   path = "partials/_#{partial}#{FILE_EXTENSION}"
-        #   file = File.read(File.join(FOLDER, path))
-        #   rendered = ERB.new(file).result(binding)
-        #   return rendered unless (indent_level = opts[:indent_level])
-
-        #   # add indentation to support callout partials within ordered lists
-        #   indentation = ' ' * indent_level
-        #   rendered.lines.map { |x| "#{indentation}#{x}" }.join("\n")
-        # end
 
         # Gets or sets the `path` attribute of the Chapter.
         #
