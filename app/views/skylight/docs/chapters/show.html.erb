@@ -13,7 +13,9 @@
   <div class="support-content card">
     <h1 id="title-<%= @chapter.title.downcase.dasherize %>"><%= @chapter.title %></h1>
     <p class="support-chapter-description"><%= @chapter.description %></p>
-    <%= render @chapter %>
+    <% cache @chapter do %>
+      <%= render @chapter %>
+    <% end %>
   </div>
 </section>
 
