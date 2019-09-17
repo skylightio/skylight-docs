@@ -49,25 +49,6 @@ describe 'Skylight::Docs::Chapter' do
     end
   end
 
-  describe '.content' do
-    # it 'parses `link_to` helpers, adding html options for external or anchor links' do
-    #   expect(chapter.content.main).to include('<a target="_blank" rel="noopener noreferrer" href="http://www.example.com">external</a>')
-    #   expect(chapter.content.main).to include('<a href="./a-aardvark-chapter">internal</a>')
-    #   expect(chapter.content.main).to include('<a class="js-scroll-link" href="#header-1">anchor</a>')
-    # end
-
-    # it 'generates HTML for a table of contents' do
-    #   expect(chapter.toc).not_to include('#header-1')
-    #   expect(chapter.toc).to include('#header-2')
-    #   expect(chapter.toc).to include('#header-3')
-    #   expect(chapter.toc).not_to include('#header-4')
-    # end
-
-    # it 'does not include the frontmatter' do
-    #   expect(chapter.content.main).not_to include(chapter.description)
-    # end
-  end
-
   describe '.description' do
     it 'returns the description of the chapter' do
       expect(chapter.description).to include('description')
