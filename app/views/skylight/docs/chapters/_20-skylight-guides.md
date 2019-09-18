@@ -19,7 +19,7 @@ The Response Timeline is useful for keeping an eye on your application and makin
 
 #### Deploy Tracking
 
-<%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships' %>
+<%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships', style: img_width(400) %>
 
 Skylight's deploy tracking feature allows you to zero in on performance improvements or regressions caused by a deployment. With the deploy tracking feature <%= link_to "configured", "./advanced-setup#deploy-tracking" %>, each of your deployments will be marked on the Response Timeline. Hover over the deploy icon to see information about that deploy. Depending on your configuration, you will see the deploy id, the git sha of the commit you deployed, and a deploy description.
 
@@ -39,7 +39,7 @@ Once you’ve figured out where you’d like to focus your performance-tuning ef
 
 Skylight allows you to view your endpoints based on how popular they are. The popularity of an endpoint is determined by the total number of requests per minute (RPM) it received. On the endpoints page, you can hover over a specific endpoints popularity to see its exact RPM during the selected time range.
 
-<%= image_tag 'skylight/docs/features/popularity.png', alt: 'Screenshot of hovering over endpoint popularity for RPM', style: "width: 100%; max-width: 350px;"%>
+<%= image_tag 'skylight/docs/features/popularity.png', alt: 'Screenshot of hovering over endpoint popularity for RPM', style: img_width(350) %>
 
 The more bars an endpoint's popularity has, the more requests it received. We recommend sorting by popularity when trying to determine which endpoints have the most requests per minute. This can be particularly useful if you are trying to <%= link_to "troubleshoot", "./troubleshooting#more-requests-than-usual" %> an uptick in requests.
 
@@ -63,11 +63,11 @@ Skylight separates html, json, and errors into their own endpoints so you get a 
 
 Skylight notifies you of potential code mistakes that may slow down your app.
 
-<%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Repeated SQL Query icon' %>
+<%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Repeated SQL Query icon', style: "#{img_width(200)} margin: 1rem 0 0;" %>
 
 **Repeated SQL Queries:** In general, you will get better performance out of your database if you group similar queries together. Skylight identifies endpoints and events that repeatedly make similar SQL queries <%= link_to "so that you can group them", "./performance-tips#repeated-queries" %>.
 
-<%= image_tag 'skylight/docs/features/heads-up-allocation-hog.png', alt: 'Screenshot of Allocation Hog icon' %>
+<%= image_tag 'skylight/docs/features/heads-up-allocation-hog.png', alt: 'Screenshot of Allocation Hog icon', style: "#{img_width(200)} margin: 1rem 0 0;" %>
 
 **Allocation Hogs:** We call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill into the individual endpoint and see exactly where the allocations occur <%= link_to "so that you can optimize them", "./performance-tips#allocation-hogs" %>.
 

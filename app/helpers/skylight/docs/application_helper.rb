@@ -25,6 +25,10 @@ module Skylight
           'Note:'
         end
       end
+
+      def img_width(width)
+        "width: 100%; max-width: #{width}px;"
+      end
     end
   end
 end

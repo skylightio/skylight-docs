@@ -7,7 +7,7 @@ description: Setting up and managing multiple environments.
 
 By default, the Skylight agent only enables itself in the `production` environment. In many cases, your applications will have other environments that you would like to profile using Skylight. For example, Rails ships with `development` and `test` environments by default. (You can also <%= link_to "create additional Rails environments", "http://guides.rubyonrails.org/configuring.html#creating-rails-environments" %>, such as `staging.`) This page shows you how to configure Skylight to profile these other environments so that you can view them separately in the Skylight UI:
 
-<%= image_tag "skylight/docs/environments/environments-dropdown.png", alt: "Screenshot of Environments Dropdown", style: "width: 100%; max-width: 350px;" %>
+<%= image_tag "skylight/docs/environments/environments-dropdown.png", alt: "Screenshot of Environments Dropdown", style: img_width(350) %>
 
 ### Skylight Environments vs. Rails Environments
 
@@ -213,7 +213,7 @@ By default, the Skylight agent only enables itself in the `production` environme
 
 We welcome our <%= link_to "Skylight for Open Source", "/oss" %> customers and their contributors to profile these other environments so that you can view them separately in the Skylight UI:
 
-<%= image_tag "skylight/docs/environments/environments-dropdown-oss.png", alt: "Screenshot of Environments Dropdown for an OSS app", style: "width: 100%; max-width: 350px;" %>
+<%= image_tag "skylight/docs/environments/environments-dropdown-oss.png", alt: "Screenshot of Environments Dropdown for an OSS app", style: img_width(350) %>
 
 If you would like to help an open source app enable Skylight in a new environment, see the <%= link_to "Skylight Environments", "#skylight-environments" %> section to learn more, then open a PR to the open source project.
 

@@ -170,48 +170,6 @@ module Skylight
           frontmatter[key] || raise("Set frontmatter for `#{key}` in #{filename}#{FILE_EXTENSION}")
         end
 
-        # Wraps the image_tag helper so we can use it to parse .erb to .md
-        # Adds .support-image and a generated unique class name to each image
-        # for CSS selection
-        #
-        # @return [String] a string of html
-        def image_tag(source, options={})
-          dashified_filename = File.basename(source, ".*").gsub(/[\s_]/, '-')
-          auto_class = "support-image support-image-#{dashified_filename}"
-
-          if options[:class]
-            options[:class] += " #{auto_class}"
-          else
-            options[:class] = auto_class
-          end
-
-          ActionController::Base.helpers.image_tag(source, options)
-        end
-
-        # Wraps the link_to helper so we can use it to parse .erb to .md
-        # Adds target="_blank" to any external links (those starting with 'http')
-        # Adds class="js-scroll-link" to any anchor links
-        #
-        # @return [String] a string of html
-        def link_to(name=nil, location=nil, html_options=nil)
-          # If the location starts with 'http', it is an external link
-          # If the location starts with '/', it is a link to a location in
-          # skylight.io that is not within /support
-          if /^http|^\//.match(location)
-            html_options ||= {}
-            # External links should open in a new window
-            html_options[:target] ||= "_blank"
-            # Security precautions for external links
-            html_options[:rel] ||= "noopener noreferrer"
-          elsif /^#/.match(location)
-            # It's an anchor, so add the js-scroll-link class
-            html_options ||= {}
-            html_options[:class] ||= "js-scroll-link"
-          end
-
-          ActionController::Base.helpers.link_to(name, location, html_options)
-        end
-
         # Gets or sets the `path` attribute of the Chapter.
         #
         # @return [String] a string of the full path to the file

@@ -181,7 +181,7 @@ This is due to our use of two different compression algorithms for the data. In 
 
 ### Web Requests are Sent to the Background Jobs Component (or vice versa)
 
-When the Skylight instrumenter starts, it attempts to determine what sort of process is running (either a web server or a background job processor). As there is no standard interface for doing so, it relies on a number of known hints. If your app uses a more bespoke setup, Skylight may send data to the wrong component. This is more likely to happen if you have set a custom worker component name, in which case it can be solved by setting `SKYLIGHT_COMPONENT=web` in the environment that runs your web server. 
+When the Skylight instrumenter starts, it attempts to determine what sort of process is running (either a web server or a background job processor). As there is no standard interface for doing so, it relies on a number of known hints. If your app uses a more bespoke setup, Skylight may send data to the wrong component. This is more likely to happen if you have set a custom worker component name, in which case it can be solved by setting `SKYLIGHT_COMPONENT=web` in the environment that runs your web server.
 
 Similarly, if you have background job data reported to your web server, setting `SKYLIGHT_COMPONENT=worker` when running your background jobs should tell Skylight to direct these traces to your worker component.
 
@@ -243,11 +243,11 @@ If you don't see your organization in the dropdown when trying to connect an app
 
 You can check our current permissions by visiting the "Third-party access" settings for your organization. If the permissions are correct, Skylight will be marked as "Approved":
 
-<%= image_tag "skylight/docs/troubleshooting/third-party-access-2.png", alt: "Screenshot of the GitHub third party access page", style: "max-width: 400px;" %>
+<%= image_tag "skylight/docs/troubleshooting/third-party-access-2.png", alt: "Screenshot of the GitHub third party access page", style: img_width(400) %>
 
 Your organization must allow third-party access to Skylight so that we can use the GitHub API to access any information about your org. Click the link below the "Connect Your GitHub Repository" dropdown on the app settings page to update your GitHub permissions, which will <%= link_to "whitelist Skylight", "https://github.com/blog/1941-organization-approved-applications" %>. This link takes you to a page in GitHub, where you can click the "Grant" button to give Skylight access to the necessary information:
 
-<%= image_tag "skylight/docs/troubleshooting/third-party-access.png", alt: "Screenshot of the GitHub organization access page", style: "max-width: 300px;" %>
+<%= image_tag "skylight/docs/troubleshooting/third-party-access.png", alt: "Screenshot of the GitHub organization access page", style: img_width(300) %>
 
 ### I'm trying to add a repo to my Skylight app but I don't see the field to do so.
 

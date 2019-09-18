@@ -58,7 +58,7 @@ Don't struggle to learn why your app is slow. Get answers with Skylight.
 
 ### True Response Times
 
-<%= image_tag 'skylight/docs/features/response-times.png', alt: 'Screenshot of Response Times' %>
+<%= image_tag 'skylight/docs/features/response-times.png', alt: 'Screenshot of Response Times', style: img_width(180) %>
 
 Your application's response times appear several places in Skylight. In most cases we talk about the numbers in one of two ways. The “problem” response time is the 95th percentile, whereas the “typical” response time is the median (50th percentile).
 

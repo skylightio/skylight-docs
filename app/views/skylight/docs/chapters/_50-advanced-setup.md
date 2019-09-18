@@ -349,7 +349,7 @@ In some cases, you might need to set up an app on Skylight manually, (e.g. to us
 
 Navigate to your app <%= link_to "setup screen", "/app/setup" %>, and click the "Or create the application manually." link towards the bottom of the page. Then, you'll be able to type in the name of your new app.
 
-<%= image_tag 'skylight/docs/getting_set_up/add-an-app-manually.png', alt: 'Screenshot of adding an app manually' %>
+<%= image_tag 'skylight/docs/getting_set_up/add-an-app-manually.png', alt: 'Screenshot of adding an app manually', style: img_width(500) %>
 
 Once the Skylight app is created, you'll be redirected to the app settings page, where you can retrieve the authentication token for your application.
 

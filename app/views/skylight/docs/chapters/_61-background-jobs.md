@@ -9,7 +9,7 @@ While Skylight was originally designed to profile web requests, we understand th
 
 By default, the Skylight agent only enables itself for web requests. In many cases, your applications might run processes in the background, via <%= link_to "Sidekiq", "https://sidekiq.org/" %>, <%= link_to "Delayed::Job", "https://github.com/collectiveidea/delayed_job" %>, or some other framework. In fact, we recommend moving certain slow actions into background jobs in our <%= link_to "Performance Tips", "./performance-tips#move-third-party-integration-to-workers" %>. This page shows you how to configure Skylight to profile your background jobs so that you can view them separately in the Skylight UI:
 
-<%= image_tag "skylight/docs/background-jobs/background-jobs.png", alt: "Screenshot of the Background Jobs user interface", style: "width: 100%; max-width: 600px;" %>
+<%= image_tag "skylight/docs/background-jobs/background-jobs.png", alt: "Screenshot of the Background Jobs user interface", style: img_width(600) %>
 
 ### Currently Supported Libraries and Frameworks {#probes}
 
@@ -82,7 +82,7 @@ config.skylight.probes << 'delayed_job'
 #### 3. [OPTIONAL] Specify a component name.
 
 <%= render(layout: "note") do %>
-    If you would like to use the default `worker` component name, skip this step. See <%= link_to "Component Names", "#component-names" %> for more information.
+  If you would like to use the default `worker` component name, skip this step. See <%= link_to "Component Names", "#component-names" %> for more information.
 <% end %>
 
 **If you would like to use a _custom_ component name:**
@@ -102,7 +102,7 @@ worker_component: 'sidekiq' # or <%%= worker_component_name %>
 
 Deploy the above changes following your normal deploy process. Your new worker component should show up in the components selector in the Skylight UI nav bar.
 
-<%= image_tag "skylight/docs/background-jobs/components-dropdown.png", alt: "Screenshot of Components Dropdown", style: "max-width: 299px;" %>
+<%= image_tag "skylight/docs/background-jobs/components-dropdown.png", alt: "Screenshot of Components Dropdown", style: img_width(350) %>
 
 ### Using Environment Variables
 
@@ -141,7 +141,7 @@ SKYLIGHT_COMPONENT=sidekiq
 
 By default, the Skylight agent only enables itself for web requests, but enabling Skylight for background jobs is super easy! We welcome our <%= link_to "Skylight for Open Source", "/oss" %> customers and their contributors to profile their background jobs so that you can view them separately in the Skylight UI:
 
-<%= image_tag "skylight/docs/background-jobs/background-jobs-oss.png", alt: "Screenshot of the Background Jobs for OSS user interface", style: "width: 100%; max-width: 600px;" %>
+<%= image_tag "skylight/docs/background-jobs/background-jobs-oss.png", alt: "Screenshot of the Background Jobs for OSS user interface", style: img_width(600) %>
 
 If you would like to help an open source app enable Skylight background job instrumentation, read the above documentation to learn about Background Jobs, then open a PR to the open source project.
 

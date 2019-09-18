@@ -55,7 +55,7 @@ Sure! You can find it over on <%= link_to "Privacy Policy page", "/privacy" %>.
 
 If you signed up for Skylight using GitHub, you may have seen this before:
 
-<%= image_tag 'skylight/docs/faqs/github-permissions.png' %>
+<%= image_tag 'skylight/docs/faqs/github-permissions.png', style: img_width(500) %>
 
 We don't really need write access to your repos, nor do we use it. We just want to check all the repos you have access to (public and private) to see if there are any apps on Skylight that are attached to those repos so we can give you automatic access.
 
