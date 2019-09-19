@@ -7,16 +7,16 @@
   <% end %>
 <% end %>
 
-<% cache @chapter do %>
-  <section class="support-chapter-container">
-    <%= render "table_of_contents" %>
+<section class="support-chapter-container">
+  <%= render "table_of_contents" %>
 
-    <div class="support-content card">
-      <h1 id="title-<%= @chapter.title.downcase.dasherize %>"><%= @chapter.title %></h1>
-      <p class="support-chapter-description"><%= @chapter.description %></p>
-      <%= @chapter.content.main.html_safe %>
-    </div>
-  </section>
-<% end %>
+  <div class="support-content card">
+    <h1 id="title-<%= @chapter.title.downcase.dasherize %>"><%= @chapter.title %></h1>
+    <p class="support-chapter-description"><%= @chapter.description %></p>
+    <% cache @chapter do %>
+      <%= render @chapter %>
+    <% end %>
+  </div>
+</section>
 
 <%= render "support_search_scripts" %>

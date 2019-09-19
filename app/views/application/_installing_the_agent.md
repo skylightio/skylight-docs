@@ -15,15 +15,8 @@
     ```
     This will automatically generate your <%= link_to "`config/skylight.yml`", "advanced-setup#agent-configuration" %> file.
 
-    <%= render partial: "note", indent_level: 4, locals: {
-      type: 'important',
-      note: <<~NOTE
-              The contents of the skylight.yml file should be considered secret,
-              so if your application is open source, you will not want to commit it
-              to your repo. See #{link_to "Setting Authentication Tokens", "./advanced-setup#setting-authentication-tokens"}
-              to learn how to set an environment variable instead.
-            NOTE
-    }
-    %>
-
 1. <%= link_to "Deploy your application", "./advanced-setup#deployment" %> to production.
+
+<%= render layout: "note", locals: { type: 'important' } do %>
+  The contents of the skylight.yml file should be considered secret, so if your application is open source, you will not want to commit it to your repo. See <%= link_to "Setting Authentication Tokens", "./advanced-setup#setting-authentication-tokens" %> to learn how to set an environment variable instead.
+<% end %>

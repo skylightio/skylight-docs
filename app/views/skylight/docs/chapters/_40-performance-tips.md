@@ -36,7 +36,7 @@ SELECT * FROM "users" WHERE "id" = ?;
 ### Identifying Repeated Queries
 
 Skylight highlights endpoints and events that repeatedly make similar SQL queries with the database "heads up" icon:
-<%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Repeat SQL icon' %>
+<%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Repeat SQL icon', style: "#{img_width(250)} margin-top: 1rem;" %>
 
 ### Possible Cause: N+1 Query
 
@@ -110,7 +110,7 @@ While this explains the mystery, it doesn't help resolve the problem. Fortunatel
 ### Identifying Allocation Hogs
 
 Endpoints with allocation hogs are identified in Skylight with the pie-chart "heads up":
-<%= image_tag 'skylight/docs/features/heads-up-allocation-hog.png', alt: 'Screenshot of Allocation Hog icon' %>
+<%= image_tag 'skylight/docs/features/heads-up-allocation-hog.png', alt: 'Screenshot of Allocation Hog icon', style: "#{img_width(250)} margin-top: 1rem;" %>
 
 By default, Skylight focuses on how much time your endpoints and events are taking. When you drill down into an endpoint, you will see a representative trace for that endpoint where the larger bars represent events that took a long time to complete. When you switch to **allocations mode**, the same trace will be re-scaled based on the number of allocations during each event, allowing you to quickly identify potentially problematic events (i.e. the largest bars in your traces).
 
@@ -120,7 +120,9 @@ By default, Skylight focuses on how much time your endpoints and events are taki
 
 Now that you've zeroed in on exactly which part of your app to work on, let's talk about the most effective ways to reduce allocations.
 
-<%= render partial: "note", locals: {type: "pro_tip", note: "Before you spend weeks applying the tips in this section to every line of code, here's a disclaimer: reducing allocations is a <b>micro-optimization</b>. This means that they produce very little benefit outside of hot paths and that they may reduce your future productivity (which may reduce your ability to do important macro-optimizations like caching). Be sure to use Skylight to identify allocation hot spots and focus your energy in those areas."} %>
+<%= render layout: 'note', locals: { type: 'pro_tip' } do %>
+  Before you spend weeks applying the tips in this section to every line of code, here's a disclaimer: reducing allocations is a **micro-optimization**. This means that they produce very little benefit outside of hot paths and that they may reduce your future productivity (which may reduce your ability to do important macro-optimizations like caching). Be sure to use Skylight to identify allocation hot spots and focus your energy in those areas.
+<% end %>
 
 **What do we mean by hot paths? In short, loops.** A piece of code that produces 200 objects might be completely fine if called occasionally; but if you call that code thousands of times in a loop, it can really add up. This is even worse if you nest loops inside of other loops, where a small piece of code can inadvertently be run hundreds of thousands of times.
 
@@ -129,7 +131,7 @@ All of these might seem obvious, but in a high-level programming language like R
 Here's a simplified example we saw recently when using Skylight to identify memory hotspots in our own app:
 
 ```ruby
-def sync_organization(organization)  
+def sync_organization(organization)
   Mixpanel.sync_organization(organization)
 
   organization.users.each do |user|
@@ -192,7 +194,7 @@ User.where("last_seen_at < ?", 1.year.ago).each(&:destroy)
 You can do the same thing in the database directly:
 
 ```ruby
-User.where("last_seen_at < ?", 1.year.ago).delete_all  
+User.where("last_seen_at < ?", 1.year.ago).delete_all
 ```
 
 This generates a SQL query that looks like:
@@ -214,7 +216,7 @@ If you have a loop in a hot path that absolutely must exist, you should try to f
 The quickest wins here involve moving shared work outside of the loop and looking for seemingly benign constructs that need to allocate objects. Let's look at this hypothetical example:
 
 ```ruby
-module Intercom  
+module Intercom
   def self.sync_customers
     Intercom.customers.each do |customer|
       if customer.last_seen < 1.year.ago
@@ -245,7 +247,7 @@ In this seemingly simple example, there are multiple places where we are allocat
 A slightly different version of this loop has many fewer allocations:
 
 ```ruby
-module Intercom  
+module Intercom
   def self.sync_customers
     inactivity_threshold = 1.year.ago
 
@@ -303,7 +305,7 @@ Adding caching to this template will improve time spent for this endpoint _and_ 
 Looking into `index.html.erb`, we find a few truly dynamic bits, like this:
 
 ```erb
-<%%= render partial: 'shared/flash',  
+<%%= render partial: 'shared/flash',
     locals: { flash: flash, class_name: "banner" } %>
 ```
 
@@ -316,18 +318,18 @@ But for the most part, it's a large template whose dynamic bits look like this:
 Fortunately, **Rails makes caching really easy!** Just wrap the area of the template that you want to cache with a cache block:
 
 ```erb
-<%% cache(action_suffix: "primary") do %>  
-<section class="hero">  
+<%% cache(action_suffix: "primary") do %>
+<section class="hero">
   <div class="container">
     ...
   </div>
 </section>
 
-<section class="data">  
+<section class="data">
   <div class="container">
     ...
   </div>
-</section>  
+</section>
 <%% end %>
 ```
 

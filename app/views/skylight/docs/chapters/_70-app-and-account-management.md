@@ -29,7 +29,9 @@ We're sorry to see you go! If you wish to cancel your account, we recommend that
 
 Currently, only one single Skylight user can retain ownership of an app. The owner of an app is responsible for managing payments and credit card information, has access to an app's billing history, and can also rename and delete an app.
 
-<%= render partial: "note", locals: {type: "note", note: "You can transfer app ownership to another Skylight user by contacting us via the in-app messenger."} %>
+<%= render layout: 'note', locals: { type: 'note' } do %>
+  You can transfer app ownership to another Skylight user by contacting us via the in-app messenger.
+<% end %>
 
 ### Sharing an app with others
 
@@ -58,14 +60,14 @@ Once your Skylight app is connected to a GitHub repo, anyone with access to that
 
 It's pretty similar to the process for adding a repo to an app:
 
-<%= image_tag "skylight/docs/app-and-account-management/github-remove-repo.png" %>
+<%= image_tag "skylight/docs/app-and-account-management/github-remove-repo.png", style: img_width(520) %>
 
 1. Click on "disconnect." If you only want to remove the repo, you're done!
 1. If you want to replace it with a different repo, just follow the steps above for adding a repo.
 
 #### Add users by email
 
-<%= image_tag 'skylight/docs/faqs/adding-collaborators.png', alt: 'adding collaborators' %>
+<%= image_tag 'skylight/docs/faqs/adding-collaborators.png', alt: 'adding collaborators', style: img_width(500) %>
 
 The user you invite will receive an invitation via email. If they don't yet have a Skylight account, that email invite will include a link to sign up. Once they complete the steps, they'll see the app inside their account.
 
@@ -74,7 +76,7 @@ The user you invite will receive an invitation via email. If they don't yet have
 
 Only app owners can rename an app. To do so, visit the settings page and click on the pencil icon next to the app's name. This will make the field editable and allow you to change your app's name.
 
-<%= image_tag 'skylight/docs/app-and-account-management/renaming-an-app.png', alt: 'renaming an app', style: "width: 100%; max-width: 350px;" %>
+<%= image_tag 'skylight/docs/app-and-account-management/renaming-an-app.png', alt: 'renaming an app', style: img_width(250) %>
 
 ### Deleting an app
 
@@ -111,7 +113,9 @@ For example, if you estimate that your app(s) will have a monthly request count 
 
 Once you have estimated your request usage and determined how many Skylight credits you'll likely need to pre-purchase, please contact us via the in-app messenger with the total amoufnt of Skylight credit you'd like to purchase. We will send you a custom invoice for the amount of Skylight credits you'd like to buy. Once we have received a payment from you, we'll add those credits into our system for the pre-paid amount.
 
-<%= render partial: "note", locals: {type: "note", note: "Pre-purchased Skylight credits are non-refundable and non-transferrable."} %>
+<%= render layout: 'note', locals: { type: 'note' } do %>
+  Pre-purchased Skylight credits are non-refundable and non-transferrable.
+<% end %>
 
 Each month, you will receive an invoice on your billing page that will indicate how many requests you used that month, as well as how many credits you have remaining. If you run out of credits, you will be billed monthly based on your usage from the prior month. You'll need to check these invoices every month to ensure that you have not run out of credits faster than expected, based on your request usage.
 

@@ -46,25 +46,15 @@ If you have any questions, please feel free to reach out at [support@skylight.io
 
 Once you have <%=link_to "applied", "https://www.skylight.io/oss#oss-sign-up"%> and been accepted to the Skylight For Open Source Program and created a Skylight account, the next step is to set up your app instance by creating your app <%= link_to "manually", "./advanced-setup#manual-app-creation" %>.
 
-<%= render partial: "note", locals: {
-  type: 'important',
-  note: <<~NOTE
-          The contents of the skylight.yml file should be considered secret,
-          so be careful not to commit it
-          to your repo! See #{link_to "Setting Authentication Tokens", "./advanced-setup#setting-authentication-tokens"}
-          to learn how to set an environment variable instead.
-        NOTE
-}
-%>
+<%= render layout: "note", locals: { type: 'important' } do %>
+The contents of the skylight.yml file should be considered secret, so be careful not to commit it to your repo! See <%= link_to "Setting Authentication Tokens", "./advanced-setup#setting-authentication-tokens" %> to learn how to set an environment variable instead.
+<% end %>
 
 After creating your app, you will need to connect your open source app's repository to Skylight using GitHub from <%= link_to "your app settings page", "/app/settings" %>. This will allow you to  grant access to your Skylight account to other maintainers of your open source app.
 
-<%= render partial: "note", locals: {
-  type: "pro_tip",
-  note: <<~NOTE
-          You can also invite contributors to your open source project to collaborate on your app's settings page. Please note that this will allow them to see application settings, such as the application's authentication token and the emails of other collaborators. It also will allow them to invite and remove collaborators themselves.
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: 'pro_tip' } do %>
+  You can also invite contributors to your open source project to collaborate on your app's settings page. Please note that this will allow them to see application settings, such as the application's authentication token and the emails of other collaborators. It also will allow them to invite and remove collaborators themselves.
+<% end %>
 
 After your open source app is set up and reporting data, please [let us know](mailto:support@skylight.io) so that we can activate open source mode for you! In open source mode, you will see an open source badge, as well as a public link on your dashboard.
 

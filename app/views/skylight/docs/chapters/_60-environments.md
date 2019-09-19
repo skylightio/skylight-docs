@@ -7,7 +7,7 @@ description: Setting up and managing multiple environments.
 
 By default, the Skylight agent only enables itself in the `production` environment. In many cases, your applications will have other environments that you would like to profile using Skylight. For example, Rails ships with `development` and `test` environments by default. (You can also <%= link_to "create additional Rails environments", "http://guides.rubyonrails.org/configuring.html#creating-rails-environments" %>, such as `staging.`) This page shows you how to configure Skylight to profile these other environments so that you can view them separately in the Skylight UI:
 
-<%= image_tag "skylight/docs/environments/environments-dropdown.png", alt: "Screenshot of Environments Dropdown", style: "width: 100%; max-width: 350px;" %>
+<%= image_tag "skylight/docs/environments/environments-dropdown.png", alt: "Screenshot of Environments Dropdown", style: img_width(350) %>
 
 ### Skylight Environments vs. Rails Environments
 
@@ -21,12 +21,9 @@ For this reason, we strongly recommend against naming your primary production en
 
 ### Migrating Your Existing Environment Setup
 
-<%= render partial: "note", locals: {
-  type: "important",
-  note: <<~NOTE
-          If you already have multiple environments set up using the legacy method of creating separate apps, the instructions on this page do not apply to you. Instead, visit #{link_to "the merge settings page", "/app/settings/merging"} for details on how to merge these legacy environment apps into their parent apps.
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: "important" } do %>
+  If you already have multiple environments set up using the legacy method of creating separate apps, the instructions on this page do not apply to you. Instead, visit <%= link_to "the merge settings page", "/app/settings/merging" %> for details on how to merge these legacy environment apps into their parent apps.
+<% end %>
 
 ## Enabling Additional Environments
 
@@ -40,7 +37,9 @@ The process for enabling additional environments is straightforward but varies d
 
 #### 2. Add the new environment to Skylight's environments list.
 
-<%= render partial: "note", locals: {type: "important", note: "Make sure to use `+=` and not `=` to add your environment to `config.skylight.environments`, lest you accidentally turn off Skylight in your production environment."} %>
+<%= render layout: 'note', locals: { type: 'important' } do %>
+  Make sure to use `+=` and not `=` to add your environment to `config.skylight.environments`, lest you accidentally turn off Skylight in your production environment.
+<% end %>
 
 ```ruby
 # config/application.rb
@@ -49,7 +48,9 @@ config.skylight.environments += ["staging"]
 
 #### 3. [OPTIONAL] Specify an environment name.
 
-<%= render partial: "note", locals: {note: "If your environment name is always the same as your Rails environment, the Skylight agent will automatically detect your environment! Skip this step."} %>
+<%= render layout: 'note' do %>
+  If your environment name is always the same as your Rails environment, the Skylight agent will automatically detect your environment! Skip this step.
+<% end %>
 
 **If your environment name _differs_ from your Rails environment:**
 
@@ -90,7 +91,9 @@ SKYLIGHT_ENABLED=true
 
 #### 3. [OPTIONAL] Specify an environment name.
 
-<%= render partial: "note", locals: {note: "If your environment name is always the same as your Rails environment, the Skylight agent will automatically detect your environment! Skip this step."} %>
+<%= render layout: "note" do %>
+  If your environment name is always the same as your Rails environment, the Skylight agent will automatically detect your environment! Skip this step.
+<% end %>
 
 **If your environment name _differs_ from your Rails environment:**
 
@@ -210,7 +213,7 @@ By default, the Skylight agent only enables itself in the `production` environme
 
 We welcome our <%= link_to "Skylight for Open Source", "/oss" %> customers and their contributors to profile these other environments so that you can view them separately in the Skylight UI:
 
-<%= image_tag "skylight/docs/environments/environments-dropdown-oss.png", alt: "Screenshot of Environments Dropdown for an OSS app", style: "width: 100%; max-width: 350px;" %>
+<%= image_tag "skylight/docs/environments/environments-dropdown-oss.png", alt: "Screenshot of Environments Dropdown for an OSS app", style: img_width(350) %>
 
 If you would like to help an open source app enable Skylight in a new environment, see the <%= link_to "Skylight Environments", "#skylight-environments" %> section to learn more, then open a PR to the open source project.
 

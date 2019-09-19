@@ -35,7 +35,7 @@ describe 'Skylight::Docs::Chapter' do
     it 'raises an error if the id is not found in /source' do
       id_to_find = "blep"
       expect { Skylight::Docs::Chapter.find(id_to_find) }
-        .to raise_error(Skylight::Docs::Chapter::ChapterNotFoundError, "`#{id_to_find}` not found in #{Skylight::Docs::Chapter::FOLDER}")
+        .to raise_error(Skylight::Docs::Chapter::ChapterNotFoundError, "`#{id_to_find}` not found")
     end
   end
 
@@ -49,39 +49,6 @@ describe 'Skylight::Docs::Chapter' do
     end
   end
 
-  describe '.content' do
-    it 'parses .md.erb to HTML elements' do
-      TestHelper.expected_elements.each do |element|
-        expect(chapter.content.main).to include(element)
-      end
-    end
-
-    it 'parses .md.erb files containing partials' do
-      expect(chapter.content.main).to include('Test partial content')
-    end
-
-    it 'parses .md.erb files containing partials with erb helpers' do
-      expect(chapter.content.main).to include('Test nested partial content')
-    end
-
-    it 'parses `link_to` helpers, adding html options for external or anchor links' do
-      expect(chapter.content.main).to include('<a target="_blank" rel="noopener noreferrer" href="http://www.example.com">external</a>')
-      expect(chapter.content.main).to include('<a href="./a-aardvark-chapter">internal</a>')
-      expect(chapter.content.main).to include('<a class="js-scroll-link" href="#header-1">anchor</a>')
-    end
-
-    it 'generates HTML for a table of contents' do
-      expect(chapter.content.toc).not_to include('#header-1')
-      expect(chapter.content.toc).to include('#header-2')
-      expect(chapter.content.toc).to include('#header-3')
-      expect(chapter.content.toc).not_to include('#header-4')
-    end
-
-    it 'does not include the frontmatter' do
-      expect(chapter.content.main).not_to include(chapter.description)
-    end
-  end
-
   describe '.description' do
     it 'returns the description of the chapter' do
       expect(chapter.description).to include('description')
@@ -89,7 +56,10 @@ describe 'Skylight::Docs::Chapter' do
 
     describe 'with invalid frontmatter' do
       let(:invalid_chapter) do
-        stub_const("Skylight::Docs::Chapter::FOLDER", File.expand_path('../test_source_invalid_files', __FILE__))
+        allow(Skylight::Docs::Chapter).to receive(:chapter_path) do
+          Pathname.new(File.expand_path('../test_source_invalid_files', __FILE__))
+        end
+
         Skylight::Docs::Chapter.new('01-chapter-without-frontmatter')
       end
 
@@ -111,7 +81,10 @@ describe 'Skylight::Docs::Chapter' do
     end
 
     it 'throws an error if the title does not exist in the frontmatter' do
-      stub_const("Skylight::Docs::Chapter::FOLDER", File.expand_path('../test_source_invalid_files', __FILE__))
+      allow(Skylight::Docs::Chapter).to receive(:chapter_path) do
+        Pathname.new(File.expand_path('../test_source_invalid_files', __FILE__))
+      end
+
       invalid_chapter = Skylight::Docs::Chapter.new('01-chapter-without-frontmatter')
       expect { invalid_chapter.title }
         .to raise_error("Set frontmatter for `title` in #{invalid_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")

@@ -19,7 +19,7 @@ The Response Timeline is useful for keeping an eye on your application and makin
 
 #### Deploy Tracking
 
-<%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships' %>
+<%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships', style: img_width(400) %>
 
 Skylight's deploy tracking feature allows you to zero in on performance improvements or regressions caused by a deployment. With the deploy tracking feature <%= link_to "configured", "./advanced-setup#deploy-tracking" %>, each of your deployments will be marked on the Response Timeline. Hover over the deploy icon to see information about that deploy. Depending on your configuration, you will see the deploy id, the git sha of the commit you deployed, and a deploy description.
 
@@ -39,7 +39,7 @@ Once you’ve figured out where you’d like to focus your performance-tuning ef
 
 Skylight allows you to view your endpoints based on how popular they are. The popularity of an endpoint is determined by the total number of requests per minute (RPM) it received. On the endpoints page, you can hover over a specific endpoints popularity to see its exact RPM during the selected time range.
 
-<%= image_tag 'skylight/docs/features/popularity.png', alt: 'Screenshot of hovering over endpoint popularity for RPM', style: "width: 100%; max-width: 350px;"%>
+<%= image_tag 'skylight/docs/features/popularity.png', alt: 'Screenshot of hovering over endpoint popularity for RPM', style: img_width(350) %>
 
 The more bars an endpoint's popularity has, the more requests it received. We recommend sorting by popularity when trying to determine which endpoints have the most requests per minute. This can be particularly useful if you are trying to <%= link_to "troubleshoot", "./troubleshooting#more-requests-than-usual" %> an uptick in requests.
 
@@ -47,7 +47,9 @@ The more bars an endpoint's popularity has, the more requests it received. We re
 
 You may have noticed that by default, we order endpoints by our patent-pending Agony-Detection Algorithm™. (Just kidding about the patent-pending bit.) We calculate how much agony your endpoint is causing customers by looking at response times and endpoint popularity. Using a combination of these factors, we determine which endpoint is having the most adverse affect on your users.
 
-<%= render partial: "note", locals: {type: "pro_tip", note: "To achieve the biggest gains in overall app performance, focus on improving your most agonizing endpoints. For example, you might have one endpoint that has a problem response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a problem response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused on the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint."} %>
+<%= render layout: "note", locals: { type: "pro_tip" } do %>
+  To achieve the biggest gains in overall app performance, focus on improving your most agonizing endpoints. For example, you might have one endpoint that has a problem response time of 800ms (not too bad!), but receives hundreds of requests per minute. You may have another endpoint with a problem response time of 2 seconds, but that only gets hit once or twice a day. Obviously, it is probably better for business if you focused on the response time of the popular endpoint, rather than spending precious engineering time on the admittedly-slower-but-less-used endpoint.
+<% end %>
 
 #### Sorting
 
@@ -61,11 +63,11 @@ Skylight separates html, json, and errors into their own endpoints so you get a 
 
 Skylight notifies you of potential code mistakes that may slow down your app.
 
-<%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Repeated SQL Query icon' %>
+<%= image_tag 'skylight/docs/features/heads-up-repeat-sql.png', alt: 'Screenshot of Repeated SQL Query icon', style: "#{img_width(200)} margin: 1rem 0 0;" %>
 
 **Repeated SQL Queries:** In general, you will get better performance out of your database if you group similar queries together. Skylight identifies endpoints and events that repeatedly make similar SQL queries <%= link_to "so that you can group them", "./performance-tips#repeated-queries" %>.
 
-<%= image_tag 'skylight/docs/features/heads-up-allocation-hog.png', alt: 'Screenshot of Allocation Hog icon' %>
+<%= image_tag 'skylight/docs/features/heads-up-allocation-hog.png', alt: 'Screenshot of Allocation Hog icon', style: "#{img_width(200)} margin: 1rem 0 0;" %>
 
 **Allocation Hogs:** We call out endpoints with abnormally high allocations that could be causing issues for your application. You can then drill into the individual endpoint and see exactly where the allocations occur <%= link_to "so that you can optimize them", "./performance-tips#allocation-hogs" %>.
 
@@ -93,7 +95,9 @@ Our new Grades <%= link_to "beta", "./faqs#accessing-user-interface-beta-feature
 
 At the top of the Endpoint View is the Response Time Distribution, showing you the distribution of the response times for this particular endpoint during the <%= link_to "currently selected time range", "#navigating-through-time" %>. The Endpoint View, by default, shows all of the requests in the selected time range.  Often, it’s helpful to focus on slower requests to see exactly why they are so slow. You can filter the endpoint data by selecting just part of the histogram to zero in on problematic requests.
 
-<%= render partial: "note", locals: {type: "pro_tip", note: "This Response Time Distribution is awesome because it makes <a target='\_blank' href='https://en.wikipedia.org/wiki/Multimodal_distribution'>bi-modal distributions</a> obvious. For example, imagine you are doing an additional SQL query when the logged in user is an admin. That particular query happens to be for a column that is not indexed, so it is very slow. If all you had was an average, you’d have no idea this was happening. But because you have a histogram, you can see that the fast, non-admin requests cluster around one response time, and the slower, admin-only requests cluster around another time."} %>
+<%= render layout: "note", locals: { type: "pro_tip" } do %>
+  This Response Time Distribution is awesome because it makes <%= link_to 'bi-model distributions', 'https://en.wikipedia.org/wiki/Multimodal_distribution' %> obvious. For example, imagine you are doing an additional SQL query when the logged in user is an admin. That particular query happens to be for a column that is not indexed, so it is very slow. If all you had was an average, you’d have no idea this was happening. But because you have a histogram, you can see that the fast, non-admin requests cluster around one response time, and the slower, admin-only requests cluster around another time.
+<% end %>
 
 ### Selection Summary
 
@@ -154,7 +158,9 @@ The time explorer lives at the bottom of your app views. For both the <%= link_t
 
 You can drag the selected range, use the arrows buttons, or choose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
 
-<%= render partial: "note", locals: {type: "pro_tip", note: "The URL updates in response to new time selections. Click the permalink icon to share the current time range with collaborators or even modify the range by modifying the URL!"} %>
+<%= render layout: 'note', locals: { type: 'pro_tip' } do %>
+  The URL updates in response to new time selections. Click the permalink icon to share the current time range with collaborators or even modify the range by modifying the URL!
+<% end %>
 
 #### Live Mode
 

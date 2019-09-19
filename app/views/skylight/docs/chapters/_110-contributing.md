@@ -7,11 +7,11 @@ description: Improving the gem and reporting bugs.
 
 Filing bugs and submitting feedback from within Skylight is easy! Find the floating question mark in the bottom right of the screen... and, well, that's pretty much it :P
 
-<%= image_tag 'skylight/docs/contributing/intercom-button.png', alt: 'intercom button'%>
+<%= image_tag 'skylight/docs/contributing/intercom-button.png', alt: 'intercom button', style: img_width(300) %>
 
 This will bring up a pop-up with the history of your communication with us and a button for starting a new conversation.
 
-<%= image_tag 'skylight/docs/contributing/intercom-messenger.png', alt: 'intercom messenger'%>
+<%= image_tag 'skylight/docs/contributing/intercom-messenger.png', alt: 'intercom messenger', style: img_width(600) %>
 
 ### Include Attachments
 

@@ -9,7 +9,7 @@ While Skylight was originally designed to profile web requests, we understand th
 
 By default, the Skylight agent only enables itself for web requests. In many cases, your applications might run processes in the background, via <%= link_to "Sidekiq", "https://sidekiq.org/" %>, <%= link_to "Delayed::Job", "https://github.com/collectiveidea/delayed_job" %>, or some other framework. In fact, we recommend moving certain slow actions into background jobs in our <%= link_to "Performance Tips", "./performance-tips#move-third-party-integration-to-workers" %>. This page shows you how to configure Skylight to profile your background jobs so that you can view them separately in the Skylight UI:
 
-<%= image_tag "skylight/docs/background-jobs/background-jobs.png", alt: "Screenshot of the Background Jobs user interface", style: "width: 100%; max-width: 600px;" %>
+<%= image_tag "skylight/docs/background-jobs/background-jobs.png", alt: "Screenshot of the Background Jobs user interface", style: img_width(600) %>
 
 ### Currently Supported Libraries and Frameworks {#probes}
 
@@ -29,28 +29,19 @@ By default, the Skylight agent only enables itself for web requests. In many cas
 ### Default Jobs Component Naming {#component-names}
 By default, we will detect that you are running jobs and report them as a `worker` component. If you would like to see another name in the Skylight user interface, the component name can be customized, according to the <%= link_to "instructions", "#enabling" %> for your specific configuration setup.
 
-<%= render partial: "note", locals: {
-  type: "important",
-  note: <<~NOTE
-          Customizing the component name only works for background job processes. Web requests will always be reported as `web`.
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: 'important' } do %>
+  Customizing the component name only works for background job processes. Web requests will always be reported as `web`.
+<% end %>
 
 ### Migrating Your Existing Background Jobs Setup
 
-<%= render partial: "note", locals: {
-  type: "important",
-  note: <<~NOTE
-          If you already have background jobs set up using the legacy method of creating a separate app for your workers and using a third-party gem, visit the #{link_to "merge settings page", "/app/settings/merging"} for details on how to merge these legacy worker apps into their parent apps to maintain data continuity.
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: 'important' } do %>
+  If you already have background jobs set up using the legacy method of creating a separate app for your workers and using a third-party gem, visit the <%= link_to "merge settings page", "/app/settings/merging" %> for details on how to merge these legacy worker apps into their parent apps to maintain data continuity.
+<% end %>
 
-<%= render partial: "note", locals: {
-  type: "important",
-  note: <<~NOTE
-          If you have previously used the third-party `sidekiq-skylight` gem, we recommend removing it from your Gemfile. It is incompatible with Skylight 4.0. Additionally, you may need to update your #{link_to "ignored endpoints configuration", "./advanced-setup#ignoring-heartbeathealth-check-endpoints"} to remove the `#perform` method name from the worker name.
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: 'important' } do %>
+  If you have previously used the third-party `sidekiq-skylight` gem, we recommend removing it from your Gemfile. It is incompatible with Skylight 4.0. Additionally, you may need to update your <%= link_to "ignored endpoints configuration", "./advanced-setup#ignoring-heartbeathealth-check-endpoints" %> to remove the `#perform` method name from the worker name.
+<% end %>
 
 ## Enabling Background Job Instrumentation {#enabling}
 
@@ -90,11 +81,9 @@ config.skylight.probes << 'delayed_job'
 
 #### 3. [OPTIONAL] Specify a component name.
 
-<%= render partial: "note", locals: {
-  note: <<~NOTE
-          If you would like to use the default `worker` component name, skip this step. See #{link_to "Component Names", "#component-names"} for more information.
-        NOTE
-}%>
+<%= render(layout: "note") do %>
+  If you would like to use the default `worker` component name, skip this step. See <%= link_to "Component Names", "#component-names" %> for more information.
+<% end %>
 
 **If you would like to use a _custom_ component name:**
 
@@ -113,7 +102,7 @@ worker_component: 'sidekiq' # or <%%= worker_component_name %>
 
 Deploy the above changes following your normal deploy process. Your new worker component should show up in the components selector in the Skylight UI nav bar.
 
-<%= image_tag "skylight/docs/background-jobs/components-dropdown.png", alt: "Screenshot of Components Dropdown", style: "max-width: 299px;" %>
+<%= image_tag "skylight/docs/background-jobs/components-dropdown.png", alt: "Screenshot of Components Dropdown", style: img_width(350) %>
 
 ### Using Environment Variables
 
@@ -136,11 +125,9 @@ For ActiveJob and Delayed::Job, you'll need to <%= link_to "enable the appropria
 
 #### 3. [OPTIONAL] Specify a component name.
 
-<%= render partial: "note", locals: {
-  note: <<~NOTE
-          If you would like to use the default `worker` component name, skip this step. See #{link_to "Component Names", "#component-names"} for more information.
-        NOTE
-}%>
+<%= render layout: "note" do %>
+  If you would like to use the default `worker` component name, skip this step. See <%= link_to "Component Names", "#component-names" %> for more information.
+<% end %>
 
 **If you would like to use a _custom_ component name:**
 
@@ -154,7 +141,7 @@ SKYLIGHT_COMPONENT=sidekiq
 
 By default, the Skylight agent only enables itself for web requests, but enabling Skylight for background jobs is super easy! We welcome our <%= link_to "Skylight for Open Source", "/oss" %> customers and their contributors to profile their background jobs so that you can view them separately in the Skylight UI:
 
-<%= image_tag "skylight/docs/background-jobs/background-jobs-oss.png", alt: "Screenshot of the Background Jobs for OSS user interface", style: "width: 100%; max-width: 600px;" %>
+<%= image_tag "skylight/docs/background-jobs/background-jobs-oss.png", alt: "Screenshot of the Background Jobs for OSS user interface", style: img_width(600) %>
 
 If you would like to help an open source app enable Skylight background job instrumentation, read the above documentation to learn about Background Jobs, then open a PR to the open source project.
 

@@ -11,12 +11,9 @@ First, check that your app meets the <%= link_to "requirements", "./advanced-set
 
 See the <%= link_to "Advanced Setup", "./advanced-setup" %> section for more details on setting environment variables, using custom configuration, setting up multiple environments, and using Skylight on a framework other than Rails.
 
-<%= render partial: "note", locals: {
-  type: "pro_tip",
-  note: <<~NOTE
-          Setting up an open source app? #{link_to "See the detailed setup instructions.", "./skylight-for-open-source#setup"}
-        NOTE
-}%>
+<%= render layout: "note", locals: { type: 'pro_tip' } do %>
+  Setting up an open source app? <%= link_to "See the detailed setup instructions.", "./skylight-for-open-source#setup" %>
+<% end %>
 
 ## Feature Overview
 
@@ -61,7 +58,7 @@ Don't struggle to learn why your app is slow. Get answers with Skylight.
 
 ### True Response Times
 
-<%= image_tag 'skylight/docs/features/response-times.png', alt: 'Screenshot of Response Times' %>
+<%= image_tag 'skylight/docs/features/response-times.png', alt: 'Screenshot of Response Times', style: img_width(180) %>
 
 Your application's response times appear several places in Skylight. In most cases we talk about the numbers in one of two ways. The “problem” response time is the 95th percentile, whereas the “typical” response time is the median (50th percentile).
 
