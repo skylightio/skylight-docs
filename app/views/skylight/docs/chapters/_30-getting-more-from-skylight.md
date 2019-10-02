@@ -110,11 +110,13 @@ _Add_ `graphql` _to <%= link_to "probes list", "./advanced-setup#probes" %>_
 
 The GraphQL probe conditionally adds the `GraphQL::Tracing::NotificationsTracing` module to your schema the first time a query is executed (You may see a note about this in STDOUT).
 
-In order for Skylight's trace aggregation to work properly, we highly encourage the use of named queries. Your query names will be used as endpoint names on your Skylight dashboard, so all similar queries should be grouped together. Anonymous queries will also be tracked, but instrumentation is disabled below the `Schema#execute` span (we don't believe aggregating divergent anonymous queries would provide you with actionable insights).
-
 <%= render layout: "note", locals: { type: "important" } do %>
   If you have added `use(GraphQL::Tracing::SkylightTracing)` to your schema, please remove it before adding the official Skylight probe.
 <% end %>
+
+#### Using Named Queries
+
+In order for Skylight's trace aggregation to work properly, we highly encourage the use of named queries. Your query names will be used as endpoint names on your Skylight dashboard, so all similar queries should be grouped together. Anonymous queries will also be tracked, but instrumentation will be disabled below the `Schema#execute` span, as we don't believe aggregating divergent anonymous queries will provide you with actionable insights.
 
 
 ### HTTPClient
