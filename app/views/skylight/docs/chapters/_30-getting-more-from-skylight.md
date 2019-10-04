@@ -118,6 +118,9 @@ The GraphQL probe conditionally adds the `GraphQL::Tracing::NotificationsTracing
 
 In order for Skylight's trace aggregation to work properly, we highly encourage the use of named queries. Your query names will be used as endpoint names on your Skylight dashboard, so all similar queries should be grouped together. Anonymous queries will also be tracked, but instrumentation will be disabled below the `Schema#execute` span, as we don't believe aggregating divergent anonymous queries will provide you with actionable insights.
 
+<%= render layout: "note", locals: { type: "important" } do %>
+  About those query names: remember that Skylight works best when aggregating trace data, so in order to keep your dynamically-named GraphQL queries appropriately grouped, it's important to limit the set of all possible names (we think 100 or so is a reasonable number).
+<% end %>
 
 ### HTTPClient
 
