@@ -176,4 +176,4 @@ Live Mode allows you to view live data (updated once per minute) for any current
 
 Track <%= link_to '"typical" and "problem" response times', "./getting-started#true-response-times" %> with lists of your most improved endpoints your biggest slowdowns. Endpoints that have slowly declined over a 6 week period will be called out as "Frog Boils".
 
-Sign up for Trends Emails on your <%= link_to "account settings page", "/app/settings/account" %> to get your trends reports sent your inbox. (Your historical trends data is also available for you to view on your Skylight dashboard without having to dig through your inbox!)
+Sign up for Trends Emails on your <%= link_to "account settings page", "/app/settings/account/email_preferences" %> to get your trends reports sent your inbox. (Your historical trends data is also available for you to view on your Skylight dashboard without having to dig through your inbox!)

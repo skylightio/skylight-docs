@@ -141,4 +141,4 @@ The UI does not currently support viewing historical usage. If you need details 
 
 Skylight users can earn rewards for referring their friends. We’ll give everyone you refer a $50 credit, and you’ll receive a $50 credit as soon as they become a paying customer. And yes, the $50 is in addition to the free 30 day trial they also get. Best of both worlds.
 
-To refer a friend, head over to <%= link_to "your referrals page", "/app/settings/referrals" %> to retrieve your unique referral URL. You can also see stats on your sharing (clicks, sign ups, etc.) as well as your total credit earned.
+To refer a friend, head over to <%= link_to "your referrals page", "/app/settings/account/referrals" %> to retrieve your unique referral URL. You can also see stats on your sharing (clicks, sign ups, etc.) as well as your total credit earned.

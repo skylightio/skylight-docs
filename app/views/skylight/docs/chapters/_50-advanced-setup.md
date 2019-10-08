@@ -337,7 +337,7 @@ use Skylight::Middleware
 
 ## Regenerating the App Token
 
-If your application token may have been compromised, you can regenerate it from the <%= link_to "settings page", "/app/settings/account" %>.
+If your application token may have been compromised, you can regenerate it from the <%= link_to "settings page", "/app/settings/account" %>, then navigate to the settings for your app.
 
 <%= image_tag 'skylight/docs/getting_set_up/regenerate-token.png', alt: 'Screenshot of settings page' %>
 
