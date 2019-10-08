@@ -32,9 +32,9 @@ end
 
 desc "Runs the tests"
 task :test do
-  sh "rspec"
+  sh "bundle exec rspec"
   Dir.chdir(DUMMY_APP_LOCATION) do
-    sh "rspec"
+    sh "bundle exec rspec"
   end
 end
 
