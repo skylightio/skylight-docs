@@ -93,7 +93,7 @@ Message [support@skylight.io](mailto:support@skylight.io) or contact us via the 
 
 ### Can I get alerts when my performance changes?
 
-While we don't yet give you up to the minute alerts, you can get insight into your app's weekly changes by signing up for <%= link_to "Trends emails", "./skylight-guides#trends" %> in your <%= link_to "account settings", "/app/settings/account" %>, or by viewing your historical trends data from your dashboard. Down the road, we may add more immediate alerting when significant slowdowns occur in your app.
+While we don't yet give you up to the minute alerts, you can get insight into your app's weekly changes by signing up for <%= link_to "Trends emails", "./skylight-guides#trends" %> in your <%= link_to "account settings", "/app/settings/account/email_preferences" %>, or by viewing your historical trends data from your dashboard. Down the road, we may add more immediate alerting when significant slowdowns occur in your app.
 
 
 ### Can I instrument background jobs like Sidekiq?
