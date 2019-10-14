@@ -281,6 +281,51 @@ When we first implemented <%= link_to "GitHub sign-in and sign-up", "http://blog
 
 Clearly the `OctokitService#repo_summaries` method was the culprit of the slowdown, so we knew where more refactoring was needed and that we might even consider creating a worker to take over much of this process (just look at how long those GitHub API requests are!). Custom instrumentation to the rescue!
 
+## Muting Skylight instrumentation (Beta!) {#mute}
+
+While we do our best to collect actionable data, we can occasionally instrument too much, which may result in a trace exceeding its predefined limits. For example, if you've seen the <%= link_to "E0003 error", "./troubleshooting#exceeded-maximum-number-of-spans" %>, it may be due to over-instrumentation. In some cases, you may want to dig deeper than these limits allow, so we've introduced `Skylight.mute`. You might use this if:
+
+ - You have too much data (as described above), and would like to dig deeper than our data limits allow
+ - There is a particularly volatile section of code that does not aggregate well (for example, a webhook endpoint that completely changes behavior based on request paramters)
+ - You have a sensitive area of the application that should not be instrumented due to legal or other non-technical reasons.
+
+`Skylight.mute` is available in version 4.2.0-beta and higher.
+
+#### Ignoring blocks of code
+
+~~~ ruby
+Skylight.mute do
+  Skylight.instrument(title: "I-wont-be-traced") do
+    ...
+  end
+end
+~~~
+
+#### Ignoring portions of a request
+
+Since `mute` is block-based, we've also added an `unmute`, which counteracts the effects within a `mute` block. If you would like to skip instrumentation for a portion of your request
+in favor of instrumenting a later method call, you may nest `unmute` inside the `mute` block:
+
+~~~ ruby
+def show
+  Skylight.mute do
+    some_expensive_method
+    another_expensive_method
+  end
+end
+
+def some_expensive_method
+  # will _not_ be traced
+  ...
+end
+
+def another_expensive_method
+  Skylight.unmute do
+    # code inside here _will_ be traced
+    ...
+  end
+end
+~~~
 
 ## How Skylight Works
 
