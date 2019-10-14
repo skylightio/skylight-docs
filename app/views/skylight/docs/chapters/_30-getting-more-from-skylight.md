@@ -303,8 +303,7 @@ end
 
 #### Ignoring portions of a request
 
-Since `mute` is block-based, we've also added an `unmute`, which counteracts the effects within a `mute` block. If you would like to skip instrumentation for a portion of your request
-in favor of instrumenting a later method call, you may nest `unmute` inside the `mute` block:
+Since `mute` is block-based, we've also added an `unmute`, which counteracts the effects within a `mute` block. If you would like to skip instrumentation for a portion of your request in favor of instrumenting a later method call, you may nest `unmute` inside the `mute` block:
 
 ~~~ ruby
 def show
