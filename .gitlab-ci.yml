@@ -1,0 +1,13 @@
+image: ruby:2.6
+
+cache:
+  paths:
+    - vendor/bundle
+
+tests:
+  stage: test
+  before_script:
+    - gem install bundler
+    - bundle install --path vendor/bundle
+  script:
+    - bundle exec rake test
