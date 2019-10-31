@@ -11,5 +11,5 @@ group :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'therubyracer' if ENV['CI_JOB_ID']
+  gem 'therubyracer' if ENV['CI_JOB_ID'] || ENV['GITHUB_ACTION']
 end
