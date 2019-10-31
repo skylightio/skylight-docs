@@ -295,7 +295,7 @@ You don’t need to install any middleware manually, or do anything with unicorn
   Padrino is not currently supported as it differs from base Sinatra in some significant ways. We are investigating adding support in future releases.
 <% end %>
 
-If your Sinatra app is mounted in another Rack app, and you would like to include that app's path prefix in your Sinatra endpoint name, set `SKYLIGHT_SINATRA_ROUTE_PREFIXES=true` in your env or `sinatra_route_prefixes: true` in your skylight.yml file (for the curious, this will prepend the value of <%= link_to '`SCRIPT_NAME`', 'https://www.rubydoc.info/github/rack/rack/file/SPEC' %> to your Sinatra app's endpoint name). (Requires Skylight >= 4.2.0.beta2)
+If your Sinatra app is mounted in another Rack app, and you would like to include that app's path prefix in your Sinatra endpoint name, set `SKYLIGHT_SINATRA_ROUTE_PREFIXES=true` in your env or `sinatra_route_prefixes: true` in your skylight.yml file (for the curious, this will prepend the value of <%= link_to '`SCRIPT_NAME`', 'https://www.rubydoc.info/github/rack/rack/file/SPEC' %> to your Sinatra app's endpoint name). (Requires Skylight >= 4.2.0)
 
 ### Grape {#grape-configuration}
 

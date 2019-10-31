@@ -101,11 +101,11 @@ _Enabled by default for Graphiti 1.2+_
 * Resource Rendering
 
 
-### GraphQL (Beta!) {#graphql}
+### GraphQL {#graphql}
 
 _Add_ `graphql` _to <%= link_to "probes list", "./advanced-setup#probes" %>_
 
-* Available in Skylight version 4.2.0.beta2 and graphql-ruby versions >= 1.7.
+* Available in Skylight version 4.2.0 and graphql-ruby versions >= 1.7.
 * Traces invocations of `GraphQL::Schema#excecute` and `GraphQL::Schema#multiplex`
 
 The GraphQL probe conditionally adds the `GraphQL::Tracing::NotificationsTracing` module to your schema the first time a query is executed (You may see a note about this in STDOUT).
@@ -289,7 +289,7 @@ While we do our best to collect actionable data, we can occasionally instrument 
  - There is a particularly volatile section of code that does not aggregate well (for example, a webhook endpoint that completely changes behavior based on request paramters)
  - You have a sensitive area of the application that should not be instrumented due to legal or other non-technical reasons.
 
-`Skylight.mute` is available in version 4.2.0-beta and higher.
+`Skylight.mute` is available in version 4.2.0 and higher.
 
 #### Ignoring blocks of code
 
