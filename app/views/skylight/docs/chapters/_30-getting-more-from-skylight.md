@@ -281,7 +281,7 @@ When we first implemented <%= link_to "GitHub sign-in and sign-up", "http://blog
 
 Clearly the `OctokitService#repo_summaries` method was the culprit of the slowdown, so we knew where more refactoring was needed and that we might even consider creating a worker to take over much of this process (just look at how long those GitHub API requests are!). Custom instrumentation to the rescue!
 
-## Muting Skylight instrumentation (Beta!) {#mute}
+## Muting Skylight instrumentation {#mute}
 
 While we do our best to collect actionable data, we can occasionally instrument too much, which may result in a trace exceeding its predefined limits. For example, if you've seen the <%= link_to "E0003 error", "./troubleshooting#exceeded-maximum-number-of-spans" %>, it may be due to over-instrumentation. In some cases, you may want to dig deeper than these limits allow, so we've introduced `Skylight.mute`. You might use this if:
 
