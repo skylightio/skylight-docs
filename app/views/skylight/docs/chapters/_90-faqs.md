@@ -9,6 +9,10 @@ description: You guessed it — frequently asked questions!
 
 Skylight plays nice with other profilers and monitoring solutions, including New Relic. Many of our customers run multiple tools with success! Go ahead and compare :)
 
+### How long is your data retention period?
+
+Our data retention period is 45 days.
+
 ## Reading Skylight
 
 ### What is the "Rack" endpoint?
