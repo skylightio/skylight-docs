@@ -21,7 +21,7 @@ If you have an email and password (even if your account is also connected to Git
 
 ### Changing your password
 
-If you signed up for Skylight with an email and password, you can change your password at any time from the <%= link_to "password settings page", "/app/settings/account/password" %>.
+If you signed up for Skylight with an email and password, you can change your password on the <%= link_to "password settings page", "/app/settings/account/password" %>.
 
 <%= image_tag "skylight/docs/app-and-account-management/change-password.gif",  alt: 'Changing a password', style: img_width(600) %>
 
