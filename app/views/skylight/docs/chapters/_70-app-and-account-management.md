@@ -9,15 +9,21 @@ description: Add collaborators, manage your apps, and explore billing details.
 
 #### GitHub-connected account
 
-If you signed up with GitHub and don't have a password, your Skylight email address will automatically default to your GitHub email address. If you want to change it, first be sure the alternate email address has been added to your GitHub account. Then, head over to your <%= link_to "account settings page", "/app/settings/account" %> and click the link next to your GitHub username, like so:
+If you signed up with GitHub and don't have a password, your Skylight email address will automatically default to your GitHub email address. If you want to change it, first be sure the alternate email address has been added to your GitHub account. Then, head over to your <%= link_to "account settings page", "/app/settings/account" %> and click the link to "Choose a different email address", located under your current email.
 
-<%= image_tag "skylight/docs/app-and-account-management/github-change-email.gif" %>
+<%= image_tag "skylight/docs/app-and-account-management/github-change-email.gif", alt: 'Changing an email address with a GitHub-connected account', style: img_width(600) %>
 
 #### Email-connected account
 
-If you have an email and password (even if your account is also connected to GitHub), you can change your email address on your <%= link_to "account settings page", "/app/settings/account" %>.
+If you have an email and password (even if your account is also connected to GitHub), you can change your email address on your <%= link_to "account settings page", "/app/settings/account", alt: 'Changing an email address with an email-connected account', style: img_width(600) %>.
 
 <%= image_tag "skylight/docs/app-and-account-management/change-email.gif" %>
+
+### Changing your password
+
+If you signed up for Skylight with an email and password, you can change your password on the <%= link_to "password settings page", "/app/settings/account/password" %>.
+
+<%= image_tag "skylight/docs/app-and-account-management/change-password.gif",  alt: 'Changing a password', style: img_width(600) %>
 
 ### Cancelling your account
 
