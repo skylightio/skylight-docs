@@ -106,7 +106,7 @@ _Enabled by default for Graphiti 1.2+_
 _Add_ `graphql` _to <%= link_to "probes list", "./advanced-setup#probes" %>_
 
 * Available in Skylight version 4.2.0 and graphql-ruby versions >= 1.7.
-* Traces invocations of `GraphQL::Schema#excecute` and `GraphQL::Schema#multiplex`
+* Traces invocations of `GraphQL::Schema#execute` and `GraphQL::Schema#multiplex`
 
 The GraphQL probe conditionally adds the `GraphQL::Tracing::NotificationsTracing` module to your schema the first time a query is executed (You may see a note about this in STDOUT).
 
