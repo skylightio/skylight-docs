@@ -11,7 +11,7 @@ Skylight plays nice with other profilers and monitoring solutions, including New
 
 ### How long is your data retention period?
 
-Our data retention period is 45 days.
+Our data retention period is 45 days. However, we do retain a limited set of your app's historical data with the <%= link_to "Trends feature", "./skylight-guides#trends" %>. You can view your app's trends data on your app's dashboard, or by subscribing to the Trends emails from your <%= link_to "account settings", "/app/settings/account/email_preferences" %> page.
 
 ## Reading Skylight
 
