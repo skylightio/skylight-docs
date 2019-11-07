@@ -9,6 +9,10 @@ description: You guessed it — frequently asked questions!
 
 Skylight plays nice with other profilers and monitoring solutions, including New Relic. Many of our customers run multiple tools with success! Go ahead and compare :)
 
+### How long is your data retention period?
+
+Our data retention period is 45 days. However, we do retain a limited set of your app's historical data with the <%= link_to "Trends feature", "./skylight-guides#trends" %>. You can view your app's trends data on your app's dashboard, or by subscribing to the Trends emails from your <%= link_to "account settings", "/app/settings/account/email_preferences" %> page.
+
 ## Reading Skylight
 
 ### What is the "Rack" endpoint?
