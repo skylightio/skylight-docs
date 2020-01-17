@@ -15,11 +15,11 @@ The goal of this program is to help encourage your contributors to find and addr
 - Its source code is licensed under an [open source license][oss-license], and
 - It is accessible to anyone on the public Internet, and
 - Its primary utility and the majority of its functionality is available for anyone to use for free, and
-- It includes a link to its public Skylight dashboard in the README (if that is not feasible, the link can be included in an alternative prominent location that is easy for potential contributors to find, such as the site footer).
+- It includes a link to its public Skylight dashboard in the README (if that is not feasible, the link can be included in an alternative prominent location that is easy for potential contributors to find, such as the site footer). The easiest way to do this is to add the performance badges to your README.
 
 Here are some specific examples:
 
-- [The Odin Project][odin] and the [Homebrew Formulae Browser][homebrew] are both examples of _single-deployment_ apps that meet the requirements. Their source code is available on GitHub under an open source license. They are deployed as publicly accessible website available for anyone to use or sign up for free, other than any administration functionality.
+- [The Odin Project][odin] and the [Octobox][octobox] are both examples of _single-deployment_ apps that meet the requirements. Their source code is available on GitHub under an open source license. They are deployed as publicly accessible website available for anyone to use or sign up for free, other than any administration functionality.
 
 - [Discourse][discourse] is an example of a _multi-deployment_ app. While its source code is available on GitHub under an open source license, it is up to the individual site operators to deploy their own installation of the app (either with the official managed hosting option or self-hosting).
 
@@ -27,7 +27,7 @@ Here are some specific examples:
 
   The accessibility and purpose of the specific deployment will determine if it qualifies for the program. For example, [discuss.emberjs.com](https://discuss.emberjs.com) will qualify as it is publicly accessible and anyone can participate in the discussions on the forum.
 
-  On the other hand, a private Discourse forum for your patreons will not qualify for the program at this time. Similarly, an [Errbit][errbit] instance or an open source Slack bot deployed for your company's internal use will also not qualify.
+  On the other hand, a private Discourse forum for your patrons will not qualify for the program at this time. Similarly, an [Errbit][errbit] instance or an open source Slack bot deployed for your company's internal use will also not qualify.
 
 - Finally, an open source app that requires payment to access its features will generally not be accepted into the program at this time. Examples of this include blogs with paywalls, bitcoin exchanges and ICO websites. Companion websites for paid products, such as support websites or apps that are meant to used with a paid smartphone app, will also not qualify as they lose their primary utility without the paid product.
 
@@ -38,7 +38,7 @@ If you have any questions, please feel free to reach out at [support@skylight.io
 [skylight-for-oss]: https://www.skylight.io/oss
 [oss-license]: https://opensource.org/licenses/alphabetical
 [odin]: https://www.theodinproject.com/
-[homebrew]: http://formulae.brew.sh/
+[octobox]: https://octobox.io/
 [discourse]: https://www.discourse.org/
 [errbit]: https://github.com/errbit/errbit
 
@@ -68,11 +68,11 @@ On <%= link_to "your app settings page", "/app/settings" %>, you will find a pla
 
 The app URL will add a direct link to your project's app, directly from the Skylight dashboard. This link will make it easy for contributors to your project to navigate between your public dashboard and your actual app.
 
-Finally, you will need to include the performance monitoring badge within your app's README as part of the <%= link_to "program's requirements", "#requirements" %>.
+Finally, you will need to include a link to your project's skylight dashboard within your app's README as part of the <%= link_to "program's requirements", "#requirements" %>. The easiest way to do this is to add our performance monitoring badge.
+
+You can find the markdown for your app's GitHub badges on your app's settings page.
 
 <%= image_tag 'skylight/docs/skylight-for-open-source/performance-badge.png', alt: 'Screenshot of performance badge on settings page' %>
-
-You can find the markdown for your's apps GitHub badges on your app's settings page.
 
 For additional setup options, check out our documentation on <%= link_to "Advanced Setup", "./advanced-setup" %> and <%= link_to "Multiple Environments", "./environments" %>
 
