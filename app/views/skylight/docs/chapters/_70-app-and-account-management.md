@@ -80,9 +80,12 @@ The user you invite will receive an invitation via email. If they don't yet have
 
 ### Renaming an app
 
-Only app owners can rename an app. To do so, visit the settings page and click on the pencil icon next to the app's name. This will make the field editable and allow you to change your app's name.
+Only app owners can rename an app. To do so, visit your app's settings page, enter the new name into the "App name" field, and click on "Save changes".
 
-<%= image_tag 'skylight/docs/app-and-account-management/renaming-an-app.png', alt: 'renaming an app', style: img_width(250) %>
+<%= image_tag 'skylight/docs/app-and-account-management/renaming-an-app.png', alt: 'renaming an app', style: img_width(500) %>
+
+### Adding an app url
+Only app owners can add an app url. To do so, visit your app's settings page, enter your app's url into the "App url" field, and click on "Save changes". This will add a direct link to your app from your App Dashboard.
 
 ### Deleting an app
 
