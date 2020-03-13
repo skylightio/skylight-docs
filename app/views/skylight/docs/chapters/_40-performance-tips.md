@@ -54,6 +54,8 @@ SELECT DISTINCT "country" FROM "users";
 
 Instead of making intermediate Ruby objects for every user and looping over those objects multiple times, this directly produces the array of countries in the database itself. This not only does less work in your application, but it also significantly reduces the work that your database has to do.
 
+Another benefit of `pluck` is that once the raw data is transmitted back to the database adapter, it is transformed into Ruby primitives, which are much lighter-weight than Active Record objects.
+
 This technique works for updating and deleting too. Instead of iterating over the objects you want to change in Ruby:
 
 ```ruby
@@ -84,7 +86,10 @@ Along the same lines, when looping through a large number of Active Record objec
 
 If you have a loop in a hot path that absolutely must exist, you should try to find ways to improve performance inside each iteration of the loop.
 
-The quickest wins here involve moving shared work outside of the loop
+The quickest wins here involve:
+* moving shared work outside of the loop (for example, into a background job),
+* doing less work in Ruby and more in the database (as shown <%= link_to "here", "#solving-the-n1-query-problem" %>),
+* and looking for seemingly benign constructs do more work that you'd expect (as shown <%= link_to "here", "#allocate-fewer-objects-per-iteration" %>).
 
 ## Repeated Queries
 
@@ -188,6 +193,8 @@ Now, Rails will generate the following SQL for you ahead of time, before you get
 SELECT * from "monsters" LIMIT 10;
 SELECT * from "favorite_foods" WHERE "monster_id" IN (7, 8, 10, 12, 13, 15, 16, 17, 21);
 ```
+
+When we tell Active Record to `include` the Favorite Foods when it loads the Monsters, Active Record will inspect the results for the required `monster_id`s and make an additional query to the Favorite Foods table, quietly inserting records into the appropriate association caches in the background. Then when a future loop (even one in the template!) needs to find a Monster's Favorite Food, it will find the data has already been loaded and use that data instead.
 
 ### Other Possibilities
 
