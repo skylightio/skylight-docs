@@ -37,20 +37,20 @@ The process for enabling additional environments is straightforward but varies d
 
 #### 2. Add the new environment to Skylight's environments list.
 
-<%= render layout: 'note', locals: { type: 'important' } do %>
-  Make sure to use `+=` and not `=` to add your environment to `config.skylight.environments`, lest you accidentally turn off Skylight in your production environment.
-<% end %>
-
 ```ruby
 # config/application.rb
-config.skylight.environments += ["staging"]
+config.skylight.environments << "staging"
 ```
+
+The environment name you add to the array should match `Rails.env` on your server. Note that if `Rails.env == "production"` you can skip this step.
+
+<%= render layout: 'note', locals: { type: 'important' } do %>
+  If you choose to do `config.skylight.environments += ["development", "staging"]` make sure to use `+=` and not `=` to add your environments, lest you accidentally turn off Skylight in your production environment.
+<% end %>
 
 #### 3. [OPTIONAL] Specify an environment name.
 
-<%= render layout: 'note' do %>
-  If your environment name is always the same as your Rails environment, the Skylight agent will automatically detect your environment! Skip this step.
-<% end %>
+If your environment name is always the same as your Rails environment, the Skylight agent will automatically detect your environment! Skip this step.
 
 **If your environment name _differs_ from your Rails environment:**
 
