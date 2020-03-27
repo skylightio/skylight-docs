@@ -18,7 +18,9 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.MIRROR_REPO_SSH_KEY }}
       - name: Set up Git
-        run: git remote add mirror "$REMOTE"
+        run: |
+          git remote add mirror "$REMOTE"
+          git fetch mirror
         env:
           REMOTE: ${{ secrets.MIRROR_REPO_GIT_REMOTE }}
       - name: Push
