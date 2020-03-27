@@ -1,0 +1,25 @@
+name: Synchronize Remote Repositories
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  mirror:
+    name: Synchronize Mirror Repository
+    runs-on: ubuntu-latest
+    env:
+      CI: 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.MIRROR_REPO_SSH_KEY }}
+      - name: Set up Git
+        run: git remote add mirror "$REMOTE"
+        env:
+          REMOTE: ${{ secrets.MIRROR_REPO_GIT_REMOTE }}
+      - name: Push
+        run: git push mirror master
