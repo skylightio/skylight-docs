@@ -235,9 +235,11 @@ As per <%= link_to "this issue in the agent repo", "https://github.com/skylighti
 
 ### I logged in with GitHub but still don't see the GitHub-connected app(s) I'm expecting to see!
 
-First, try <%= link_to "syncing your GitHub account with Skylight", "https://www.skylight.io/app/settings/account" %>. If that doesn't work, it's possible the GitHub organization that owns the repo needs to <%= link_to "whitelist Skylight", "#whitelist-skylight" %> in order for us to see that you are a member of the repo. Ask your GitHub org's administrator to add Skylight to the whitelist, then <%= link_to "sync your GitHub account again", "https://www.skylight.io/app/settings/account" %>. You should then have access to the app(s) you expected to see!
+First, try <%= link_to "syncing your GitHub account with Skylight", "https://www.skylight.io/app/settings/account" %>. If that doesn't work, it's possible the GitHub organization that owns the repo needs to <%= link_to "grant permissions", "#grant-permissions" %> in order for us to see that you are a member of the repo. Ask your GitHub org's administrator to add Skylight to the approved access list, then <%= link_to "sync your GitHub account again", "https://www.skylight.io/app/settings/account" %>. You should then have access to the app(s) you expected to see!
 
-### I am having trouble accessing my GitHub organization in Skylight. {#whitelist-skylight}
+<a name="whitelist-skylight"></a>
+### I am having trouble accessing my GitHub organization in Skylight. {#grant-permissions}
+
 
 If you don't see your organization in the dropdown when trying to connect an app or your users encounter issues accessing your GitHub-connected apps, you may have your GitHub organization's "Third-party application access policy" set to "Access restricted."
 
@@ -245,7 +247,7 @@ You can check our current permissions by visiting the "Third-party access" setti
 
 <%= image_tag "skylight/docs/troubleshooting/third-party-access-2.png", alt: "Screenshot of the GitHub third party access page", style: img_width(400) %>
 
-Your organization must allow third-party access to Skylight so that we can use the GitHub API to access any information about your org. Click the link below the "Connect Your GitHub Repository" dropdown on the app settings page to update your GitHub permissions, which will <%= link_to "whitelist Skylight", "https://github.com/blog/1941-organization-approved-applications" %>. This link takes you to a page in GitHub, where you can click the "Grant" button to give Skylight access to the necessary information:
+Your organization must allow third-party access to Skylight so that we can use the GitHub API to access any information about your org. Click the link below the "Connect Your GitHub Repository" dropdown on the app settings page to update your <%= link_to "GitHub permissions", "https://github.com/blog/1941-organization-approved-applications" %>. This link takes you to a page in GitHub, where you can click the "Grant" button to give Skylight access to the necessary information:
 
 <%= image_tag "skylight/docs/troubleshooting/third-party-access.png", alt: "Screenshot of the GitHub organization access page", style: img_width(300) %>
 
