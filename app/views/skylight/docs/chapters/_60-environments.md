@@ -156,7 +156,7 @@ For example, in Sinatra:
 ```ruby
 configure :production, :staging do
   require "skylight/sinatra"
-  Skylight.start!(env: ENVIRONMENT)
+  Skylight.start!(environment: ENVIRONMENT)
 end
 ```
 
