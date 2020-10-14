@@ -19,7 +19,7 @@ The Response Timeline is useful for keeping an eye on your application and makin
 
 #### Deploy Tracking
 
-<%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships', style: img_width(600) %>
+<%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships', style: img_width(500) %>
 
 Skylight's deploy tracking feature allows you to zero in on performance improvements or regressions caused by a deployment. With the deploy tracking feature <%= link_to "configured", "./advanced-setup#deploy-tracking" %>, each of your deployments will be marked on the Response Timeline. Hover over the deploy icon to see information about that deploy. Depending on your configuration, you will see the deploy id, the git sha of the commit you deployed, and a deploy description.
 
@@ -156,7 +156,9 @@ In order to minimize the amount of noise in the Event Sequence, Skylight shows i
 
 The time explorer lives at the bottom of your app views. For both the <%= link_to "App Dashboard", "#app-dashboard" %> and the <%= link_to "Endpoint View", "#endpoint-view" %> the data shown is for the range selected in the explorer. Displayed in the graph is the <%= link_to "problem response time", "./getting-started#true-response-times" %> for either the entire application or for the specific endpoint being viewed.
 
-You can drag the selected range, use the arrows buttons, or choose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
+You can drag the selected range, use the arrows buttons, choose a predefined range of time or select one of the last 45 days using the datepicker. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
+
+<%= image_tag 'skylight/docs/features/datepicker.png', alt: 'Screenshot of Datepicker', style: img_width(300) %>
 
 #### Datepicker
 
@@ -169,7 +171,11 @@ Click the calendar icon to open a 45-day datepicker, then click a date to view i
 
 Live Mode allows you to view live data (updated once per minute) for any current time frames by selecting a "Live Stats" option on the left-hand side of the Time Explorer:
 
-<%= image_tag 'skylight/docs/features/time-explorer-live-mode.png', alt: 'Screenshot of Time Explorer in Live Mode' %>
+<%= image_tag 'skylight/docs/features/live-stats-controls.png', alt: "Screenshot of Skylight's live-mode controls" %>
+
+<%= render layout: 'note', locals: { type: 'pro_tip' } do %>
+  Click the timestamp of a live-mode selection to freeze it. This will turn off auto-reloading and update the URL to the exact time range.
+<% end %>
 
 <%= render layout: 'note', locals: { type: 'pro_tip' } do %>
   To switch out of Live Mode, click the timestamp in parentheses. This will freeze the time explorer to the selected time range and update your URL to a shareable permalink.
