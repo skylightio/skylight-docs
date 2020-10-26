@@ -9,6 +9,7 @@ module Skylight
 
       configure do
         config.chapter_path = root.join('app/views/skylight/docs/chapters')
+        config.user_features = nil
       end
     end
   end

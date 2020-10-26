@@ -2,6 +2,7 @@
 title: Source Locations
 description: How does Skylight track source locations?
 keep_secret: true
+show_for: sourceLocations
 ---
 
 <%= render layout: "note" do %>
@@ -66,7 +67,7 @@ Skylight tracks changes across deploys for each source location. If the call sit
 
 In the above example, the same SQL query was detected in three different locations for the first deploy, and only one location for the subsequent deploy. Note that the deploys (and corresponding source locations) that are displayed are dependent on the range you have selected in the <%= link_to "time explorer", "./features#time-explorer" %>.
 
-<%= render partial: "note" do %>
+<%= render layout: "note" do %>
   Change detection is subject to real-world conditions&mdash; if you have an infrequently-used call site, Skylight may not encounter it at all during the duration of a particular deploy, in which case it may appear to have been removed, only to come back in a future deploy. It also can not see changes to code other than file name and line number, so it is possible for a single 'source location' to point to two different methods across deploys (another reason to enable <%= link_to "deploy tracking", "#deploy-tracking" %>).
 <% end %>
 

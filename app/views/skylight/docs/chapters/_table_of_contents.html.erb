@@ -5,7 +5,7 @@
       <%= render "support_search_input" %>
       <ul class="support-menu-chapter-list">
         <% @chapters.sort.each do |chapter| %>
-          <% if is_current_chapter?(chapter.id) || chapter.show_in_index %>
+          <% if is_current_chapter?(chapter.id) || chapter.show_in_index?(self) %>
             <li class="support-menu-chapter">
               <%= link_to chapter.title, chapter_path(chapter.id), class: "support-menu-chapter-link" + (is_current_chapter?(chapter.id) ? " active": "") %>
               <% if is_current_chapter?(chapter.id) %>
