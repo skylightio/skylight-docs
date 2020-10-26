@@ -79,7 +79,7 @@ In the above example, the same SQL query was detected in three different locatio
 
 The Source Locations feature is enabled by default in Skylight 5.0.0-beta2 and above. Before the Skylight agent will report Source Locations however, your friendly Skylight administrator (i.e., one of us) will need to enable source locations collection for your user account. Please fill out the <%= link_to "source locations alpha survey", "/surveys/source-locations" %> to be added to the alpha cohort.
 
-If you need to disable source locations you can set one of the above config options to `false`. If you do so, please <%= "get in touch with us", "/contact" %> and let us know why you needed to disable it.
+If you need to disable source locations you can set one of the above config options to `false`. If you do so, please <%= link_to "get in touch with us", "/contact" %> and let us know why you needed to disable it.
 
 ### Deploy Tracking
 
