@@ -121,16 +121,20 @@ module Skylight
       # if not found in the frontmatter.
       #
       # @return [Boolean] whether the chapter is a secret chapter
-      def keep_secret
-        frontmatter["keep_secret"] || false
+      def keep_secret?
+        frontmatter["keep_secret"]
       end
 
       # Whether the chapter should be shown on the index page and in other
       # chapters' TOCs.
       #
       # @return [Boolean] whether the chapter should be shown in the TOCs
-      def show_in_index
-        !keep_secret
+      def show_in_index?(context = nil)
+        return true unless keep_secret?
+
+        if frontmatter["show_for"] && context
+          Skylight::Docs.user_features(context).include?(frontmatter["show_for"])
+        end
       end
 
       private

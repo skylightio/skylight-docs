@@ -1,7 +1,7 @@
 <%= content_for(:main_class, "support support-chapter card-background") %>
 <%= content_for :title, @chapter.title %>
 
-<% if @chapter.keep_secret %>
+<% if @chapter.keep_secret? %>
   <% content_for :head do %>
     <meta name="robots" content="noindex">
   <% end %>
