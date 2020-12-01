@@ -57,7 +57,7 @@ Skylight Version | Ruby Version
 2.x              | >= 2.2.7
 1.7              | >= 1.9.3
 
-You can also check the required Ruby version based on <%= link_to "the specific version", "https://rubygems.org/gems/skylight" %> of the Skylight agent you are running. For the curious, our CI currently is testing against <%= link_to "these versions", "https://github.com/skylightio/skylight-ruby/blob/master/.gitlab-ci.yml" %>. Intermediate versions are expected to work as well.
+You can also check the required Ruby version based on <%= link_to "the specific version", "https://rubygems.org/gems/skylight" %> of the Skylight agent you are running. For the curious, our CI currently is testing against <%= link_to "these versions", "https://github.com/skylightio/skylight-ruby/blob/master/.github/workflows/build.yml" %>. Intermediate versions are expected to work as well.
 
 ### Server Requirements
 
