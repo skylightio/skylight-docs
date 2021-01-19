@@ -84,8 +84,8 @@ Only app owners can rename an app. To do so, visit your app's settings page, ent
 
 <%= image_tag 'skylight/docs/app-and-account-management/renaming-an-app.png', alt: 'renaming an app', style: img_width(500) %>
 
-### Adding an app url
-Only app owners can add an app url. To do so, visit your app's settings page, enter your app's url into the "App url" field, and click on "Save changes". This will add a direct link to your app from your App Dashboard.
+### Adding an app URL
+Only app owners can add an app URL. To do so, visit your app's settings page, enter your app's URL into the "App URL" field, and click on "Save changes". This will add a direct link to your app from your App Dashboard.
 
 ### Deleting an app
 
@@ -145,6 +145,16 @@ If you have multiple apps, we then show you how your usage breaks down across al
 <%= image_tag 'skylight/docs/getting_to_know_skylight/billing-apps.png', alt: "Screenshot of usage per app" %>
 
 The UI does not currently support viewing historical usage. If you need details about past billing cycles, please contact us via the in-app messenger with your request.
+
+### Invoice Administration
+
+App owners can view and download past invoices by visiting their <%= link_to "billing history page", "/app/settings/billing/history" %>.
+
+<%= image_tag 'skylight/docs/app-and-account-management/invoices.png', alt: 'Screenshot showing past invoices for a customer, each of which has a PDF link' %>
+
+Additionally, app owners can add custom metadata (like addresses and VAT details) and CC additional recipients to invoices (by adding their email addresses) at their <%= link_to "billing invoice settings page", "/app/settings/billing/invoice" %>. Additional recipients do not need Skylight accounts to receive copies of invoices.
+
+<%= image_tag 'skylight/docs/app-and-account-management/billing-invoice-settings.png', alt: 'Screenshot showing the billing invoice settings inputs' %>
 
 ### Referrals
 
