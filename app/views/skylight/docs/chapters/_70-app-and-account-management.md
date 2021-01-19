@@ -148,8 +148,13 @@ The UI does not currently support viewing historical usage. If you need details 
 
 ### Invoice Administration
 
-* How to look up old invoices and download them
-* How to CC people on invoices and add memos
+App owners can view and download past invoices by visiting their <%= link_to "billing history page", "/app/settings/billing/history" %>.
+
+<%= image_tag 'skylight/docs/app-and-account-management/invoices.png', alt: 'Screenshot showing past invoices for a customer, each of which has a PDF link' %>
+
+Additionally, app owners can add custom metadata (like addresses and VAT details) and CC additional recipients to invoices (by adding their email addresses) at their <%= link_to "billing invoice settings page", "/app/settings/billing/invoice" %>. Additional recipients do not need Skylight accounts to receive copies of invoices.
+
+<%= image_tag 'skylight/docs/app-and-account-management/billing-invoice-settings.png', alt: 'Screenshot showing the billing invoice settings inputs' %>
 
 ### Referrals
 
