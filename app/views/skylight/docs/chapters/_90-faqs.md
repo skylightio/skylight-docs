@@ -91,7 +91,8 @@ The easiest way to gain access to Skylight's UI beta features is to become a Sky
   'skylight/docs/faqs/feature-flag-toggle.mp4',
   :autoplay => true,
   :loop => true,
-  :muted => true
+  :muted => true,
+  :playsinline => true
 ) %>
 
 See <%= link_to "Feature Toggles", "http://blog.skylight.io/feature-toggles/" %> for more information.

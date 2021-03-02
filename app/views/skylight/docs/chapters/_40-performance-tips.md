@@ -228,7 +228,8 @@ By default, Skylight focuses on how much time your endpoints and events are taki
   'skylight/docs/features/allocations-mode.mp4',
   :autoplay => true,
   :loop => true,
-  :muted => true
+  :muted => true,
+  :playsinline => true
 ) %>
 
 ### Fixing the Problem
