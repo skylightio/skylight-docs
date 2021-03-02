@@ -87,7 +87,12 @@ Check out the <%= link_to "GitHub section", "./troubleshooting#github-integratio
 
 The easiest way to gain access to Skylight's UI beta features is to become a Skylight Insider. It's super easy. Just head to the <%= link_to "Labs page", "/app/settings/labs" %> and click "SUBSCRIBE" to cement your status. Once you've become an Insider, you can toggle beta feature flags on and off to your heart's content.
 
-<%= image_tag 'skylight/docs/faqs/feature-flag-toggle.gif', alt: 'Animation of how to become an Insider' %>
+<%= video_tag(
+  'skylight/docs/faqs/feature-flag-toggle.mp4',
+  :autoplay => true,
+  :loop => true,
+  :muted => true
+) %>
 
 See <%= link_to "Feature Toggles", "http://blog.skylight.io/feature-toggles/" %> for more information.
 
