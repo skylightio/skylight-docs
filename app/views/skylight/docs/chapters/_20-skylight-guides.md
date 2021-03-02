@@ -15,8 +15,7 @@ description: Learn how to use Skylight to make your app faster.
   'skylight/docs/features/response-timeline.mp4',
   :autoplay => true,
   :loop => true,
-  :muted => true,
-  :controls => true
+  :muted => true
 ) %>
 
 At the top of the App Dashboard, you will see a graph with the <%= link_to '"typical" and "problem" response times', "./getting-started#true-response-times" %> and requests per minute (RPM) for your app during the <%= link_to "currently selected time range", "#navigating-through-time" %>. Hover over the graph to see the specific numbers at a given time.
@@ -85,8 +84,7 @@ With Endpoint Search, you can search for a particular endpoint or group of endpo
   'skylight/docs/features/advanced-search.mp4',
   :autoplay => true,
   :loop => true,
-  :muted => true,
-  :controls => true
+  :muted => true
 ) %>
 
 #### Grades (in Beta)
@@ -131,8 +129,7 @@ In addition, the Summary shows the types of events that make up the selected req
   'skylight/docs/features/allocations-mode.mp4',
   :autoplay => true,
   :loop => true,
-  :muted => true,
-  :controls => true
+  :muted => true
 ) %>
 
 The heart of the Endpoint View is the Event Sequence—also referred to as the "trace"—which shows you exactly where your app is spending time or allocating objects when servicing an endpoint. Each row represents a different event, and they’re color coded:
