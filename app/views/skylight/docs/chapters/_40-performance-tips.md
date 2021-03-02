@@ -224,7 +224,12 @@ Endpoints with allocation hogs are identified in Skylight with the pie-chart "he
 
 By default, Skylight focuses on how much time your endpoints and events are taking. When you drill down into an endpoint, you will see a representative trace for that endpoint where the larger bars represent events that took a long time to complete. When you switch to **allocations mode**, the same trace will be re-scaled based on the number of allocations during each event, allowing you to quickly identify potentially problematic events (i.e. the largest bars in your traces).
 
-<%= image_tag 'skylight/docs/features/allocations-mode.gif', alt: 'Animation of Allocations Mode transition' %>
+<%= video_tag(
+  'skylight/docs/features/allocations-mode.mp4',
+  :autoplay => true,
+  :loop => true,
+  :muted => true
+) %>
 
 ### Fixing the Problem
 

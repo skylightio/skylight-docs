@@ -11,7 +11,12 @@ description: Learn how to use Skylight to make your app faster.
 
 ### Response Timeline
 
-<%= image_tag 'skylight/docs/features/response-timeline.gif', alt: 'Animation of Response Timeline' %>
+<%= video_tag(
+  'skylight/docs/features/response-timeline.mp4',
+  :autoplay => true,
+  :loop => true,
+  :muted => true
+) %>
 
 At the top of the App Dashboard, you will see a graph with the <%= link_to '"typical" and "problem" response times', "./getting-started#true-response-times" %> and requests per minute (RPM) for your app during the <%= link_to "currently selected time range", "#navigating-through-time" %>. Hover over the graph to see the specific numbers at a given time.
 
@@ -115,7 +120,12 @@ In addition, the Summary shows the types of events that make up the selected req
 
 ### Event Sequence
 
-<%= image_tag 'skylight/docs/features/allocations-mode.gif', alt: 'Animation of Allocations Mode transition' %>
+<%= video_tag(
+  'skylight/docs/features/allocations-mode.mp4',
+  :autoplay => true,
+  :loop => true,
+  :muted => true
+) %>
 
 The heart of the Endpoint View is the Event Sequence—also referred to as the "trace"—which shows you exactly where your app is spending time or allocating objects when servicing an endpoint. Each row represents a different event, and they’re color coded:
   * Blue rows represent **application** code.
@@ -158,15 +168,22 @@ The time explorer lives at the bottom of your app views. For both the <%= link_t
 
 You can drag the selected range, use the arrows buttons, or choose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
 
-<%= render layout: 'note', locals: { type: 'pro_tip' } do %>
-  The URL updates in response to new time selections. Click the permalink icon to share the current time range with collaborators or even modify the range by modifying the URL!
-<% end %>
+#### Datepicker
+
+<%= image_tag 'skylight/docs/features/time-explorer-live-mode.png', alt: 'Screenshot of Time Explorer Datepicker' %>
+
+Click the calendar icon to open a 45-day datepicker, then click a date to view it.
+
 
 #### Live Mode
 
 Live Mode allows you to view live data (updated once per minute) for any current time frames by selecting a "Live Stats" option on the left-hand side of the Time Explorer:
 
 <%= image_tag 'skylight/docs/features/time-explorer-live-mode.png', alt: 'Screenshot of Time Explorer in Live Mode' %>
+
+<%= render layout: 'note', locals: { type: 'pro_tip' } do %>
+  To switch out of Live Mode, click the timestamp in parentheses. This will freeze the time explorer to the selected time range and update your URL to a shareable permalink.
+<% end %>
 
 ## Staying the Course
 

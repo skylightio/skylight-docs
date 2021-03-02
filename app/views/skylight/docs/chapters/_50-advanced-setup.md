@@ -187,7 +187,7 @@ deploy:
   description: <%%= some_code_that_returns_a_description %>
 ```
 
-<%= image_tag 'skylight/docs/getting_set_up/deploy-tracking-variables.png', alt: 'Screenshot showing deploy tracking variables' %>
+<%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships', style: img_width(400) %>
 
 Alternatively, you can set `SKYLIGHT_DEPLOY_ID`, `SKYLIGHT_DEPLOY_GIT_SHA`, and `SKYLIGHT_DEPLOY_DESCRIPTION` as environment variables.
 
