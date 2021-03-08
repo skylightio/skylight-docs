@@ -1,19 +1,7 @@
 ---
 title: Source Locations
 description: How does Skylight track source locations?
-keep_secret: true
-show_for: sourceLocations
 ---
-
-<%= render layout: "note" do %>
-  The Source Locations feature is in alpha! Please <%= link_to "contact us", "/surveys/source-locations" %> to enable this feature for your user account.
-<% end %>
-
-## Welcome to the Source Locations Alpha!
-
-Thank you for your interest in participating in the alpha test of Skylight's new Source Locations feature! We're excited to launch this new feature and appreciate your assistance in fine-tuning it. During the alpha phase, please submit feedback via our <%= link_to "contact form", "/contact" %>, or via the <%= link_to "in-app messenger", "./contributing#reporting-bugs-and-submitting-feedback" %>. Let us know how you are using the source locations feature to improve your app's performance!
-
-The Source Locations feature is enabled per-user, so in order for the Skylight agent to collect and report source locations, your app must belong to an approved user account. If you have shared your app with additional collaborators, they will be able to view your app's source locations in the UI (but their own apps will not have the feature unless they join the alpha).
 
 ## Source Locations for Skylight
 
@@ -78,7 +66,7 @@ In the above example, the same SQL query was detected in three different locatio
 - `SKYLIGHT_SOURCE_LOCATIONS_ENABLED=true|false` (in env)
 - `source_locations_enabled: true|false` (in skylight.yml)
 
-The Source Locations feature is enabled by default in Skylight 5.0.0-beta2 and above. Before the Skylight agent will report Source Locations however, your friendly Skylight administrator (i.e., one of us) will need to enable source locations collection for your user account. Please fill out the <%= link_to "source locations alpha survey", "/surveys/source-locations" %> to be added to the alpha cohort.
+The Source Locations feature is enabled by default in Skylight 5.0.0 and above.
 
 If you need to disable source locations you can set one of the above config options to `false`. If you do so, please <%= link_to "get in touch with us", "/contact" %> and let us know why you needed to disable it.
 
