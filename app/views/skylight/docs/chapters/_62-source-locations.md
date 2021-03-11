@@ -79,7 +79,7 @@ Or set `SKYLIGHT_SOURCE_LOCATIONS_ENABLED=false` in your environment.
 
 ### Deploy Tracking
 
-Source Locations works best if you have enabled <%= link_to "deploy tracking", "./advanced-setup#deploy-tracking" %>, because it allows you find an event's source location for a particular moment in time, and track <%= link_to "changes across deploys", "#change-detection" %>
+Source Locations works best if you have enabled <%= link_to "deploy tracking", "./advanced-setup#deploy-tracking" %>, because it allows you to find an event's source location for a particular moment in time, and track <%= link_to "changes across deploys", "#change-detection" %>
 
 ### Ignored Gems
 
