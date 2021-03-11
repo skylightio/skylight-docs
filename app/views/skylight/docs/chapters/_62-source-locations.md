@@ -63,12 +63,19 @@ In the above example, the same SQL query was detected in three different locatio
 
 ### Enabling Source Locations
 
-- `SKYLIGHT_SOURCE_LOCATIONS_ENABLED=true|false` (in env)
-- `source_locations_enabled: true|false` (in skylight.yml)
-
 The Source Locations feature is enabled by default in Skylight 5.0.0 and above.
 
-If you need to disable source locations you can set one of the above config options to `false`. If you do so, please <%= link_to "get in touch with us", "/contact" %> and let us know why you needed to disable it.
+### Disabling Source Locations
+
+If you need to disable source locations you can set one of the following config options to `false`. If you do so, please <%= link_to "get in touch with us", "/contact" %> and let us know why you needed to disable it.
+
+```yaml
+# config/skylight.yml
+
+source_locations_enabled: false
+```
+
+Or set `SKYLIGHT_SOURCE_LOCATIONS_ENABLED=false` in your environment.
 
 ### Deploy Tracking
 
@@ -76,7 +83,17 @@ Source Locations works best if you have enabled <%= link_to "deploy tracking", "
 
 ### Ignored Gems
 
-Note that an event may sometimes be attributed to gem code that you did not expect (for example, a logger that wraps existing code). To avoid this you can add gem names as a comma separated list to `SKYLIGHT_SOURCE_LOCATION_IGNORED_GEMS` in your env, or `source_location_ignored_gems` in your skylight.yml file. By default, we ignore `skylight`, `activesupport`, and `activerecord`.
+Note that an event may sometimes be attributed to gem code that you did not expect (for example, a logger that wraps existing code). To avoid this you can add gem names to `source_location_ignored_gems` in your skylight.yml file. By default, we ignore `skylight`, `activesupport`, and `activerecord`.
+
+```yaml
+# config/skylight.yml
+
+source_location_ignored_gems:
+  - dalli
+  - redis
+```
+
+Alternatively, set `SKYLIGHT_SOURCE_LOCATION_IGNORED_GEMS=dalli,redis` in your environment.
 
 <%= render layout: "note", locals: { type: "important" } do %>
   Ensure you use the gem name and not the require path in case they are different, as is the case for all the Rails gems.
