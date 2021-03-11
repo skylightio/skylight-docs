@@ -8,7 +8,7 @@ If you would like the browser to auto reload when you update your markdown files
 
 ## USAGE
 
-Just mount the engine and you're good to go! In the Skylight Rails app, we have done it like so:
+We've already mounted the engine in the Skylight Rails app:
 
 ```
 # in config/routes.rb
@@ -31,6 +31,29 @@ end
 ```
 
 ## DEVELOPMENT
+
+#### Previewing Local Changes (Tilde Employees Only)
+
+To view changes locally, edit the `direwolf-client` gemfile to point to your local gem:
+
+```
+# Unset the current gem:
+bundle config --delete local.skylight-docs && bundle
+
+# Comment out the current gem
+# gem "skylight-docs", git: "https://github.com/skylightio/skylight-docs",
+#                      branch: "master"
+
+# Uncomment the local gem:
+gem 'skylight-docs', git: "https://github.com/tildeio/direwolf-docs",
+                     branch: "enter-branch-name-here"
+
+# Configure the local gem:
+bundle config local.skylight-docs ../direwolf-docs && bundle
+
+# Discard changes when finished.
+
+```
 
 ### Adding New Markdown Files
 

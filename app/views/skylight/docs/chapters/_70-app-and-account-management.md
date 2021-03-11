@@ -23,7 +23,7 @@ If you have an email and password (even if your account is also connected to Git
 
 If you signed up for Skylight with an email and password, you can change your password on the <%= link_to "password settings page", "/app/settings/account/password" %>.
 
-<%= image_tag "skylight/docs/app-and-account-management/change-password.gif",  alt: 'Changing a password', style: img_width(600) %>
+<%= image_tag "skylight/docs/app-and-account-management/change-password.gif",  alt: 'Changing a password', style: img_width(500) %>
 
 ### Cancelling your account
 
@@ -51,7 +51,9 @@ Chances are, the people who need access to an app on Skylight will be the same p
 
 You can read more in the <%= link_to "announcement blog post", "http://blog.skylight.io/i-feel-a-connection-a-github-connection/" %> and our <%= link_to "blog post detailing its development", "http://blog.skylight.io/connecting-skylight-apps-to-github-the-devil-is-in-the-details/" %>.
 
-<%= image_tag 'skylight/docs/app-and-account-management/github-add-repo.gif' %>
+<%= image_tag 'skylight/docs/app-and-account-management/github-add-repo-1.png', alt: 'The "connect repo" button', style: img_width(500) %>
+
+<%= image_tag 'skylight/docs/app-and-account-management/github-add-repo-2.png', alt: 'Options for connecting your repo', style: img_width(500) %>
 
 If you are the owner of the app on Skylight and logged in via GitHub, navigate to your app's settings page.
 
@@ -66,7 +68,7 @@ Once your Skylight app is connected to a GitHub repo, anyone with access to that
 
 It's pretty similar to the process for adding a repo to an app:
 
-<%= image_tag "skylight/docs/app-and-account-management/github-remove-repo.png", style: img_width(520) %>
+<%= image_tag "skylight/docs/app-and-account-management/github-remove-repo.png", style: img_width(500) %>
 
 1. Click on "disconnect." If you only want to remove the repo, you're done!
 1. If you want to replace it with a different repo, just follow the steps above for adding a repo.

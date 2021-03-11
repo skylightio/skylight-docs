@@ -11,7 +11,7 @@ description: Learn how to use Skylight to make your app faster.
 
 ### Response Timeline
 
-<%= image_tag 'skylight/docs/features/response-timeline.gif', alt: 'Animation of Response Timeline' %>
+<%= render partial: "autoplaying_video", locals: { path_and_filename: 'features/response-timeline.mp4'} %>
 
 At the top of the App Dashboard, you will see a graph with the <%= link_to '"typical" and "problem" response times', "./getting-started#true-response-times" %> and requests per minute (RPM) for your app during the <%= link_to "currently selected time range", "#navigating-through-time" %>. Hover over the graph to see the specific numbers at a given time.
 
@@ -19,7 +19,7 @@ The Response Timeline is useful for keeping an eye on your application and makin
 
 #### Deploy Tracking
 
-<%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships', style: img_width(400) %>
+<%= image_tag 'skylight/docs/features/deploy-tracking.png', alt: 'Image of Deploy Tracking rocketships', style: img_width(600) %>
 
 Skylight's deploy tracking feature allows you to zero in on performance improvements or regressions caused by a deployment. With the deploy tracking feature <%= link_to "configured", "./advanced-setup#deploy-tracking" %>, each of your deployments will be marked on the Response Timeline. Hover over the deploy icon to see information about that deploy. Depending on your configuration, you will see the deploy id, the git sha of the commit you deployed, and a deploy description.
 
@@ -75,7 +75,7 @@ Skylight notifies you of potential code mistakes that may slow down your app.
 
 With Endpoint Search, you can search for a particular endpoint or group of endpoints by typing all or part of an endpoint name into the field; a type of fuzzy search. You can also filter based on the Endpoints List column headings.
 
-<%= image_tag 'skylight/docs/features/advanced-search.gif', alt: 'Animation of Advanced Search' %>
+<%= render partial: "autoplaying_video", locals: { path_and_filename: 'features/advanced-search.mp4'} %>
 
 #### Grades (in Beta)
 
@@ -91,7 +91,7 @@ Our new Grades <%= link_to "beta", "./faqs#accessing-user-interface-beta-feature
 
 ### Response Time Distribution
 
-<%= image_tag 'skylight/docs/features/response-time-distribution.gif', alt: 'Animation of Response Time Distribution filtering' %>
+<%= image_tag 'skylight/docs/features/response-time-distribution.png', alt: 'A screenshot of the response time distribution graph' %>
 
 At the top of the Endpoint View is the Response Time Distribution, showing you the distribution of the response times for this particular endpoint during the <%= link_to "currently selected time range", "#navigating-through-time" %>. The Endpoint View, by default, shows all of the requests in the selected time range.  Often, it’s helpful to focus on slower requests to see exactly why they are so slow. You can filter the endpoint data by selecting just part of the histogram to zero in on problematic requests.
 
@@ -115,7 +115,7 @@ In addition, the Summary shows the types of events that make up the selected req
 
 ### Event Sequence
 
-<%= image_tag 'skylight/docs/features/allocations-mode.gif', alt: 'Animation of Allocations Mode transition' %>
+<%= render partial: "autoplaying_video", locals: { path_and_filename: 'features/allocations-mode.mp4'} %>
 
 The heart of the Endpoint View is the Event Sequence—also referred to as the "trace"—which shows you exactly where your app is spending time or allocating objects when servicing an endpoint. Each row represents a different event, and they’re color coded:
   * Blue rows represent **application** code.
@@ -132,7 +132,7 @@ It’s important to understand that the Event Sequence does not represent a sing
 
 #### Detail Cards and Aggregated SQL Queries
 
-<%= image_tag 'skylight/docs/features/detail-card.png', alt: 'Screenshot of Detail Card' %>
+<%= image_tag 'skylight/docs/features/detail-card.png', alt: 'Screenshot of Detail Card', style: img_width(700) %>
 
 You can get more information about a particular event by clicking on it to get the Detail Card. In database events, for example, we show the SQL that was executed, so it’s easy to track down exactly what query was slow. Note that the SQL query is aggregated. Any variables are stripped from SQL queries before they are sent to Skylight, allowing us to aggregate similar queries and give you a more holistic view of the performance of the query (not to mention the <%= link_to "information security benefits", "./faqs#will-my-users-private-data-be-sent-to-skylight" %>).
 
@@ -158,15 +158,22 @@ The time explorer lives at the bottom of your app views. For both the <%= link_t
 
 You can drag the selected range, use the arrows buttons, or choose a predefined range of time. When you update this range, you’ll immediately see the current data in the rest of the page update accordingly.
 
-<%= render layout: 'note', locals: { type: 'pro_tip' } do %>
-  The URL updates in response to new time selections. Click the permalink icon to share the current time range with collaborators or even modify the range by modifying the URL!
-<% end %>
+#### Datepicker
+
+<%= image_tag 'skylight/docs/features/datepicker.png', alt: 'Screenshot of Time Explorer Datepicker', style: img_width(400) %>
+
+Click the calendar icon to open a 45-day datepicker, then click a date to view it.
+
 
 #### Live Mode
 
 Live Mode allows you to view live data (updated once per minute) for any current time frames by selecting a "Live Stats" option on the left-hand side of the Time Explorer:
 
 <%= image_tag 'skylight/docs/features/time-explorer-live-mode.png', alt: 'Screenshot of Time Explorer in Live Mode' %>
+
+<%= render layout: 'note', locals: { type: 'pro_tip' } do %>
+  To switch out of Live Mode, click the timestamp in parentheses. This will freeze the time explorer to the selected time range and update your URL to a shareable permalink.
+<% end %>
 
 ## Staying the Course
 
