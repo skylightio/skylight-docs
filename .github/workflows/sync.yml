@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.2.0
+        uses: webfactory/ssh-agent@v0.5.1
         with:
           ssh-private-key: ${{ secrets.MIRROR_REPO_SSH_KEY }}
       - name: Set up Git
