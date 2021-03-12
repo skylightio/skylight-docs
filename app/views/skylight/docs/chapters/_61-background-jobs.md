@@ -9,7 +9,7 @@ While Skylight was originally designed to profile web requests, we understand th
 
 By default, the Skylight agent only enables itself for web requests. In many cases, your applications might run processes in the background, via <%= link_to "Sidekiq", "https://sidekiq.org/" %>, <%= link_to "Delayed::Job", "https://github.com/collectiveidea/delayed_job" %>, or some other framework. In fact, we recommend moving certain slow actions into background jobs in our <%= link_to "Performance Tips", "./performance-tips#move-third-party-integration-to-workers" %>. This page shows you how to configure Skylight to profile your background jobs so that you can view them separately in the Skylight UI:
 
-<%= image_tag "skylight/docs/background-jobs/background-jobs.png", alt: "Screenshot of the Background Jobs user interface", style: img_width(600) %>
+<%= image_tag "skylight/docs/background-jobs/background-jobs.png", alt: "Screenshot of the Background Jobs user interface", style: img_width(300) %>
 
 ### Currently Supported Libraries and Frameworks {#probes}
 
