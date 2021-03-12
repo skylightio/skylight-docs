@@ -5,11 +5,36 @@ description: Add collaborators, manage your apps, and explore billing details.
 
 ## Account Management
 
+### Connecting your Account to GitHub
+
+Connecting your account to GitHub is necessary for certain Skylight features, including:
+
+- <%= link_to "Connecting an app to GitHub", "#connecting-an-app-to-github" %>
+- <%= link_to "Enhanced deploy tracking", "./advanced-setup#deploy-github-integration" %>
+
+#### Signing up with GitHub {#github-only-accounts}
+
+<%= link_to "Sign up for Skylight", "/signup" %> with GitHub to have a GitHub-connected account from the get go. If you sign up with GitHub, you will not be asked to provide a password. Signing up with GitHub is highly recommended for users who would like to use <%= link_to "two-factor authentication (2FA)", "https://docs.github.com/en/github/authenticating-to-github/securing-your-account-with-two-factor-authentication-2fa" %> for logging in to Skylight.
+
+#### Connecting an existing account to GitHub
+
+To connect an existing account to GitHub, head over to your <%= link_to "account settings page", "/app/settings/account" %> and click the "Connect to GitHub" button.
+
+<%= image_tag "skylight/docs/app-and-account-management/connect-user-to-github-1.png", alt: "Image of the portion of the Skylight account management page dedicated to connecting your user to GitHub" %>
+
+#### Disconnecting your account from GitHub
+
+To disconnect your account from GitHub, head over to your <%= link_to "account settings page", "/app/settings/account" %> and click the "Disconnect..." button under "GitHub account."
+
+<%= image_tag "skylight/docs/app-and-account-management/connect-user-to-github-2.png", alt: "Image of the portion of the Skylight account management page dedicated to managing your GitHub account connection" %>
+
+Note that <%= link_to "GitHub-only accounts", "#github-only-accounts" %> cannot disconnect from GitHub.
+
 ### Changing your email address
 
 #### GitHub-connected account
 
-If you signed up with GitHub and don't have a password, your Skylight email address will automatically default to your GitHub email address. If you want to change it, first be sure the alternate email address has been added to your GitHub account. Then, head over to your <%= link_to "account settings page", "/app/settings/account" %> to choose the correct email address.
+If you <%= link_to "signed up with GitHub", "#github-only-accounts" %>, your Skylight email address will automatically default to your GitHub email address. If you want to change it, first be sure the alternate email address has been added to your GitHub account. Then, head over to your <%= link_to "account settings page", "/app/settings/account" %> to choose the correct email address.
 
 <%= image_tag "skylight/docs/app-and-account-management/github-change-email.png", alt: "Changing an email address with a GitHub-connected account", style: img_width(600) %>
 
@@ -39,46 +64,58 @@ Currently, only one single Skylight user can retain ownership of an app. The own
   You can transfer app ownership to another Skylight user by contacting us via the in-app messenger.
 <% end %>
 
-### Sharing an app with others
+### Connecting an app to GitHub
 
-If you're the app owner, you can share an app with multiple people at once on your app's settings page <%= link_to "using GitHub", "#add-multiple-users-through-github" %>. Anyone with access to the app can add new collaborators using <%= link_to "email addresses", "#add-users-by-email" %>, also on your app's settings page. You can add unlimited users/collaborators to your app.
+Connecting your app to GitHub is necessary for certain Skylight features, including:
 
-Note that invites are currently app-specific only. If you want to grant access to multiple apps, repeat the steps below on the settings page of each app.
+- <%= link_to "GitHub collaborators", "#github-collaborators" %>
+- <%= link_to "Enhanced deploy tracking", "./advanced-setup#deploy-github-integration" %>
 
-#### Add multiple users through GitHub
+If you are the owner of the app on Skylight and <%= link_to "your account is connected to GitHub", "#connecting-your-account-to-github" %>, navigate to your app's settings page.
 
-Chances are, the people who need access to an app on Skylight will be the same people working on that app and pushing code to GitHub. With Skylight's GitHub integration you can give access to all those people in just a few clicks!
-
-You can read more in the <%= link_to "announcement blog post", "http://blog.skylight.io/i-feel-a-connection-a-github-connection/" %> and our <%= link_to "blog post detailing its development", "http://blog.skylight.io/connecting-skylight-apps-to-github-the-devil-is-in-the-details/" %>.
+1. Choose the organization that owns the app you're looking for (it must be an <%= link_to "organization repo", "./troubleshooting#im-having-problems-connecting-my-skylight-app-to-a-personal-github-repo" %>).
+1. Choose the repo you wish to connect to GitHub.
+1. Select your desired collaborator access settings. You can choose to give access to admin users only, to all GitHub users with access to the repo, or to no one.
+1. Click "Connect repo" and you're done!
 
 <%= image_tag 'skylight/docs/app-and-account-management/github-add-repo-1.png', alt: 'The "connect repo" button', style: img_width(500) %>
 
 <%= image_tag 'skylight/docs/app-and-account-management/github-add-repo-2.png', alt: 'Options for connecting your repo', style: img_width(500) %>
 
-If you are the owner of the app on Skylight and logged in via GitHub, navigate to your app's settings page.
+#### Removing or changing a repo already connected to a Skylight app
 
-1. Click on the field marked "Search or select an organization" and choose the organization that owns the app you're looking for (it must be an organization repo).
-1. Click on the field marked "Search or select a repository" and choose the repo you wish to connect to GitHub.
-1. Select your desired privacy settings. You can choose to give access to admin users only, or to all GitHub users with access to the repo.
-1. Click "Connect" and you're done!
-
-Once your Skylight app is connected to a GitHub repo, anyone with access to that repo can just log into Skylight with GitHub, and they will be automatically connected! Easy!
-
-##### Removing or changing a repo already connected to a Skylight app
-
-It's pretty similar to the process for adding a repo to an app:
+1. Navigate to your app's settings page.
+1. Click on "disconnect." If you only want to remove the repo, you're done!
+1. If you want to replace it with a different repo, just follow the <%= link_to "steps above", "#connecting-an-app-to-github" %> for adding a repo.
 
 <%= image_tag "skylight/docs/app-and-account-management/github-remove-repo.png", style: img_width(500) %>
 
-1. Click on "disconnect." If you only want to remove the repo, you're done!
-1. If you want to replace it with a different repo, just follow the steps above for adding a repo.
+### Sharing an app with others
+
+If you're the app owner, you can share an app with multiple people at once on your app's settings page <%= link_to "using GitHub", "#github-collaborators" %>. Anyone with access to the app can add new collaborators using <%= link_to "email addresses", "#add-users-by-email" %>, also on your app's settings page. You can add unlimited users/collaborators to your app.
+
+Note that invites are currently app-specific only. If you want to grant access to multiple apps, repeat the steps below on the settings page of each app.
+
+#### Add multiple users through GitHub {#github-collaborators}
+
+Chances are, the people who need access to an app on Skylight will be the same people working on that app and pushing code to GitHub. With Skylight's GitHub integration you can give access to all those people in just a few clicks!
+
+1. <%= link_to "Connect your app to a GitHub repo", "#connecting-an-app-to-github" %> and select the desired GitHub collaborator settings (admin users only or all GitHub users with access to the repo).
+2. Have your collaborators <%= link_to "create a Skylight account with GitHub", "#github-only-accounts" %> or <%= link_to "connect their existing accounts to GitHub", "#connecting-an-existing-account-to-gitHub" %>.
+
+All qualifying GitHub-connected users will be automatically added as collaborators to your app! Easy!
+
+Learn more about this feature:
+* <%= link_to "GitHub collaborators announcement blog post", "http://blog.skylight.io/i-feel-a-connection-a-github-connection/" %>
+* <%= link_to "Our blog post detailing the development of this feature", "http://blog.skylight.io/connecting-skylight-apps-to-github-the-devil-is-in-the-details/" %>
+* <%= link_to "Feature FAQ", "./faqs#github-integration" %>
+* <%= link_to "Feature Troubleshooting Guide", "./troubleshooting#github-integration-issues" %>
 
 #### Add users by email
 
 <%= image_tag 'skylight/docs/faqs/adding-collaborators.png', alt: 'adding collaborators', style: img_width(500) %>
 
 The user you invite will receive an invitation via email. If they don't yet have a Skylight account, that email invite will include a link to sign up. Once they complete the steps, they'll see the app inside their account.
-
 
 ### Renaming an app
 
@@ -87,6 +124,7 @@ Only app owners can rename an app. To do so, visit your app's settings page, ent
 <%= image_tag 'skylight/docs/app-and-account-management/renaming-an-app.png', alt: 'renaming an app', style: img_width(500) %>
 
 ### Adding an app URL
+
 Only app owners can add an app URL. To do so, visit your app's settings page, enter your app's URL into the "App URL" field, and click on "Save changes". This will add a direct link to your app from your App Dashboard.
 
 ### Deleting an app
@@ -94,7 +132,6 @@ Only app owners can add an app URL. To do so, visit your app's settings page, en
 Only app owners can delete apps. To do so, visit the settings page and find the app you'd like to delete listed in the left sidebar. Click on the app name to visit the settings page for that app. Scroll to the bottom of the page and click the link that says "Delete this application..."
 
 Deletions are permanent, so make absolutely sure you don't need the app anymore before deleting it!
-
 
 ### Removing yourself from a shared app
 
