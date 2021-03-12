@@ -65,8 +65,7 @@ staging:                                 # Rails environment
   env: <%%= "staging-#{server_number}" %> # Skylight environment
 ```
 
-<!-- TODO: [jobs] switch this partial to dynamic_component_names_warning -->
-<%= render partial: "dynamic_environment_names_warning" %>
+<%= render partial: "dynamic_component_names_warning" %>
 
 #### 4. Deploy and watch your data trickle in!
 
@@ -136,8 +135,7 @@ staging:
   env: "staging" # or <%%= "staging-#{server_number}" %>
 ```
 
-<!-- TODO: [jobs] switch this partial to dynamic_component_names_warning -->
-<%= render partial: "dynamic_environment_names_warning" %>
+<%= render partial: "dynamic_component_names_warning" %>
 
 #### 4. Deploy and watch your data trickle in!
 
