@@ -191,13 +191,15 @@ deploy:
 
 Alternatively, you can set `SKYLIGHT_DEPLOY_ID`, `SKYLIGHT_DEPLOY_GIT_SHA`, and `SKYLIGHT_DEPLOY_DESCRIPTION` as environment variables.
 
-<%= render layout: "note", locals: { type: "pro_tip" } do %>
-  If you link your app to GitHub and provide a valid git sha, you can leave the description blank. We’ll get it for you from GitHub!
-<% end %>
-
 <%= render layout: "note", locals: { type: "important" } do %>
   If you override one of these variables, our server will assume they are all overridden. For example, if you deploy with Heroku and override your deploy descriptions, you’ll also need to override the deploy id and/or sha.
 <% end %>
+
+#### GitHub integration {#deploy-github-integration}
+
+If you <%= link_to "connect your app to GitHub", "./app-and-account-management#connecting-an-app-to-github" %> and provide a valid git sha, you can leave the description blank. We’ll get it for you from GitHub!
+
+Additionally, connecting your app to GitHub allows us to link to the GitHub commit associated with the deploy.
 
 ### Setting Up Multiple Environments
 
