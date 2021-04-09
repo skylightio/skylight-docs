@@ -77,7 +77,7 @@ With Endpoint Search, you can search for a particular endpoint or group of endpo
 
 <%= render partial: "autoplaying_video", locals: { path_and_filename: 'features/advanced-search.mp4'} %>
 
-#### Saved Searches (in Beta)
+#### Saved Searches (in Beta) {#saved-searches}
 
 Our new Saved Searches <%= link_to "beta", "./faqs#accessing-user-interface-beta-features" %> feature allows you to save commonly used Endpoint Searches for all users of a Skylight app component.
 
