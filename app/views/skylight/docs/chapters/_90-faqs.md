@@ -47,7 +47,7 @@ In fact, scrubbing parameters and values from the data your app sends is what al
 
 For example, Skylight will remove variables from your SQL queries and display aggregated queries in the UI along with average durations and allocations:
 
-<%= image_tag 'skylight/docs/faqs/sanitized-sql-query.png', alt: 'Screenshot of a sanitized SQL query' %>
+<%= image_tag 'skylight/docs/features/detail-card.png', alt: 'Screenshot of Detail Card' %>
 
 ### Can I read your privacy policy?
 

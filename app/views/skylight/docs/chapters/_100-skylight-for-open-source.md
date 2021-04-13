@@ -72,7 +72,7 @@ Finally, you will need to include a link to your project's skylight dashboard wi
 
 You can find the markdown for your app's GitHub badges on your app's settings page.
 
-<%= image_tag 'skylight/docs/skylight-for-open-source/performance-badge.png', alt: 'Screenshot of performance badge on settings page' %>
+<%= image_tag 'skylight/docs/skylight-for-open-source/performance-badge.png', alt: 'Screenshot of performance badge on settings page', style: img_width(400) %>
 
 For additional setup options, check out our documentation on <%= link_to "Advanced Setup", "./advanced-setup" %> and <%= link_to "Multiple Environments", "./environments" %>
 
