@@ -61,7 +61,8 @@ You can also check the required Ruby version based on <%= link_to "the specific 
 
 ### Server Requirements
 
-We aim to support all \*nix servers with glibc 2.15+ as well as FreeBSD and musl. Just add the gem to your Gemfile, add the configuration, then deploy as you normally would. You can also run the agent locally on macOS for testing, if desired.
+We aim to support all \*nix servers with glibc 2.23+ as well as musl. Just add the gem to your Gemfile, add the configuration, then deploy as you normally would. You can also run the agent locally on macOS for testing, if desired.
+(NOTE: Skylight v4 supports glibc 2.15+.)
 
 The agent runs great on Heroku. No special actions required.
 
