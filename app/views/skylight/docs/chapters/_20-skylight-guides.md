@@ -79,7 +79,9 @@ With Endpoint Search, you can search for a particular endpoint or group of endpo
 
 #### Saved Searches
 
-Our new Saved Searches feature allows you to save commonly used Endpoint Searches for all users of a Skylight app component. Learm more about Saved Searches in our <%= link_to "release blog post", "https://blog.skylight.io/introducing-saved-searches/" %>
+Skylight allows you to bookmark your commonly used Endpoint Searches for all users of an app component. To save a search, simply type your query into the Endpoint Search input and click on the clear star button that appears. A yellow star indicates that a search has already been saved, and can be clicked on to remove it. You can view your list of Saved Searches by clicking the Saved Searches dropdown button on the right hand side of the Endpoint Search input. Clicking on an item in the list will add it to the input to filter the Endpoints List or you can click on the yellow star next to the item to remove it from the list.
+
+Because Saved Searches are stored by app component, you can use them to track your work in each one. This feature also makes it easy to share your work with a colleague, whether for getting help or demoing your performance improvements.
 
 <%= image_tag 'skylight/docs/features/saved-searches.gif', alt: 'Screenshot of Saved Searches feature' %>
 
