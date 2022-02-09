@@ -52,6 +52,7 @@ While the minimum version listed above is based on our most *recent* version of 
 
 Skylight Version | Ruby Version
 -----------------|--------------
+5.x              | >= 2.6
 4.x              | >= 2.3
 3.x              | >= 2.2.7
 2.x              | >= 2.2.7
