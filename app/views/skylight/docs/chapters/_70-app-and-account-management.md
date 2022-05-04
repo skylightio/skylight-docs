@@ -111,6 +111,18 @@ Learn more about this feature:
 * <%= link_to "Feature FAQ", "./faqs#github-integration" %>
 * <%= link_to "Feature Troubleshooting Guide", "./troubleshooting#github-integration-issues" %>
 
+#### With restricted third-party access on your Github organization {#github-third-party-restrictions}
+
+If you have <%= link_to "restricted OAuth app access", "https://docs.github.com/en/organizations/restricting-access-to-your-organizations-data/about-oauth-app-access-restrictions" %> to your Github organization's data, you will need to enable Skylight on the organization itself. To do so, ensure you have <%= link_to "connected your Skylight account", "#connecting-your-account-to-github" %> to your personal Github account first, then:
+
+1. Go to <%= link_to "github.com/settings/applications", "https://github.com/settings/applications" %> If you are an organization administrator, use the dropdown menu to ensure you are looking at your _personal_ account. Click the "Authorized OAuth Apps" tab under 'Applications'.
+2. Find and click the 'Skylight' application in the list.
+3. You should see a list of permissions and a list of Organizations. If you see 'Grant' next to your organization, click it (and skip the rest of these steps!). Otherwise, click 'Request' (to ask an administrator to add the app). If this was previously requested and either denied or revoked, proceed to the next step.
+4. Go back to Github's settings page and use the dropdown to switch to your organization's account (or login as your organization's administrator). 
+5. Click 'third-party access'. If Skylight is in the list, you can edit approval there. If not, check for pending installation requests under the Github Apps tab.
+
+We sync Github access once per day, so adding all of your approved users may take up to 24 hours after you complete the above steps. Individual users may trigger an immediate sync by clicking "Sync with Github" on the <%= link_to "profile page", "https://www.skylight.io/app/settings/account/profile" %>.
+
 #### Add users by email
 
 <%= image_tag 'skylight/docs/faqs/adding-collaborators.png', alt: 'adding collaborators', style: img_width(500) %>
