@@ -147,18 +147,9 @@ _Add_ `mongo` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
 * Database Queries
 
 
-### Moped
-
-_Add_ `moped` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
-
-* Database Queries
-
-
 ### Mongoid
 
 _Add_ `mongoid` _to <%= link_to "probes list", "./advanced-setup#probes" %>._
-
-Depending on the version, Mongoid either uses Moped or the official Mongo driver under the hood. This probe will just enable the correct probe for one of these two libraries.
 
 
 ### Net::HTTP
@@ -354,4 +345,4 @@ To make sure we do this in a sane fashion, we developed `Probes`. Probes are sma
 
 And, since we don't really like having to monkey-patch things either, when at all possible, we <%= link_to "submit pull requests", "https://github.com/ruby-grape/grape/pull/1086" %> to relevant projects to add in `ActiveSupport::Notifications`.
 
-For more information about how to add an existing probe (such as Mongo, Moped, Excon, etc.) to your Skylight setup, see the <%= link_to "Advanced Setup Probes", "./advanced-setup#probes" %> page.
+For more information about how to add an existing probe (such as Mongo, Excon, etc.) to your Skylight setup, see the <%= link_to "Advanced Setup Probes", "./advanced-setup#probes" %> page.
