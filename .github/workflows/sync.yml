@@ -2,14 +2,14 @@ name: Synchronize Remote Repositories
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   mirror:
     name: Synchronize Mirror Repository
     runs-on: ubuntu-latest
     env:
-      CI: 'true'
+      CI: "true"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -26,4 +26,4 @@ jobs:
         env:
           REMOTE: ${{ secrets.MIRROR_REPO_GIT_REMOTE }}
       - name: Push
-        run: git push mirror master
+        run: git push mirror main

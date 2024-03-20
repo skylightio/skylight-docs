@@ -42,7 +42,7 @@ bundle config --delete local.skylight-docs && bundle
 
 # Comment out the current gem
 # gem "skylight-docs", git: "https://github.com/skylightio/skylight-docs",
-#                      branch: "master"
+#                      branch: "main"
 
 # Uncomment the local gem:
 gem 'skylight-docs', git: "https://github.com/tildeio/direwolf-docs",

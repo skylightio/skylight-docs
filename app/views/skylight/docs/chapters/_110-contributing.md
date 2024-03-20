@@ -38,7 +38,7 @@ Sharing is caring when it comes to code. We're <%= link_to "proud to contribute"
 
 If you want to try your hand at fixing bugs or adding features, our agent code is <%= link_to "publicly available on GitHub", "https://github.com/skylightio/skylight-ruby" %>. However, we do recommend that you contact us at [support@skylight.io](mailto:support@skylight.io) before getting started. We'd hate to have you spend time working on something that we might not be able to merge!
 
-Also take a look at our <%= link_to "`CONTRIBUTING.md`", "https://github.com/skylightio/skylight-ruby/blob/master/CONTRIBUTING.md" %> and make sure to sign the CLA before you submit the PR.
+Also take a look at our <%= link_to "`CONTRIBUTING.md`", "https://github.com/skylightio/skylight-ruby/blob/main/CONTRIBUTING.md" %> and make sure to sign the CLA before you submit the PR.
 
 
 #### Adding Instrumentation

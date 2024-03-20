@@ -3,14 +3,14 @@ on:
   pull_request: {}
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     env:
-      CI: 'true'
+      CI: "true"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
