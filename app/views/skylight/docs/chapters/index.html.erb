@@ -1,14 +1,14 @@
 <%= content_for(:main_class, "support support-index") %>
 <%= content_for :title, "Support" %>
 
-<% cache([Skylight::Docs::REVISION, *Skylight::Docs.user_features(self)]) do %>
+<% cache([*Skylight::Docs.user_features(self), @chapters]) do %>
   <%= render "support_monsters_header" %>
 
   <div class="page-section">
     <div class="page-section-container">
       <div class="support-index-tiles">
 
-        <% @chapters.sort.each do |chapter| %>
+        <% @chapters.all.each do |chapter| %>
           <% if chapter.show_in_index?(self) %>
             <%= link_to chapter_path(chapter.id), class: "support-index-tile" do %>
               <h3><%= chapter.title %></h3>

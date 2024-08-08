@@ -1,3 +1,7 @@
+---
+bad: Don't Do This
+---
+
 blep
 
 it a bean

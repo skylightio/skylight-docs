@@ -13,7 +13,7 @@ RSpec.configure do |config|
 end
 
 Skylight::Docs::Engine.configure do
-  config.chapter_path = root.join("spec/test_source/skylight/docs/chapters")
+  config.chapters_dir = root.join("spec/test_source/skylight/docs/chapters")
 end
 
 module TestHelper

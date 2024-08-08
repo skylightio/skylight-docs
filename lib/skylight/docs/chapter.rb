@@ -1,13 +1,7 @@
 module Skylight
   module Docs
     class Chapter
-      class ChapterNotFoundError < ActionController::RoutingError
-      end
-
-      attr_accessor :id, :filename, :order
-
-      # file extension of the source markdown files
-      FILE_EXTENSION = '.md'
+      attr_reader :id, :order
 
       # options to pass into the Kramdown document constructor
       KRAMDOWN_OPTIONS = {
@@ -26,46 +20,22 @@ module Skylight
 
       # Creates an object containing content and metadata about a docs chapter.
       # Takes a filename (such as 'running-skylight') on initialization.
-      def initialize(filename)
-        @filename = filename.sub(/\A_/, '') # '00-dashified-file-name'
+      def initialize(full_path)
+        # /some/path/to/_00-foo-bar.md
+        @full_path = full_path
 
-        number, @id = @filename.split('-', 2)
-        @order = number.to_i
-      end
+        # _00-foo-bar.md
+        @basename = File.basename(full_path)
 
-      # Gets or sets a class variable @chapters, which is an array of
-      # Chapter objects derived from the markdown folders in /source.
-      # These chapters are sorted by their `order` attribute.
-      #
-      # @return [Array<Chapter>] all of the Chapter objects
-      def self.all
-        # Force reloading the chapters in development so that we don't
-        # have to keep restarting the server when we make changes
-        @chapters = nil if Rails.env.development?
-        @chapters ||= begin
-          # Match .md files in /source but not in /source/deprecated
-          pattern = chapter_path.join("_[0-9]*#{FILE_EXTENSION}")
+        # 00-foo-bar
+        @partial_path = File.basename(full_path, ".md").remove(/\A_/)
 
-          Dir[pattern].map do |path|
-            Skylight::Docs::Chapter.new(File.basename(path, FILE_EXTENSION))
-          end
-        end
-      end
-
-      def self.chapter_path
-        Skylight::Docs::Engine.config.chapter_path
+        order, @id = @partial_path.split('-', 2)
+        @order = order.to_i
       end
 
       def to_partial_path
-        filename
-      end
-
-      # Given a path, such as 'running-skylight', returns a particular
-      # Chapter object from the @chapters array.
-      #
-      # @return [Chapter] the chapter
-      def self.find(id_to_find, collection = all)
-        collection.find { |c| c.id == id_to_find } || raise(ChapterNotFoundError, "`#{id_to_find}` not found")
+        partial_path
       end
 
       # When sorting chapters, use their order for comparison
@@ -79,7 +49,7 @@ module Skylight
       #
       # @return [Array<String>]
       def cache_key
-        [filename, Skylight::Docs::REVISION, ENV["SKYLIGHT_AGENT_EDGE_VERSION"]]
+        [basename, Skylight::Docs::REVISION, ENV["SKYLIGHT_AGENT_EDGE_VERSION"]]
       end
 
       # Gets or sets the `toc` of a Chapter object.
@@ -138,11 +108,13 @@ module Skylight
       end
 
       private
+        attr_reader :full_path, :basename, :partial_path
+
         # Gets or sets the `file_content` read from the file at the Chapter's path.
         #
         # @return [String] the file's full content
         def file_content
-          @file_content ||= File.read(path)
+          @file_content ||= File.read(full_path)
         end
 
         # Gets the content of the Chapter's file minus its frontmatter.
@@ -162,7 +134,7 @@ module Skylight
         # @return [Hash] see above
         def frontmatter
           @frontmatter ||= begin
-            YAML.load(file_content) || raise("No frontmatter found for #{filename}#{FILE_EXTENSION}")
+            YAML.load(file_content) || raise("No frontmatter found for #{basename}")
           end
         end
 
@@ -171,14 +143,7 @@ module Skylight
         #
         # @return [String, Numeric] return value will vary
         def frontmatter_attr(key)
-          frontmatter[key] || raise("Set frontmatter for `#{key}` in #{filename}#{FILE_EXTENSION}")
-        end
-
-        # Gets or sets the `path` attribute of the Chapter.
-        #
-        # @return [String] a string of the full path to the file
-        def path
-          @path ||= self.class.chapter_path.join("_#{filename}#{FILE_EXTENSION}")
+          frontmatter[key] || raise("Set frontmatter for `#{key}` in #{basename}")
         end
     end
   end

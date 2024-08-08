@@ -4,5 +4,6 @@ pkg/
 dummy_app/log/*.log
 dummy_app/tmp/
 tmp/*
+.DS_Store
 
 Gemfile.lock

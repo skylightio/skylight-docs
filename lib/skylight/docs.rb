@@ -1,4 +1,5 @@
 require "skylight/docs/engine"
+require "skylight/docs/version"
 
 module Skylight
   module Docs
@@ -10,4 +11,5 @@ module Skylight
   end
 end
 
+require "skylight/docs/chapters"
 require "skylight/docs/chapter"
