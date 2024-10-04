@@ -8,7 +8,8 @@ module Skylight
       require 'sprockets/es6'
 
       configure do
-        config.chapter_path = root.join('app/views/skylight/docs/chapters')
+        config.chapters_dir = root.join('app/views/skylight/docs/chapters')
+        config.otel_chapters_dir = root.join('app/views/skylight/docs/otel_chapters')
         config.user_features = nil
       end
     end

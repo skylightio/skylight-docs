@@ -1,14 +1,16 @@
 require 'spec_helper'
 include TestHelper
 
-describe 'Skylight::Docs::Chapter' do
-  let(:chapter) { Skylight::Docs::Chapter.new('01-markdown-styleguide') }
-  let(:second_chapter) { Skylight::Docs::Chapter.new('02-a-aardvark-chapter') }
-  let(:third_chapter) { Skylight::Docs::Chapter.new('03-third-chapter') }
+describe 'Skylight::Docs::Chapters' do
+  let(:chapters) { Skylight::Docs::Chapters.load }
+  let(:invalid_chapters) { Skylight::Docs::Chapters.load Pathname.new(__dir__).join('test_source_invalid_files') }
+
+  let(:chapter) { chapters.find('markdown-styleguide') }
+  let(:second_chapter) { chapters.find('a-aardvark-chapter') }
+  let(:third_chapter) { chapters.find('third-chapter') }
 
   describe "initialize" do
     it "generates a filename, id, and order" do
-      expect(chapter.filename).to eq('01-markdown-styleguide')
       expect(chapter.id).to eq('markdown-styleguide')
       expect(chapter.order).to eq(1)
     end
@@ -18,24 +20,24 @@ describe 'Skylight::Docs::Chapter' do
     it 'returns an array of all chapters' do
       # figure out a better way to mock this statically
       # so we don't have to update this list every time a new file is added
-      expected_files = [chapter.filename, second_chapter.filename, third_chapter.filename]
-      expect(Skylight::Docs::Chapter.all.map(&:filename).sort).to eq(expected_files)
+      expected_files = [chapter.id, second_chapter.id, third_chapter.id]
+      expect(chapters.all.map(&:id)).to eq(expected_files)
     end
 
     it 'does not include non-markdown files' do
-      expect(Skylight::Docs::Chapter.all.map(&:id)).not_to include('test-ruby-file')
+      expect(chapters.all.map(&:id)).not_to include('test-ruby-file')
     end
   end
 
   describe '#find' do
     it 'returns the correct Chapter object based on search parameters' do
-      expect(Skylight::Docs::Chapter.find('markdown-styleguide').filename).to eq(chapter.filename)
+      expect(chapters.find('markdown-styleguide')).to eq(chapter)
     end
 
     it 'raises an error if the id is not found in /source' do
       id_to_find = "blep"
-      expect { Skylight::Docs::Chapter.find(id_to_find) }
-        .to raise_error(Skylight::Docs::Chapter::ChapterNotFoundError, "`#{id_to_find}` not found")
+      expect { chapters.find(id_to_find) }
+        .to raise_error(Skylight::Docs::ChapterNotFoundError, "`#{id_to_find}` not found")
     end
   end
 
@@ -49,28 +51,21 @@ describe 'Skylight::Docs::Chapter' do
     end
   end
 
+
   describe '.description' do
     it 'returns the description of the chapter' do
       expect(chapter.description).to include('description')
     end
 
     describe 'with invalid frontmatter' do
-      let(:invalid_chapter) do
-        allow(Skylight::Docs::Chapter).to receive(:chapter_path) do
-          Pathname.new(File.expand_path('../test_source_invalid_files', __FILE__))
-        end
-
-        Skylight::Docs::Chapter.new('01-chapter-without-frontmatter')
+      it 'throws an error if there is no frontmatter for the chapter' do
+        expect { invalid_chapters.find('chapter-without-frontmatter').description }
+          .to raise_error("Set frontmatter for `description` in _01-chapter-without-frontmatter.md")
       end
 
       it 'throws an error if the description does not exist in the frontmatter' do
-        expect { invalid_chapter.description }
-          .to raise_error("Set frontmatter for `description` in #{invalid_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
-      end
-
-      it 'throws an error if there is no frontmatter for the chapter' do
-        expect { invalid_chapter.description }
-          .to raise_error("Set frontmatter for `description` in #{invalid_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
+        expect { invalid_chapters.find('chapter-with-missing-attributes').description }
+          .to raise_error("Set frontmatter for `description` in _02-chapter-with-missing-attributes.md")
       end
     end
   end
@@ -80,14 +75,16 @@ describe 'Skylight::Docs::Chapter' do
       expect(chapter.title).to eq('Markdown Styleguide')
     end
 
-    it 'throws an error if the title does not exist in the frontmatter' do
-      allow(Skylight::Docs::Chapter).to receive(:chapter_path) do
-        Pathname.new(File.expand_path('../test_source_invalid_files', __FILE__))
+    describe 'with invalid frontmatter' do
+      it 'throws an error if there is no frontmatter for the chapter' do
+        expect { invalid_chapters.find('chapter-without-frontmatter').title }
+          .to raise_error("Set frontmatter for `title` in _01-chapter-without-frontmatter.md")
       end
 
-      invalid_chapter = Skylight::Docs::Chapter.new('01-chapter-without-frontmatter')
-      expect { invalid_chapter.title }
-        .to raise_error("Set frontmatter for `title` in #{invalid_chapter.filename}#{Skylight::Docs::Chapter::FILE_EXTENSION}")
+      it 'throws an error if the description does not exist in the frontmatter' do
+        expect { invalid_chapters.find('chapter-with-missing-attributes').title }
+          .to raise_error("Set frontmatter for `title` in _02-chapter-with-missing-attributes.md")
+      end
     end
   end
 end

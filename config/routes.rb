@@ -21,5 +21,6 @@ Skylight::Docs::Engine.routes.draw do
     get "/#{key}", to: redirect { |_path_params, req| "#{req.script_name}/#{value}" }
   end
 
+  resources :otel_chapters, only: [:index, :show], path: '/otel'
   resources :chapters, only: [:index, :show], path: '/'
 end

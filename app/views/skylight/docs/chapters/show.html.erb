@@ -8,15 +8,15 @@
 <% end %>
 
 <section class="support-chapter-container">
-  <%= render "table_of_contents" %>
+  <% cache([*Skylight::Docs.user_features(self), @chapters, @chapter]) do %>
+    <%= render "table_of_contents" %>
 
-  <div class="support-content card">
-    <h1 id="title-<%= @chapter.title.downcase.dasherize %>"><%= @chapter.title %></h1>
-    <p class="support-chapter-description"><%= @chapter.description %></p>
-    <% cache @chapter do %>
-      <%= render @chapter %>
-    <% end %>
-  </div>
+    <div class="support-content card">
+      <h1 id="title-<%= @chapter.title.downcase.dasherize %>"><%= @chapter.title %></h1>
+      <p class="support-chapter-description"><%= @chapter.description %></p>
+        <%= render @chapter %>
+    </div>
+  <% end %>
 </section>
 
 <%= render "support_search_scripts" %>
