@@ -12,11 +12,11 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.1
+        uses: webfactory/ssh-agent@v0.9.1
         with:
           ssh-private-key: ${{ secrets.MIRROR_REPO_SSH_KEY }}
       - name: Set up Git
