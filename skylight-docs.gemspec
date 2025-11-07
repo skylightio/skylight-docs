@@ -20,5 +20,4 @@ Gem::Specification.new do |s|
   s.add_dependency "kramdown", "~> 2"
   s.add_dependency "kramdown-parser-gfm"
   s.add_dependency "kramdown-syntax-coderay"
-  s.add_dependency "sprockets-es6"
 end

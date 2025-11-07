@@ -5,7 +5,6 @@ module Skylight
 
       require 'kramdown'
       require 'kramdown-syntax-coderay'
-      require 'sprockets/es6'
 
       configure do
         config.chapters_dir = root.join('app/views/skylight/docs/chapters')
