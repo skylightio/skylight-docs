@@ -16,9 +16,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,source,lib}/**/*", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", ">=7.0.0","<7.3.0"
+  s.add_dependency "rails", ">=7.0.0"
   s.add_dependency "kramdown", "~> 2"
   s.add_dependency "kramdown-parser-gfm"
   s.add_dependency "kramdown-syntax-coderay"
-  s.add_dependency "sprockets-es6"
 end

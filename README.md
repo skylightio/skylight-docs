@@ -4,7 +4,6 @@
 `bundle install` as normal.
 `rake server` will run the dummy app server on port 3001.
 `rake [test]` will run the specs for both the engine and the dummy app.
-If you would like the browser to auto reload when you update your markdown files, after running the server, in a new terminal window, run `bundle exec guard`.
 
 ## USAGE
 
