@@ -118,7 +118,7 @@ For example, in Sinatra:
 ```ruby
 configure :production, :staging do
   require "skylight/sinatra"
-  Skylight.start!(file: PATH_TO_CONFIG, env: ENVIRONMENT)
+  Skylight.start!(file: PATH_TO_CONFIG, environment: ENVIRONMENT)
 end
 ```
 
@@ -154,7 +154,7 @@ For example, in Sinatra:
 ```ruby
 configure :production, :staging do
   require "skylight/sinatra"
-  Skylight.start!(env: ENVIRONMENT)
+  Skylight.start!(environment: ENVIRONMENT)
 end
 ```
 
