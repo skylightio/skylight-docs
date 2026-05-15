@@ -14,6 +14,7 @@ The Skylight MCP server reveals your application’s performance data to AI codi
 ### Install the gem
 
 **Requires Ruby 3.0 or later.** Check with `ruby -v`. If you're on the macOS system Ruby (typically 2.6 or 2.7), install a current Ruby via Homebrew or a version manager ([rbenv](https://github.com/rbenv/rbenv), [asdf](https://asdf-vm.com/), rvm) before continuing.
+The config snippets shown below use `gem exec`, which needs RubyGems 3.5 or later (ships with Ruby 3.3+). If `gem --version` shows <3.5, run `gem update --system`.
 
 ```
 gem install skylight-mcp
@@ -97,6 +98,23 @@ args = ["exec", "--conservative", "skylight-mcp", "--token", "<YOUR_TOKEN>"]
 ```
 
 Tradeoff: you'll need to restart your AI client after `gem update skylight-mcp` for the new version to be picked up (which you'd want to do anyway).
+
+### Auto-shutdown behavior
+
+The MCP server idles down after 30 minutes of inactivity (configurable with `--timeout <minutes>` in the harness config args). Your AI client transparently restarts it on next use—you may notice a brief cold-start delay after a long idle period, but no action is required.
+
+### Enabling logs
+
+The MCP server is silent by default. To enable structured (JSON) logs for debugging, add `--log-file <path>` to the harness config args:
+
+```json
+"skylight": {
+  "command": "gem",
+  "args": ["exec", "skylight-mcp", "--token", "<YOUR_TOKEN>", "--log-file", "/tmp/skylight-mcp.log"]
+}
+```
+
+Pair with `--debug` for verbose output.
 
 ### Updating
 
