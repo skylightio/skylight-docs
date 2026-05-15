@@ -13,6 +13,8 @@ The Skylight MCP server reveals your application’s performance data to AI codi
 
 ### Install the gem
 
+**Requires Ruby 3.0 or later.** Check with `ruby -v`. If you're on the macOS system Ruby (typically 2.6 or 2.7), install a current Ruby via Homebrew or a version manager ([rbenv](https://github.com/rbenv/rbenv), [asdf](https://asdf-vm.com/), rvm) before continuing.
+
 ```
 gem install skylight-mcp
 ```
