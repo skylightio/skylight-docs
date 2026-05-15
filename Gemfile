@@ -8,6 +8,7 @@ group :test, :development do
   gem 'sprockets', '~> 4.2'
   gem 'sprockets-rails', '~> 3.5'
   gem 'pry-byebug'
+  gem 'puma'
 end
 
 group :test do
